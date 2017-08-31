@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/tools">
+
+    <TextView
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="工 作 通 知"/>
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#5A89F1"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_work_notice_readnum"
+                android:paddingTop="5dp"
+                android:paddingRight="3dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本月0条已读0条 读取率:0.00%"/>
+
+        </RelativeLayout>
+
+        <!--<ListView-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="#ffffff"-->
+            <!--android:id="@+id/lv_work_notice"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1"></ListView>-->
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:layout_margin="5dp"
+            android:background="#ffffff"
+            android:id="@+id/lv_work_notice"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:cacheColorHint="#000000"
+            android:divider="#19000000"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="true"
+            android:smoothScrollbar="true"
+            ptr:ptrAnimationStyle="rotate"
+            >
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+    </LinearLayout>
+
+</LinearLayout>

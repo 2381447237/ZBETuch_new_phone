@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.youli.zbetuch.jingan"
+          android:versionName="版本日期：2017-07-03 \n新增高校专项调查">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name=".utils.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <!--防止屏幕旋转变形，锁定竖屏-->
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"
+           >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.MainLayoutActivity"
+            >
+
+        </activity>
+
+        <activity android:name=".activity.FunctionListActivity"
+            ></activity>
+
+        <activity android:name=".activity.ZiyuandiaochaActivity"
+           ></activity>
+        <activity android:name=".activity.ZiyuanDetailListActivity"
+            android:windowSoftInputMode="stateHidden"
+            ></activity>
+        <activity android:name=".activity.ShiwuyeDetailActivity"
+            >
+
+        </activity>
+        <activity android:name=".activity.PersonInfoActivity"
+            >
+        </activity>
+        <activity android:name=".activity.PersonalInfoQuery"
+           ></activity>
+        <activity android:name=".activity.PersonalInfoQueryResult"
+           ></activity>
+
+        <activity android:name=".activity.RecruitInfoActivity"
+            android:windowSoftInputMode="stateHidden"
+            ></activity>
+
+        <activity android:name=".activity.JobInfoListActivity"
+            ></activity>
+        <activity android:name=".activity.JobInfoDetailActivity"
+            ></activity>
+        <activity android:name=".activity.PersonBaseInfoActivity"
+            android:windowSoftInputMode="stateHidden"
+            ></activity>
+        <activity android:name=".activity.PersonReActivity"
+            android:windowSoftInputMode="stateHidden"
+            ></activity>
+        <activity android:name=".activity.PersonEduActivity"
+            ></activity>
+        <activity android:name=".activity.RecentNewsActivity"
+            ></activity>
+        <activity android:name=".activity.WorkNoticeActivity"
+            ></activity>
+        <activity android:name=".activity.WorkNoticeDetailActivity"
+            ></activity>
+    </application>
+
+</manifest>

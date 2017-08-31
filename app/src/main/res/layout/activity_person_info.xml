@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:background="#5ba4e6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/btn_person_info_caidan"
+            android:layout_alignParentRight="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/selector_person_info_cehua_btn"
+            />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wz"/>
+
+        </RelativeLayout>
+
+        <!--<TextView-->
+            <!--android:textColor="#ffffff"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="社区就业服务e本通"/>-->
+
+
+        <Button
+            android:id="@+id/btn_person_info_jiugongge"
+            android:layout_alignParentRight="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/selector_main_layout_work_btn"
+            />
+
+            <Button
+                android:id="@+id/btn_person_info_zhuye"
+                android:layout_alignParentRight="true"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/selector_person_info_home_btn"
+                />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_person_info_pif"
+        android:background="#4887c3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <ImageView
+            android:id="@+id/iv_person_info_head"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/personhead" />
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="2dp"
+        android:paddingTop="5dp"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓        名:"/>
+        <TextView
+            android:id="@+id/tv_person_info_name"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <ImageView
+            android:id="@+id/iv_person_info_modify"
+            android:layout_marginLeft="10dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/xg"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+
+
+        </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="2dp"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性        别:"/>
+        <TextView
+            android:id="@+id/tv_person_info_sex"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="2dp">
+
+        <TextView
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="状        态:"/>
+        <TextView
+            android:id="@+id/tv_person_info_status"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="2dp">
+
+        <TextView
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="证件号码:"/>
+        <TextView
+            android:id="@+id/tv_person_info_sfz"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+</LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp">
+
+        <Button
+            android:id="@+id/btn_person_info_follow"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:textSize="12sp"
+            android:layout_gravity="end"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/button_selector"
+            android:text="关注" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#8fbbdf"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        
+        <RadioGroup
+            android:background="#5ba4e6"
+            android:id="@+id/rg_person_info"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <RadioButton
+                android:padding="5dp"
+                android:checked="true"
+                android:textColor="@drawable/selector_person_info_textcolor"
+                android:gravity="center"
+                android:id="@+id/rb_person_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:text="基本信息"
+                android:background="@drawable/selector_view" />
+            <RadioButton
+                android:padding="5dp"
+                android:textColor="@drawable/selector_person_info_textcolor"
+                android:gravity="center"
+                android:id="@+id/rb_family_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:text="家庭信息"
+                android:background="@drawable/selector_view" />
+            <RadioButton
+                android:padding="5dp"
+                android:textColor="@drawable/selector_person_info_textcolor"
+                android:gravity="center"
+                android:id="@+id/rb_person_resume"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:text="个人简历"
+                android:background="@drawable/selector_view" />
+            <RadioButton
+                android:padding="5dp"
+                android:textColor="@drawable/selector_person_info_textcolor"
+                android:gravity="center"
+                android:id="@+id/rb_service_record"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:text="服务记录"
+                android:background="@drawable/selector_view" />
+            <RadioButton
+                android:padding="5dp"
+                android:textColor="@drawable/selector_person_info_textcolor"
+                android:gravity="center"
+                android:id="@+id/rb_edu_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:text="教育信息"
+                android:background="@drawable/selector_view" />
+        </RadioGroup>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_person_info"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+    
+</LinearLayout>

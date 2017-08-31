@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  >
+
+    <TextView
+        android:id="@+id/tv_dialog_recentnews_title"
+        android:padding="5dp"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:background="@drawable/lt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="近 期 热 点"/>
+
+    <TextView
+        android:layout_below="@id/tv_dialog_recentnews_title"
+        android:id="@+id/tv_dialog_recentnews_name"
+        android:padding="5dp"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_below="@id/tv_dialog_recentnews_name"
+        android:id="@+id/tv_dialog_recentnews_content"
+        android:padding="5dp"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="3dp"
+        />
+
+    <TextView
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tv_dialog_recentnews_hour"
+        android:textSize="16sp"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:layout_above="@id/tv_dialog_recentnews_hour"
+        android:layout_alignParentRight="true"
+        android:id="@+id/tv_dialog_recentnews_date"
+        android:textSize="16sp"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+</RelativeLayout>

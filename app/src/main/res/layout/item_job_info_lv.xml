@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:id="@+id/item_job_info_ll">
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:singleLine="true"
+                android:id="@+id/tv_item_job_info_comname"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"/>
+            <TextView
+                android:singleLine="true"
+                android:id="@+id/tv_item_job_info_jobname"
+                android:gravity="center"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:singleLine="true"
+                android:id="@+id/tv_item_job_info_jobno"
+                android:gravity="center"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:singleLine="true"
+                android:id="@+id/tv_item_job_info_eduname"
+                android:gravity="center"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:singleLine="true"
+                android:id="@+id/tv_item_job_info_age"
+                android:gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:singleLine="true"
+                android:id="@+id/tv_item_job_info_recruitnums"
+                android:gravity="center"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:singleLine="true"
+                android:id="@+id/tv_item_job_info_salary"
+                android:gravity="center"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:singleLine="true"
+                android:id="@+id/tv_item_job_info_time"
+                android:gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+</LinearLayout>

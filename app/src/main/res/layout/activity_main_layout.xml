@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#90b8dd"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--  android:background="@drawable/detail_title_bg"-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      android:background="#5ca2e4">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wz"/>
+
+        <TextView
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="静安区江场三路228号"/>
+        <Button
+            android:layout_margin="5dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/main_layout_work_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/selector_main_layout_work_btn"
+            />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4987c2">
+
+        <!--圆框android:background="@drawable/shape_main_layout_person_info"-->
+<RelativeLayout
+    android:padding="10dp"
+    android:layout_margin="5dp"
+    android:id="@+id/main_layout_personinfo_rl"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content">
+        <!--<ImageView-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:id="@+id/main_layout_head_iv"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:src="@drawable/personhead"/>-->
+
+
+    <com.youli.zbetuch.jingan.view.CircleImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/main_layout_head_iv"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/personhead"
+        app:civ_border_color="#ffffff"
+        app:civ_border_width="2dp"
+        />
+
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_margin="5dp"-->
+        <!--android:id="@+id/main_layout_head_iv"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:src="@drawable/personhead"-->
+        <!--app:civ_border_color="#ffffff"-->
+        <!--app:civ_border_width="1dp" />-->
+
+    <LinearLayout
+            android:paddingLeft="12dp"
+            android:id="@+id/main_layout_ll_name"
+            android:layout_toRightOf="@id/main_layout_head_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/nc"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    />
+
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:textColor="#ffffff"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="昵        称："
+               />
+
+            <TextView
+                android:textColor="#ffffff"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/main_layout_name_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+
+            />
+
+            </LinearLayout>
+        </LinearLayout>
+    <LinearLayout
+        android:paddingLeft="12dp"
+        android:id="@+id/main_layout_ll_email"
+        android:layout_below="@id/main_layout_ll_name"
+        android:layout_toRightOf="@id/main_layout_head_iv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/yj"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                />
+
+            <TextView
+                android:paddingLeft="5dp"
+                android:textColor="#ffffff"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电子邮箱："
+                />
+
+            <TextView
+                android:textColor="#ffffff"
+                android:id="@+id/main_layout_email_tv"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:paddingLeft="12dp"
+        android:layout_below="@id/main_layout_ll_email"
+        android:layout_toRightOf="@id/main_layout_head_iv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/dh"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                />
+
+            <TextView
+                android:paddingLeft="5dp"
+                android:textColor="#ffffff"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系电话："
+                />
+
+            <TextView
+                android:textColor="#ffffff"
+                android:id="@+id/main_layout_phone_tv"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
+
+
+    </LinearLayout>
+
+    <GridView
+        android:numColumns="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/main_layout_gv">
+
+    </GridView>
+
+</LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="5dp"
+        android:id="@+id/item_ziyuandiaocha_ll"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/item_ziyuandiaocha_number_tv"
+        android:paddingLeft="3dp"
+        style="@style/resources_main_title"
+        android:layout_weight="0.5"
+        android:text="序号" />
+
+    <TextView
+        android:paddingLeft="5dp"
+        android:id="@+id/item_ziyuandiaocha_type_tv"
+        style="@style/resources_main_title"
+        android:layout_weight="1"
+        android:text="调查类型" />
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:id="@+id/item_ziyuandiaocha_operator_tv"
+        style="@style/resources_main_title"
+        android:layout_weight="1"
+        android:text="布置操作员" />
+
+    <TextView
+        android:id="@+id/item_ziyuandiaocha_time_tv"
+        style="@style/resources_main_title"
+        android:layout_weight="1.2"
+        android:text="布置时间" />
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:id="@+id/item_ziyuandiaocha_needNum_tv"
+        style="@style/resources_main_title"
+        android:layout_weight="0.9"
+        android:text="需查人数" />
+
+    <TextView
+        android:paddingLeft="15dp"
+        android:id="@+id/item_ziyuandiaocha_alreadyNum_tv"
+        style="@style/resources_main_title"
+        android:layout_weight="0.9"
+        android:text="已查人数" />
+
+    </LinearLayout>
+</LinearLayout>

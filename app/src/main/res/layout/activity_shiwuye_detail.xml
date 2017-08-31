@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/detail_title_bg">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wz"/>
+
+        <TextView
+            android:id="@+id/shiwuye_detail_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:background="@drawable/functionlistbackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+       <LinearLayout
+           android:padding="9dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+
+           <TextView
+               android:paddingRight="3dp"
+               android:textSize="16sp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="身份证"
+               android:textColor="#ffffff"/>
+
+           <EditText
+               android:id="@+id/shiwuye_detail_sfz_et"
+               android:textColor="#c0c0c0"
+               android:paddingLeft="3dp"
+               android:textSize="16sp"
+               android:focusable="false"
+               android:background="@drawable/shape_shiwuye_detail_et"
+               android:layout_weight="3.7"
+               android:singleLine="true"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               />
+
+           <TextView
+               android:textSize="16sp"
+               android:paddingRight="3dp"
+               android:paddingLeft="3dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="姓  名"
+               android:textColor="#ffffff"/>
+
+           <EditText
+               android:id="@+id/shiwuye_detail_name_et"
+               android:textColor="#c0c0c0"
+               android:paddingLeft="3dp"
+               android:textSize="16sp"
+               android:focusable="false"
+               android:background="@drawable/shape_shiwuye_detail_et"
+               android:layout_weight="2.3"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               />
+
+       </LinearLayout>
+
+
+<!--性别，出生日期-->
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+<LinearLayout
+    android:layout_weight="1"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="性  别"
+        android:textColor="#ffffff"
+        android:paddingRight="3dp"/>
+
+    <EditText
+        android:id="@+id/shiwuye_detail_sex_et"
+        android:textColor="#c0c0c0"
+        android:paddingLeft="3dp"
+        android:textSize="16sp"
+        android:focusable="false"
+        android:background="@drawable/shape_shiwuye_detail_et"
+        android:layout_weight="1"
+        android:singleLine="true"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        />
+</LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:paddingLeft="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="出生日期"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_birthday_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <!--民族，文化程度-->
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="民  族"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_nation_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:paddingLeft="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="文化程度"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:singleLine="true"
+                    android:id="@+id/shiwuye_detail_education_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <!--居  委，街道-->
+
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="居  委"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_jw_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:paddingLeft="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="街  道"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:singleLine="true"
+                    android:id="@+id/shiwuye_detail_street_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <!--居委，详细地址-->
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:textSize="16sp"
+                android:paddingRight="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="户籍地址"
+                android:textColor="#ffffff"/>
+
+            <EditText
+                android:id="@+id/shiwuye_detail_huji_address_et"
+                android:textColor="#c0c0c0"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
+                android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="详细地址"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_detail_address_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--目前状况，摸底日期-->
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="目前状况"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_present_status_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                  />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:paddingLeft="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="摸底日期"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_master_date_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--当前意向，最近失登日期-->
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前意向"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_present_intention_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shiwuye_detail_shideng_ll"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:paddingLeft="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最近失登日期"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_shideng_date_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--失登有效期，联系电话-->
+        <LinearLayout
+            android:id="@+id/shiwuye_detail_shideng_and_phone_ll"
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="失登有效期"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_shideng_vid_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:paddingLeft="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="联系电话"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:singleLine="true"
+                    android:id="@+id/shiwuye_detail_phone_et"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/shiwuye_detail_diaocha_btn"
+                android:background="@drawable/selector_shiwuye_detail_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="16sp"
+                android:text="点击调查"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/shiwuye_detail_info_btn"
+                android:background="@drawable/selector_shiwuye_detail_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="16sp"
+                android:text="详细信息"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/shiwuye_detail_diaocha_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:padding="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:text="调查日期:"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/shiwuye_detail_diaochadate_tv"
+                    android:background="#ffffff"
+                    android:textSize="16sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"  />
+                <TextView
+                    android:gravity="center_horizontal"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:text="调查人:"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    />
+
+                <EditText
+                    android:paddingLeft="5dp"
+                    android:id="@+id/shiwuye_detail_diaocharen_et"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:focusable="false"
+                    android:textColor="#c0c0c0"
+                    android:textSize="16sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"  />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:text="目前状况:"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    />
+
+                <Spinner
+                    android:spinnerMode="dialog"
+                    android:id="@+id/sp_shiwuye_detail_curr_sta"
+                    android:background="@drawable/spinner_bg"
+                    android:textSize="16sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"  />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:text="当前意向:"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    />
+
+                <Spinner
+                    android:spinnerMode="dialog"
+                    android:id="@+id/sp_shiwuye_detail_curr_int"
+                    android:background="@drawable/spinner_bg"
+                    android:textSize="16sp"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"  />
+            </LinearLayout>
+
+           <LinearLayout
+               android:padding="9dp"
+               android:layout_width="match_parent"
+               android:layout_height="100dp"
+               android:orientation="horizontal">
+
+               <TextView
+                   android:gravity="center"
+                   android:textColor="#ffffff"
+                   android:textSize="16sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:text="备  注:  "/>
+
+               <EditText
+                   android:id="@+id/shiwuye_detail_remarks_et"
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="match_parent"
+                   android:background="@drawable/shape_shiwuye_detail_et"
+                   android:textSize="16sp"
+                   />
+
+           </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/shiwuye_detail_result_btn"
+                    android:background="@drawable/selector_shiwuye_detail_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:textSize="16sp"
+                    android:text="调查结果同上"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/shiwuye_detail_submit_btn"
+                    android:background="@drawable/selector_shiwuye_detail_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:textSize="16sp"
+                    android:text="提交"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

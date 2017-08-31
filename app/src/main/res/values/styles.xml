@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--<style name="AppTheme" parent="@android:style/Theme.Light.NoTitleBar">-->
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="android:fitsSystemWindows">true</item>-->
+
+        <item name="android:screenOrientation">portrait</item>
+
+
+
+    </style>
+
+    <!-- 资源调查页面 -->
+    <style name="resources_main_title">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="myspinner_style">
+        <item name="android:background">@drawable/spinner_bg</item>
+    </style>
+
+    <style name="gradeate_list_titletext">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SpinnerTheme" parent="Base.Widget.AppCompat.TextView.SpinnerItem"/>
+
+
+    <!--个人信息列表的查询页面 item 公共属性-->
+    <style name="personal_info_list_item">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">2.5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!--个人信息列表标题属性-->
+    <style name="personal_info_list_title">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:padding="7.1dp"
+        android:id="@+id/item_ziyuan_detail_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/item_ziyuan_detail_num_tv"
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="0.9"
+            android:gravity="center"
+
+            />
+    <TextView
+        android:id="@+id/item_ziyuan_detail_name_tv"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="1.8"
+        android:gravity="center"
+         />
+
+    <TextView
+        android:id="@+id/item_ziyuan_detail_idcard_tv"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="5.3"
+        android:gravity="center"
+        />
+
+
+    <TextView
+        android:id="@+id/item_ziyuan_detail_juwei_tv"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+         />
+
+    </LinearLayout >
+</LinearLayout>

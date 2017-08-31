@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/gwxxlb">
+
+        <TextView
+            android:id="@+id/tv_job_info_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            />
+
+    </RelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/hsv_job_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    android:cacheColorHint="#000000"
+    android:divider="#19000000"
+    android:fastScrollEnabled="false"
+    android:footerDividersEnabled="true"
+    android:smoothScrollbar="true"
+   ptr:ptrAnimationStyle="rotate">
+<com.youli.zbetuch.jingan.view.JobInfoHsv
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<!--<LinearLayout-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:orientation="vertical">-->
+
+    <com.youli.zbetuch.jingan.view.MyListView
+        android:id="@+id/lv_job_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.youli.zbetuch.jingan.view.MyListView>
+<!--</LinearLayout>-->
+</com.youli.zbetuch.jingan.view.JobInfoHsv>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+</LinearLayout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <LinearLayout
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:background="@drawable/lt"
+       android:orientation="vertical">
+
+       <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="40dp"
+           android:layout_gravity="center_horizontal"
+           android:src="@drawable/resourcestitle" />
+
+   </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:background="@drawable/functionlistbackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:padding="5dp"
+            android:layout_weight="1.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="调查类型"/>
+
+        <Spinner
+            android:id="@+id/ziyuandiaocha_type_spinner"
+            android:layout_weight="1.7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/myspinner_style"
+            android:spinnerMode="dialog"/>
+        <TextView
+            android:padding="5dp"
+            android:layout_weight="0.8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="街道"/>
+
+        <Spinner
+            android:id="@+id/ziyuandiaocha_street_spinner"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/myspinner_style"
+            android:spinnerMode="dialog"
+           />
+        <Button
+            android:id="@+id/ziyuandiaocha_query_btn"
+            android:background="@drawable/button_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="查询"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/title2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:paddingLeft="3dp"
+            style="@style/resources_main_title"
+           android:layout_weight="0.5"
+            android:text="序号" />
+
+        <TextView
+            style="@style/resources_main_title"
+            android:layout_weight="1"
+            android:text="调查类型" />
+
+        <TextView
+            style="@style/resources_main_title"
+            android:layout_weight="1.1"
+            android:text="布置操作员" />
+
+        <TextView
+            style="@style/resources_main_title"
+            android:layout_weight="1"
+            android:text="布置时间" />
+
+        <TextView
+            style="@style/resources_main_title"
+            android:layout_weight="0.9"
+            android:text="需查人数" />
+
+        <TextView
+            style="@style/resources_main_title"
+            android:layout_weight="0.9"
+            android:text="已查人数" />
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ziyuandiaocha_lv"></ListView>
+
+    <TextView
+        android:visibility="gone"
+        android:gravity="center"
+        android:id="@+id/ziyuandiaocha_tv_nodata"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="暂无数据"/>
+
+</LinearLayout>
+</LinearLayout>

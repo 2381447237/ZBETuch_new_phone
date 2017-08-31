@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8fbbdf"
+    android:padding="5dp"
+    >
+
+    <LinearLayout
+        android:padding="5dp"
+        android:background="@drawable/shape_fmt_service_record_top_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="服  务  人:"/>
+
+        <TextView
+            android:id="@+id/tv_item_fmt_service_record_name"
+            android:layout_weight="3.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="admin"/>
+
+    </LinearLayout>
+
+    
+    <LinearLayout
+        android:padding="5dp"
+        android:background="@drawable/shape_fmt_service_record_ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:paddingLeft="5dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="服务日期:"/>
+
+    <TextView
+        android:id="@+id/tv_item_fmt_service_record_date"
+        android:layout_weight="3.5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="2017-08-14"/>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:background="@drawable/shape_fmt_service_record_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="服务内容:"/>
+
+        <TextView
+            android:id="@+id/tv_item_fmt_service_record_content"
+            android:layout_weight="3.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="职介指导"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:background="@drawable/shape_fmt_service_record_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="备        注:"/>
+
+        <TextView
+            android:id="@+id/tv_item_fmt_service_record_remarks"
+            android:layout_weight="3.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="123456"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:padding="5dp"
+        android:background="@drawable/shape_fmt_service_record_bottom_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_item_fmt_service_record_delete"
+            android:layout_marginRight="10dp"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:textSize="12sp"
+            android:text="删除"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_selector"/>
+
+
+        <Button
+            android:id="@+id/btn_item_fmt_service_record_modify"
+            android:layout_marginRight="10dp"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:textSize="12sp"
+            android:text="修改"
+            android:layout_toLeftOf="@id/btn_item_fmt_service_record_delete"
+            android:background="@drawable/button_selector"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
