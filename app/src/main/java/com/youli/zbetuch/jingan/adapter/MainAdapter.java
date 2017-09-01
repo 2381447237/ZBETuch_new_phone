@@ -22,6 +22,7 @@ import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.activity.JobInfoDetailActivity;
 import com.youli.zbetuch.jingan.activity.JobInfoListActivity;
 import com.youli.zbetuch.jingan.activity.MainLayoutActivity;
+import com.youli.zbetuch.jingan.activity.MeetNoticeActivity;
 import com.youli.zbetuch.jingan.activity.RecentNewsActivity;
 import com.youli.zbetuch.jingan.activity.WorkNoticeActivity;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
@@ -222,7 +223,8 @@ public class MainAdapter extends BaseAdapter{
 
                 switch (p){
                     case 0://会议通知
-                       Toast.makeText(context,"会议通知",Toast.LENGTH_SHORT).show();
+                        intent=new Intent(context, MeetNoticeActivity.class);
+                        context.startActivity(intent);
                        break;
                    case 1://工作通知
                        intent=new Intent(context, WorkNoticeActivity.class);

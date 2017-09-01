@@ -110,7 +110,8 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
@@ -119,11 +120,11 @@
                 android:text="附        件："
                 />
 
-            <TextView
+            <com.youli.zbetuch.jingan.view.MyListView
+                android:divider="@null"
+                android:id="@+id/lv_worknotice_detail_appendix"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#0000ff"
-                />
+                android:layout_height="wrap_content"></com.youli.zbetuch.jingan.view.MyListView>
 
         </LinearLayout>
 
