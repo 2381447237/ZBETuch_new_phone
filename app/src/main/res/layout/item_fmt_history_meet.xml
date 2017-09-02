@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="3dp"
+    android:paddingTop="3dp"
+    android:gravity="center"
+    android:id="@+id/ll_item_fmt_hisory_meet">
+
+    <TextView
+        android:id="@+id/tv_item_fmt_hisory_meet_no"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="编号"/>
+
+    <TextView
+        android:id="@+id/tv_item_fmt_hisory_meet_theme"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:text="会议主题"/>
+    <TextView
+        android:id="@+id/tv_item_fmt_hisory_meet_address"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:text="会议地址"/>
+    <TextView
+        android:id="@+id/tv_item_fmt_hisory_meet_time"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:text="会议时间"/>
+
+
+</LinearLayout>

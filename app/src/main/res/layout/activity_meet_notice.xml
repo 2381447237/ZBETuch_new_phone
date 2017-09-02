@@ -4,8 +4,114 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="会议通知"/>
+        android:text="会议通知"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:paddingTop="5dp"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#5A89F1"
+        android:layout_margin="10dp"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:onClick="onChange"
+                    android:id="@+id/rb_meet_notice_current"
+                    android:checked="true"
+                    android:background="@drawable/meet_notice_rb_selector"
+                    android:button="@null"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="当 前 会 议"/>
+
+                <RadioButton
+                    android:onClick="onChange"
+                    android:id="@+id/rb_meet_notice_history"
+                    android:background="@drawable/meet_notice_rb_selector"
+                    android:button="@null"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="历 史 会 议"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本月0条，已读0条 读取率0.0%"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:background="#50AAFF"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="编号"/>
+
+            <TextView
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="会议主题"/>
+            <TextView
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:text="会议地址"/>
+            <TextView
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:text="会议时间"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#0B1EF0"/>
+
+        <FrameLayout
+            android:id="@+id/fl_meet_notice"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></FrameLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

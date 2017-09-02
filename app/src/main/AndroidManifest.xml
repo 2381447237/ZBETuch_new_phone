@@ -91,6 +91,8 @@
             ></activity>
         <activity android:name=".activity.MeetNoticeActivity"
             ></activity>
+        <activity android:name=".activity.MeetDetailActivity"
+            ></activity>
     </application>
 
 </manifest>

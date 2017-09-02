@@ -1,10 +1,7 @@
 package com.youli.zbetuch.jingan.activity;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,16 +10,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,14 +25,11 @@ import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.AppendixInfo;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.WorkNoticeInfo;
-import com.youli.zbetuch.jingan.utils.FileUtils;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.view.MyListView;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
