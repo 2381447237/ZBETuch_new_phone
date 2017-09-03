@@ -1,15 +1,19 @@
 package com.youli.zbetuch.jingan.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -94,7 +98,7 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
         btnNew= (Button) findViewById(R.id.btn_person_education_new);
         btnNew.setOnClickListener(this);
-        initDatas();
+       initDatas();
 
     }
     private void initDatas(){
@@ -177,6 +181,8 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
                         Toast.makeText(mContext,"第"+position+"个修改",Toast.LENGTH_SHORT).show();
 
+                        showNewOrModifyDialog("modify",position);
+
                     }
                 });
 
@@ -246,11 +252,53 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
             case R.id.btn_person_education_new:
 
-                Toast.makeText(mContext,"新建",Toast.LENGTH_SHORT).show();
+
+
+                showNewOrModifyDialog("new",-1);
 
                 break;
 
         }
 
     }
+
+    private void showNewOrModifyDialog(String sign,int position){
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        View view= LayoutInflater.from(mContext).inflate(R.layout.dialog_person_edu,null,false);
+        builder.setView(view);
+
+       final AlertDialog dialog=builder.create();
+
+        EditText etName= (EditText) view.findViewById(R.id.et_dialog_person_edu_name);
+        EditText etEdu= (EditText) view.findViewById(R.id.et_dialog_person_edu_edu);
+        EditText etMajor= (EditText) view.findViewById(R.id.et_dialog_person_edu_major);
+
+        if(TextUtils.equals(sign,"modify")){
+            etName.setText(data.get(position).getSCHOOL());
+            etEdu.setText(data.get(position).getEDUCATION());
+            etMajor.setText(data.get(position).getSPECIALTY());
+        }
+
+        Button btnSure= (Button) view.findViewById(R.id.btn_dialog_person_edu_sure);
+        btnSure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"确定",Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+        Button btnCancel = (Button) view.findViewById(R.id.btn_dialog_person_edu_cancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"取消",Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+    };
+
 }
