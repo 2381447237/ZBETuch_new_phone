@@ -25,6 +25,7 @@ import com.youli.zbetuch.jingan.activity.MainLayoutActivity;
 import com.youli.zbetuch.jingan.activity.MeetNoticeActivity;
 import com.youli.zbetuch.jingan.activity.RecentNewsActivity;
 import com.youli.zbetuch.jingan.activity.WorkNoticeActivity;
+import com.youli.zbetuch.jingan.activity.WorkNoticeDetailActivity;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.JobInfoListInfo;
 import com.youli.zbetuch.jingan.entity.JobsInfo;
@@ -191,17 +192,24 @@ public class MainAdapter extends BaseAdapter{
 
        vh.contentLv.setAdapter(commonAdapter);
        vh.contentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+           Intent intent=null;
+
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                switch (p){
+
                    case 0:
                      //  Toast.makeText(context,data.get(p).getMeetInfos().get(position).getTITLE(),Toast.LENGTH_SHORT).show();
                        break;
-                   case 1:
+                   case 1://工作通知
+                       intent=new Intent(context,WorkNoticeDetailActivity.class);
+                       intent.putExtra("WORKDATA",data.get(p).getWorkNoticeInfos().get(position));
+                       context.startActivity(intent);
                       // Toast.makeText(context,data.get(p).getWorkNoticeInfos().get(position).getTITLE(),Toast.LENGTH_SHORT).show();
                        break;
                    case 2://岗位信息
-                       Intent intent=new Intent(context,JobInfoDetailActivity.class);
+                       intent=new Intent(context,JobInfoDetailActivity.class);
                        intent.putExtra("JOBNO",data.get(p).getJobsInfos().get(position).getJobno());
                        context.startActivity(intent);
                        break;

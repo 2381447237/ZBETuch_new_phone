@@ -106,19 +106,16 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
                     if(isDownLoad){//查看文件
 
                         File file=new File(currentFile);
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
                         if (Build.VERSION.SDK_INT <Build.VERSION_CODES.N) {//小于7.0查看图片
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
                             intent.setDataAndType(Uri.fromFile(file), "image/*");
-                            startActivity(intent);
                         }else{//大于等于7.0查看图片
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            if(file!=null) {
+                            //解决方法，请查看：http://www.cnblogs.com/galibujianbusana/p/6482992.html
                                 Uri photoURI = FileProvider.getUriForFile(mContext, "com.youli.zbetuch.jingan.provider", file);
-                                intent.setDataAndType(photoURI, "image/*");
-                                startActivity(intent);
-                            }
+                               intent.setDataAndType(photoURI, "image/*");
+                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);    //这一步很重要。给目标应用一个临时的授权。
                         }
-
+                        startActivity(intent);
                         currentFile = "";
 
                     }else{
