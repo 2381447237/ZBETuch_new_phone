@@ -1,6 +1,7 @@
 package com.youli.zbetuch.jingan.activity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,6 +32,7 @@ import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import okhttp3.Response;
@@ -179,7 +182,7 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
                     @Override
                     public void onClick(View v) {
 
-                        Toast.makeText(mContext,"第"+position+"个修改",Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(mContext,"第"+position+"个修改",Toast.LENGTH_SHORT).show();
 
                         showNewOrModifyDialog("modify",position);
 
@@ -270,9 +273,41 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
        final AlertDialog dialog=builder.create();
 
-        EditText etName= (EditText) view.findViewById(R.id.et_dialog_person_edu_name);
-        EditText etEdu= (EditText) view.findViewById(R.id.et_dialog_person_edu_edu);
-        EditText etMajor= (EditText) view.findViewById(R.id.et_dialog_person_edu_major);
+        final EditText etName= (EditText) view.findViewById(R.id.et_dialog_person_edu_name);
+        final EditText etEdu= (EditText) view.findViewById(R.id.et_dialog_person_edu_edu);
+        final EditText etMajor= (EditText) view.findViewById(R.id.et_dialog_person_edu_major);
+        final Calendar c = Calendar.getInstance();
+        final TextView tvStartTime= (TextView) view.findViewById(R.id.tv_dialog_person_edu_start_time);
+
+        tvStartTime.setText(c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH)+1)+ "-" + c.get(Calendar.DAY_OF_MONTH));
+        tvStartTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(mContext,new DatePickerDialog.OnDateSetListener(){
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        tvStartTime.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+
+        final TextView tvEndTime= (TextView) view.findViewById(R.id.tv_dialog_person_edu_end_time);
+
+        tvEndTime.setText(c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH)+1)+ "-" + c.get(Calendar.DAY_OF_MONTH));
+        tvEndTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(mContext,new DatePickerDialog.OnDateSetListener(){
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        tvEndTime.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
 
         if(TextUtils.equals(sign,"modify")){
             etName.setText(data.get(position).getSCHOOL());
@@ -284,7 +319,16 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
         btnSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,"确定",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(mContext,"确定",Toast.LENGTH_SHORT).show();
+
+                String nameStr=etName.getText().toString().trim();
+                String eduStr=etEdu.getText().toString().trim();
+                String majorStr=etMajor.getText().toString().trim();
+                String startTimeStr=tvStartTime.getText().toString().trim();
+                String endTimeStr=tvEndTime.getText().toString().trim();
+
+                 Toast.makeText(mContext,"学校="+nameStr+"学历="+eduStr+"专业="+majorStr+"开始时间="+startTimeStr+"结束时间="+endTimeStr,Toast.LENGTH_SHORT).show();
+
                 dialog.dismiss();
             }
         });
@@ -292,7 +336,7 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,"取消",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext,"取消",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });

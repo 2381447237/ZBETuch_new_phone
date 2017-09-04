@@ -305,7 +305,7 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
                 getPersonInfo();
                 break;
 
-            case R.id.shiwuye_detail_diaochadate_tv://调查日期
+          case R.id.shiwuye_detail_diaochadate_tv://调查日期
 
                 final Calendar c = Calendar.getInstance();
 

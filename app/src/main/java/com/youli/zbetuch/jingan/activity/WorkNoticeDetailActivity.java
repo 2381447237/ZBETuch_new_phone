@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,6 +26,8 @@ import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.AppendixInfo;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.WorkNoticeInfo;
+import com.youli.zbetuch.jingan.utils.FileUtils;
+import com.youli.zbetuch.jingan.utils.IOUtil;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.view.MyListView;
@@ -49,8 +52,9 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
     private final int SUCCEED_BUTTON_GET_STATE=10000;
     private final int SUCCEED_BUTTON_SET_STATE=10001;
     private final int SUCCEED_APPENDIX=10002;
-    private final int SUCCEED_PICTURE=10003;
-    private final int  PROBLEM=10004;
+    private final int SUCCEED_FILE=10003;
+    private final int SUCCEED_SEE=10004;
+    private final int  PROBLEM=10005;
 
     private Button btnIsRead;
     private TextView tvTitle,tvDoc,tvNoticeTime,tvNotifier,tvCreateDate;
@@ -99,28 +103,18 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
                     lvSetAdapter(lvData);
                     break;
 
-                case SUCCEED_PICTURE://下载附件中的图片
+                case SUCCEED_FILE://下载文件
 
-                    boolean isDownLoad=SavaImage((Bitmap) msg.obj, Environment.getExternalStorageDirectory().getPath(),msg.arg1);
+                    SavaFile((InputStream) msg.obj, Environment.getExternalStorageDirectory().getPath(),msg.arg1);
 
-                    if(isDownLoad){//查看文件
+                    break;
 
-                        File file=new File(currentFile);
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        if (Build.VERSION.SDK_INT <Build.VERSION_CODES.N) {//小于7.0查看图片
-                            intent.setDataAndType(Uri.fromFile(file), "image/*");
-                        }else{//大于等于7.0查看图片
-                            //解决方法，请查看：http://www.cnblogs.com/galibujianbusana/p/6482992.html
-                                Uri photoURI = FileProvider.getUriForFile(mContext, "com.youli.zbetuch.jingan.provider", file);
-                               intent.setDataAndType(photoURI, "image/*");
-                                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);    //这一步很重要。给目标应用一个临时的授权。
-                        }
-                        startActivity(intent);
-                        currentFile = "";
+                case SUCCEED_SEE://查看附件的具体内容
 
-                    }else{
-                        Toast.makeText(mContext,"文件下载失败，请重新点击",Toast.LENGTH_SHORT).show();
-                    }
+                    File file=new File(currentFile);
+                    Intent intent = FileUtils.openFile(file.getAbsolutePath());
+                    startActivity(intent);
+                    currentFile = "";
 
                     break;
 
@@ -305,9 +299,9 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
 
                           if(response!=null){
 
-                              msg.obj= BitmapFactory.decodeStream((InputStream)(response.body().byteStream()));
+                              msg.obj= (InputStream)(response.body().byteStream());
 
-                              msg.what=SUCCEED_PICTURE;
+                              msg.what=SUCCEED_FILE;
 
                               msg.arg1=position;
 
@@ -328,7 +322,6 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
 
     /**
      * 保存位图到本地
-     * @param bitmap
      * @param path 本地路径,这个方法你按几次图片就会下载几次图片
      * @return void
      */
@@ -354,43 +347,94 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
 //        }
 //    }
 
-    /**
-     * 保存位图到本地
-     * @param bitmap
-     * @param path 本地路径，这个方法你只要下载过图片了，就不会重复下载
-     * @return void
-     */
-    public boolean SavaImage(Bitmap bitmap, String path,int position) {
+//    /**
+//     * 保存位图到本地
+//     * @param bitmap
+//     * @param path 本地路径，这个方法你只要下载过图片了，就不会重复下载
+//     * @return void
+//     */
+//    public boolean SavaImage(Bitmap bitmap, String path,int position) {
+//
+//        String fileName = lvData.get(position).getFILE_NAME();
+//
+//        File file = new File(path);
+//        FileOutputStream fileOutputStream = null;
+//        //文件夹不存在，则创建它
+//        if (!file.exists()) {
+//            file.mkdir();
+//        }
+//
+//        currentFile=path+"/"+fileName;
+//
+//        File saveFile = new File(file, fileName);
+//
+//        if (saveFile.exists()) {
+//            return true;
+//        } else {
+//            try {
+//                fileOutputStream = new FileOutputStream(saveFile);
+//                fileOutputStream.close();
+//                return true;
+//            } catch (Exception e) {
+//                if(saveFile.exists()){
+//                    saveFile.delete();
+//                }
+//                e.printStackTrace();
+//                return  false;
+//            }
+//        }
+//
+//    }
 
-        String fileName = lvData.get(position).getFILE_NAME();
+    private void SavaFile(final InputStream is, final String path, final int position) {
 
-        File file = new File(path);
-        FileOutputStream fileOutputStream = null;
-        //文件夹不存在，则创建它
-        if (!file.exists()) {
-            file.mkdir();
-        }
+        new Thread(
 
-        currentFile=path+"/"+fileName;
+                new Runnable() {
+                    @Override
+                    public void run() {
 
-        File saveFile = new File(file, fileName);
+                        String fileName = lvData.get(position).getFILE_NAME();
 
-        if (saveFile.exists()) {
-            return true;
-        } else {
-            try {
-                fileOutputStream = new FileOutputStream(saveFile);
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-                fileOutputStream.close();
-                return true;
-            } catch (Exception e) {
-                if(saveFile.exists()){
-                    saveFile.delete();
+                        Message msg=Message.obtain();
+
+                        File file = new File(path);
+                        FileOutputStream fileOutputStream = null;
+                        //文件夹不存在，则创建它
+                        if (!file.exists()) {
+                            file.mkdir();
+                        }
+
+                        currentFile=path+"/"+fileName;
+
+                        File saveFile = new File(file, fileName);
+
+//                        if (saveFile.exists()) {
+//                            Log.e("2017/9/4","你存在");
+//                            msg.what=SUCCEED_SEE;
+//                        } else {
+                        try {
+
+                            fileOutputStream = new FileOutputStream(saveFile);
+                            //Log.e("2017/9/4","数据流=="+is);
+                            fileOutputStream.write(IOUtil.getBytesByStream(is));
+                            fileOutputStream.close();
+                            Log.e("2017/9/4","创建");
+                            msg.what=SUCCEED_SEE;
+                        } catch (IOException e) {
+                            if(saveFile.exists()){
+                                saveFile.delete();
+                            }
+                            e.printStackTrace();
+                            msg.what=PROBLEM;
+                        }
+                        //    }
+                        mHandler.sendMessage(msg);
+                    }
                 }
-                e.printStackTrace();
-                return  false;
-            }
-        }
+
+        ).start();
 
     }
+
 }

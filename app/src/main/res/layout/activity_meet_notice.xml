@@ -32,6 +32,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:padding="2dp"
                     android:onClick="onChange"
                     android:id="@+id/rb_meet_notice_current"
                     android:checked="true"
@@ -43,6 +44,7 @@
                     android:text="当 前 会 议"/>
 
                 <RadioButton
+                    android:padding="2dp"
                     android:onClick="onChange"
                     android:id="@+id/rb_meet_notice_history"
                     android:background="@drawable/meet_notice_rb_selector"
@@ -55,10 +57,11 @@
             </RadioGroup>
 
             <TextView
+                android:id="@+id/tv_meet_notice_readnum"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="本月0条，已读0条 读取率0.0%"/>
+                />
 
         </RelativeLayout>
 
@@ -79,6 +82,7 @@
                 android:text="编号"/>
 
             <TextView
+                android:paddingLeft="20dp"
                 android:gravity="center"
                 android:textColor="#ffffff"
                 android:layout_width="0dp"
@@ -86,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:text="会议主题"/>
             <TextView
+                android:paddingLeft="20dp"
                 android:gravity="center"
                 android:textColor="#ffffff"
                 android:layout_width="0dp"

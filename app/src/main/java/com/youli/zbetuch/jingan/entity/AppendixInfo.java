@@ -4,6 +4,7 @@ package com.youli.zbetuch.jingan.entity;
  * Created by liutao on 2017/9/1.
  */
 //http://web.youli.pw:89/Json/Get_Work_Notice_File.aspx?master_id=2
+    //http://web.youli.pw:89/Json/Get_Meeting_File.aspx?master_id=4
     //[{"ID":2,"FILE_PATH":"upload/Manage/9e0d2ccc-ad8a-496d-ba61-78e0c181c489_NimoScanDemo.jpg",
 // "FILE_NAME":"NimoScan Demo.jpg","MASTER_ID":2,"RecordCount":0,"type":0}]
 public class AppendixInfo {

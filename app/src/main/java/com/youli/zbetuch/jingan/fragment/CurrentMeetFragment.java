@@ -70,11 +70,11 @@ public class CurrentMeetFragment extends Fragment implements AdapterView.OnItemC
                     TextView tvNo=holder.getView(R.id.tv_item_fmt_hisory_meet_no);
                     tvNo.setText((position+1)+"");
                     TextView tvTheme=holder.getView(R.id.tv_item_fmt_hisory_meet_theme);
-                    tvTheme.setText(item.getTheme());
+                    tvTheme.setText(item.getTITLE());
                     TextView tvAddress=holder.getView(R.id.tv_item_fmt_hisory_meet_address);
-                    tvAddress.setText(item.getAddress());
+                    tvAddress.setText(item.getMEETING_ADD());
                     TextView tvTime=holder.getView(R.id.tv_item_fmt_hisory_meet_time);
-                    tvTime.setText(item.getTime());
+                    tvTime.setText(item.getMEETING_TIME());
 
                     LinearLayout ll=holder.getView(R.id.ll_item_fmt_hisory_meet);
 

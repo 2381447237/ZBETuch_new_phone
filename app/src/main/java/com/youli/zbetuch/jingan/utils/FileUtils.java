@@ -2,6 +2,9 @@ package com.youli.zbetuch.jingan.utils;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
 
 import java.io.File;
 
@@ -26,39 +29,62 @@ public class FileUtils {
 		/* 依扩展名的类型决定MimeType */
         if (end.equals("m4a") || end.equals("mp3") || end.equals("mid")
                 || end.equals("xmf") || end.equals("ogg") || end.equals("wav")) {
+
             return getAudioFileIntent(filePath);
         } else if (end.equals("3gp") || end.equals("mp4")) {
+
             return getAudioFileIntent(filePath);
         } else if (end.equals("jpg") || end.equals("gif") || end.equals("png")
                 || end.equals("jpeg") || end.equals("bmp")) {
+
             return getImageFileIntent(filePath);
         } else if (end.equals("apk")) {
+
             return getApkFileIntent(filePath);
         } else if (end.equals("ppt")) {
+
             return getPptFileIntent(filePath);
         } else if (end.equals("xls")) {
+
             return getExcelFileIntent(filePath);
         } else if (end.equals("doc")) {
+
             return getWordFileIntent(filePath);
+
         } else if (end.equals("pdf")) {
+
             return getPdfFileIntent(filePath);
         } else if (end.equals("chm")) {
+
             return getChmFileIntent(filePath);
         } else if (end.equals("txt")) {
+
             return getTextFileIntent(filePath, false);
         } else {
-            return getAllIntent(filePath);
+
+            return getAllIntent(end,filePath);
         }
     }
 
     // Android获取一个用于打开APK文件的intent
-    public static Intent getAllIntent(String param) {
+    public static Intent getAllIntent(String end,String param) {
 
         Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setAction(android.content.Intent.ACTION_VIEW);
-        Uri uri = Uri.fromFile(new File(param));
-        intent.setDataAndType(uri, "*/*");
+        if (Build.VERSION.SDK_INT <Build.VERSION_CODES.N) {//小于安卓7.0
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            Uri uri = Uri.fromFile(new File(param));
+            intent.setDataAndType(uri, "*/*");
+        }else {//大于安卓7.0
+            Uri uri = FileProvider.getUriForFile(MyApplication.getContext(), "com.youli.zbetuch.jingan.provider", new File(param));
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);    //这一步很重要。给目标应用一个临时的授权。
+
+            if(end.equals("xlsx")) {
+                intent.setDataAndType(uri, "application/vnd.ms-excel");
+            }else{
+                intent.setDataAndType(uri, "*/*");
+            }
+        }
         return intent;
     }
 
@@ -110,12 +136,18 @@ public class FileUtils {
 
     // Android获取一个用于打开图片文件的intent
     public static Intent getImageFileIntent(String param) {
-
         Intent intent = new Intent("android.intent.action.VIEW");
-        intent.addCategory("android.intent.category.DEFAULT");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri = Uri.fromFile(new File(param));
-        intent.setDataAndType(uri, "image/*");
+        if (Build.VERSION.SDK_INT <Build.VERSION_CODES.N){//小于7.0查看图片
+            intent.addCategory("android.intent.category.DEFAULT");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri uri = Uri.fromFile(new File(param));
+            intent.setDataAndType(uri, "image/*");
+        }else{//大于等于7.0查看图片
+            Uri photoURI = FileProvider.getUriForFile(MyApplication.getContext(), "com.youli.zbetuch.jingan.provider", new File(param));
+            intent.setDataAndType(photoURI, "image/*");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);    //这一步很重要。给目标应用一个临时的授权。
+        }
+
         return intent;
     }
 
