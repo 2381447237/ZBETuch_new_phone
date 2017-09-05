@@ -30,6 +30,11 @@ public class MeetNoticeInfo implements Serializable{
         this.MEETING_ADD = MEETING_ADD;
     }
 
+    public MeetNoticeInfo(String TITLE,  String MEETING_TIME) {
+        this.TITLE = TITLE;
+        this.MEETING_TIME = MEETING_TIME;
+    }
+
     public String getChecks() {
         return Checks;
     }

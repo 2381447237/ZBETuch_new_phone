@@ -22,7 +22,7 @@ import com.youli.zbetuch.jingan.adapter.MainAdapter;
 import com.youli.zbetuch.jingan.entity.GetStaffInfo;
 import com.youli.zbetuch.jingan.entity.JobsInfo;
 import com.youli.zbetuch.jingan.entity.MainContent;
-import com.youli.zbetuch.jingan.entity.MeetInfo;
+import com.youli.zbetuch.jingan.entity.MeetNoticeInfo;
 import com.youli.zbetuch.jingan.entity.NewsInfo;
 import com.youli.zbetuch.jingan.entity.WorkNoticeInfo;
 import com.youli.zbetuch.jingan.utils.IOUtil;
@@ -41,7 +41,7 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
     private GridView gv;
     private String titleArray []={"会议通知","工作通知","岗位信息","近期热点"};
     private List<MainContent> data=new ArrayList<>();
-    private List<MeetInfo> childData1=new ArrayList<>();
+    private List<MeetNoticeInfo> childData1=new ArrayList<>();
     private List<WorkNoticeInfo> childData2=new ArrayList<>();
     private List<JobsInfo> childData3=new ArrayList<>();
     private List<NewsInfo> childData4=new ArrayList<>();
@@ -94,7 +94,7 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
 
                         for (int i = 0; i < 4 - itemSize1; i++) {
 
-                            childData1.add(new MeetInfo("", ""));
+                            childData1.add(new MeetNoticeInfo("", ""));
 
                         }
 
@@ -281,7 +281,7 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                             if(response!=null){
                                 String miStr=response.body().string();
                                 Gson gson=new Gson();
-                                childData1=gson.fromJson(miStr,new TypeToken<List<MeetInfo>>(){}.getType());
+                                childData1=gson.fromJson(miStr,new TypeToken<List<MeetNoticeInfo>>(){}.getType());
                                 msg.obj=childData1;
                                 msg.what=SUCCEED_MI;
                                 mHandler.sendMessage(msg);

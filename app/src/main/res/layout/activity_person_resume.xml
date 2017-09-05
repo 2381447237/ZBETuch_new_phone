@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#8fbbdf">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="#4B92EE"></LinearLayout>
+        ></LinearLayout>
     <!--用工性质、工作班时-->
     <LinearLayout
         android:background="#afd0ec"
@@ -49,17 +51,16 @@
                 android:text="工作班时:"/>
 
             <TextView
-                android:text="全日制劳动合同"
+                android:text="常日班"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
 
         </LinearLayout>
-        </LinearLayout>
+    </LinearLayout>
     <!--工作地区、-->
     <LinearLayout
-        android:background="#4B92EE"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -127,8 +128,7 @@
             <TextView
                 android:gravity="center"
                 android:textSize="16sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="工程技术人员"/>
 
@@ -146,7 +146,6 @@
 
     <!--欲从事岗位2-->
     <LinearLayout
-        android:background="#4B92EE"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -167,8 +166,7 @@
             <TextView
                 android:gravity="center"
                 android:textSize="16sp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+               android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="农业技术人员"/>
 
@@ -185,7 +183,7 @@
     </LinearLayout>
 
 
-    <!--欲从事岗位3、期望薪资-->
+    <!--欲从事岗位3-->
     <LinearLayout
         android:background="#afd0ec"
         android:padding="5dp"
@@ -214,6 +212,15 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+    <!--期望薪资-->
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -237,7 +244,7 @@
     </LinearLayout>
     <!--计算机应用能力、计算机证书-->
     <LinearLayout
-        android:background="#4B92EE"
+        android:background="#afd0ec"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -288,7 +295,7 @@
 
     <!--外语语种1、熟练程度-->
     <LinearLayout
-        android:background="#afd0ec"
+
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -338,7 +345,7 @@
     </LinearLayout>
     <!--外语语种2、熟练程度-->
     <LinearLayout
-        android:background="#4B92EE"
+        android:background="#afd0ec"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -389,7 +396,7 @@
 
     <!--外语类证书-->
     <LinearLayout
-        android:background="#afd0ec"
+
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -421,7 +428,7 @@
 
     <!--其他职业技能证书-->
     <LinearLayout
-        android:background="#4B92EE"
+        android:background="#afd0ec"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -451,7 +458,7 @@
 
     <!--自我评价-->
     <LinearLayout
-        android:background="#afd0ec"
+
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -460,18 +467,16 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
-
-
 
             <TextView
                 android:textSize="16sp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="自我评价:"/>
-
-
 
         </LinearLayout>
 
@@ -491,20 +496,34 @@
         </LinearLayout>
     </LinearLayout>
     <!--提交-->
-    <RelativeLayout
-        android:background="#4B92EE"
+    <LinearLayout
+
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <Button
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/tv_person_resume_submit"
+            android:gravity="center"
             android:textSize="16sp"
             android:background="@drawable/selector_shiwuye_detail_btn"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_width="0dp"
+            android:layout_weight="10"
             android:layout_height="wrap_content"
             android:text="提交"/>
 
-    </RelativeLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
 </LinearLayout>

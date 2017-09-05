@@ -14,7 +14,7 @@ public class MainContent {
 
     private List<NewsInfo> newsInfos;//近期热点
 
-    private List<MeetInfo> meetInfos;//会议通知
+    private List<MeetNoticeInfo> meetInfos;//会议通知
 
     private List<WorkNoticeInfo> workNoticeInfos;//工作通知
 
@@ -34,11 +34,11 @@ public class MainContent {
         this.workNoticeInfos = workNoticeInfos;
     }
 
-    public List<MeetInfo> getMeetInfos() {
+    public List<MeetNoticeInfo> getMeetInfos() {
         return meetInfos;
     }
 
-    public void setMeetInfos(List<MeetInfo> meetInfos) {
+    public void setMeetInfos(List<MeetNoticeInfo> meetInfos) {
         this.meetInfos = meetInfos;
     }
 
@@ -58,7 +58,7 @@ public class MainContent {
         this.title = title;
     }
 
-    public MainContent(String title, List<MeetInfo> meetInfos,  List<WorkNoticeInfo> workNoticeInfos,List<JobsInfo> jobsInfos, List<NewsInfo> newsInfos) {
+    public MainContent(String title, List<MeetNoticeInfo> meetInfos,  List<WorkNoticeInfo> workNoticeInfos,List<JobsInfo> jobsInfos, List<NewsInfo> newsInfos) {
         this.jobsInfos = jobsInfos;
         this.meetInfos = meetInfos;
         this.newsInfos = newsInfos;

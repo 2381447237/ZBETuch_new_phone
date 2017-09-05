@@ -173,6 +173,56 @@ public class MyOkHttpUtils {
         return response;
     }
 
+    //教育信息的新建或修改
+//http://web.youli.pw:89/Json/Set_Educational_Information.aspx?ID=0&SFZ=310108198004026642&SCHOOL=我的学校&EDUCATION=我的学历&SPECIALTY=我的专业&START_DATE=2017-09-04&END_DATE=2017-09-04
+    public  static Response okHttpPostNewEduInfo(String url,String id,String sfz,String school,String education,String specialty,String startTime,String endTime){
+
+        getInstance();
+        String cookies=SharedPreferencesUtils.getString("cookies");
+        RequestBody requestBody=new FormBody.Builder().add("ID",id)
+                .add("SFZ",sfz).add("SCHOOL",school).add("EDUCATION",education)
+                .add("SPECIALTY",specialty).add("START_DATE",startTime).add("END_DATE",endTime).build();
+
+        Log.e("2017/9/5","requestBody=="+requestBody);
+
+        Request request=new Request.Builder().url(url).post(requestBody)
+                .addHeader("cookie",cookies).build();
+
+        Response response;
+
+        try {
+            response=okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+return response;
+    }
+
+
+    public  static Response okHttpPostNewEduInfo(String url,String json){
+
+        getInstance();
+        String cookies=SharedPreferencesUtils.getString("cookies");
+        RequestBody requestBody=new FormBody.Builder().add("json",json).build();
+
+        Log.e("2017/9/5","requestBody=="+requestBody);
+
+        Request request=new Request.Builder().url(url).post(requestBody)
+                .addHeader("cookie",cookies).build();
+
+        Response response;
+
+        try {
+            response=okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return response;
+    }
+
+
     //异步Get
     public static void okHttpAsynGet(String url, Callback callback) {
         getInstance();

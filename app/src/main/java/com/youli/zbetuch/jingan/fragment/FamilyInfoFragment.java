@@ -58,7 +58,6 @@ public class FamilyInfoFragment extends Fragment {
     private ListView lv;
 
     private List<FamilyAddressInfo> data=new ArrayList<>();
-
     private List<FamilyAddressInfo.FamilyAddressInfoList> hujiData=new ArrayList<>();
     private List<FamilyAddressInfo.FamilyAddressInfoList> juzhuData=new ArrayList<>();
 
@@ -280,6 +279,9 @@ public class FamilyInfoFragment extends Fragment {
 
                     @Override
                     public void convert(CommonViewHolder holder, FamilyAddressInfo.FamilyAddressInfoList item, int position) {
+
+                        ImageView head=holder.getView(R.id.iv_item_item_family_info_head);
+
 
                         TextView name=holder.getView(R.id.tv_item_item_family_info_name);
                         name.setText(item.getNAME());

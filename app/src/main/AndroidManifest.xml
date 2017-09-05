@@ -11,8 +11,6 @@
     <!-- 向SD卡中创建或者删除的权限。 -->
     <uses-permission android:name="andorid.permission.MONUN_UNMOUNT_FILESYSTEMS"/>
 
-
-
     <application
         android:name=".utils.MyApplication"
         android:allowBackup="true"
@@ -33,7 +31,7 @@
 
         <!--防止屏幕旋转变形，锁定竖屏-->
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.PersonBaseInfoActivity"
             android:launchMode="singleTask"
            >
             <intent-filter>
@@ -75,7 +73,7 @@
             ></activity>
         <activity android:name=".activity.JobInfoDetailActivity"
             ></activity>
-        <activity android:name=".activity.PersonBaseInfoActivity"
+        <activity android:name=".activity.LoginActivity"
             android:windowSoftInputMode="stateHidden"
             ></activity>
         <activity android:name=".activity.PersonReActivity"

@@ -23,7 +23,6 @@ import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.activity.MeetDetailActivity;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
-import com.youli.zbetuch.jingan.entity.MeetInfo;
 import com.youli.zbetuch.jingan.entity.MeetNoticeInfo;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;

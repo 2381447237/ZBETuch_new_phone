@@ -22,6 +22,7 @@ import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.activity.JobInfoDetailActivity;
 import com.youli.zbetuch.jingan.activity.JobInfoListActivity;
 import com.youli.zbetuch.jingan.activity.MainLayoutActivity;
+import com.youli.zbetuch.jingan.activity.MeetDetailActivity;
 import com.youli.zbetuch.jingan.activity.MeetNoticeActivity;
 import com.youli.zbetuch.jingan.activity.RecentNewsActivity;
 import com.youli.zbetuch.jingan.activity.WorkNoticeActivity;
@@ -30,7 +31,7 @@ import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.JobInfoListInfo;
 import com.youli.zbetuch.jingan.entity.JobsInfo;
 import com.youli.zbetuch.jingan.entity.MainContent;
-import com.youli.zbetuch.jingan.entity.MeetInfo;
+import com.youli.zbetuch.jingan.entity.MeetNoticeInfo;
 import com.youli.zbetuch.jingan.entity.NewsInfo;
 import com.youli.zbetuch.jingan.entity.WorkNoticeInfo;
 import com.youli.zbetuch.jingan.utils.MyApplication;
@@ -136,13 +137,13 @@ public class MainAdapter extends BaseAdapter{
 
 
         if(p==0) {
-            commonAdapter = new CommonAdapter<MeetInfo>(context, data.get(p).getMeetInfos(), R.layout.item_main_layout_lv) {
+            commonAdapter = new CommonAdapter<MeetNoticeInfo>(context, data.get(p).getMeetInfos(), R.layout.item_main_layout_lv) {
                 @Override
-                public void convert(CommonViewHolder holder, MeetInfo item, int position) {
+                public void convert(CommonViewHolder holder, MeetNoticeInfo item, int position) {
                     TextView title = holder.getView(R.id.item_main_layout_lv_content_tv);
                     title.setText(data.get(p).getMeetInfos().get(position).getTITLE());
                     TextView time = holder.getView(R.id.item_main_layout_lv_time_tv);
-                    time.setText(data.get(p).getMeetInfos().get(position).getMEETING_TIME());
+                    time.setText(MyDateUtils.stringToYMDHMS(data.get(p).getMeetInfos().get(position).getMEETING_TIME()));
                 }
 
             };
@@ -199,8 +200,10 @@ public class MainAdapter extends BaseAdapter{
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                switch (p){
 
-                   case 0:
-                     //  Toast.makeText(context,data.get(p).getMeetInfos().get(position).getTITLE(),Toast.LENGTH_SHORT).show();
+                   case 0://会议通知
+                       intent=new Intent(context,MeetDetailActivity.class);
+                       intent.putExtra("MEETINFO",data.get(p).getMeetInfos().get(position));
+                       context.startActivity(intent);
                        break;
                    case 1://工作通知
                        intent=new Intent(context,WorkNoticeDetailActivity.class);

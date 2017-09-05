@@ -64,8 +64,9 @@ public class JobInfoListActivity extends BaseActivity implements AdapterView.OnI
 
                      jobInfoList.addAll((List<JobInfoListInfo>)msg.obj);
                      rowNum.setText("共有数据"+jobInfoList.get(0).getMax_row()+"条");
-                     lvSetAdapter(jobInfoList);
-
+                     if(jobInfoList!=null) {
+                         lvSetAdapter(jobInfoList);
+                     }
 
                      break;
 
@@ -131,9 +132,9 @@ public class JobInfoListActivity extends BaseActivity implements AdapterView.OnI
         lv.addHeaderView(headerLv);
          lv.setOnItemClickListener(this);
 
-
-        lvSetAdapter(jobInfoList);
-
+        if(jobInfoList!=null) {
+            lvSetAdapter(jobInfoList);
+        }
 
     }
 

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Process;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,11 +17,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.activity.JobInfoListActivity;
-import com.youli.zbetuch.jingan.entity.EduInfo;
+import com.youli.zbetuch.jingan.entity.JobInfoListInfo;
 import com.youli.zbetuch.jingan.entity.PersonReInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +35,7 @@ import okhttp3.Response;
 public class PersonReFragment extends Fragment{
 
     private String sfzStr;
+
 
     public String getSfzStr() {
         return sfzStr;
@@ -55,10 +55,13 @@ public class PersonReFragment extends Fragment{
 
     private List<PersonReInfo> data=new ArrayList<>();
 
-    private Button findWorkBtn;
+    private List<JobInfoListInfo> jobInfoList=new ArrayList<>();
 
+    private Button findWorkBtn;
+    private String queryUrl;
     private final int SUCCESS=10000;
-    private final int  PROBLEM=10001;
+    private final int SUCCESS_JOB=10001;
+    private final int  PROBLEM=10002;
 
     private Handler mHandler=new Handler(){
 
@@ -100,6 +103,19 @@ public class PersonReFragment extends Fragment{
 
                     break;
 
+                case SUCCESS_JOB:
+
+                    jobInfoList.clear();
+                    jobInfoList.addAll((List<JobInfoListInfo>)msg.obj);
+
+                    Log.e("2017/9/5","岗位信息=="+jobInfoList);
+
+                    Intent intent=new Intent(getActivity(), JobInfoListActivity.class);
+                    intent.putExtra("JobInfoList",(Serializable) jobInfoList);
+                    intent.putExtra("queryUrl",queryUrl);
+                    startActivity(intent);
+                    break;
+
                 case PROBLEM:
 
                     Toast.makeText(getActivity(),"网络不给力",Toast.LENGTH_SHORT).show();
@@ -110,9 +126,9 @@ public class PersonReFragment extends Fragment{
         }
     };
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
 
         contentView=LayoutInflater.from(getContext()).inflate(R.layout.framgment_personal_resume,container,false);
 
@@ -150,15 +166,64 @@ public class PersonReFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getActivity(),"查找对应工作",Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(getActivity(), JobInfoListActivity.class);
-                startActivity(intent);
-
+                getJobList(sfzStr);
 
             }
         });
 
         initDatas();
+    }
+
+    private void getJobList(final String sfz){
+
+        new Thread(
+
+                new Runnable() {
+                    @Override
+                    public void run() {
+
+//                        根据身份证查询岗位信息
+//                        http://web.youli.pw:89/Json/Get_JobsInfo.aspx?sfz=422201197209204223&PageIndex=0&PageRecCnts=15
+
+                        queryUrl=MyOkHttpUtils.BaseUrl+"/Json/Get_JobsInfo.aspx?sfz="+getSfzStr()+"&PageRecCnts=15&PageIndex=";
+
+                        String urlJobList=queryUrl+"0";
+
+                        Response response=MyOkHttpUtils.okHttpGet(urlJobList);
+
+                        Message msg=Message.obtain();
+
+                        if(response!=null){
+
+                            try {
+                                String jobStr=response.body().string();
+
+                                if(jobStr!=null){
+                                    Gson gson=new Gson();
+                                    msg.what=SUCCESS_JOB;
+                                    msg.obj=gson.fromJson(jobStr,new TypeToken<List<JobInfoListInfo>>(){}.getType());
+                                }else{
+
+                                    msg.what=PROBLEM;
+                                }
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }else{
+
+                            msg.what=PROBLEM;
+
+                        }
+
+                        mHandler.sendMessage(msg);
+
+                    }
+                }
+
+        ).start();
+
     }
 
     private void initDatas(){

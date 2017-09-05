@@ -30,10 +30,15 @@ import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.EduInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Response;
 
@@ -49,7 +54,8 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
     private CommonAdapter adapter;
     private final int SUCCESS=10000;
     private final int SUCCESS_DELETE=10001;
-    private final int  PROBLEM=10002;
+    private final int SUCCESS_NEW=10002;
+    private final int  PROBLEM=10003;
     private String sfzStr;
     private Button btnNew;
     private Handler mHandler=new Handler(){
@@ -69,11 +75,17 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
                     break;
 
-                case SUCCESS_DELETE:
+                case SUCCESS_DELETE://删除
 
                     Toast.makeText(mContext,"删除成功",Toast.LENGTH_SHORT).show();
                     //data.remove(p);
                     adapter.notifyDataSetChanged();
+                    break;
+
+                case SUCCESS_NEW://新建
+
+                    Toast.makeText(mContext,"成功="+(String)msg.obj,Toast.LENGTH_SHORT).show();
+
                     break;
 
                 case PROBLEM:
@@ -327,7 +339,11 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
                 String startTimeStr=tvStartTime.getText().toString().trim();
                 String endTimeStr=tvEndTime.getText().toString().trim();
 
-                 Toast.makeText(mContext,"学校="+nameStr+"学历="+eduStr+"专业="+majorStr+"开始时间="+startTimeStr+"结束时间="+endTimeStr,Toast.LENGTH_SHORT).show();
+              //  http://web.youli.pw:89/Json/Set_Educational_Information.aspx?ID=0&SFZ=310108198004026642&SCHOOL=我的学校&EDUCATION=我的学历&SPECIALTY=我的专业&START_DATE=2017-09-04&END_DATE=2017-09-04
+
+                 //Toast.makeText(mContext,"学校="+nameStr+"学历="+eduStr+"专业="+majorStr+"开始时间="+startTimeStr+"结束时间="+endTimeStr,Toast.LENGTH_SHORT).show();
+
+                newOrModifyEduInfo(nameStr,eduStr,majorStr,startTimeStr,endTimeStr);
 
                 dialog.dismiss();
             }
@@ -344,5 +360,71 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
         dialog.show();
         dialog.setCanceledOnTouchOutside(false);
     };
+
+
+    private void newOrModifyEduInfo(final String name, final String edu, final String major, final String startTime, final String endTime){
+
+//        JSONObject obj = new JSONObject();
+//        try {
+//            obj.put("ID"," "+0);
+//            obj.put("SFZ",sfzStr);
+//            obj.put("SCHOOL",name);
+//            obj.put("EDUCATION",edu);
+//            obj.put("SPECIALTY",major);
+//            obj.put("START_DATE",startTime);
+//            obj.put("END_DATE",endTime);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        Map<String,Object> params=new HashMap<String,Object>();
+//        Map<String,String> data=new HashMap<String,String>();
+//        data.put("json",obj.toString());
+//        params.put("data",data);
+//
+//        new Thread(
+//
+//                new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //  http://web.youli.pw:89/Json/Set_Educational_Information.aspx?ID=0&SFZ=310108198004026642&SCHOOL=我的学校&EDUCATION=我的学历&SPECIALTY=我的专业&START_DATE=2017-09-04&END_DATE=2017-09-04
+//
+//                      String url=MyOkHttpUtils.BaseUrl+"/Json/Set_Educational_Information.aspx";
+//
+//                     // Response response=MyOkHttpUtils.okHttpPostNewEduInfo(url,"0",sfzStr,name,edu,major,startTime,endTime);
+//                        Response response=MyOkHttpUtils.okHttpPostNewEduInfo(url,data.get("json"));
+//
+//                        Message msg=Message.obtain();
+//
+//                       if(response!=null){
+//
+//                           try {
+//                               String resStr=response.body().string();
+//
+//                               msg.what=SUCCESS_NEW;
+//                               msg.obj=resStr;
+//
+//
+//                           } catch (IOException e) {
+//                               e.printStackTrace();
+//                           }
+//
+//                       }else{
+//
+//                         msg.what=PROBLEM;
+//
+//                       }
+//
+//                        mHandler.sendMessage(msg);
+//
+//                    }
+//                }
+//
+//        ).start();
+
+
+
+    }
 
 }

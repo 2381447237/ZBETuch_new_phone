@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,15 +24,21 @@ import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.bean.addressBean.CommitteeInfo;
 import com.youli.zbetuch.jingan.bean.addressBean.RegionInfo;
 import com.youli.zbetuch.jingan.bean.addressBean.StreetInfo;
+import com.youli.zbetuch.jingan.entity.PersonInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Response;
 
 public class PersonalInfoQuery extends BaseActivity implements View.OnClickListener {
+
+    private final int SUCCEED=10000;
+    private final int  PROBLEM=10001;
+    private List<PersonInfo> personList=new ArrayList<>();
 
     private Button btn_scanning;
     private EditText et_id_num;
@@ -59,6 +67,33 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
     private CheckBox cb_resource;
     private Button btn_condition_query;
 
+    private Handler mHandler=new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what){
+
+                case SUCCEED:
+
+                    personList.clear();
+                    personList.addAll((List<PersonInfo>)msg.obj);
+                    Intent intent=new Intent(mContext,PersonInfoActivity.class);
+                    intent.putExtra("personInfos",(Serializable)personList.get(0));
+                    startActivity(intent);
+
+                    break;
+
+
+                case PROBLEM:
+                    Toast.makeText(mContext,"网络不给力",Toast.LENGTH_SHORT).show();
+
+                    break;
+
+            }
+
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -289,11 +324,11 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                 final String id_card_num = et_id_num.getText().toString().trim();
                 if (id_card_num.isEmpty()) {
                     Toast.makeText(this, "身份证号码不能为空", Toast.LENGTH_SHORT).show();
-                    et_id_num.setText("");
+                    //et_id_num.setText("");
                     return;
                 } else if (id_card_num.length() < 18) {
                     Toast.makeText(this, "对不起，您所输入的身份证号码有误，请重新输入", Toast.LENGTH_SHORT).show();
-                    et_id_num.setText("");
+                   // et_id_num.setText("");
                     return;
                 } else {
                     new Thread(new Runnable() {
@@ -310,7 +345,12 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                                     Looper.loop();
                                 } else {
                                     // TODO 解析数据并传递给下一个Activity
+                                   Gson gson=new Gson();
+                                    Message msg=Message.obtain();
 
+                                    msg.obj=gson.fromJson(result,new TypeToken<List<PersonInfo>>(){}.getType());
+                                    msg.what=SUCCEED;
+                                    mHandler.sendMessage(msg);
                                 }
                             } catch (IOException e) {
                                 e.printStackTrace();
