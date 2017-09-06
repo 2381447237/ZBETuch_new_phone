@@ -284,4 +284,80 @@
         <item>注塑</item>
     </string-array>
 
+    <string-array name="personyonggongxingzi">
+        <item>请选择</item>
+        <item>全日制劳动合同</item>
+        <item>事业单位聘用合同</item>
+        <item>保险代理人</item>
+        <item>青年职业见习计划</item>
+        <item>非正规就业劳动组织用工</item>
+    </string-array>
+
+    <string-array name="personworktime">
+        <item>请选择</item>
+        <item>常日班</item>
+        <item>常夜班</item>
+        <item>常早班</item>
+        <item>常中班</item>
+        <item>三班制</item>
+        <item>两头班</item>
+        <item>两两制</item>
+        <item>早中班</item>
+        <item>中晚班</item>
+        <item>隔天班</item>
+    </string-array>
+
+    <string-array name="personaddress">
+        <item>请选择</item>
+        <item>全市</item>
+        <item>黄浦</item>
+        <item>徐汇</item>
+        <item>长宁</item>
+        <item>静安</item>
+        <item>普陀</item>
+        <item>闸北</item>
+        <item>虹口</item>
+        <item>杨浦</item>
+        <item>闵行</item>
+        <item>宝山</item>
+        <item>嘉定</item>
+        <item>浦东</item>
+        <item>金山</item>
+        <item>松江</item>
+        <item>青浦</item>
+        <item>奉贤</item>
+        <item>崇明</item>
+        <item>外省市</item>
+    </string-array>
+
+    <string-array name="personxinzi">
+        <item>请选择</item>
+        <item>1620-2000</item>
+        <item>2001-3000</item>
+        <item>3001-5000</item>
+        <item>5100-8000</item>
+        <item>8001-10000</item>
+        <item>10001-20000</item>
+        <item>20001以上</item>
+    </string-array>
+
+    <string-array name="personSkills">
+        <item>请选择</item>
+        <item>精通</item>
+        <item>熟练</item>
+        <item>良好</item>
+        <item>一般</item>
+    </string-array>
+
+    <string-array name="personLanguage">
+        <item>请选择</item>
+        <item>英语</item>
+        <item>日语</item>
+        <item>法语</item>
+        <item>德语</item>
+        <item>西班牙语</item>
+        <item>俄语</item>
+        <item>意大利语</item>
+    </string-array>
+
 </resources>

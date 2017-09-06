@@ -398,6 +398,9 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
                         break;
                     case R.id.rb_person_resume://个人简历
                         intent.setClass(mContext,PersonReActivity.class);
+                        if(personInfo!=null){
+                            intent.putExtra("SFZ",personInfo.getSFZ());
+                        }
                         startActivity(intent);
                         break;
                     case R.id.rb_service_record://服务记录

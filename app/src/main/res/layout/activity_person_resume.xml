@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8fbbdf"
+    >
+
+<LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8fbbdf">
+    >
 
 
     <LinearLayout
@@ -29,11 +36,13 @@
                 android:layout_height="wrap_content"
                 android:text="用工性质:"/>
 
-            <TextView
-                android:text="全日制劳动合同"
-                android:textSize="16sp"
+
+            <Spinner
+            android:background="@drawable/spinner_bg"
+            android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_work_nature"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
 
         </LinearLayout>
@@ -50,11 +59,12 @@
                 android:layout_height="wrap_content"
                 android:text="工作班时:"/>
 
-            <TextView
-                android:text="常日班"
-                android:textSize="16sp"
+            <Spinner
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_work_class"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
 
         </LinearLayout>
@@ -62,10 +72,12 @@
     <!--工作地区、-->
     <LinearLayout
         android:padding="5dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+
             android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,30 +88,34 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <Spinner
                 android:gravity="center"
-                android:text="黄浦"
-                android:textSize="16sp"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_work_area_one"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
 
-            <TextView
+            <Spinner
                 android:gravity="center"
-                android:textSize="16sp"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_work_area_two"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="普陀"/>
+                android:layout_height="33dp"
+                />
 
-            <TextView
+            <Spinner
                 android:gravity="center"
-                android:text="长宁"
-                android:textSize="16sp"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_work_area_three"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
 
         </LinearLayout>
@@ -107,12 +123,14 @@
 
     <!--欲从事岗位1-->
     <LinearLayout
+        android:gravity="center"
         android:background="#afd0ec"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+
             android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -123,22 +141,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
-
-            <TextView
+            <Spinner
                 android:gravity="center"
-                android:textSize="16sp"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_want_work_one"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="工程技术人员"/>
+                android:layout_height="33dp"
+                />
 
-            <TextView
+            <Spinner
                 android:gravity="center"
-                android:text="地质勘探工程技术人员"
-                android:textSize="16sp"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_want_work_one_detail"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
 
         </LinearLayout>
@@ -146,6 +165,7 @@
 
     <!--欲从事岗位2-->
     <LinearLayout
+        android:gravity="center"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -162,22 +182,25 @@
             android:orientation="horizontal">
 
 
-
-            <TextView
+            <Spinner
                 android:gravity="center"
-                android:textSize="16sp"
-               android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="农业技术人员"/>
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_want_work_two"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                />
 
-            <TextView
+            <Spinner
                 android:gravity="center"
-                android:text="土壤技术人员"
-                android:textSize="16sp"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_want_work_two_detail"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
+
 
         </LinearLayout>
     </LinearLayout>
@@ -203,12 +226,14 @@
                 android:layout_height="wrap_content"
                 android:text="欲从事岗位3:"/>
 
-            <TextView
-                android:text="测试"
+            <EditText
+                android:gravity="center"
+                android:id="@+id/et_person_re_want_work_three"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
+
 
         </LinearLayout>
 
@@ -233,17 +258,21 @@
                 android:layout_height="wrap_content"
                 android:text="期望薪资:"/>
 
-            <TextView
-                android:text="请选择"
-                android:textSize="16sp"
+            <Spinner
+                android:gravity="center"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_want_salary"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
+
 
         </LinearLayout>
     </LinearLayout>
     <!--计算机应用能力、计算机证书-->
     <LinearLayout
+        android:gravity="center"
         android:background="#afd0ec"
         android:padding="5dp"
         android:layout_width="match_parent"
@@ -251,6 +280,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:gravity="center"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -262,12 +292,16 @@
                 android:layout_height="wrap_content"
                 android:text="计算机应用能力:"/>
 
-            <TextView
-                android:text="精通"
-                android:textSize="16sp"
+
+            <Spinner
+                android:gravity="center"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_computer_level"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
+
 
         </LinearLayout>
 
@@ -283,8 +317,8 @@
                 android:layout_height="wrap_content"
                 android:text="计算机证书:"/>
 
-            <TextView
-                android:text="2级"
+            <EditText
+                android:id="@+id/et_person_re_computer_cert"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -313,11 +347,14 @@
                 android:layout_height="wrap_content"
                 android:text="外语语种1:"/>
 
-            <TextView
-                android:text="英语"
-                android:textSize="16sp"
+
+            <Spinner
+                android:gravity="center"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_language_one"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
 
         </LinearLayout>
@@ -334,12 +371,15 @@
                 android:layout_height="wrap_content"
                 android:text="熟练程度:"/>
 
-            <TextView
-                android:text="精通"
-                android:textSize="16sp"
+            <Spinner
+                android:gravity="center"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_language_proficiency_one"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
+
 
         </LinearLayout>
     </LinearLayout>
@@ -363,12 +403,15 @@
                 android:layout_height="wrap_content"
                 android:text="外语语种2:"/>
 
-            <TextView
-                android:text="德语"
-                android:textSize="16sp"
+            <Spinner
+                android:gravity="center"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_language_two"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
+
 
         </LinearLayout>
 
@@ -384,11 +427,13 @@
                 android:layout_height="wrap_content"
                 android:text="熟练程度:"/>
 
-            <TextView
-                android:text="良好"
-                android:textSize="16sp"
+            <Spinner
+                android:gravity="center"
+                android:background="@drawable/spinner_bg"
+                android:spinnerMode="dialog"
+                android:id="@+id/sp_person_re_language_proficiency_two"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 />
 
         </LinearLayout>
@@ -414,8 +459,8 @@
                 android:layout_height="wrap_content"
                 android:text="外语类证书:"/>
 
-            <TextView
-                android:text="英语4级"
+            <EditText
+                android:id="@+id/et_person_re_language_cert"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -446,8 +491,8 @@
                 android:layout_height="wrap_content"
                 android:text="其他职业技能证书:"/>
 
-            <TextView
-                android:text="教师资格证"
+            <EditText
+                android:id="@+id/et_person_re_other_certs"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -488,10 +533,13 @@
             android:orientation="horizontal">
 
             <EditText
+                android:hint="请输入自己的评价,(最多可输入1000字)"
+
+                android:id="@+id/et_person_resume_self_evaluation"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="本人性格开朗"/>
+                />
 
         </LinearLayout>
     </LinearLayout>
@@ -527,3 +575,4 @@
 
     </LinearLayout>
 </LinearLayout>
+    </ScrollView>
