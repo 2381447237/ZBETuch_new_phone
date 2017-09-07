@@ -9,9 +9,9 @@ import java.util.List;
 
 public class ChildJobPostInfo {
 
-    private String childJobName;
-    private String childJobCode;
-    private String jobCode;
+    private String childJobName;//职位名
+    private String childJobCode;//子职位编码
+    private String jobCode;//父职位编码
 
     public List<ChildJobPostInfo> getChildJobInfo(){
 

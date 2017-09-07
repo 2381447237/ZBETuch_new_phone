@@ -18,7 +18,7 @@
 
     </RelativeLayout>
     <ScrollView
-        android:background="@drawable/functionlistbackground"
+        android:background="@drawable/bjt"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -29,9 +29,98 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
+    <!--图片-->
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/personhead"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_person_baseinfo_takephoto"
+                android:background="@drawable/selector_shiwuye_detail_btn"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:textSize="10sp"
+                android:text="拍照"/>
+
+            <Button
+                android:id="@+id/btn_person_baseinfo_uploadphoto"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/selector_shiwuye_detail_btn"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:textSize="10sp"
+                android:text="上传图片"/>
+
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_person_baseinfo_choicephoto"
+                android:background="@drawable/selector_shiwuye_detail_btn"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:textSize="10sp"
+                android:text="选择图片"/>
+
+            <Button
+                android:id="@+id/btn_person_baseinfo_saveinfo"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/selector_shiwuye_detail_btn"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:textSize="10sp"
+                android:text="保存信息"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <!--姓名、性别-->
     <LinearLayout
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -48,14 +137,28 @@
     android:layout_height="wrap_content"
     android:text="姓        名:"/>
 
-      <EditText
-          android:padding="3dp"
-          android:background="#ffffff"
-          android:focusable="false"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="储明净静"/>
+      <!--<EditText-->
+          <!--android:padding="3dp"-->
+          <!--android:background="#ffffff"-->
+          <!--android:focusable="false"-->
+          <!--android:layout_width="0dp"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_weight="1"-->
+          <!--android:text="储明净静"/>-->
+
+        <EditText
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="储明净静"
+            android:paddingLeft="3dp"
+            android:textSize="16sp"
+            android:focusable="false"
+            android:background="@drawable/shape_shiwuye_detail_et"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
 
     </LinearLayout>
     <LinearLayout
@@ -71,13 +174,20 @@
             android:layout_height="wrap_content"
             android:text="性        别:"/>
 
+
         <EditText
-            android:padding="3dp"
-            android:background="#ffffff"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="女"
+            android:paddingLeft="3dp"
+            android:textSize="16sp"
+            android:focusable="false"
+            android:background="@drawable/shape_shiwuye_detail_et"
+            android:layout_weight="1"
+            android:singleLine="true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="女"/>
+            />
 
     </LinearLayout>
 
@@ -85,7 +195,7 @@
 
     <!--出生年月、民族-->
     <LinearLayout
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -102,13 +212,18 @@
                 android:text="出生年月:"/>
 
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="1980-04-02"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
                 android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="1980-04-02"/>
+                />
 
         </LinearLayout>
         <LinearLayout
@@ -124,13 +239,21 @@
                 android:layout_height="wrap_content"
                 android:text="民        族:"/>
 
+
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="汉族"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
+                android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="汉族"/>
+                />
+
 
         </LinearLayout>
 
@@ -138,7 +261,7 @@
 
     <!--籍贯、状态-->
     <LinearLayout
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -154,14 +277,20 @@
                 android:layout_height="wrap_content"
                 android:text="籍        贯:"/>
 
+
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="上海"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
                 android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="上海"/>
+                />
 
         </LinearLayout>
         <LinearLayout
@@ -177,13 +306,20 @@
                 android:layout_height="wrap_content"
                 android:text="状        态:"/>
 
+
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="未登记失业"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
+                android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="未登记失业"/>
+                />
 
         </LinearLayout>
 
@@ -191,7 +327,7 @@
 
     <!--联系电话、当前意向-->
     <LinearLayout
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -205,15 +341,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="联系电话:"/>
-
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="13212344321"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
                 android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="13212344321"/>
+                />
+
 
 
         </LinearLayout>
@@ -229,14 +370,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="当前意向:"/>
-
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="请选择"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
+                android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="请选择"/>
+                />
 
         </LinearLayout>
 
@@ -244,7 +390,7 @@
 
     <!--文化程度、摸底情况-->
     <LinearLayout
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -259,15 +405,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="文化程度:"/>
-
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="高中"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
                 android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="高中"/>
+                />
 
         </LinearLayout>
         <LinearLayout
@@ -282,14 +432,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="摸底情况:"/>
-
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="其他"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
+                android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="其他"/>
+                />
+
 
         </LinearLayout>
 
@@ -298,7 +454,7 @@
 
     <!--街道、居委会-->
     <LinearLayout
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -313,15 +469,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="街        道:"/>
-
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="大宁路街道"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
                 android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="大宁路街道"/>
+                />
 
         </LinearLayout>
         <LinearLayout
@@ -336,14 +496,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="居  委  会:"/>
-
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="667弄居委会"
+                android:paddingLeft="3dp"
+                android:textSize="16sp"
+                android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:layout_weight="1"
+                android:singleLine="true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="667弄居委会"/>
+                />
+
 
         </LinearLayout>
 
@@ -351,7 +517,7 @@
 
     <!--证件号码-->
     <LinearLayout
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -366,14 +532,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="证件号码:"/>
-
             <EditText
-                android:padding="3dp"
-                android:background="#ffffff"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:text="31010898004026642"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:textSize="16sp"
                 android:focusable="false"
+                android:background="@drawable/shape_shiwuye_detail_et"
+                android:singleLine="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="31010898004026642"/>
+                />
+
 
         </LinearLayout>
 
@@ -382,6 +554,7 @@
 
     <!--户籍地址-->
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -399,12 +572,14 @@
 
 
             <TextView
+                android:layout_marginLeft="3dp"
                 android:textColor="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="路"/>
 
             <EditText
+                android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
@@ -418,6 +593,7 @@
                 android:text="弄"/>
 
             <EditText
+                android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
@@ -431,6 +607,7 @@
                 android:text="号"/>
 
             <EditText
+                android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
@@ -444,6 +621,7 @@
                 android:text="室"/>
 
             <EditText
+                android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
@@ -462,7 +640,248 @@
 
     </LinearLayout>
 
-</LinearLayout>
+
+    <!--居住地址-->
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="居住地址:"/>
+
+
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="路"/>
+
+            <EditText
+                android:textSize="16sp"
+                android:padding="3dp"
+                android:background="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="大宁路"
+                />
+            <TextView
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="弄"/>
+
+            <EditText
+                android:textSize="16sp"
+                android:padding="3dp"
+                android:background="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="535弄"
+                />
+            <TextView
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="号"/>
+
+            <EditText
+                android:textSize="16sp"
+                android:padding="3dp"
+                android:background="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16号"
+                />
+            <TextView
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="室"/>
+
+            <EditText
+                android:textSize="16sp"
+                android:padding="3dp"
+                android:background="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="602室"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="同上"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 标识-->
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_person_baseinfo_biaoshi"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="标        识:"/>
+
+            <LinearLayout
+                android:layout_toRightOf="@id/tv_person_baseinfo_biaoshi"
+                android:id="@+id/ll_person_baseinfo_biaoshi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_person_info_yjbysh"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/yingjiebiyesheng"
+                    />
+                <ImageView
+                    android:id="@+id/iv_person_info_jdry"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/jiedurenyuan"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_person_info_jykn"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/jiuyekunnan"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_person_info_qhry"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/qihangrenyuan"
+                  />
+
+                <ImageView
+                    android:id="@+id/iv_person_info_wjyj"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/nonejiuyefanily"
+                   />
+
+                <ImageView
+                    android:id="@+id/iv_person_info_xjry"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/xingjierenyuan"
+                    />
+
+
+            </LinearLayout>
+
+            <Button
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="3dp"
+                android:id="@+id/btn_person_baseinfo_biaoshi"
+                android:background="@drawable/selector_shiwuye_detail_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="16sp"
+                android:text="编辑标识"/>
+
+            </RelativeLayout>
+
+        <!-- 专项标识-->
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/tv_person_baseinfo_zhuangxiang_biaoshi"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="专项标识:"/>
+
+            <LinearLayout
+                android:layout_toRightOf="@id/tv_person_baseinfo_zhuangxiang_biaoshi"
+                android:id="@+id/ll_person_baseinfo_zhuangxiang_biaoshi"
+                android:layout_marginLeft="3dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:textColor="#ffffff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="丧劳调查"/>
+
+
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_person_baseinfo_zhuanxiang_biaoshi"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/selector_shiwuye_detail_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="16sp"
+                android:text="编辑标识"/>
+</RelativeLayout>
+
+    <!-- 备注-->
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备        注:"/>
+
+        <EditText
+            android:text="我是备注"
+            android:background="#ffffff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="100dp" />
+
+    </LinearLayout>
+
+
+        </LinearLayout>
 
     </ScrollView>
 </LinearLayout>

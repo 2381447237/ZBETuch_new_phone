@@ -1,6 +1,8 @@
 package com.youli.zbetuch.jingan.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -62,7 +64,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
    private List<ChildJobPostInfo> wantWorkOneDetailSpData=new ArrayList<>();
     private Spinner wantWorkTwoSp,wantWorkTwoDetailSp;//欲从事岗位2
     private List<JobPostInfo> wantWorkTwoSpData=new ArrayList<>();
-    private List<String> wantWorkTwoDetailSpData=new ArrayList<>();
+    private List<ChildJobPostInfo> wantWorkTwoDetailSpData=new ArrayList<>();
     private EditText wantWorkThreeEt;//欲从事岗位3
     private Spinner wantSalarySp;//期望薪资
     private String wantSalarySpArray [];
@@ -90,7 +92,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
                     data.clear();
                     data.addAll((List<PersonReInfo> )msg.obj);
-                    if(data.size()!=0) {
+                    if(data!=null&&data.size()>0) {
 
                        spinnerCheckTo(data,workNatureSp);//用工性质
                         //    workNatureTv.setText(data.get(0).getGZXZNAME());
@@ -98,18 +100,18 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                         //   workClassTv.setText(data.get(0).getGZBSNAME());
                         spinnerCheckTo(data,workAreaOneSp);//工作地区1
                     //    workAreaOneTv.setText(data.get(0).getAREAID_1());
-                        spinnerCheckTo(data,workAreaTwoSp);//工作地区1
+                        spinnerCheckTo(data,workAreaTwoSp);//工作地区2
                       //  workAreaTwoTv.setText(data.get(0).getAREAID_2());
-                        spinnerCheckTo(data,workAreaThreeSp);//工作地区1
+                        spinnerCheckTo(data,workAreaThreeSp);//工作地区3
                        // workAreaThreeTv.setText(data.get(0).getAREAID_3());
                         spinnerCheckTo(data,wantWorkOneSp);//欲从事岗位1
                       //  wantWorkOneTv.setText(data.get(0).getZYFLID_1());
-                        spinnerCheckTo(data,wantWorkOneDetailSp);//欲从事岗位详细1
+                       // spinnerCheckTo(data,wantWorkOneDetailSp);//欲从事岗位详细1
                        // wantWorkOneDetailTv.setText(data.get(0).getZYFLCHILDID_1());
                         spinnerCheckTo(data,wantWorkTwoSp);//欲从事岗位2
                       //  wantWorkTwoTv.setText(data.get(0).getZYFLID_2());
                        // wantWorkTwoDetailTv.setText(data.get(0).getZYFLCHILDID_2());
-                        wantWorkThreeEt.setText(data.get(0).getOTHERZYFL());
+                        wantWorkThreeEt.setText("\t\t"+data.get(0).getOTHERZYFL()+"\t\t");
 
                         spinnerCheckTo(data,wantSalarySp);//期望薪资
 //                        if (data.get(0).getENDSALARY() == -1) {
@@ -120,7 +122,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
                         spinnerCheckTo(data,computerLevelSp);//计算机应用能力
                     //    computerLevelTv.setText(data.get(0).getCOMPUTERLEVELID());
-                        computerCertEt.setText(data.get(0).getCOMPUTERCERT());
+                        computerCertEt.setText("\t\t"+data.get(0).getCOMPUTERCERT()+"\t\t");
 
                         spinnerCheckTo(data,languageOneSp);//外语语种1
                     //    languageOneTv.setText(data.get(0).getLANGUAGEID_1());
@@ -130,8 +132,8 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                      //   languageTwoTv.setText(data.get(0).getLANGUAGEID_2());
                         spinnerCheckTo(data,languageProfTwoSp);//熟练程度
                        // languageProfTwoTv.setText(data.get(0).getLANGUAGEPROFICIENCYID_2());
-                        languageCertEt.setText(data.get(0).getLANGUAGECERT());
-                        otherCertsEt.setText(data.get(0).getOTHERCERTS());
+                        languageCertEt.setText("\t\t"+data.get(0).getLANGUAGECERT()+"\t\t");
+                        otherCertsEt.setText("\t\t"+data.get(0).getOTHERCERTS()+"\t\t");
                         selfEvaluationTv.setText(data.get(0).getSELFEVALUATION());
                     }
 
@@ -191,12 +193,9 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
         wantWorkOneSpData.addAll(new JobPostInfo().getJobPost());
         wantWorkOneSp.setAdapter(new ArrayAdapter<JobPostInfo>(mContext,android.R.layout.simple_list_item_1,wantWorkOneSpData));
 
+
         wantWorkOneDetailSp= (Spinner) findViewById(R.id.sp_person_re_want_work_one_detail);//欲从事岗位1
         wantWorkOneDetailSp.setOnItemSelectedListener(this);
-        wantWorkOneDetailSpData.clear();
-        wantWorkOneDetailSpData.addAll(new ChildJobPostInfo().getChildJobInfo());
-
-        wantWorkOneDetailSp.setAdapter(new ArrayAdapter<ChildJobPostInfo>(mContext,android.R.layout.simple_list_item_1,wantWorkOneDetailSpData));
 
          wantWorkTwoSp= (Spinner) findViewById(R.id.sp_person_re_want_work_two);
         wantWorkTwoSp.setOnItemSelectedListener(this);
@@ -207,13 +206,6 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
         wantWorkTwoDetailSp= (Spinner) findViewById(R.id.sp_person_re_want_work_two_detail);//欲从事岗位2
         wantWorkTwoDetailSp.setOnItemSelectedListener(this);
 
-        for(int i=1;i<10;i++){
-
-            wantWorkTwoDetailSpData.add("欲从事岗位2"+i);
-
-        }
-
-        wantWorkTwoDetailSp.setAdapter(new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,wantWorkTwoDetailSpData));
 
          wantWorkThreeEt= (EditText) findViewById(R.id.et_person_re_want_work_three);//欲从事岗位3
 
@@ -324,12 +316,15 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
                 Toast.makeText(mContext,"提交",Toast.LENGTH_SHORT).show();
 
+                submitDialog();
+
             break;
 
         }
 
     }
 
+    //给Spinner控件赋值
     private void spinnerCheckTo(List<PersonReInfo> data,Spinner spinner){
 
         if(spinner==workNatureSp){
@@ -392,9 +387,25 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
             }
         }else if(spinner==wantWorkOneDetailSp) {
+            if (wantWorkOneDetailSpData.size() != 0) {
             for (int i = 0; i <wantWorkOneDetailSpData.size(); i++) {
-                if (TextUtils.equals(data.get(0).getZYFLCHILDID_1(), wantWorkOneDetailSpData.get(i).getChildJobName())) {
-                    spinner.setSelection(i);}
+
+                if(data!=null&&data.size()>0) {
+                    if (TextUtils.equals(data.get(0).getZYFLCHILDID_1(), wantWorkOneDetailSpData.get(i).getChildJobName())) {
+                        spinner.setSelection(i);
+                    }
+                }
+                }
+            }
+        }else if(spinner==wantWorkTwoDetailSp) {
+            if(wantWorkTwoDetailSpData.size()!=0) {
+            for (int i = 0; i <wantWorkTwoDetailSpData.size(); i++) {
+                if(data!=null&&data.size()>0) {
+                    if (TextUtils.equals(data.get(0).getZYFLCHILDID_2(), wantWorkTwoDetailSpData.get(i).getChildJobName())) {
+                        spinner.setSelection(i);
+                    }
+                }
+                }
 
             }
         }
@@ -438,7 +449,8 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
             case R.id.sp_person_re_want_work_one://欲从事岗位1
 
-              //  Toast.makeText(mContext,"欲从事岗位1=="+wantWorkOneSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                     jobPostFindChildJobPost(((JobPostInfo) wantWorkOneSp.getSelectedItem()).getJobCode(),wantWorkOneDetailSpData,wantWorkOneDetailSp);
+
                 break;
 
             case R.id.sp_person_re_want_work_one_detail://欲从事岗位1详情
@@ -447,7 +459,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                 break;
 
             case R.id.sp_person_re_want_work_two://欲从事岗位2
-
+                jobPostFindChildJobPost(((JobPostInfo) wantWorkTwoSp.getSelectedItem()).getJobCode(),wantWorkTwoDetailSpData,wantWorkTwoDetailSp);
              //   Toast.makeText(mContext,"欲从事岗位2=="+wantWorkTwoSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
                 break;
 
@@ -496,4 +508,55 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
+    //根据父岗位的编码找到子岗位
+    private void jobPostFindChildJobPost(String jobCode,List<ChildJobPostInfo> childSpData ,Spinner childSp){
+
+        List<ChildJobPostInfo> childList=new ArrayList<>();
+
+        childList.clear();
+        childSpData.clear();
+
+            childList.addAll(new ChildJobPostInfo().getChildJobInfo());
+
+        for(int i=0;i<childList.size();i++){
+
+            if(TextUtils.equals(jobCode,childList.get(i).getJobCode())){
+
+                childSpData.add(childList.get(i));
+
+                childSp.setAdapter(new ArrayAdapter<ChildJobPostInfo>(mContext,android.R.layout.simple_list_item_1,childSpData));
+
+            }
+
+        }
+
+        spinnerCheckTo(data,childSp);
+    }
+
+    //提交对话框
+    private void submitDialog(){
+
+        final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("上传信息提示");
+        builder.setMessage("您确定上传简历信息吗?");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Toast.makeText(mContext,"确定",Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(mContext,"取消",Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
+    }
+
+
+
 }

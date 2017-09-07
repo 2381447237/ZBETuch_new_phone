@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp"
+    android:id="@+id/ll_item_person_baseinfo_mark">
+
+    <TextView
+        android:id="@+id/tv_item_person_baseinfo_mark_no"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="1"/>
+
+    <TextView
+        android:id="@+id/tv_item_person_baseinfo_mark_name"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="3.25"
+        android:layout_height="wrap_content"
+        android:text="丧劳调查"/>
+
+    <TextView
+        android:id="@+id/tv_item_person_baseinfo_mark_date"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="3.25"
+        android:layout_height="wrap_content"
+        android:text="2017-09-07"/>
+
+    <Button
+        android:id="@+id/btn_item_person_baseinfo_mark_delete"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/selector_shiwuye_detail_btn"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="28dp"
+        android:textSize="14sp"
+        android:text="删除"/>
+
+</LinearLayout>
