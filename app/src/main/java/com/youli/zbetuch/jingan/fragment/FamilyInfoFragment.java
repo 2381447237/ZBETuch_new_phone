@@ -3,11 +3,12 @@ package com.youli.zbetuch.jingan.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,10 @@ import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.view.MyListView;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -278,10 +282,55 @@ public class FamilyInfoFragment extends Fragment {
 
 
                     @Override
-                    public void convert(CommonViewHolder holder, FamilyAddressInfo.FamilyAddressInfoList item, int position) {
+                    public void convert(CommonViewHolder holder, final FamilyAddressInfo.FamilyAddressInfoList item, int position) {
 
-                        ImageView head=holder.getView(R.id.iv_item_item_family_info_head);
+                        final ImageView head=holder.getView(R.id.iv_item_item_family_info_head);
 
+                        new Thread(){
+
+                            @Override
+                            public void run() {
+
+                                try {
+                                    String headUrl=null;
+                                    headUrl=MyOkHttpUtils.BaseUrl+"/Web/Personal/windows/ShowPic.aspx?sfz="+item.getSFZ();
+                                    URL url=new URL(headUrl);
+
+                                    InputStream is=url.openStream();
+                                        BitmapFactory.Options options = new BitmapFactory.Options();
+                                        options.inSampleSize = 2;//图片大小，设置越大，图片越不清晰，占用空间越小
+                                     Bitmap bmp=BitmapFactory.decodeStream(is,null,options);
+                                        //Log.e("2017/9/8","图片大小上上上=="+bmp.getByteCount());
+                                        if(bmp!=null) {
+
+                                            final Bitmap bitmap=bmp;
+
+                                            getActivity().runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    head.setImageBitmap(bitmap);
+                                                }
+                                            });
+                                        }else{
+                                            headUrl=MyOkHttpUtils.BaseUrl+"/"+item.getGetPhotoUrl();
+                                            url=new URL(headUrl);
+                                            is=url.openStream();
+                                            bmp=BitmapFactory.decodeStream(is,null,options);
+                                            final Bitmap nullBmp=bmp;
+                                            getActivity().runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    head.setImageBitmap(nullBmp);
+                                                }
+                                            });
+                                        }
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }.start();
 
                         TextView name=holder.getView(R.id.tv_item_item_family_info_name);
                         name.setText(item.getNAME());
@@ -332,6 +381,7 @@ public class FamilyInfoFragment extends Fragment {
 
         builder.setNegativeButton("取消",null);
         builder.show();
+
     }
 
     private void  getPersonInfo(final int p){
@@ -343,8 +393,6 @@ public class FamilyInfoFragment extends Fragment {
                     public void run() {
                         //  http://web.youli.pw:89/Json/Get_BASIC_INFORMATION.aspx?sfz=310108198004026642
                         String url=MyOkHttpUtils.BaseUrl+"/Json/Get_BASIC_INFORMATION.aspx?sfz="+hujiData.get(p).getSFZ();
-
-                        Log.e("2017/8/31","路径==="+url);
 
                         Response response=MyOkHttpUtils.okHttpGet(url);
                         Message msg=Message.obtain();

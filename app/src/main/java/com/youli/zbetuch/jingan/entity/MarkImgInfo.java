@@ -15,6 +15,10 @@ public class MarkImgInfo {
     private String SOURCE;
     private String GPS;
 
+    public MarkImgInfo(String MARK) {
+        this.MARK = MARK;
+    }
+
     public String getCREATE_DATE() {
         return CREATE_DATE;
     }

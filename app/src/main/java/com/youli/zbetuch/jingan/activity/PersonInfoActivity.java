@@ -126,17 +126,6 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
             mFragments.add(new ServiceReFramgent(personInfo.getSFZ()));
             mFragments.add(new EduInfoFragment(personInfo.getSFZ()));
         }
-//
-//        if(personInfo==null){
-//            mFragments.add(new PersonInfoFragment(null));
-//            mFragments.add(new FamilyInfoFragment(null));
-//            mFragments.add(new PersonReFragment(null));
-//            mFragments.add(new ServiceReFramgent(null));
-//            mFragments.add(new EduInfoFragment(null));
-//        }else{
-//
-//        }
-
 
     }
 

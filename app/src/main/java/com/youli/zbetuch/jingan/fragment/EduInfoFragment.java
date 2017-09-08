@@ -1,5 +1,6 @@
 package com.youli.zbetuch.jingan.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.session.MediaSession;
 import android.os.Bundle;
@@ -19,7 +20,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.activity.PersonInfoActivity;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.EduInfo;
@@ -94,6 +98,8 @@ public class EduInfoFragment extends Fragment{
     private void initView(View view){
 
         lv= (ListView) view.findViewById(R.id.lv_fmt_education_info);
+
+
 
         initDatas();
 
@@ -172,5 +178,6 @@ public class EduInfoFragment extends Fragment{
 
 
     }
+
 
 }

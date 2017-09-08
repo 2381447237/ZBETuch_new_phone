@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
@@ -49,7 +52,7 @@ import okhttp3.Response;
 public class PersonEduActivity extends BaseActivity implements View.OnClickListener{
 
     private Context mContext=this;
-    private ListView lv;
+    private PullToRefreshListView lv;
     private List<EduInfo> data=new ArrayList<>();
     private CommonAdapter adapter;
     private final int SUCCESS=10000;
@@ -77,9 +80,11 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
                 case SUCCESS_DELETE://删除
 
-                    Toast.makeText(mContext,"删除成功",Toast.LENGTH_SHORT).show();
-                    //data.remove(p);
-                    adapter.notifyDataSetChanged();
+                    if(TextUtils.equals("True",(String)msg.obj)) {
+                        Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
+                        data.remove(msg.arg1);
+                        adapter.notifyDataSetChanged();
+                    }
                     break;
 
                 case SUCCESS_NEW://新建
@@ -109,12 +114,25 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
     private void initViews(){
 
-        lv= (ListView) findViewById(R.id.lv_person_education);
+        lv= (PullToRefreshListView) findViewById(R.id.lv_person_education);
 
         btnNew= (Button) findViewById(R.id.btn_person_education_new);
         btnNew.setOnClickListener(this);
        initDatas();
+        lv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                initDatas();
+            }
 
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+                // Toast.makeText(mContext, "上拉加载", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
     }
     private void initDatas(){
         //http://web.youli.pw:89/Json/Get_Educational_Information.aspx?sfz=310108198004026642
@@ -201,8 +219,8 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
                     }
                 });
 
-                Button upDelete=holder.getView(R.id.btn_item_fmt_education_info_delete);
-                upDelete.setOnClickListener(new View.OnClickListener() {
+                Button delete=holder.getView(R.id.btn_item_fmt_education_info_delete);
+                delete.setOnClickListener(new View.OnClickListener() {//删除
                     @Override
                     public void onClick(View v) {
 
@@ -229,7 +247,6 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
                 deleteInfo(p);
 
-
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -248,13 +265,42 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
                 new Runnable() {
                     @Override
                     public void run() {
+                        JSONObject obj = new JSONObject();
+                        try {
+                            obj.put("ID", "" + data.get(p).getID());
+                            obj.put("Type", "-1");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                       // http://web.youli.pw:89/Json/Set_Educational_Information.aspx?ID=&Type=-1
+                        Map<String, String> data = new HashMap<String, String>();
+                        data.put("json", obj.toString());
+                       // http://web.youli.pw:89/Json/Set_Educational_Information.aspx?json={"ID":"8","Type":"-1"}
+                        String urlDelete=MyOkHttpUtils.BaseUrl+"/Json/Set_Educational_Information.aspx";
+                        Response response=MyOkHttpUtils.okHttpPostDeleteEduInfo(urlDelete,data.get("json"));
 
-                        String deleteUrl=MyOkHttpUtils.BaseUrl+"/Json/Set_Educational_Information.aspx?ID="+data.get(p).getID()+"&Type=-1";
+                        Message msg=Message.obtain();
 
+                        if(response!=null){
+
+                            try {
+                                String str=response.body().string();
+
+                                msg.what=SUCCESS_DELETE;
+                                msg.obj=str;
+                                msg.arg1=p;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }else{
+
+                            msg.what=PROBLEM;
+
+                        }
+                        mHandler.sendMessage(msg);
                     }
-                }
+               }
 
         ).start();
 

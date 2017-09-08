@@ -31,7 +31,7 @@
 
         <!--防止屏幕旋转变形，锁定竖屏-->
         <activity
-            android:name=".activity.PersonBaseInfoActivity"
+            android:name=".activity.LoginActivity"
             android:launchMode="singleTask"
            >
             <intent-filter>
@@ -73,7 +73,7 @@
             ></activity>
         <activity android:name=".activity.JobInfoDetailActivity"
             ></activity>
-        <activity android:name=".activity.LoginActivity"
+        <activity android:name=".activity.PersonBaseInfoActivity"
             android:windowSoftInputMode="stateHidden"
             ></activity>
         <activity android:name=".activity.PersonReActivity"

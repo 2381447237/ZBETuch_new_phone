@@ -2,12 +2,15 @@ package com.youli.zbetuch.jingan.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
+import com.youli.zbetuch.jingan.entity.MarkImgInfo;
 import com.youli.zbetuch.jingan.entity.StaffMarkInfo;
 
 import java.util.ArrayList;
@@ -35,7 +39,8 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
     private Button btnSaveInfo;//保存信息
     private Button btnMark;// 标识
     private Button btnZxMark;//专项标识
-    private List<StaffMarkInfo> markData=new ArrayList<>();
+    private List<StaffMarkInfo> zxMarkData=new ArrayList<>();//专项标识
+    private List<MarkImgInfo> markData=new ArrayList<>();//标识
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +65,10 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
         btnMark.setOnClickListener(this);
         btnZxMark.setOnClickListener(this);
 
-        for(int i=1;i<10;i++){
+        for(int i=1;i<5;i++){
 
-            markData.add(new StaffMarkInfo("丧劳调查"+i,"2017-09-07"));
-
+            zxMarkData.add(new StaffMarkInfo("丧劳调查"+i,"2017-09-07"));
+            markData.add(new MarkImgInfo("应届毕业生"+i));
         }
 
     }
@@ -87,8 +92,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
             case R.id.btn_person_baseinfo_uploadphoto:
 
-                Toast.makeText(mContext,"上传图片",Toast.LENGTH_SHORT).show();
-
+                showAlertDialog("uploadPhoto","uploadPhoto");
                 break;
 
             case R.id.btn_person_baseinfo_saveinfo:
@@ -143,7 +147,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mContext,"添加",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"请选择标识类型",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -153,7 +157,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mContext,"维护",Toast.LENGTH_SHORT).show();
+                showWhDialog();//维护标识的对话框
 
             }
         });
@@ -163,8 +167,8 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mContext,"修改",Toast.LENGTH_SHORT).show();
-
+               // Toast.makeText(mContext,"修改",Toast.LENGTH_SHORT).show();
+                showAlertDialog("modify","modify");
             }
         });
 
@@ -173,22 +177,23 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mContext,"关闭",Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                dialog.dismiss();//关闭
             }
         });
 
 
-        lv.setAdapter(new CommonAdapter<StaffMarkInfo>(mContext,markData,R.layout.item_person_baseinfo_mark) {
+        if(TextUtils.equals(sign,"mark")){
+
+        lv.setAdapter(new CommonAdapter<MarkImgInfo>(mContext,markData,R.layout.item_person_baseinfo_mark) {
             @Override
-            public void convert(CommonViewHolder holder, StaffMarkInfo item, final int position) {
+            public void convert(CommonViewHolder holder, MarkImgInfo item, final int position) {
 
                 LinearLayout ll=holder.getView(R.id.ll_item_person_baseinfo_mark);
 
                 TextView noTv=holder.getView(R.id.tv_item_person_baseinfo_mark_no);
                 noTv.setText((position+1)+"");
                 TextView nameTv=holder.getView(R.id.tv_item_person_baseinfo_mark_name);
-                nameTv.setText(markData.get(position).getType_Name());
+                nameTv.setText(markData.get(position).getMARK());
                 TextView dateTv=holder.getView(R.id.tv_item_person_baseinfo_mark_date);
                 dateTv.setText(markData.get(position).getCREATE_DATE());
                 Button deleteBtn=holder.getView(R.id.btn_item_person_baseinfo_mark_delete);
@@ -206,18 +211,210 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                 } else if (position % 2 != 0) {
                     ll.setBackgroundResource(R.drawable.selector_ziyuandiaocha_item2);
                 }
-                if(TextUtils.equals(sign,"mark")){
+
                     deleteBtn.setTextColor(Color.parseColor("#ff0000"));
                     dateTv.setVisibility(View.GONE);
-                }else if(TextUtils.equals(sign,"zxMark")){
-                    deleteBtn.setTextColor(Color.parseColor("#000000"));
-                    dateTv.setVisibility(View.VISIBLE);
-                }
+
 
             }
         });
 
+        }else if(TextUtils.equals(sign,"zxMark")){
+
+            lv.setAdapter(new CommonAdapter<StaffMarkInfo>(mContext,zxMarkData,R.layout.item_person_baseinfo_mark) {
+            @Override
+            public void convert(CommonViewHolder holder, StaffMarkInfo item, final int position) {
+
+                LinearLayout ll=holder.getView(R.id.ll_item_person_baseinfo_mark);
+
+                TextView noTv=holder.getView(R.id.tv_item_person_baseinfo_mark_no);
+                noTv.setText((position+1)+"");
+                TextView nameTv=holder.getView(R.id.tv_item_person_baseinfo_mark_name);
+                nameTv.setText(zxMarkData.get(position).getType_Name());
+                TextView dateTv=holder.getView(R.id.tv_item_person_baseinfo_mark_date);
+                dateTv.setText(zxMarkData.get(position).getCREATE_DATE());
+                Button deleteBtn=holder.getView(R.id.btn_item_person_baseinfo_mark_delete);
+                deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Toast.makeText(mContext,"删除第"+position+"个",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+                if (position % 2 == 0) {
+                    ll.setBackgroundResource(R.drawable.selector_ziyuandiaocha_item1);
+                } else if (position % 2 != 0) {
+                    ll.setBackgroundResource(R.drawable.selector_ziyuandiaocha_item2);
+                }
+
+                    deleteBtn.setTextColor(Color.parseColor("#000000"));
+                    dateTv.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        }
+
 
     }
+
+    private void showWhDialog(){//维护标识的对话框
+
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
+
+        View view=LayoutInflater.from(mContext).inflate(R.layout.dialog_person_baseinfo_wh,null,false);
+
+        builder.setView(view);
+
+        final AlertDialog dialog=builder.create();
+
+        dialog.show();
+
+        Button btnAdd= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_wh_add);
+        Button btnUpdate= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_wh_update);
+        Button btnDelete= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_wh_delete);
+        Button btnClose= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_wh_close);
+
+        final EditText etName= (EditText) view.findViewById(R.id.et_dialog_person_baseinfo_wh_name);
+
+      //  final String etNameStr=etName.getText().toString().trim();
+
+
+        ListView lv= (ListView) view.findViewById(R.id.lv_dialog_person_baseinfo_wh);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                etName.setText(zxMarkData.get(position).getType_Name());
+             //   etNameStr=etName.getText().toString().trim();
+            }
+        });
+
+
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String etNameStr=etName.getText().toString().trim();
+                showAlertDialog("add",etNameStr);//添加
+
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String etNameStr=etName.getText().toString().trim();
+                showAlertDialog("update",etNameStr);//修改
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String etNameStr=etName.getText().toString().trim();
+                showAlertDialog("delete",etNameStr);//删除
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+
+            }
+        });
+
+        lv.setAdapter(new CommonAdapter<StaffMarkInfo>(mContext,zxMarkData,R.layout.item_person_baseinfo_mark) {
+            @Override
+            public void convert(CommonViewHolder holder, StaffMarkInfo item, final int position) {
+
+                LinearLayout ll=holder.getView(R.id.ll_item_person_baseinfo_mark);
+
+                TextView noTv=holder.getView(R.id.tv_item_person_baseinfo_mark_no);
+                noTv.setText((position+1)+"");
+                TextView nameTv=holder.getView(R.id.tv_item_person_baseinfo_mark_name);
+                nameTv.setText(zxMarkData.get(position).getType_Name());
+                TextView dateTv=holder.getView(R.id.tv_item_person_baseinfo_mark_date);
+                dateTv.setText(zxMarkData.get(position).getCREATE_DATE());
+                Button deleteBtn=holder.getView(R.id.btn_item_person_baseinfo_mark_delete);
+                deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Toast.makeText(mContext,"删除第"+position+"个",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+                if (position % 2 == 0) {
+                    ll.setBackgroundResource(R.drawable.selector_ziyuandiaocha_item1);
+                } else if (position % 2 != 0) {
+                    ll.setBackgroundResource(R.drawable.selector_ziyuandiaocha_item2);
+                }
+
+                noTv.setVisibility(View.GONE);
+                deleteBtn.setVisibility(View.GONE);
+                dateTv.setVisibility(View.GONE);
+
+            }
+        });
+    }
+
+    private void showAlertDialog(String sign,String name){//提示对话框
+
+        if(TextUtils.equals(name,"")){
+            Toast.makeText(mContext,"名称不能为空！"+name,Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+     //   Toast.makeText(mContext,"名称=="+name,Toast.LENGTH_SHORT).show();
+
+        String msgStr = null;
+
+        String titleStr=null;
+
+        if(TextUtils.equals(sign,"add")){
+            msgStr="您确定要添加";
+            titleStr="温馨提示";
+        }else if(TextUtils.equals(sign,"update")){
+            msgStr="您确定要修改";
+            titleStr="温馨提示";
+        }else if(TextUtils.equals(sign,"delete")){
+            msgStr="您确定要删除";
+            titleStr="温馨提示";
+        }else if(TextUtils.equals(sign,"modify")){
+            msgStr="您确认修改的标识上传服务器";
+            titleStr="修改标识提示";
+        }else if(TextUtils.equals(sign,"uploadPhoto")){
+            msgStr="您确定要把头像，上传服务器";
+            titleStr="上传头像确认提示";
+        }
+
+            AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
+        builder.setTitle(titleStr);
+        builder.setMessage(msgStr+"吗？");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
+
 
 }
