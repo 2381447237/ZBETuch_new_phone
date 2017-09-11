@@ -60,7 +60,6 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
     private LinearLayout pifLl;
 
     private PersonInfo personInfo;
-    //private String personSFZ;
     private TextView nameTv,sexTv,statusTv,sfzTv;
     private ImageView headIv;
 
@@ -77,8 +76,9 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
 
                 case SUCCEED_PHOTO:
 
-                    headIv.setImageBitmap((Bitmap)msg.obj);
-
+                    if(msg.obj!=null) {
+                        headIv.setImageBitmap((Bitmap) msg.obj);
+                    }
                     break;
 
                 case SUCCEED_FOLLOW:
@@ -250,11 +250,10 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
 
                             InputStream is=response.body().byteStream();
 
-                            byte [] picData= IOUtil.getBytesByStream(is);
-
-                            Bitmap bp= BitmapFactory.decodeByteArray(picData,0,picData.length);
-
-                            msg.obj=bp;
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inSampleSize = 2;//图片大小，设置越大，图片越不清晰，占用空间越小
+                            Bitmap bmp=BitmapFactory.decodeStream(is,null,options);
+                            msg.obj=bmp;
                             msg.what=SUCCEED_PHOTO;
                             mHandler.sendMessage(msg);
 
@@ -380,6 +379,7 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
 
                     case R.id.rb_person_info://基本信息
                         intent.setClass(mContext,PersonBaseInfoActivity.class);
+                        intent.putExtra("PINFO",personInfo);
                         startActivity(intent);
                         break;
                     case R.id.rb_family_info://家庭信息

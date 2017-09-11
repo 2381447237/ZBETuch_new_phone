@@ -314,8 +314,6 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
             case R.id.tv_person_resume_submit:
 
-                Toast.makeText(mContext,"提交",Toast.LENGTH_SHORT).show();
-
                 submitDialog();
 
             break;

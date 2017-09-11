@@ -199,8 +199,8 @@ public class MyOkHttpUtils {
 return response;
     }
 
-    //教育信息的删除
-    public  static Response okHttpPostDeleteEduInfo(String url,String json){
+    //教育信息的删除,新建，修改
+    public  static Response okHttpPostEduInfo(String url,String json){
 
         getInstance();
         String cookies=SharedPreferencesUtils.getString("cookies");

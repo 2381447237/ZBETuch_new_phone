@@ -188,7 +188,6 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
         jwhTv.setText(pInfo.getCenter().getQ居委会());
         hujiTv.setText(pInfo.getCenter().getQ户口地址());
         phoneTv.setText(pInfo.getCONTACT_NUMBER());
-        sexTv.setText(pInfo.getSEX());
         juzhuTv.setText(pInfo.getNOW_ROAD()+pInfo.getNOW_LANE()+pInfo.getNOW_NO()+pInfo.getNOW_ROOM());
         markTv.setText(pInfo.getRemark());
 

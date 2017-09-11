@@ -49,6 +49,7 @@
             android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/iv_person_baseinfo_head"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/personhead"/>
@@ -131,7 +132,6 @@
         android:layout_height="wrap_content">
 
 <TextView
-
     android:textColor="#ffffff"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -147,9 +147,10 @@
           <!--android:text="储明净静"/>-->
 
         <EditText
+            android:textColor="#c0c0c0"
+            android:id="@+id/et_person_baseinfo_name"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:text="储明净静"
             android:paddingLeft="3dp"
             android:textSize="16sp"
             android:focusable="false"
@@ -157,7 +158,7 @@
             android:layout_weight="1"
             android:singleLine="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="31dp"
             />
 
     </LinearLayout>
@@ -175,19 +176,30 @@
             android:text="性        别:"/>
 
 
-        <EditText
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:text="女"
-            android:paddingLeft="3dp"
-            android:textSize="16sp"
-            android:focusable="false"
-            android:background="@drawable/shape_shiwuye_detail_et"
-            android:layout_weight="1"
-            android:singleLine="true"
+        <Spinner
+            android:id="@+id/sp_person_baseinfo_sex"
+            android:background="@drawable/spinner_bg_baseinfo"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:paddingLeft="3dp"
+            android:spinnerMode="dialog"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="31dp"
+            android:layout_weight="1"
             />
+
+        <!--<EditText-->
+            <!--android:id="@+id/et_person_baseinfo_sex"-->
+            <!--android:layout_marginLeft="3dp"-->
+            <!--android:layout_marginRight="3dp"-->
+            <!--android:paddingLeft="3dp"-->
+            <!--android:textSize="16sp"-->
+            <!--android:background="@drawable/shape_shiwuye_detail_et"-->
+            <!--android:layout_weight="1"-->
+            <!--android:singleLine="true"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
 
     </LinearLayout>
 
@@ -212,9 +224,10 @@
                 android:text="出生年月:"/>
 
             <EditText
+                android:textColor="#c0c0c0"
+                android:id="@+id/et_person_baseinfo_birthday"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="1980-04-02"
                 android:paddingLeft="3dp"
                 android:textSize="16sp"
                 android:focusable="false"
@@ -222,7 +235,7 @@
                 android:layout_weight="1"
                 android:singleLine="true"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 />
 
         </LinearLayout>
@@ -240,20 +253,29 @@
                 android:text="民        族:"/>
 
 
-            <EditText
+            <!--<EditText-->
+                <!--android:id="@+id/et_person_baseinfo_nation"-->
+                <!--android:layout_marginLeft="3dp"-->
+                <!--android:layout_marginRight="3dp"-->
+                <!--android:paddingLeft="3dp"-->
+                <!--android:textSize="16sp"-->
+                <!--android:background="@drawable/shape_shiwuye_detail_et"-->
+                <!--android:layout_weight="1"-->
+                <!--android:singleLine="true"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--/>-->
+            <Spinner
+                android:id="@+id/sp_person_baseinfo_nation"
+                android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="汉族"
                 android:paddingLeft="3dp"
-                android:textSize="16sp"
-                android:focusable="false"
-                android:background="@drawable/shape_shiwuye_detail_et"
-                android:layout_weight="1"
-                android:singleLine="true"
+                android:spinnerMode="dialog"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
+                android:layout_weight="1"
                 />
-
 
         </LinearLayout>
 
@@ -279,17 +301,16 @@
 
 
             <EditText
+                android:id="@+id/et_person_baseinfo_origin"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="上海"
                 android:paddingLeft="3dp"
                 android:textSize="16sp"
-                android:focusable="false"
                 android:background="@drawable/shape_shiwuye_detail_et"
                 android:layout_weight="1"
                 android:singleLine="true"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 />
 
         </LinearLayout>
@@ -306,20 +327,29 @@
                 android:layout_height="wrap_content"
                 android:text="状        态:"/>
 
-
-            <EditText
+            <Spinner
+                android:id="@+id/sp_person_baseinfo_state"
+                android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="未登记失业"
                 android:paddingLeft="3dp"
-                android:textSize="16sp"
-                android:focusable="false"
-                android:background="@drawable/shape_shiwuye_detail_et"
-                android:layout_weight="1"
-                android:singleLine="true"
+                android:spinnerMode="dialog"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
+                android:layout_weight="1"
                 />
+            <!--<EditText-->
+                <!--android:id="@+id/et_person_baseinfo_state"-->
+                <!--android:layout_marginLeft="3dp"-->
+                <!--android:layout_marginRight="3dp"-->
+                <!--android:paddingLeft="3dp"-->
+                <!--android:textSize="16sp"-->
+                <!--android:background="@drawable/shape_shiwuye_detail_et"-->
+                <!--android:layout_weight="1"-->
+                <!--android:singleLine="true"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--/>-->
 
         </LinearLayout>
 
@@ -342,17 +372,16 @@
                 android:layout_height="wrap_content"
                 android:text="联系电话:"/>
             <EditText
+                android:id="@+id/et_person_baseinfo_phone"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="13212344321"
                 android:paddingLeft="3dp"
                 android:textSize="16sp"
-                android:focusable="false"
                 android:background="@drawable/shape_shiwuye_detail_et"
                 android:layout_weight="1"
                 android:singleLine="true"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 />
 
 
@@ -370,19 +399,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="当前意向:"/>
-            <EditText
+
+            <Spinner
+                android:id="@+id/sp_person_baseinfo_intention"
+                android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="请选择"
                 android:paddingLeft="3dp"
-                android:textSize="16sp"
-                android:focusable="false"
-                android:background="@drawable/shape_shiwuye_detail_et"
-                android:layout_weight="1"
-                android:singleLine="true"
+                android:spinnerMode="dialog"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
+                android:layout_weight="1"
                 />
+
+            <!--<EditText-->
+                <!--android:id="@+id/et_person_baseinfo_intention"-->
+                <!--android:layout_marginLeft="3dp"-->
+                <!--android:layout_marginRight="3dp"-->
+                <!--android:paddingLeft="3dp"-->
+                <!--android:textSize="16sp"-->
+                <!--android:background="@drawable/shape_shiwuye_detail_et"-->
+                <!--android:layout_weight="1"-->
+                <!--android:singleLine="true"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--/>-->
 
         </LinearLayout>
 
@@ -405,19 +446,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="文化程度:"/>
-            <EditText
+
+            <Spinner
+                android:id="@+id/sp_person_baseinfo_edu"
+                android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="高中"
                 android:paddingLeft="3dp"
-                android:textSize="16sp"
-                android:focusable="false"
-                android:background="@drawable/shape_shiwuye_detail_et"
-                android:layout_weight="1"
-                android:singleLine="true"
+                android:spinnerMode="dialog"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
+                android:layout_weight="1"
                 />
+
+            <!--<EditText-->
+                <!--android:id="@+id/et_person_baseinfo_edu"-->
+                <!--android:layout_marginLeft="3dp"-->
+                <!--android:layout_marginRight="3dp"-->
+                <!--android:paddingLeft="3dp"-->
+                <!--android:textSize="16sp"-->
+                <!--android:background="@drawable/shape_shiwuye_detail_et"-->
+                <!--android:layout_weight="1"-->
+                <!--android:singleLine="true"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--/>-->
 
         </LinearLayout>
         <LinearLayout
@@ -432,19 +485,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="摸底情况:"/>
-            <EditText
+
+            <Spinner
+                android:id="@+id/sp_person_baseinfo_md"
+                android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="其他"
                 android:paddingLeft="3dp"
-                android:textSize="16sp"
-                android:focusable="false"
-                android:background="@drawable/shape_shiwuye_detail_et"
-                android:layout_weight="1"
-                android:singleLine="true"
+                android:spinnerMode="dialog"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
+                android:layout_weight="1"
                 />
+
+            <!--<EditText-->
+                <!--android:id="@+id/et_person_baseinfo_md"-->
+                <!--android:layout_marginLeft="3dp"-->
+                <!--android:layout_marginRight="3dp"-->
+                <!--android:paddingLeft="3dp"-->
+                <!--android:textSize="16sp"-->
+                <!--android:background="@drawable/shape_shiwuye_detail_et"-->
+                <!--android:layout_weight="1"-->
+                <!--android:singleLine="true"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--/>-->
 
 
         </LinearLayout>
@@ -469,18 +534,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="街        道:"/>
+
+            <!--<Spinner-->
+                <!--android:id="@+id/sp_person_baseinfo_street"-->
+                <!--android:background="@drawable/spinner_bg_baseinfo"-->
+                <!--android:layout_marginLeft="3dp"-->
+                <!--android:layout_marginRight="3dp"-->
+                <!--android:paddingLeft="3dp"-->
+                <!--android:spinnerMode="dialog"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="31dp"-->
+                <!--android:layout_weight="1"-->
+                <!--/>-->
+
             <EditText
+                android:textColor="#c0c0c0"
+                android:focusable="false"
+                android:id="@+id/et_person_baseinfo_street"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="大宁路街道"
                 android:paddingLeft="3dp"
                 android:textSize="16sp"
-                android:focusable="false"
                 android:background="@drawable/shape_shiwuye_detail_et"
                 android:layout_weight="1"
                 android:singleLine="true"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 />
 
         </LinearLayout>
@@ -496,18 +575,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="居  委  会:"/>
+
+            <!--<Spinner-->
+                <!--android:id="@+id/sp_person_baseinfo_jwh"-->
+                <!--android:background="@drawable/spinner_bg_baseinfo"-->
+                <!--android:layout_marginLeft="3dp"-->
+                <!--android:layout_marginRight="3dp"-->
+                <!--android:paddingLeft="3dp"-->
+                <!--android:spinnerMode="dialog"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="31dp"-->
+                <!--android:layout_weight="1"-->
+                <!--/>-->
+
             <EditText
+                android:textColor="#c0c0c0"
+                android:focusable="false"
+                android:id="@+id/et_person_baseinfo_jwh"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="667弄居委会"
                 android:paddingLeft="3dp"
                 android:textSize="16sp"
-                android:focusable="false"
                 android:background="@drawable/shape_shiwuye_detail_et"
                 android:layout_weight="1"
                 android:singleLine="true"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 />
 
 
@@ -533,9 +626,10 @@
                 android:layout_height="wrap_content"
                 android:text="证件号码:"/>
             <EditText
+                android:textColor="#c0c0c0"
+                android:id="@+id/et_person_baseinfo_sfz"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:text="31010898004026642"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:textSize="16sp"
@@ -543,7 +637,7 @@
                 android:background="@drawable/shape_shiwuye_detail_et"
                 android:singleLine="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="31dp"
                 />
 
 
@@ -579,12 +673,12 @@
                 android:text="路"/>
 
             <EditText
+                android:id="@+id/et_person_baseinfo_huji_road"
                 android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="大宁路"
                 />
             <TextView
                 android:textColor="#ffffff"
@@ -593,12 +687,12 @@
                 android:text="弄"/>
 
             <EditText
+                android:id="@+id/et_person_baseinfo_huji_nong"
                 android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="535弄"
                 />
             <TextView
                 android:textColor="#ffffff"
@@ -607,12 +701,12 @@
                 android:text="号"/>
 
             <EditText
+                android:id="@+id/et_person_baseinfo_huji_num"
                 android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16号"
                 />
             <TextView
                 android:textColor="#ffffff"
@@ -621,14 +715,15 @@
                 android:text="室"/>
 
             <EditText
+                android:id="@+id/et_person_baseinfo_huji_room"
                 android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="602室"
                 />
             <CheckBox
+                android:id="@+id/cb_person_baseinfo_huji"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -668,12 +763,12 @@
                 android:text="路"/>
 
             <EditText
+                android:id="@+id/et_person_baseinfo_juzhu_road"
                 android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="大宁路"
                 />
             <TextView
                 android:textColor="#ffffff"
@@ -682,12 +777,12 @@
                 android:text="弄"/>
 
             <EditText
+                android:id="@+id/et_person_baseinfo_juzhu_nong"
                 android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="535弄"
                 />
             <TextView
                 android:textColor="#ffffff"
@@ -696,12 +791,12 @@
                 android:text="号"/>
 
             <EditText
+                android:id="@+id/et_person_baseinfo_juzhu_num"
                 android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16号"
                 />
             <TextView
                 android:textColor="#ffffff"
@@ -710,14 +805,15 @@
                 android:text="室"/>
 
             <EditText
+                android:id="@+id/et_person_baseinfo_juzhu_room"
                 android:textSize="16sp"
                 android:padding="3dp"
                 android:background="#ffffff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="602室"
                 />
             <CheckBox
+                android:id="@+id/cb_person_baseinfo_juzhu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -752,14 +848,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/iv_person_info_yjbysh"
+                    android:id="@+id/iv_person_baseinfo_yjbysh"
                     android:layout_marginLeft="5dp"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
                     android:src="@drawable/yingjiebiyesheng"
                     />
                 <ImageView
-                    android:id="@+id/iv_person_info_jdry"
+                    android:id="@+id/iv_person_baseinfo_jdry"
                     android:layout_marginLeft="5dp"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
@@ -767,7 +863,7 @@
                     />
 
                 <ImageView
-                    android:id="@+id/iv_person_info_jykn"
+                    android:id="@+id/iv_person_baseinfo_jykn"
                     android:layout_marginLeft="5dp"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
@@ -775,7 +871,7 @@
                     />
 
                 <ImageView
-                    android:id="@+id/iv_person_info_qhry"
+                    android:id="@+id/iv_person_baseinfo_qhry"
                     android:layout_marginLeft="5dp"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
@@ -783,7 +879,7 @@
                   />
 
                 <ImageView
-                    android:id="@+id/iv_person_info_wjyj"
+                    android:id="@+id/iv_person_baseinfo_wjyj"
                     android:layout_marginLeft="5dp"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
@@ -791,7 +887,7 @@
                    />
 
                 <ImageView
-                    android:id="@+id/iv_person_info_xjry"
+                    android:id="@+id/iv_person_baseinfo_xjry"
                     android:layout_marginLeft="5dp"
                     android:layout_width="30dp"
                     android:layout_height="25dp"
@@ -828,24 +924,6 @@
                 android:layout_height="wrap_content"
                 android:text="专项标识:"/>
 
-            <LinearLayout
-                android:layout_toRightOf="@id/tv_person_baseinfo_zhuangxiang_biaoshi"
-                android:id="@+id/ll_person_baseinfo_zhuangxiang_biaoshi"
-                android:layout_marginLeft="3dp"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:textColor="#ffffff"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="丧劳调查"/>
-
-
-
-            </LinearLayout>
             <Button
                 android:id="@+id/btn_person_baseinfo_zhuanxiang_biaoshi"
                 android:layout_alignParentRight="true"
@@ -855,6 +933,49 @@
                 android:layout_height="30dp"
                 android:textSize="16sp"
                 android:text="编辑标识"/>
+
+            <LinearLayout
+                android:layout_toLeftOf="@id/btn_person_baseinfo_zhuanxiang_biaoshi"
+                android:layout_toRightOf="@id/tv_person_baseinfo_zhuangxiang_biaoshi"
+                android:id="@+id/ll_person_baseinfo_zhuangxiang_biaoshi"
+                android:layout_marginLeft="3dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--<TextView-->
+                    <!--android:textColor="#ffffff"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="丧劳调查"/>-->
+
+                <HorizontalScrollView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:id="@+id/ll_person_baseinfo_special_mark">
+
+                        <!--<TextView-->
+                            <!--android:textColor="#ffffff"-->
+                        <!--android:textSize="16sp"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="专项标识1"-->
+                        <!--/>-->
+
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
 </RelativeLayout>
 
     <!-- 备注-->
@@ -872,7 +993,7 @@
             android:text="备        注:"/>
 
         <EditText
-            android:text="我是备注"
+            android:id="@+id/et_person_baseinfo_mark"
             android:background="#ffffff"
             android:layout_width="0dp"
             android:layout_weight="1"

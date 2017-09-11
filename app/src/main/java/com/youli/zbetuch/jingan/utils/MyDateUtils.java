@@ -33,6 +33,26 @@ public class MyDateUtils {
         return null;
     }
 
+    //将字符串日期格式化 年月日
+    public static String stringToYMD(String myDate){
+
+        sdf=new SimpleDateFormat("yyyy-MM-dd");
+
+        myDate=myDate.replace("T"," ");
+
+        try {
+            date=sdf.parse(myDate);
+
+            return sdf.format(date);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
     //将字符串日期格式化 时分秒
     public static String stringToHMS(String myDate){
         sdf=new SimpleDateFormat("HH:mm:ss");
