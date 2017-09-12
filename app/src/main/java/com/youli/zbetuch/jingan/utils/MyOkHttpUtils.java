@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -16,6 +17,7 @@ import okhttp3.Response;
 
 public class MyOkHttpUtils {
 
+    public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     public static final String BaseUrl="http://web.youli.pw:89";
     private static final String TAG = "asdasdasd";
     static OkHttpClient okHttpClient = null;
@@ -248,4 +250,50 @@ return response;
                 .build();
         okHttpClient.newCall(request).enqueue(callback);
     }
+
+    //提交个人简历信息
+    public static Response okHttpPersonRePost(String url,String data){
+
+        getInstance();
+        String cookies=SharedPreferencesUtils.getString("cookies");
+        RequestBody requestBody = RequestBody.create(JSON, data);
+
+                Request request=new Request.Builder().url(url).post(requestBody)
+                .addHeader("cookie",cookies).build();
+
+        Response response;
+
+        try {
+            response=okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return response;
+
+    }
+
+
+//    public  static Response okHttpPostEduInfo(String url,String json){
+//
+//        getInstance();
+//        String cookies=SharedPreferencesUtils.getString("cookies");
+//        RequestBody requestBody=new FormBody.Builder().add("json",json).build();
+//
+//        Log.e("2017/9/5","requestBody=="+requestBody);
+//
+//        Request request=new Request.Builder().url(url).post(requestBody)
+//                .addHeader("cookie",cookies).build();
+//
+//        Response response;
+//
+//        try {
+//            response=okHttpClient.newCall(request).execute();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//        return response;
+//    }
+
 }

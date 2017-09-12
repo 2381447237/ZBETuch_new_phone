@@ -1,5 +1,7 @@
 package com.youli.zbetuch.jingan.entity;
 
+import android.text.TextUtils;
+
 /**
  * Created by liutao on 2017/8/22.
  */
@@ -15,8 +17,13 @@ public class MarkImgInfo {
     private String SOURCE;
     private String GPS;
 
-    public MarkImgInfo(String MARK) {
+    public MarkImgInfo(String MARK, int ID,String CREATE_DATE, String GPS,  String SFZ, String SOURCE) {
+        this.CREATE_DATE = CREATE_DATE;
+        this.GPS = GPS;
+        this.ID = ID;
         this.MARK = MARK;
+        this.SFZ = SFZ;
+        this.SOURCE = SOURCE;
     }
 
     public String getCREATE_DATE() {
@@ -66,4 +73,31 @@ public class MarkImgInfo {
     public void setSOURCE(String SOURCE) {
         this.SOURCE = SOURCE;
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//
+//        if(this.getID()==((MarkImgInfo)o).getID()&&TextUtils.equals(this.getSFZ(),((MarkImgInfo)o).getSFZ())
+//                &&TextUtils.equals(this.getMARK(),((MarkImgInfo)o).getMARK())
+//                &&TextUtils.equals(this.getCREATE_DATE(),((MarkImgInfo)o).getCREATE_DATE())
+//                &&TextUtils.equals(this.getSOURCE(),((MarkImgInfo)o).getSOURCE())
+//                &&TextUtils.equals(this.getGPS(),((MarkImgInfo)o).getGPS())){
+//
+//
+//            return true;
+//        }
+//        return false;
+//    }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if(TextUtils.equals(this.SEATNO,((SeatsInfo)o).SEATNO)&&TextUtils.equals(this.PATIENTNAME,((SeatsInfo)o).PATIENTNAME)&&TextUtils.equals(this.PATIENTID,((SeatsInfo)o).PATIENTID)
+//                &&TextUtils.equals(this.CARDNO,((SeatsInfo)o).CARDNO)&&TextUtils.equals(this.AGE, ((SeatsInfo)o).AGE)){
+//            return true;
+//        }
+//
+//        return false;
+//    }
+
+
 }

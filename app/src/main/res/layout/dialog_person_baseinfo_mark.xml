@@ -21,9 +21,9 @@
             android:text="标识类型："/>
 
         <Spinner
+            android:id="@+id/sp_dialog_person_baseinfo_mark"
             android:background="@drawable/spinner_bg"
             android:spinnerMode="dialog"
-            android:prompt="@string/spinner_title"
             android:layout_width="0dp"
             android:layout_weight="2.2"
             android:layout_height="33dp"

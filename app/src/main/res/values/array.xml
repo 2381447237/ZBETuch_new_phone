@@ -5,7 +5,7 @@
         <item>男</item>
         <item>女</item>
     </string-array>
-    <string-array name="spinner_identifying">
+    <string-array name="spinner_identifying">==
         <item>请选择</item>
         <item>应届毕业生</item>
         <item>启航人员</item>

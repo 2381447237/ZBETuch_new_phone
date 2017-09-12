@@ -27,6 +27,10 @@ import com.youli.zbetuch.jingan.entity.PersonReInfo;
 import com.youli.zbetuch.jingan.entity.RecruitEduInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,7 +47,8 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
     private Context mContext=PersonReActivity.this;
 
     private final int SUCCESS=10000;
-    private final int  PROBLEM=10001;
+    private final int SUCCESS_UPLOAD=10001;//上传个人简历
+    private final int  PROBLEM=10002;
 
     private List<PersonReInfo> data=new ArrayList<>();
 
@@ -61,7 +66,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
     private String workAreaThreeSpArray [];
     private Spinner wantWorkOneSp,wantWorkOneDetailSp;//欲从事岗位1
     private List<JobPostInfo> wantWorkOneSpData=new ArrayList<>();
-   private List<ChildJobPostInfo> wantWorkOneDetailSpData=new ArrayList<>();
+    private List<ChildJobPostInfo> wantWorkOneDetailSpData=new ArrayList<>();
     private Spinner wantWorkTwoSp,wantWorkTwoDetailSp;//欲从事岗位2
     private List<JobPostInfo> wantWorkTwoSpData=new ArrayList<>();
     private List<ChildJobPostInfo> wantWorkTwoDetailSpData=new ArrayList<>();
@@ -79,7 +84,23 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
     private String languageProfTwoSpArray [];
     private EditText languageCertEt;//外语类证书
     private EditText otherCertsEt;//其他职业技能书
-    private EditText selfEvaluationTv;//自我评价
+    private EditText selfEvaluationEt;//自我评价
+
+    //要上传的参数============================
+    private String workNatureStr;//用工性质
+    private String workClassStr;//工作班时
+    private String   workAreaOneStr,workAreaTwoStr,workAreaThreeStr;//工作地区1,2,3
+    private String wantWorkOneStr,wantWorkOneDetailStr;//欲从事岗位1
+    private String wantWorkTwoStr,wantWorkTwoDetailStr;//欲从事岗位2
+    private String wantWorkThreeStr;//欲从事岗位3
+    private String computerLevelStr;//计算机应用能力
+    private String computerCertStr;//计算机证书
+    private String languageOneStr,languageProfOneStr;//外语语种1和熟练程度
+    private String languageTwoStr,languageProfTwoStr;//外语语种2和熟练程度
+    private String languageCertStr;//外语类证书
+    private String otherCertsStr;//其他职业技能书
+    private String selfEvaluationStr;//自我评价
+    private String wantSalaryStr,startSalaryStr,endSalaryStr;//期望薪资
 
     private Handler mHandler=new Handler(){
 
@@ -134,12 +155,19 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                        // languageProfTwoTv.setText(data.get(0).getLANGUAGEPROFICIENCYID_2());
                         languageCertEt.setText("\t\t"+data.get(0).getLANGUAGECERT()+"\t\t");
                         otherCertsEt.setText("\t\t"+data.get(0).getOTHERCERTS()+"\t\t");
-                        selfEvaluationTv.setText(data.get(0).getSELFEVALUATION());
+                        selfEvaluationEt.setText(data.get(0).getSELFEVALUATION());
                     }
 
                     break;
 
 
+                case SUCCESS_UPLOAD:
+
+                    if(TextUtils.equals("True",(String)msg.obj)){
+                        Toast.makeText(mContext,"上传成功",Toast.LENGTH_SHORT).show();
+                    }
+
+                    break;
                 case PROBLEM:
 
                     Toast.makeText(mContext,"网络不给力",Toast.LENGTH_SHORT).show();
@@ -244,7 +272,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
          languageCertEt= (EditText) findViewById(R.id.et_person_re_language_cert);//外语类证书
          otherCertsEt= (EditText) findViewById(R.id.et_person_re_other_certs);//其他职业技能书
-         selfEvaluationTv= (EditText) findViewById(R.id.et_person_resume_self_evaluation);//自我评价
+         selfEvaluationEt= (EditText) findViewById(R.id.et_person_resume_self_evaluation);//自我评价
 
         tvSubmit= (TextView) findViewById(R.id.tv_person_resume_submit);
         tvSubmit.setOnClickListener(this);
@@ -347,11 +375,22 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                     spinner.setSelection(i);}}
         }else if(spinner==wantSalarySp){
             for(int i=0;i<wantSalarySpArray.length;i++){
-                if (data.get(0).getSTARTSALARY()!=-1&&data.get(0).getENDSALARY() == -1) {
-                    spinner.setSelection(wantSalarySpArray.length-1);
-                } else if(data.get(0).getSTARTSALARY()!=-1&&data.get(0).getENDSALARY() != -1){
-                    if(TextUtils.equals(data.get(0).getSTARTSALARY()+"-"+data.get(0).getENDSALARY(),wantSalarySpArray[i])){
-                        spinner.setSelection(i);}}}
+                  if(data.get(0).getENDSALARY()==-1){
+                      spinner.setSelection(0);
+                  }else if(data.get(0).getENDSALARY()==0){
+                      if(data.get(0).getSTARTSALARY()==0){
+                          spinner.setSelection(0);
+                      }else{
+                          spinner.setSelection(wantSalarySpArray.length-1);
+                      }
+                  }else{
+                      if(TextUtils.equals(data.get(0).getSTARTSALARY()+"-"+data.get(0).getENDSALARY(),wantSalarySpArray[i])){
+                            spinner.setSelection(i);
+                        }
+
+                  }
+
+            }
         }else if(spinner==computerLevelSp) {
             for (int i = 0; i < computerLevelSpArray.length; i++) {
                 if (TextUtils.equals(data.get(0).getCOMPUTERLEVELID(), computerLevelSpArray[i])) {
@@ -420,80 +459,102 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
             case R.id.sp_person_re_work_nature://工作性质
 
-                //Toast.makeText(mContext,"工作性质=="+workNatureSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
-
+                workNatureStr=(String)workNatureSp.getSelectedItem();
                 break;
             case R.id.sp_person_re_work_class://工作班时
 
-              //  Toast.makeText(mContext,"工作班时=="+workClassSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
-
+                workClassStr=(String)workClassSp.getSelectedItem();
                 break;
 
             case R.id.sp_person_re_work_area_one://工作地区1
 
-              //  Toast.makeText(mContext,"工作地区1=="+workAreaOneSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                workAreaOneStr=(String)workAreaOneSp.getSelectedItem();
 
                 break;
 
             case R.id.sp_person_re_work_area_two://工作地区2
 
-             //   Toast.makeText(mContext,"工作地区2=="+workAreaTwoSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                workAreaTwoStr=(String)workAreaTwoSp.getSelectedItem();
                 break;
 
             case R.id.sp_person_re_work_area_three://工作地区3
+                workAreaThreeStr=(String)workAreaThreeSp.getSelectedItem();
 
-              //  Toast.makeText(mContext,"工作地区3=="+workAreaThreeSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.sp_person_re_want_work_one://欲从事岗位1
 
                      jobPostFindChildJobPost(((JobPostInfo) wantWorkOneSp.getSelectedItem()).getJobCode(),wantWorkOneDetailSpData,wantWorkOneDetailSp);
 
+                wantWorkOneStr=((JobPostInfo) wantWorkOneSp.getSelectedItem()).getJobName();
+
                 break;
 
             case R.id.sp_person_re_want_work_one_detail://欲从事岗位1详情
 
-             //   Toast.makeText(mContext,"欲从事岗位1详情=="+wantWorkOneDetailSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                wantWorkOneDetailStr=((ChildJobPostInfo)wantWorkOneDetailSp.getSelectedItem()).getChildJobName();
+
                 break;
 
             case R.id.sp_person_re_want_work_two://欲从事岗位2
                 jobPostFindChildJobPost(((JobPostInfo) wantWorkTwoSp.getSelectedItem()).getJobCode(),wantWorkTwoDetailSpData,wantWorkTwoDetailSp);
-             //   Toast.makeText(mContext,"欲从事岗位2=="+wantWorkTwoSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                wantWorkTwoStr=((JobPostInfo) wantWorkTwoSp.getSelectedItem()).getJobName();
+
                 break;
 
             case R.id.sp_person_re_want_work_two_detail://欲从事岗位2详情
 
-               // Toast.makeText(mContext,"欲从事岗位2详情=="+wantWorkTwoDetailSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                wantWorkTwoDetailStr=((ChildJobPostInfo)wantWorkTwoDetailSp.getSelectedItem()).getChildJobName();
+
                 break;
 
             case R.id.sp_person_re_want_salary://期望薪资
 
-            //    Toast.makeText(mContext,"期望薪资=="+wantSalarySp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                wantSalaryStr=(String)wantSalarySp.getSelectedItem();
+
+                if(wantSalaryStr.indexOf("请选择")!=-1){//包含"请选择"
+                    startSalaryStr="0";
+                    endSalaryStr="0";
+                }else{
+
+                    if(wantSalaryStr.indexOf("以上")!=-1){
+                          startSalaryStr=wantSalaryStr.replace("以上","");
+                        endSalaryStr="0";
+
+                        Log.e("2017/9/12","startSalaryStr=="+startSalaryStr);
+                        Log.e("2017/9/12","endSalaryStr=="+endSalaryStr);
+
+                    }else{
+
+                        if(wantSalaryStr.indexOf("-")!=-1){
+                            startSalaryStr=wantSalaryStr.split("-")[0];
+                            endSalaryStr=wantSalaryStr.split("-")[1];
+                        }
+
+                    }
+
+                }
+
                 break;
 
             case R.id.sp_person_re_computer_level://计算机应用能力
-
-              //  Toast.makeText(mContext,"计算机应用能力=="+computerLevelSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                computerLevelStr=(String)computerLevelSp.getSelectedItem();
                 break;
 
             case R.id.sp_person_re_language_one://外语语种1
-
-             //   Toast.makeText(mContext,"外语语种1=="+languageOneSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                languageOneStr=(String)languageOneSp.getSelectedItem();
                 break;
 
             case R.id.sp_person_re_language_proficiency_one://熟练程度语种1
-
-          //      Toast.makeText(mContext,"熟练程度语种1=="+languageProfOneSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                languageProfOneStr=(String)languageProfOneSp.getSelectedItem();
                 break;
 
             case R.id.sp_person_re_language_two://外语语种2
-
-             //   Toast.makeText(mContext,"外语语种2=="+languageTwoSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                languageTwoStr=(String)languageTwoSp.getSelectedItem();
                 break;
 
             case R.id.sp_person_re_language_proficiency_two://熟练程度语种2
-
-             //   Toast.makeText(mContext,"熟练程度语种2=="+languageProfTwoSp.getSelectedItem(),Toast.LENGTH_SHORT).show();
+                languageProfTwoStr=(String)languageProfTwoSp.getSelectedItem();
 
                 break;
 
@@ -543,18 +604,101 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                Toast.makeText(mContext,"确定",Toast.LENGTH_SHORT).show();
+                submitInfo();
+
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(mContext,"取消",Toast.LENGTH_SHORT).show();
+
             }
         });
         builder.show();
     }
 
+//    修改个人简历
+//    http://web.youli.pw:89/Json/Set_Resumes_Info.aspx
+//
+//            [{"SELFEVALUATION":"","COMPUTERLEVELID":"请选择","GZXZID":"请选择","LANGUAGEID_1":"请选择",
+// "LANGUAGEPROFICIENCYID_1":"请选择","LANGUAGEID_2":"请选择","IDNO":"310108198004026642","LANGUAGEPROFICIENCYID_2":"请选择",
+// "ENDSALARY":"8000","GZBSID":"请选择","LANGUAGECERT":"","COMPUTERCERT":"","AREAID_3":"请选择","OTHERZYFL":"","GPS":"0.0,0.0",
+// "ZYFLCHILDID_1":"","ZYFLID_1":"请选择","STARTSALARY":"5100","ZYFLCHILDID_2":"请选择","OTHERCERTS":"","ZYFLID_2":"请选择",
+// "AREAID_2":"请选择","AREAID_1":"请选择"}]
+    private void submitInfo(){
+
+        wantWorkThreeStr=wantWorkThreeEt.getText().toString().trim();
+        computerCertStr=computerCertEt.getText().toString().trim();
+        languageCertStr=languageCertEt.getText().toString().trim();
+        otherCertsStr=otherCertsEt.getText().toString().trim();
+        selfEvaluationStr=selfEvaluationEt.getText().toString().trim();
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+        JSONArray jsonArray=new JSONArray();
+        JSONObject jsonObj=new JSONObject();
+        try {
+            jsonObj.put("SELFEVALUATION",selfEvaluationStr);//自我评价
+            jsonObj.put("COMPUTERLEVELID",computerLevelStr);//计算机应用能力
+            jsonObj.put("GZXZID",workNatureStr);//用工性质
+            jsonObj.put("LANGUAGEID_1",languageOneStr);//外语语种1
+            jsonObj.put("LANGUAGEPROFICIENCYID_1",languageProfOneStr);//外语语种1熟练程度
+            jsonObj.put("LANGUAGEID_2",languageTwoStr);//外语语种2
+            jsonObj.put("LANGUAGEPROFICIENCYID_2",languageProfTwoStr);//外语语种2熟练程度
+            jsonObj.put("IDNO",sfzStr);//身份证
+            jsonObj.put("STARTSALARY",startSalaryStr);//薪水下限
+            jsonObj.put("ENDSALARY",endSalaryStr);//薪水上限
+            jsonObj.put("GZBSID",workClassStr);//工作班时
+            jsonObj.put("LANGUAGECERT",languageCertStr);//外语类证书
+            jsonObj.put("COMPUTERCERT",computerCertStr);//计算机证书
+            jsonObj.put("OTHERZYFL",wantWorkThreeStr);//欲从事岗位3
+            jsonObj.put("GPS","0.0,0.0");
+            jsonObj.put("ZYFLCHILDID_1",wantWorkOneDetailStr);//欲从事岗位1详细
+            jsonObj.put("ZYFLID_1",wantWorkOneStr);//欲从事岗位1
+            jsonObj.put("ZYFLCHILDID_2",wantWorkTwoDetailStr);//欲从事岗位2详细
+            jsonObj.put("ZYFLID_2",wantWorkTwoStr);//欲从事岗位2
+            jsonObj.put("OTHERCERTS",otherCertsStr);//其他职业技能书
+            jsonObj.put("AREAID_3",workAreaThreeStr);//工作地区3
+            jsonObj.put("AREAID_2",workAreaTwoStr);//工作地区2
+            jsonObj.put("AREAID_1",workAreaOneStr);//工作地区1
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        jsonArray.put(jsonObj);
+
+        String personReUrl=MyOkHttpUtils.BaseUrl+"/Json/Set_Resumes_Info.aspx";
+
+
+                        Response response=  MyOkHttpUtils.okHttpPersonRePost(personReUrl,jsonArray.toString());
+
+                        Message msg=Message.obtain();
+                       if(response!=null){
+
+                           try {
+                               msg.obj=response.body().string();
+                               msg.what=SUCCESS_UPLOAD;
+                           } catch (IOException e) {
+                               e.printStackTrace();
+                           }
+
+                       }else{
+
+                         msg.what=PROBLEM;
+
+                       }
+
+                        mHandler.sendMessage(msg);
+
+                    }
+                }
+
+        ).start();
+
+
+
+    }
 
 
 }

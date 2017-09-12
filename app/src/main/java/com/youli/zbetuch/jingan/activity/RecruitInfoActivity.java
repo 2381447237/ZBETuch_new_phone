@@ -518,8 +518,6 @@ public class RecruitInfoActivity extends BaseActivity implements View.OnClickLis
                        String url= queryUrl+PageIndex;
 
 
-                        Log.e("2017/8/25","======="+url);
-
                         Response response=MyOkHttpUtils.okHttpGet(url);
 
                         Message msg=Message.obtain();

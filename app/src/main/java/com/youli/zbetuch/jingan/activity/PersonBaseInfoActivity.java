@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +115,9 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
     private LinearLayout markLl;
 
+    private CommonAdapter markAdapter;//标识对话框里面的适配器
+    private  String  markArrayStr;
+   private  String [] markArray;
     private Handler mHandler=new Handler(){
 
         @Override
@@ -278,7 +282,6 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
         for(int i=1;i<5;i++){
 
             zxMarkDataDialog.add(new StaffMarkInfo("丧劳调查"+i,"2017-09-07"));
-            markData.add(new MarkImgInfo("应届毕业生"+i));
         }
 
         initDatas();
@@ -433,6 +436,10 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
             case R.id.btn_person_baseinfo_biaoshi:
 
+                //标识图片
+                markData.clear();
+                markData.addAll((List<MarkImgInfo> )markImgData);
+
                 showEditDialog("mark");
                 break;
 
@@ -445,7 +452,8 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
     }
 
-    private void showEditDialog(final String sign){
+
+    private void showEditDialog(final String sign){//两个编辑标识的对话框
 
 
         AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
@@ -459,6 +467,22 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
         dialog.show();
         dialog.setCanceledOnTouchOutside(false);
 
+        final Spinner sp= (Spinner) view.findViewById(R.id.sp_dialog_person_baseinfo_mark);
+
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                markArrayStr =markArray[position];
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         final Button addBtn= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_mark_add);
         final Button whBtn= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_mark_wh);
         Button modifyBtn= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_mark_modify);
@@ -469,15 +493,59 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
         if(TextUtils.equals(sign,"mark")){
             whBtn.setVisibility(View.GONE);
             dateTv.setText("备注");
+            markArray=getResources().getStringArray(R.array.spinner_identifying);
         }else if(TextUtils.equals(sign,"zxMark")){
             whBtn.setVisibility(View.VISIBLE);
             dateTv.setText("标识日期");
         }
+
+        sp.setAdapter(new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,markArray));
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mContext,"请选择标识类型",Toast.LENGTH_SHORT).show();
+
+                if(TextUtils.equals("请选择",markArrayStr)){
+                    Toast.makeText(mContext,"请选择标识类型",Toast.LENGTH_SHORT).show();
+                }else{
+
+                    if(TextUtils.equals(sign,"mark")){
+
+//                        for(MarkImgInfo info:markData){
+//
+//                            if(TextUtils.equals(markArrayStr,info.getMARK())){
+//                                Toast.makeText(mContext,"对不起，不能重复添加标识,请重新选择",Toast.LENGTH_SHORT).show();
+//                                return;
+//                            }else{
+//
+//                              //  markData.add(new MarkImgInfo(markArrayStr,0,null,null,null,null));
+//                                Toast.makeText(mContext,"添加",Toast.LENGTH_SHORT).show();
+//                                markAdapter.notifyDataSetChanged();
+//                            }
+//                    }
+
+                     if(!judmentMark(markData,markArrayStr)){
+
+                       if(markData.size()==1&&markData.get(0).getMARK()==null){
+                           markData.clear();
+                       }
+                               markData.add(new MarkImgInfo(markArrayStr,0,null,null,null,null));===
+                                markAdapter.notifyDataSetChanged();
+
+
+
+                     }
+
+
+
+                    }else if(TextUtils.equals(sign,"zxMark")) {
+
+                    }
+                }
+
+
+
+
 
             }
         });
@@ -514,11 +582,14 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
         if(TextUtils.equals(sign,"mark")){
 
-        lv.setAdapter(new CommonAdapter<MarkImgInfo>(mContext,markData,R.layout.item_person_baseinfo_mark) {
-            @Override
-            public void convert(CommonViewHolder holder, MarkImgInfo item, final int position) {
 
-                LinearLayout ll=holder.getView(R.id.ll_item_person_baseinfo_mark);
+            if(markAdapter==null) {
+
+                markAdapter=new CommonAdapter<MarkImgInfo>(mContext,markData,R.layout.item_person_baseinfo_mark) {
+
+                  @Override
+                  public void convert(CommonViewHolder holder, MarkImgInfo item, final int position) {
+                                      LinearLayout ll=holder.getView(R.id.ll_item_person_baseinfo_mark);
 
                 TextView noTv=holder.getView(R.id.tv_item_person_baseinfo_mark_no);
                 noTv.setText((position+1)+"");
@@ -531,7 +602,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                     @Override
                     public void onClick(View v) {
 
-                        Toast.makeText(mContext,"删除第"+position+"个",Toast.LENGTH_SHORT).show();
+                           deleteEditMark(sign, position, markAdapter);//编辑标识对话框里面的删除
 
                     }
                 });
@@ -545,9 +616,12 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                     deleteBtn.setTextColor(Color.parseColor("#ff0000"));
                     dateTv.setVisibility(View.GONE);
 
+                  }
+              };
 
-            }
-        });
+                }
+
+           lv.setAdapter(markAdapter);
 
         }else if(TextUtils.equals(sign,"zxMark")){
 
@@ -568,8 +642,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                     @Override
                     public void onClick(View v) {
 
-                        Toast.makeText(mContext,"删除第"+position+"个",Toast.LENGTH_SHORT).show();
-
+                        deleteEditMark(sign,position,null);//编辑标识对话框里面的删除
                     }
                 });
 
@@ -756,8 +829,6 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.sp_person_baseinfo_state://状态
 
-                Toast.makeText(mContext,"状态=="+spState.getSelectedItem(),Toast.LENGTH_SHORT).show();
-
                 if(TextUtils.equals((String)spState.getSelectedItem(),"登记失业")){
                     spMdData=getResources().getStringArray(R.array.personmodishiye);
                 }else if(TextUtils.equals((String)spState.getSelectedItem(),"未登记失业")){
@@ -810,4 +881,40 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
         }
 
     }
+
+    private void deleteEditMark(String sign,int position,CommonAdapter markAdapter){//编辑标识对话框里面的删除
+
+        if(TextUtils.equals(sign,"mark")){//删除标识
+
+          //  Toast.makeText(mContext,"删除标识第"+position+"个",Toast.LENGTH_SHORT).show();
+
+            markData.remove(position);
+
+            markAdapter.notifyDataSetChanged();
+
+        }else if(TextUtils.equals(sign,"zxMark")){//删除专项标识
+
+            Toast.makeText(mContext,"删除专项标识第"+position+"个",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private boolean judmentMark(List<MarkImgInfo> info,String markName){//判断标识是否含有
+
+        for(int i=0;i<info.size();i++){
+
+            String name=info.get(i).getMARK();
+
+            if(name.equals(markName)){
+
+                Toast.makeText(mContext,
+                        "对不起，不能重复添加标识,请重新选择", Toast.LENGTH_SHORT).show();
+                return  true;
+            }
+
+        }
+
+        return false;
+    }
+
 }

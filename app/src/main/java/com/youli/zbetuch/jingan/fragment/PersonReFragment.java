@@ -84,10 +84,17 @@ public class PersonReFragment extends Fragment{
                         wantWorkTwoTv.setText(data.get(0).getZYFLID_2());
                         wantWorkTwoDetailTv.setText(data.get(0).getZYFLCHILDID_2());
                         wantWorkThreeTv.setText(data.get(0).getOTHERZYFL());
-                        if (data.get(0).getENDSALARY() == -1) {
-                            wantSalaryTv.setText(data.get(0).getSTARTSALARY() + "及以上");
-                        } else {
-                            wantSalaryTv.setText(data.get(0).getSTARTSALARY() + "-" + data.get(0).getENDSALARY());
+
+                        if(data.get(0).getSTARTSALARY()==0){
+
+                            wantSalaryTv.setVisibility(View.GONE);
+                        }else {
+                            wantSalaryTv.setVisibility(View.VISIBLE);
+                            if (data.get(0).getENDSALARY() != 0) {
+                                wantSalaryTv.setText(data.get(0).getSTARTSALARY() + "-" + data.get(0).getENDSALARY());
+                            } else if(data.get(0).getENDSALARY() == 0){
+                                wantSalaryTv.setText(data.get(0).getSTARTSALARY() + "及以上");
+                            }
                         }
 
                         computerLevelTv.setText(data.get(0).getCOMPUTERLEVELID());
