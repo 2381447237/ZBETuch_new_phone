@@ -31,17 +31,25 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
+import com.youli.zbetuch.jingan.adapter.WhSpAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.MarkImgInfo;
 import com.youli.zbetuch.jingan.entity.PersonInfo;
 import com.youli.zbetuch.jingan.entity.StaffMarkInfo;
+import com.youli.zbetuch.jingan.entity.WhMarkInfo;
 import com.youli.zbetuch.jingan.utils.IOUtil;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Response;
@@ -56,7 +64,10 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
     private final int SUCCEED_PHOTO=10000;//头像
     private final int SUCCEED_MARKIMG=10001;//标识图片
     private final int SUCCEED_MARK=10002;//专项标识
-    private final int  PROBLEM=10003;
+    private final int SUCCEED_MARKIMG_UPLOAD=10003;//上传标识
+    private final int SUCCEED_MARK_WH=10004;//获取维护标识的信息
+    private final int SUCCEED_MARK_WH_ADD=10005;//维护标识的添加
+    private final int  PROBLEM=10006;
 
     private Context mContext=PersonBaseInfoActivity.this;
 
@@ -68,6 +79,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
     private Button btnZxMark;//专项标识
     private List<StaffMarkInfo> zxMarkData=new ArrayList<>();//专项标识
     private List<StaffMarkInfo> zxMarkDataDialog=new ArrayList<>();//专项标识
+    private List<WhMarkInfo> zxMarkWhData=new ArrayList<>();//维护专项标识
     private List<MarkImgInfo> markData=new ArrayList<>();//标识
     private List<MarkImgInfo> markImgData=new ArrayList<>();//标识
     private PersonInfo personInfo;
@@ -118,6 +130,10 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
     private CommonAdapter markAdapter;//标识对话框里面的适配器
     private  String  markArrayStr;
    private  String [] markArray;
+
+    private AlertDialog editDialog;//编辑的对话框
+    private AlertDialog whDialog;//维护的对话框
+
     private Handler mHandler=new Handler(){
 
         @Override
@@ -132,7 +148,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                     }
 
                     //标识图片
-                    getNetDatas("markimg");
+                    getNetDatas("markimg",-1);
 
                 break;
 
@@ -142,30 +158,37 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
                     markImgData.addAll((List<MarkImgInfo>)msg.obj);
 
-                    for(MarkImgInfo info:markImgData){
+                        yjbyshIv.setVisibility(View.GONE);
+                        qhryIv.setVisibility(View.GONE);
+                        xjryIv.setVisibility(View.GONE);
+                        jdryIv.setVisibility(View.GONE);
+                        wjyjIv.setVisibility(View.GONE);
+                        jyknIv.setVisibility(View.GONE);
 
-                        if(TextUtils.equals(info.getMARK(),"应届毕业生")){
-                            yjbyshIv.setVisibility(View.VISIBLE);
-                        }
-                        if(TextUtils.equals(info.getMARK(),"启航人员")){
-                            qhryIv.setVisibility(View.VISIBLE);
-                        }
-                        if(TextUtils.equals(info.getMARK(),"刑解人员")){
-                            xjryIv.setVisibility(View.VISIBLE);
-                        }
-                        if(TextUtils.equals(info.getMARK(),"戒毒人员")){
-                            jdryIv.setVisibility(View.VISIBLE);
-                        }
-                        if(TextUtils.equals(info.getMARK(),"零就业家庭")){
-                            wjyjIv.setVisibility(View.VISIBLE);
-                        }
-                        if(TextUtils.equals(info.getMARK(),"就业困难人员")){
-                            jyknIv.setVisibility(View.VISIBLE);
-                        }
-                    }
+                      for (MarkImgInfo info : markImgData) {
+
+                          if (TextUtils.equals(info.getMARK(), "应届毕业生")) {
+                              yjbyshIv.setVisibility(View.VISIBLE);
+                          }
+                          if (TextUtils.equals(info.getMARK(), "启航人员")) {
+                              qhryIv.setVisibility(View.VISIBLE);
+                          }
+                          if (TextUtils.equals(info.getMARK(), "刑解人员")) {
+                              xjryIv.setVisibility(View.VISIBLE);
+                          }
+                          if (TextUtils.equals(info.getMARK(), "戒毒人员")) {
+                              jdryIv.setVisibility(View.VISIBLE);
+                          }
+                          if (TextUtils.equals(info.getMARK(), "零就业家庭")) {
+                              wjyjIv.setVisibility(View.VISIBLE);
+                          }
+                          if (TextUtils.equals(info.getMARK(), "就业困难人员")) {
+                              jyknIv.setVisibility(View.VISIBLE);
+                          }
+                      }
 
                     ////专项标识
-                    getNetDatas("mark");
+                    getNetDatas("mark",-1);
 
                     break;
 
@@ -187,6 +210,38 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                     }
                     break;
 
+                case SUCCEED_MARKIMG_UPLOAD://上传标识
+
+                    if(TextUtils.equals("True",(String)msg.obj)){
+                        Toast.makeText(mContext,"上传成功",Toast.LENGTH_SHORT).show();
+                        editDialog.dismiss();
+                    }
+                    //标识图片
+                    getNetDatas("markimg",-1);
+                    break;
+                case SUCCEED_MARK_WH://获取维护标识的信息
+
+                    zxMarkWhData.clear();
+
+                    zxMarkWhData.addAll((List<WhMarkInfo>)(msg.obj));
+
+                    if(msg.arg1==10000){
+                        showEditDialog("zxMark");
+                    }
+
+
+
+                    break;
+
+                case SUCCEED_MARK_WH_ADD://维护标识的添加
+
+                    if(TextUtils.equals("True",(String)msg.obj)){
+                        Toast.makeText(mContext,"操作成功!",Toast.LENGTH_SHORT).show();
+                        whDialog.dismiss();
+                    }
+
+                    break;
+
                 case PROBLEM:
 
                     Toast.makeText(mContext,"网络不给力",Toast.LENGTH_SHORT).show();
@@ -197,6 +252,8 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
         }
     };
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -330,11 +387,11 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
 
         //获取头像
-            getNetDatas("head");
+            getNetDatas("head",-1);
     }
 
 
-    private void getNetDatas(final String sign){
+    private void getNetDatas(final String sign, final int isFristWh){
 
         new Thread(
 
@@ -349,14 +406,14 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                             url=MyOkHttpUtils.BaseUrl+"/Json/Get_Tb_Mark.aspx?sfz="+personInfo.getSFZ();;
                         }else if(TextUtils.equals(sign,"mark")){
                             url=MyOkHttpUtils.BaseUrl+"/Json/Get_TB_Staff_Marks.aspx?sfz="+personInfo.getSFZ();
+                        }else if(TextUtils.equals(sign,"whMarkInfo")){
+                            url=MyOkHttpUtils.BaseUrl+"/Json/Get_TB_Staff_Mark_Type.aspx";
                         }
-
+                        Message msg=Message.obtain();
                         Response response=MyOkHttpUtils.okHttpGet(url);
 
-                        Message msg=Message.obtain();
-
                         if(response!=null){
-
+                            Gson gson=new Gson();
                             if(TextUtils.equals(sign,"head")) {
 
                                 InputStream is = response.body().byteStream();
@@ -369,7 +426,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                                 String resStr= null;
                                 try {
                                     resStr = response.body().string();
-                                    Gson gson=new Gson();
+
                                     msg.obj=gson.fromJson(resStr,new TypeToken<List<MarkImgInfo>>(){}.getType());
                                     msg.what=SUCCEED_MARKIMG;
                                 } catch (IOException e) {
@@ -383,9 +440,23 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                                 String resStr= null;
                                 try {
                                     resStr = response.body().string();
-                                    Gson gson=new Gson();
+
                                     msg.what=SUCCEED_MARK;
                                     msg.obj=gson.fromJson(resStr,new TypeToken<List<StaffMarkInfo>>(){}.getType());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }else if(TextUtils.equals(sign,"whMarkInfo")){
+
+                                String resStr=null;
+
+                                try {
+                                    resStr=response.body().string();
+                                    msg.what=SUCCEED_MARK_WH;
+                                    msg.arg1=isFristWh;
+                                    msg.obj=gson.fromJson(resStr,new TypeToken<List<WhMarkInfo>>(){}.getType());
+
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -439,13 +510,16 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                 //标识图片
                 markData.clear();
                 markData.addAll((List<MarkImgInfo> )markImgData);
-
+            //   Log.e("2017/9/13","11111111="+markData);
                 showEditDialog("mark");
                 break;
 
             case R.id.btn_person_baseinfo_zhuanxiang_biaoshi:
 
-                showEditDialog("zxMark");
+                //获取维护标识的数据
+                getNetDatas("whMarkInfo",10000);
+
+
 
                 break;
         }
@@ -462,26 +536,14 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
         builder.setView(view);
 
-        final AlertDialog dialog=builder.create();
+        editDialog=builder.create();
 
-        dialog.show();
-        dialog.setCanceledOnTouchOutside(false);
+        editDialog.show();
+        editDialog.setCanceledOnTouchOutside(false);
 
         final Spinner sp= (Spinner) view.findViewById(R.id.sp_dialog_person_baseinfo_mark);
 
-        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                markArrayStr =markArray[position];
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         final Button addBtn= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_mark_add);
         final Button whBtn= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_mark_wh);
@@ -494,12 +556,45 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             whBtn.setVisibility(View.GONE);
             dateTv.setText("备注");
             markArray=getResources().getStringArray(R.array.spinner_identifying);
+            sp.setAdapter(new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,markArray));
+            sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    markArrayStr =markArray[position];
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }else if(TextUtils.equals(sign,"zxMark")){
             whBtn.setVisibility(View.VISIBLE);
             dateTv.setText("标识日期");
+            if(!TextUtils.equals(zxMarkWhData.get(0).getNAME(),"请选择")){
+                zxMarkWhData.add(0,new WhMarkInfo("请选择"));
+            }
+           sp.setAdapter(new WhSpAdapter(mContext,zxMarkWhData));
+            sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                    markArrayStr =zxMarkWhData.get(position).getNAME();
+
+                  //  Toast.makeText(mContext,"==="+markArrayStr,Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
 
-        sp.setAdapter(new ArrayAdapter<String>(mContext,android.R.layout.simple_list_item_1,markArray));
+
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -511,29 +606,23 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
                     if(TextUtils.equals(sign,"mark")){
 
-//                        for(MarkImgInfo info:markData){
-//
-//                            if(TextUtils.equals(markArrayStr,info.getMARK())){
-//                                Toast.makeText(mContext,"对不起，不能重复添加标识,请重新选择",Toast.LENGTH_SHORT).show();
-//                                return;
-//                            }else{
-//
-//                              //  markData.add(new MarkImgInfo(markArrayStr,0,null,null,null,null));
-//                                Toast.makeText(mContext,"添加",Toast.LENGTH_SHORT).show();
-//                                markAdapter.notifyDataSetChanged();
-//                            }
-//                    }
-
                      if(!judmentMark(markData,markArrayStr)){
 
-                       if(markData.size()==1&&markData.get(0).getMARK()==null){
-                           markData.clear();
-                       }
-                               markData.add(new MarkImgInfo(markArrayStr,0,null,null,null,null));===
+//                       if(markData.size()==1&&markData.get(0).getMARK()==null){
+//                           markData.clear();
+//                       }
+                         MarkImgInfo mInfo=new MarkImgInfo();
+                         mInfo.setMARK(markArrayStr);
+                         mInfo.setSOURCE("现场采集");
+                         mInfo.setSFZ(personInfo.getSFZ());
+                         mInfo.setGPS("0.0.0.0");
+                         SimpleDateFormat sdf = new SimpleDateFormat(
+                                 "yyyy-MM-dd HH:mm");
+                         String markDate = sdf.format(new Date());
+                         mInfo.setCREATE_DATE(markDate);
+                               markData.add(mInfo);
                                 markAdapter.notifyDataSetChanged();
-
-
-
+                         //PersonMark [personMarkId=null, personSFZ=310108198004026642, personMarkName=启航人员, personMarkCreatdate=2017-09-13 09:20, personMarkSoure=现场采集]
                      }
 
 
@@ -542,10 +631,6 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
                     }
                 }
-
-
-
-
 
             }
         });
@@ -564,9 +649,8 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
         modifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-               // Toast.makeText(mContext,"修改",Toast.LENGTH_SHORT).show();
-                showAlertDialog("modify","modify");
+                //sign==mark就是标识，sign==zxMark就是专项标识
+                showAlertDialog(sign,"modify");
             }
         });
 
@@ -575,7 +659,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                dialog.dismiss();//关闭
+                editDialog.dismiss();//关闭
             }
         });
 
@@ -664,7 +748,9 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
     }
 
     private void showWhDialog(){//维护标识的对话框
-
+        //获取维护标识的数据
+        //获取维护标识的数据
+        getNetDatas("whMarkInfo",-1);
 
         AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
 
@@ -672,9 +758,9 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
         builder.setView(view);
 
-        final AlertDialog dialog=builder.create();
+        whDialog =builder.create();
 
-        dialog.show();
+        whDialog.show();
 
         Button btnAdd= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_wh_add);
         Button btnUpdate= (Button) view.findViewById(R.id.btn_dialog_person_baseinfo_wh_update);
@@ -692,7 +778,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                etName.setText(zxMarkDataDialog.get(position).getType_Name());
+                etName.setText(zxMarkWhData.get(position).getNAME());
              //   etNameStr=etName.getText().toString().trim();
             }
         });
@@ -703,7 +789,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 String etNameStr=etName.getText().toString().trim();
-                showAlertDialog("add",etNameStr);//添加
+                showAlertDialog("add",etNameStr);//维护标识里面的添加
 
             }
         });
@@ -712,7 +798,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 String etNameStr=etName.getText().toString().trim();
-                showAlertDialog("update",etNameStr);//修改
+                showAlertDialog("update",etNameStr);//维护标识里面的修改
             }
         });
 
@@ -720,7 +806,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 String etNameStr=etName.getText().toString().trim();
-                showAlertDialog("delete",etNameStr);//删除
+                showAlertDialog("delete",etNameStr);//维护标识里面的删除
             }
         });
 
@@ -728,32 +814,30 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onClick(View v) {
 
-                dialog.dismiss();
-
+                whDialog.dismiss();
+                if(!TextUtils.equals(zxMarkWhData.get(0).getNAME(),"请选择")){
+                    zxMarkWhData.add(0,new WhMarkInfo("请选择"));
+                }
             }
         });
 
-        lv.setAdapter(new CommonAdapter<StaffMarkInfo>(mContext,zxMarkDataDialog,R.layout.item_person_baseinfo_mark) {
+
+        if(TextUtils.equals(zxMarkWhData.get(0).getNAME(),"请选择")){
+            zxMarkWhData.remove(0);
+        }
+
+        lv.setAdapter(new CommonAdapter<WhMarkInfo>(mContext,zxMarkWhData,R.layout.item_person_baseinfo_mark) {
             @Override
-            public void convert(CommonViewHolder holder, StaffMarkInfo item, final int position) {
+            public void convert(CommonViewHolder holder, WhMarkInfo item, final int position) {
 
                 LinearLayout ll=holder.getView(R.id.ll_item_person_baseinfo_mark);
 
                 TextView noTv=holder.getView(R.id.tv_item_person_baseinfo_mark_no);
-                noTv.setText((position+1)+"");
                 TextView nameTv=holder.getView(R.id.tv_item_person_baseinfo_mark_name);
-                nameTv.setText(zxMarkDataDialog.get(position).getType_Name());
+                nameTv.setText(zxMarkWhData.get(position).getNAME());
                 TextView dateTv=holder.getView(R.id.tv_item_person_baseinfo_mark_date);
-                dateTv.setText(zxMarkDataDialog.get(position).getCREATE_DATE());
                 Button deleteBtn=holder.getView(R.id.btn_item_person_baseinfo_mark_delete);
-                deleteBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                        Toast.makeText(mContext,"删除第"+position+"个",Toast.LENGTH_SHORT).show();
-
-                    }
-                });
 
                 if (position % 2 == 0) {
                     ll.setBackgroundResource(R.drawable.selector_ziyuandiaocha_item1);
@@ -769,7 +853,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
         });
     }
 
-    private void showAlertDialog(String sign,String name){//提示对话框
+    private void showAlertDialog(final String sign, final String name){//提示对话框
 
         if(TextUtils.equals(name,"")){
             Toast.makeText(mContext,"名称不能为空！"+name,Toast.LENGTH_SHORT).show();
@@ -782,7 +866,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
         String titleStr=null;
 
-        if(TextUtils.equals(sign,"add")){
+        if(TextUtils.equals(sign,"add")){//维护标识里面的添加
             msgStr="您确定要添加";
             titleStr="温馨提示";
         }else if(TextUtils.equals(sign,"update")){
@@ -791,21 +875,45 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
         }else if(TextUtils.equals(sign,"delete")){
             msgStr="您确定要删除";
             titleStr="温馨提示";
-        }else if(TextUtils.equals(sign,"modify")){
+        }else if(TextUtils.equals(sign,"mark")){
             msgStr="您确认修改的标识上传服务器";
             titleStr="修改标识提示";
         }else if(TextUtils.equals(sign,"uploadPhoto")){
             msgStr="您确定要把头像，上传服务器";
             titleStr="上传头像确认提示";
+        }else if(TextUtils.equals(sign,"zxMark")) {
+            msgStr = "您确认修改的标识上传服务器";
+            titleStr = "修改标识提示";
         }
-
             AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
         builder.setTitle(titleStr);
         builder.setMessage(msgStr+"吗？");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //sign==mark就是标识，sign==zxMark就是专项标识
+               // if(TextUtils.equals(sign,"mark")){
 
+                   // Toast.makeText(mContext,"标识",Toast.LENGTH_SHORT).show();
+
+
+
+//                }else if(TextUtils.equals(sign,"zxMark")){
+//                    Toast.makeText(mContext,"专项标识",Toast.LENGTH_SHORT).show();
+//                }
+                if(TextUtils.equals(sign,"add")){//维护标识里面的添加
+                    addWhMark(sign,name);
+                }else if(TextUtils.equals(sign,"update")){
+
+                }else if(TextUtils.equals(sign,"delete")){
+
+                }else if(TextUtils.equals(sign,"mark")){//上传标识
+                    upLoadMark(sign);
+                }else if(TextUtils.equals(sign,"uploadPhoto")){
+
+                }else if(TextUtils.equals(sign,"zxMark")) {
+
+                }
 
             }
         });
@@ -915,6 +1023,124 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
         }
 
         return false;
+    }
+
+    //上传标识或专项标识
+    private void upLoadMark(final String sign) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+
+                String upLoadUrl;
+
+                //Log.e("2017-9-13", "我的json==" + markData);
+
+
+                if (TextUtils.equals(sign, "mark")) {//标识
+
+                    JSONArray jsonArray = new JSONArray();
+                    JSONObject jsonObj;
+                    try {
+                    if(markData.size()>0){
+
+                    for (MarkImgInfo mInfo : markData) {
+                        jsonObj = new JSONObject();
+                            jsonObj.put("MARK", mInfo.getMARK());
+                            jsonObj.put("SOURCE", mInfo.getSOURCE());
+                            jsonObj.put("CREATE_DATE", mInfo.getCREATE_DATE());
+                            jsonObj.put("SFZ", mInfo.getSFZ());
+                            jsonObj.put("GPS", mInfo.getGPS());
+                            jsonArray.put(jsonObj);
+                    }
+                    }else {
+                        jsonObj = new JSONObject();
+                               jsonObj.put("ID", "-1");
+                                jsonObj.put("SFZ", personInfo.getSFZ());
+                                markData.clear();
+                        jsonArray.put(jsonObj);
+                    }
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    upLoadUrl = MyOkHttpUtils.BaseUrl + "/Json/Set_Tb_Mark.aspx";
+                  //  Log.e("2017-9-13", "上传的数据==" + jsonArray);
+                    Response response=MyOkHttpUtils.okHttpPersonRePost(upLoadUrl,jsonArray.toString());
+                    Message msg=Message.obtain();
+
+
+                    if(response.isSuccessful()){
+
+
+                        try {
+                            msg.obj=response.body().string();
+                            msg.what=SUCCEED_MARKIMG_UPLOAD;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }else{
+
+
+                        msg.what=PROBLEM;
+                    }
+
+                    mHandler.sendMessage(msg);
+
+                }
+
+
+            }
+        }).start();
+    }
+
+    //维护标识的添加保存
+    //http://web.youli.pw:89/Json/Set_TB_Staff_Mark_Type.aspx?name=123
+    private void addWhMark(String sign, final String name){
+
+        new Thread(
+
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        String urlAdd=MyOkHttpUtils.BaseUrl+"/Json/Set_TB_Staff_Mark_Type.aspx";
+
+                        Response response=MyOkHttpUtils.okHttpWhMarkAddPost(urlAdd,name);
+                        Message msg=Message.obtain();
+
+
+                        if(response.isSuccessful()){
+
+                            try {
+                                msg.obj=response.body().string();
+                                msg.what=SUCCEED_MARK_WH_ADD;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }else{
+
+                            msg.what=PROBLEM;
+
+                        }
+
+                        mHandler.sendMessage(msg);
+
+                    }
+                }
+
+        ).start();
+
+
+
+
+
     }
 
 }

@@ -17,6 +17,8 @@ public class MarkImgInfo {
     private String SOURCE;
     private String GPS;
 
+    public MarkImgInfo(){}
+
     public MarkImgInfo(String MARK, int ID,String CREATE_DATE, String GPS,  String SFZ, String SOURCE) {
         this.CREATE_DATE = CREATE_DATE;
         this.GPS = GPS;
@@ -74,30 +76,15 @@ public class MarkImgInfo {
         this.SOURCE = SOURCE;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//
-//        if(this.getID()==((MarkImgInfo)o).getID()&&TextUtils.equals(this.getSFZ(),((MarkImgInfo)o).getSFZ())
-//                &&TextUtils.equals(this.getMARK(),((MarkImgInfo)o).getMARK())
-//                &&TextUtils.equals(this.getCREATE_DATE(),((MarkImgInfo)o).getCREATE_DATE())
-//                &&TextUtils.equals(this.getSOURCE(),((MarkImgInfo)o).getSOURCE())
-//                &&TextUtils.equals(this.getGPS(),((MarkImgInfo)o).getGPS())){
-//
-//
-//            return true;
-//        }
-//        return false;
-//    }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if(TextUtils.equals(this.SEATNO,((SeatsInfo)o).SEATNO)&&TextUtils.equals(this.PATIENTNAME,((SeatsInfo)o).PATIENTNAME)&&TextUtils.equals(this.PATIENTID,((SeatsInfo)o).PATIENTID)
-//                &&TextUtils.equals(this.CARDNO,((SeatsInfo)o).CARDNO)&&TextUtils.equals(this.AGE, ((SeatsInfo)o).AGE)){
-//            return true;
-//        }
-//
-//        return false;
-//    }
-
-
+    @Override
+    public String toString() {
+        return "MarkImgInfo{" +
+                "CREATE_DATE='" + CREATE_DATE + '\'' +
+                ", ID=" + ID +
+                ", SFZ='" + SFZ + '\'' +
+                ", MARK='" + MARK + '\'' +
+                ", SOURCE='" + SOURCE + '\'' +
+                ", GPS='" + GPS + '\'' +
+                '}';
+    }
 }

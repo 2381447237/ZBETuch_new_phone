@@ -102,6 +102,13 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
 
                     markImgData.addAll((List<MarkImgInfo>)msg.obj);
 
+                    yjbyshIv.setVisibility(View.GONE);
+                    qhryIv.setVisibility(View.GONE);
+                    xjryIv.setVisibility(View.GONE);
+                    jdryIv.setVisibility(View.GONE);
+                    wjyjIv.setVisibility(View.GONE);
+                    jyknIv.setVisibility(View.GONE);
+
                     for(MarkImgInfo info:markImgData){
 
                         if(TextUtils.equals(info.getMARK(),"应届毕业生")){

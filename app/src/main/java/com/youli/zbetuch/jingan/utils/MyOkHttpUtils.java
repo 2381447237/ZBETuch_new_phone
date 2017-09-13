@@ -273,27 +273,28 @@ return response;
 
     }
 
+    //维护标识的添加
+    public static Response okHttpWhMarkAddPost(String url,String name){
 
-//    public  static Response okHttpPostEduInfo(String url,String json){
-//
-//        getInstance();
-//        String cookies=SharedPreferencesUtils.getString("cookies");
-//        RequestBody requestBody=new FormBody.Builder().add("json",json).build();
-//
-//        Log.e("2017/9/5","requestBody=="+requestBody);
-//
-//        Request request=new Request.Builder().url(url).post(requestBody)
-//                .addHeader("cookie",cookies).build();
-//
-//        Response response;
-//
-//        try {
-//            response=okHttpClient.newCall(request).execute();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//        return response;
-//    }
+        getInstance();
+        String cookies=SharedPreferencesUtils.getString("cookies");
 
+
+        RequestBody requestBody=new FormBody.Builder().add("name",name).build();
+
+        Request request=new Request.Builder().url(url).post(requestBody)
+                .addHeader("cookie",cookies).build();
+
+        Response response;
+
+        try {
+            response=okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return response;
+
+
+    }
 }
