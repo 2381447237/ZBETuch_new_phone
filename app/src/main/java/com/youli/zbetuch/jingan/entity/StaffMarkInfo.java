@@ -19,6 +19,9 @@ public class StaffMarkInfo {
     private int RecordCount;
     private String Type_Name;//显示这个
 
+    public StaffMarkInfo() {
+    }
+
     public StaffMarkInfo(String type_Name, String CREATE_DATE) {
         Type_Name = type_Name;
         this.CREATE_DATE = CREATE_DATE;

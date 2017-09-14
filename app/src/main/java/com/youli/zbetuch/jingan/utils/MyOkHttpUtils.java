@@ -18,6 +18,7 @@ import okhttp3.Response;
 public class MyOkHttpUtils {
 
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
+    public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
     public static final String BaseUrl="http://web.youli.pw:89";
     private static final String TAG = "asdasdasd";
     static OkHttpClient okHttpClient = null;
@@ -251,7 +252,7 @@ return response;
         okHttpClient.newCall(request).enqueue(callback);
     }
 
-    //提交个人简历信息
+    //提交个人简历信息上传
     public static Response okHttpPersonRePost(String url,String data){
 
         getInstance();
@@ -259,6 +260,28 @@ return response;
         RequestBody requestBody = RequestBody.create(JSON, data);
 
                 Request request=new Request.Builder().url(url).post(requestBody)
+                .addHeader("cookie",cookies).build();
+
+        Response response;
+
+        try {
+            response=okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return response;
+
+    }
+
+    //提交专项标识的上传
+    public static Response okHttpZxMarkPost(String url,String data){
+
+        getInstance();
+        String cookies=SharedPreferencesUtils.getString("cookies");
+        RequestBody requestBody = RequestBody.create(MEDIA_TYPE_MARKDOWN, data.getBytes());
+
+        Request request=new Request.Builder().url(url).post(requestBody)
                 .addHeader("cookie",cookies).build();
 
         Response response;
@@ -297,4 +320,50 @@ return response;
 
 
     }
+
+    //维护标识的删除
+    public static Response okHttpWhMarkDelPost(String url,String id){
+
+        getInstance();
+        String cookies=SharedPreferencesUtils.getString("cookies");
+
+        RequestBody requestBody=new FormBody.Builder().add("id",id).add("del","true").build();
+
+        Request request=new Request.Builder().url(url).post(requestBody).addHeader("cookie",cookies).build();
+
+        Response response;
+
+        try {
+            response=okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return response;
+    }
+
+    //维护标识的修改
+    public static Response okHttpWhMarkModifyPost(String url,String id,String name){
+
+        getInstance();
+        String cookies=SharedPreferencesUtils.getString("cookies");
+
+        RequestBody requestBody=new FormBody.Builder().add("id",id).add("name",name).build();
+
+        Request request=new Request.Builder().url(url).post(requestBody).addHeader("cookie",cookies).build();
+
+        Response response;
+
+        try {
+            response=okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return response;
+    }
+
+
 }

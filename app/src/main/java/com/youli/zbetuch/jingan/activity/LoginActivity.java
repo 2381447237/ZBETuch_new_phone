@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.utils.GetManifestInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
@@ -97,6 +96,7 @@ switch (msg.what){
         tv_dialog_app_version.setText(GetManifestInfo.getVersionName(this));
         AlertDialog dialog = builder.create();
         dialog.show();
+
     }
 
     @Override

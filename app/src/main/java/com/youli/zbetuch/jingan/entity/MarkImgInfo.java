@@ -2,6 +2,8 @@ package com.youli.zbetuch.jingan.entity;
 
 import android.text.TextUtils;
 
+import java.io.Serializable;
+
 /**
  * Created by liutao on 2017/8/22.
  */

@@ -1,5 +1,7 @@
 package com.youli.zbetuch.jingan.utils;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,10 +38,15 @@ public class MyDateUtils {
     //将字符串日期格式化 年月日
     public static String stringToYMD(String myDate){
 
+        if(myDate==null){
+            return null;
+        }
+
         sdf=new SimpleDateFormat("yyyy-MM-dd");
 
-        myDate=myDate.replace("T"," ");
-
+        if(myDate.indexOf("T")!=-1) {
+            myDate = myDate.replace("T", " ");
+        }
         try {
             date=sdf.parse(myDate);
 
