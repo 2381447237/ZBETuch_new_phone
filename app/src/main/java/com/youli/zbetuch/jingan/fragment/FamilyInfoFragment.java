@@ -305,12 +305,15 @@ public class FamilyInfoFragment extends Fragment {
 
                                             final Bitmap bitmap=bmp;
 
-                                            getActivity().runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    head.setImageBitmap(bitmap);
-                                                }
-                                            });
+                                            if(getActivity()!=null) {
+
+                                                getActivity().runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        head.setImageBitmap(bitmap);
+                                                    }
+                                                });
+                                            }
                                         }else{
                                             headUrl=MyOkHttpUtils.BaseUrl+"/"+item.getGetPhotoUrl();
                                             url=new URL(headUrl);

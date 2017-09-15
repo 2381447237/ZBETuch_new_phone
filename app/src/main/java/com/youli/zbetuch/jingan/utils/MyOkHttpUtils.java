@@ -1,11 +1,13 @@
 package com.youli.zbetuch.jingan.utils;
 
 
+import android.util.Base64;
 import android.util.Log;
 
 import org.json.JSONTokener;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -275,12 +277,12 @@ return response;
     }
 
     //提交专项标识的上传
-    public static Response okHttpZxMarkPost(String url,String data){
+    public static Response okHttpZxMarkPost(String url,byte [] data){
 
         getInstance();
         String cookies=SharedPreferencesUtils.getString("cookies");
-        RequestBody requestBody = RequestBody.create(MEDIA_TYPE_MARKDOWN, data.getBytes());
-
+        String str = Base64.encodeToString(data, Base64.DEFAULT);//这句话不能少
+        RequestBody requestBody=RequestBody.create(null,str.getBytes());
         Request request=new Request.Builder().url(url).post(requestBody)
                 .addHeader("cookie",cookies).build();
 
@@ -290,8 +292,10 @@ return response;
             response=okHttpClient.newCall(request).execute();
         } catch (IOException e) {
             e.printStackTrace();
+
             return null;
         }
+
         return response;
 
     }

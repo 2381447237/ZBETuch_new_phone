@@ -191,16 +191,25 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                           }
                       }
 
-                    ////专项标识
+                    //专项标识
                     getNetDatas("mark",-1);
 
                     break;
 
                 case SUCCEED_MARK://专项标识
 
+
                     markLl.removeAllViews();
+
                     zxMarkData.clear();
                     zxMarkData.addAll(( List<StaffMarkInfo>)msg.obj);
+
+
+//                    if(markZxAdapter!=null){
+//                        zxMarkDataDialog.clear();
+//                        zxMarkDataDialog.addAll((List<StaffMarkInfo>)zxMarkData);
+//                        markZxAdapter.notifyDataSetChanged();
+//                    }
 
                     for(StaffMarkInfo info : zxMarkData) {
 
@@ -228,16 +237,13 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
                     zxMarkWhData.clear();
 
-                       // zxMarkWhData.add(0,new WhMarkInfo("请选择"));
-
                     zxMarkWhData.addAll((List<WhMarkInfo>)(msg.obj));
 
                     if(msg.arg1==10000){
                         showEditDialog("zxMark");
-//                    }else if(msg.arg1==-1){
-//                        if(TextUtils.equals(zxMarkWhData.get(0).getNAME(),"请选择")){
-//                            zxMarkWhData.remove(0);
-//                        }
+//                    }else if(msg.arg1==20000){
+//                        //专项标识
+//                        getNetDatas("mark",-1);
                     }
 
 
@@ -249,7 +255,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                     if(TextUtils.equals("True",(String)msg.obj)){
                         Toast.makeText(mContext,"操作成功!",Toast.LENGTH_SHORT).show();
                         whDialog.dismiss();
-                        getNetDatas("whMarkInfo",20000);
+                      //  getNetDatas("whMarkInfo",20000);
                     }
 
                     break;
@@ -259,7 +265,8 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                     if(TextUtils.equals("True",(String)msg.obj)){
                         Toast.makeText(mContext,"操作成功!",Toast.LENGTH_SHORT).show();
                         whDialog.dismiss();
-                        getNetDatas("whMarkInfo",20000);
+
+                       // getNetDatas("whMarkInfo",20000);
                     }
 
                     break;
@@ -269,7 +276,8 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                     if(TextUtils.equals("True",(String)msg.obj)){
                         Toast.makeText(mContext,"操作成功!",Toast.LENGTH_SHORT).show();
                         whDialog.dismiss();
-                        getNetDatas("whMarkInfo",20000);
+
+                       // getNetDatas("whMarkInfo",20000);
                     }
 
 
@@ -499,10 +507,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                             }
 
                         }else{
-
                             msg.what=PROBLEM;
-
-
                         }
                         mHandler.sendMessage(msg);
                     }
@@ -1071,7 +1076,9 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
         }else if(TextUtils.equals(sign,"zxMark")){//删除专项标识
 
-            Toast.makeText(mContext,"删除专项标识第"+position+"个",Toast.LENGTH_SHORT).show();
+            zxMarkDataDialog.remove(position);
+
+            markZxAdapter.notifyDataSetChanged();
         }
 
     }
@@ -1208,9 +1215,9 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                                 jsonArray.put(jsonObj);
                             }
                         }else {
-                            jsonObj = new JSONObject();
+                           // jsonObj = new JSONObject();
                             zxMarkDataDialog.clear();
-                            jsonArray.put(jsonObj);
+                          //  jsonArray.put(null);
                         }
 
 
@@ -1223,18 +1230,14 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
 
                     upLoadUrl = MyOkHttpUtils.BaseUrl + "/Json/Set_TB_Staff_Marks.aspx";
 
-                    Log.e("2017-9-13", "上传的路径==" + upLoadUrl);
-                     Log.e("2017-9-13", "上传的数据==" + jsonArray);
-                    Response response=MyOkHttpUtils.okHttpZxMarkPost(upLoadUrl,jsonArray.toString());这里要上传数据流还有问题
+                Log.e("2017-9-13", "上传的json==" +jsonArray);
+
+                byte [] upLoadStream=jsonArray.toString().getBytes();
+
+                     Log.e("2017-9-13", "上传的数据==" + upLoadStream);
+                    Response response=MyOkHttpUtils.okHttpZxMarkPost(upLoadUrl,upLoadStream);//这里要上传数据流还有问题
                     Message msg=Message.obtain();
 
-
-                try {
-                    Log.e("2017/9/14","响应=="+response.body().string());
-                    return;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
                 if(response.isSuccessful()){
 
