@@ -53,22 +53,39 @@ public class FunctionListActivity extends BaseActivity{
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent intent;
+
                     switch (finalI) {//判断哪一个 GridView
+
+
+
                         case 0:
                             switch (position) {//判断哪一个item
+
+
                                 case 0:
-                                    Intent intent = new Intent(FunctionListActivity.this,
+                                    intent = new Intent(FunctionListActivity.this,
                                             PersonalInfoQuery.class);
                                     startActivity(intent);
                                     break;
                                 case 1:
-                                    Intent intent1 = new Intent(mContext,
+                                    intent = new Intent(mContext,
                                             RecruitInfoActivity.class);
-                                    startActivity(intent1);
+                                    startActivity(intent);
+                                    break;
+                                case 2:
+                                   intent = new Intent(mContext,
+                                            ReportActivity.class);
+                                    startActivity(intent);
                                     break;
                                 case 4:
-                                    Intent intent2=new Intent(mContext,ZiyuandiaochaActivity.class);
-                                    startActivity(intent2);
+                                    intent=new Intent(mContext,ZiyuandiaochaActivity.class);
+                                    startActivity(intent);
+                                    break;
+                                case 5:
+                                    intent=new Intent(mContext,InterviewActivity.class);
+                                    startActivity(intent);
                                     break;
 //                                default:
 //                                    Toast.makeText(FunctionListActivity.this, "当前点击第" + finalI
@@ -76,22 +93,25 @@ public class FunctionListActivity extends BaseActivity{
 //                                    break;
                             }
                             break;
-//                        case 1:
-//                            switch (position) {
-//                                default:
-//                                    Toast.makeText(FunctionListActivity.this, "当前点击第" + finalI
-//                                            + "页第" + position + "个", Toast.LENGTH_SHORT).show();
-//                                    break;
-//                            }
-//                            break;
-//                        case 2:
-//                            switch (position) {
-//                                default:
-//                                    Toast.makeText(FunctionListActivity.this, "当前点击第" + finalI
-//                                            + "页第" + position + "个", Toast.LENGTH_SHORT).show();
-//                                    break;
-//                            }
- //                           break;
+                        case 1:
+                            switch (position) {
+                                case 9:
+                                    //关注列表
+                                    intent=new Intent(FunctionListActivity.this,FollowListActivity.class);
+                                    startActivity(intent);
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            switch (position) {
+                                case 0:
+                                    //修改密码
+                                    intent=new Intent(FunctionListActivity.this,ChangePwdActivity.class);
+                                    startActivity(intent);
+
+                                    break;
+                            }
+                            break;
                     }
                 }
             });

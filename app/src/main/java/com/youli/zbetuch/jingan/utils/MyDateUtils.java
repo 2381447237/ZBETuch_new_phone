@@ -1,5 +1,6 @@
 package com.youli.zbetuch.jingan.utils;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -21,6 +22,13 @@ public class MyDateUtils {
 
         sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+        if(myDate==null){
+            return null;
+        }
+
+        if(myDate.indexOf("T")==-1){
+            return null;
+        }
         myDate=myDate.replace("T"," ");
 
         try {

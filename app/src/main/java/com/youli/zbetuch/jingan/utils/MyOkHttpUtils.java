@@ -22,6 +22,7 @@ public class MyOkHttpUtils {
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
     public static final String BaseUrl="http://web.youli.pw:89";
+  //  public static final String BaseUrl="http://192.168.4.11:89";
     private static final String TAG = "asdasdasd";
     static OkHttpClient okHttpClient = null;
 

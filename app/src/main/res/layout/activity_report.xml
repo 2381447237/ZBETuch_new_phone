@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/detail_title_bg">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wz"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/bjt">
+
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="报表日期：2017/4/6"
+            android:textColor="#ffffff"/>
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+                    <ImageView
+                 android:id="@+id/iv_report_street1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/street1"
+                        android:paddingRight="5dp"
+                       />
+
+            <ImageView
+                android:id="@+id/iv_report_committee1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/committee1"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"/>
+
+            <ImageView
+                android:id="@+id/iv_report_age1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/age1"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"/>
+
+            <ImageView
+                android:id="@+id/iv_report_sex1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sex1"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"/>
+
+            <ImageView
+                android:id="@+id/iv_report_degree1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/degree1"
+                android:paddingLeft="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_report_street2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/street2"
+                android:paddingRight="5dp"
+                />
+
+            <ImageView
+                android:id="@+id/iv_report_committee2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/committee2"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"/>
+
+            <ImageView
+                android:id="@+id/iv_report_age2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/age2"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"/>
+
+            <ImageView
+                android:id="@+id/iv_report_sex2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sex2"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"/>
+
+            <ImageView
+                android:id="@+id/iv_report_degree2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/degree2"
+                android:paddingLeft="5dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

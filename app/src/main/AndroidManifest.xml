@@ -33,7 +33,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask"
-           >
+            android:screenOrientation="portrait"  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -41,56 +41,66 @@
         </activity>
 
         <activity android:name=".activity.MainLayoutActivity"
-            >
+            android:screenOrientation="portrait">
 
         </activity>
 
         <activity android:name=".activity.FunctionListActivity"
-            ></activity>
+            android:screenOrientation="portrait" ></activity>
 
         <activity android:name=".activity.ZiyuandiaochaActivity"
-           ></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ZiyuanDetailListActivity"
             android:windowSoftInputMode="stateHidden"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.ShiwuyeDetailActivity"
-            >
+            android:screenOrientation="portrait" >
 
         </activity>
         <activity android:name=".activity.PersonInfoActivity"
-            >
+            android:screenOrientation="portrait" >
         </activity>
         <activity android:name=".activity.PersonalInfoQuery"
-           ></activity>
+            android:screenOrientation="portrait" ></activity>
         <activity android:name=".activity.PersonalInfoQueryResult"
-           ></activity>
+            android:screenOrientation="portrait"></activity>
 
         <activity android:name=".activity.RecruitInfoActivity"
             android:windowSoftInputMode="stateHidden"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
 
         <activity android:name=".activity.JobInfoListActivity"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.JobInfoDetailActivity"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.PersonBaseInfoActivity"
             android:windowSoftInputMode="stateHidden"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.PersonReActivity"
             android:windowSoftInputMode="stateHidden"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.PersonEduActivity"
-            ></activity>
+            android:screenOrientation="portrait" ></activity>
         <activity android:name=".activity.RecentNewsActivity"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.WorkNoticeActivity"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.WorkNoticeDetailActivity"
-            ></activity>
+            android:screenOrientation="portrait" ></activity>
         <activity android:name=".activity.MeetNoticeActivity"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.MeetDetailActivity"
-            ></activity>
+            android:screenOrientation="portrait"></activity>
+<activity android:name=".activity.ChangePwdActivity"
+    android:screenOrientation="portrait"></activity><!--修改密码-->
+
+        <activity android:name=".activity.ReportActivity"
+            android:screenOrientation="portrait"></activity><!--统计报表-->
+
+        <activity android:name=".activity.InterviewActivity"
+            android:screenOrientation="portrait"></activity><!--现场招聘-->
+        <activity android:name=".activity.FollowListActivity"
+            android:screenOrientation="portrait"></activity><!--关注列表-->
     </application>
 
 </manifest>
