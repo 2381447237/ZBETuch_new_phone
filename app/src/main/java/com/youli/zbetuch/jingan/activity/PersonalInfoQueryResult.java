@@ -104,6 +104,7 @@ public class PersonalInfoQueryResult extends BaseActivity {
     private void initListView() {
         lv_personalInfo = (PullToRefreshListView) findViewById(R.id.lv);
         numTv= (TextView) findViewById(R.id.ziyuan_detail_num_tv);
+        numTv.setText("共有0人");
         lv_personalInfo.setMode(PullToRefreshBase.Mode.BOTH);
 
         //设置下拉刷新内容
@@ -244,13 +245,15 @@ public class PersonalInfoQueryResult extends BaseActivity {
 
         } else {
             Toast.makeText(mContext, "数据异常", Toast.LENGTH_SHORT).show();
-            numTv.setText("没有数据");
+            numTv.setText("共有0人");
         }
 
         if (personalInfoListAdapter != null && isFirst) {
             lv_personalInfo.setAdapter(personalInfoListAdapter);
             if(personalInfoList!=null&&personalInfoList.size()>0) {
                 numTv.setText("共有" + personalInfoList.get(0).getRecordCount() + "人");
+            }else{
+                numTv.setText("共有0人");
             }
             isFirst = false;
         }

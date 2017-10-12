@@ -48,6 +48,8 @@ import okhttp3.Response;
 
 /**
  * Created by ZHengBin on 2017/8/26.
+ *
+ * 教育信息
  */
 
 public class PersonEduActivity extends BaseActivity implements View.OnClickListener{

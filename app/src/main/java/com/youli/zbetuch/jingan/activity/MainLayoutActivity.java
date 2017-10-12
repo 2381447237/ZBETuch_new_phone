@@ -72,8 +72,8 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                 case SUCCEED_NAME:
 
                     nameTv.setText(((GetStaffInfo)msg.obj).getNAME());
-                    emailTv.setText(((GetStaffInfo)msg.obj).getEMAIL()+"2381447237@qq.com");
-                    phoneTv.setText(((GetStaffInfo)msg.obj).getPHONE()+"13120601125");
+                    emailTv.setText(((GetStaffInfo)msg.obj).getEMAIL());
+                    phoneTv.setText(((GetStaffInfo)msg.obj).getPHONE());
                     adminName=nameTv.getText().toString().trim();
                     adminId=((GetStaffInfo)msg.obj).getID();
                     break;

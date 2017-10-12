@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/firstpage_more_docbackground"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp">
+
+    <TextView
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="工作日志"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:paddingTop="5dp"
+        />
+    <Button
+        android:id="@+id/btn_work_record_new"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="25dp"
+        android:layout_height="33dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/addpendwork" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:background="#50AAFF"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="编号"/>
+
+        <TextView
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="标题"/>
+        <TextView
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="日期"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#0B1EF0"/>
+
+        <ListView
+            android:id="@+id/lv_work_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+    </LinearLayout>
+</LinearLayout>

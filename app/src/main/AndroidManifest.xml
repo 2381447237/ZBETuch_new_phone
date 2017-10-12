@@ -80,7 +80,7 @@
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.PersonEduActivity"
-            android:screenOrientation="portrait" ></activity>
+            android:screenOrientation="portrait" ></activity><!--教育信息-->
         <activity android:name=".activity.RecentNewsActivity"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.WorkNoticeActivity"
@@ -98,9 +98,23 @@
             android:screenOrientation="portrait"></activity><!--统计报表-->
 
         <activity android:name=".activity.InterviewActivity"
-            android:screenOrientation="portrait"></activity><!--现场招聘-->
+            android:screenOrientation="portrait"></activity><!--现场面试-->
         <activity android:name=".activity.FollowListActivity"
             android:screenOrientation="portrait"></activity><!--关注列表-->
+        <activity android:name=".activity.WorkRecordActivity"
+            android:screenOrientation="portrait"></activity><!--工作日志-->
+        <activity android:name=".activity.GraduateActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity><!--应届毕业生-->
+        <activity android:name=".activity.InterviewDetailsActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.GeRenRecomActivity"
+            android:screenOrientation="portrait"></activity><!--个人推荐-->
+        <activity android:name=".activity.RecomListActivity"
+            android:screenOrientation="portrait"></activity><!--推荐列表-->
+        <activity android:name=".activity.GradConQueryActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity><!--应届毕业生里面的条件查询界面-->
     </application>
 
 </manifest>

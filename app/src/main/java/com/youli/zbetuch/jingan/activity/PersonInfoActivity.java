@@ -106,7 +106,7 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_info);
 
-        personInfo=(PersonInfo)getIntent().getSerializableExtra("personInfos");//从ShiwuyeDetailActivity传过来的//从PersonalInfoQueryResult传过来的
+        personInfo=(PersonInfo)getIntent().getSerializableExtra("personInfos");//从ShiwuyeDetailActivity传过来的//从PersonalInfoQueryResult传过来的//从RecomListActivity传过来的//从FollowListActivity传过来的
         if(mFragments==null) {
 
             initData();

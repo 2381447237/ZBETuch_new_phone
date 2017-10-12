@@ -49,6 +49,10 @@
                     android:text="请输入原密码："/>
 
                 <EditText
+                    android:ems="20"
+                    android:singleLine="true"
+                    android:inputType="textFilter"
+                    android:id="@+id/et_change_pwd_original"
                     android:layout_marginLeft="5dp"
                     android:paddingLeft="3dp"
                     android:paddingBottom="2dp"
@@ -74,6 +78,10 @@
                     android:text="请输入新密码："/>
 
                 <EditText
+                    android:ems="20"
+                    android:singleLine="true"
+                    android:inputType="textFilter"
+                    android:id="@+id/et_change_pwd_new"
                     android:layout_marginLeft="5dp"
                     android:paddingLeft="3dp"
                     android:paddingBottom="2dp"
@@ -98,6 +106,10 @@
                     android:text="请确认新密码："/>
 
                 <EditText
+                    android:ems="20"
+                    android:singleLine="true"
+                    android:inputType="textFilter"
+                    android:id="@+id/et_change_pwd_new_again"
                     android:layout_marginLeft="5dp"
                     android:paddingLeft="3dp"
                     android:paddingBottom="2dp"

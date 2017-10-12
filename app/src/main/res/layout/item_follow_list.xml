@@ -6,26 +6,28 @@
     android:id="@+id/ll_item_follow_list">
 
     <TextView
+        android:layout_weight="0.8"
         android:textStyle="bold"
         android:id="@+id/tv_item_follow_list_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="姓名"/>
+        />
 
     <TextView
         android:textStyle="bold"
         android:gravity="center"
         android:id="@+id/tv_item_follow_list_idcard"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_height="wrap_content"
-        android:text="123456789098765432"/>
+        />
 
     <Button
         android:id="@+id/btn_item_follow_list_details"
         android:layout_marginRight="5dp"
         android:background="@drawable/button_selector"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="0.8"
         android:layout_height="35dp"
         android:text="查看详情"/>
 
@@ -33,7 +35,8 @@
         android:id="@+id/btn_item_follow_list_follow"
         android:layout_marginLeft="5dp"
         android:background="@drawable/button_selector"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="0.8"
         android:layout_height="35dp"
         android:text="取消关注"/>
 

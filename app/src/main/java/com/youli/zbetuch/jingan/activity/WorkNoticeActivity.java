@@ -101,7 +101,9 @@ public class WorkNoticeActivity extends BaseActivity implements AdapterView.OnIt
                 case PROBLEM:
 
                     Toast.makeText(mContext,"网络不给力", Toast.LENGTH_SHORT).show();
-
+                    if(ptrLv.isRefreshing()){
+                        ptrLv.onRefreshComplete();
+                    }
                     break;
             }
 

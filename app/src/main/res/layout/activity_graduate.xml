@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/detail_title_bg">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wz"/>
+
+        <TextView
+            android:id="@+id/tv_graduate_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            android:text="共有50人"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="身份证："
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:singleLine="true"
+            android:id="@+id/ziyuan_detail_et"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:padding="2dp"
+            android:background="@drawable/shape_ziyuan_detail_et"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="姓名："
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:singleLine="true"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:padding="2dp"
+            android:background="@drawable/shape_ziyuan_detail_et"
+            />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="年度："
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:layout_marginRight="5dp"
+            android:singleLine="true"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:padding="2dp"
+            android:background="@drawable/shape_ziyuan_detail_et"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
+        <Button
+            android:id="@+id/btn_graduate_find"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_selector"
+            android:text="查询"
+            android:textSize="15sp"/>
+
+        <Button
+            android:id="@+id/btn_graduate_condition_find"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_selector"
+            android:text="条件查询"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/title2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="编号"
+            />
+
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="姓 名" />
+
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="性 别" />
+
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="4.5"
+            android:gravity="center"
+            android:text="身份证" />
+
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="2.5"
+            android:gravity="center"
+            android:text="联系电话"
+            />
+
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_graduate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+</LinearLayout>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="20sp"
+            android:id="@+id/tv_interview_details_name"
+            android:background="@drawable/title2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"/>
+            <Button
+                android:textSize="12sp"
+                android:id="@+id/btn_interview_detail_isread"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/mybutton"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:padding="5dp"
+            android:background="@drawable/bule"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间："/>
+
+            <TextView
+                android:textSize="20sp"
+                android:id="@+id/tv_interview_details_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:padding="5dp"
+            android:background="@drawable/bule"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单位数量："/>
+
+            <TextView
+                android:textSize="20sp"
+                android:id="@+id/tv_interview_details_company_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="岗位数量："/>
+
+            <TextView
+                android:textSize="20sp"
+                android:id="@+id/tv_interview_details_post_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:padding="5dp"
+            android:background="@drawable/bule"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地址："/>
+
+            <TextView
+                android:textSize="20sp"
+                android:id="@+id/tv_interview_details_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/title2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+          android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="单位名称"
+            />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="岗位名称"
+            />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="学历"
+            />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="年龄"
+            />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="招聘人数"
+            />
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="月薪"
+            />
+
+    </LinearLayout>
+    </LinearLayout>
+        <!--<ListView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/lv_interview_details"></ListView>-->
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#ffffff"
+        android:id="@+id/lv_interview_details"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#000000"
+        android:divider="#19000000"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="true"
+        android:smoothScrollbar="true"
+        ptr:ptrAnimationStyle="rotate"
+        >
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+
+</LinearLayout>

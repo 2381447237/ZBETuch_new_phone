@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:id="@+id/item_graduate_ll">
+
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/tv_item_graduate_no"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/tv_item_graduate_name"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/tv_item_graduate_sex"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/tv_item_graduate_idcard"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="4.5"
+        android:gravity="center"
+         />
+
+    <TextView
+        android:singleLine="true"
+        android:id="@+id/tv_item_graduate_phone"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="2.5"
+        android:gravity="center"
+
+        />
+
+
+</LinearLayout>

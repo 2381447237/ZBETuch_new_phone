@@ -8,6 +8,8 @@ import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
 
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -19,6 +21,7 @@ import okhttp3.Response;
 
 public class MyOkHttpUtils {
 
+    private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");//mdiatype 这个需要和服务端保持一致
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
     public static final String BaseUrl="http://web.youli.pw:89";
@@ -370,5 +373,40 @@ return response;
         return response;
     }
 
+         //修改密码http://web.youli.pw:89/Json/Set_Pwd.aspx?pwd=123&new_pwd=321
+    public static Response okHttpPostFormBody(String url, HashMap<String,String> data){
 
+        try {
+        //处理参数
+        StringBuilder tempParams = new StringBuilder();
+        int pos = 0;
+        for (String key : data.keySet()) {
+            if (pos > 0) {
+                tempParams.append("&");
+            }
+            tempParams.append(String.format("%s=%s", key, URLEncoder.encode(data.get(key), "utf-8")));
+            pos++;
+        }
+
+        getInstance();
+        String cookies=SharedPreferencesUtils.getString("cookies");
+
+            //生成参数
+            String params = tempParams.toString();
+
+            //创建一个请求实体对象 RequestBody
+            RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, params);
+
+            Request request=new Request.Builder().url(url).post(body).addHeader("cookie",cookies).build();
+
+            Response response;
+
+            response=okHttpClient.newCall(request).execute();
+            return response;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }

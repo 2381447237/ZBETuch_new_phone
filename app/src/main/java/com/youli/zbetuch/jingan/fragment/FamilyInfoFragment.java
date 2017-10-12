@@ -300,7 +300,6 @@ public class FamilyInfoFragment extends Fragment {
                                         BitmapFactory.Options options = new BitmapFactory.Options();
                                         options.inSampleSize = 2;//图片大小，设置越大，图片越不清晰，占用空间越小
                                      Bitmap bmp=BitmapFactory.decodeStream(is,null,options);
-                                        //Log.e("2017/9/8","图片大小上上上=="+bmp.getByteCount());
                                         if(bmp!=null) {
 
                                             final Bitmap bitmap=bmp;
@@ -320,12 +319,15 @@ public class FamilyInfoFragment extends Fragment {
                                             is=url.openStream();
                                             bmp=BitmapFactory.decodeStream(is,null,options);
                                             final Bitmap nullBmp=bmp;
-                                            getActivity().runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    head.setImageBitmap(nullBmp);
-                                                }
-                                            });
+                                            if(getActivity()!=null){
+                                                getActivity().runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        head.setImageBitmap(nullBmp);
+                                                    }
+                                                });
+                                            }
+
                                         }
 
                                 } catch (IOException e) {

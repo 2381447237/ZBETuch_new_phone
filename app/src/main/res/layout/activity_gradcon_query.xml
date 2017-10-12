@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/detail_title_bg">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wz"/>
+
+        <Button
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/btn_gradcon_query_find"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_selector"
+            android:text="查询"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="街        道："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="居        委："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="性        别："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="年        龄："/>
+
+                <LinearLayout
+                    android:layout_marginRight="5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:singleLine="true"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:textSize="15sp"
+                        android:padding="2dp"
+                        android:background="@drawable/shape_ziyuan_detail_et"
+                        />
+
+                    <TextView
+                        android:textSize="13sp"
+                        android:paddingRight="5dp"
+                        android:paddingLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="至"/>
+
+                    <EditText
+
+                        android:singleLine="true"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:textSize="15sp"
+                        android:padding="2dp"
+                        android:background="@drawable/shape_ziyuan_detail_et"
+                        />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="文化程度："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="特殊情况："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="企业类型："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="行业类别："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="岗位类别："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="税后薪资："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="人员基本情况："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="人员基本情况："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="是否职业指导："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="是否推荐就业岗位："/>
+
+                <EditText
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

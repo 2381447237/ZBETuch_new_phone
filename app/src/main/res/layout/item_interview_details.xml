@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:id="@+id/item_interview_details_ll">
+
+    <TextView
+         android:id="@+id/tv_item_interview_details_cname"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:singleLine="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_interview_details_jname"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:singleLine="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_interview_details_edu"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:singleLine="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_interview_details_age"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:singleLine="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_interview_details_num"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:singleLine="true"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_interview_details_salary"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:singleLine="true"
+        />
+
+</LinearLayout>

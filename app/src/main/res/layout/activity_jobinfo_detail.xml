@@ -86,8 +86,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
-
             <TextView
                 android:paddingRight="2dp"
                 android:layout_width="wrap_content"
@@ -414,7 +412,8 @@
             </ScrollView>
 
             <ScrollView
-                android:layout_margin="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:background="#AFCEEB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

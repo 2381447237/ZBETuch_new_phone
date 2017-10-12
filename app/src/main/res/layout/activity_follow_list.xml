@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/tools">
 
 
     <LinearLayout
@@ -38,9 +39,21 @@
     </LinearLayout>
 
 
-    <ListView
+    <!--<ListView-->
+        <!--android:id="@+id/lv_follow_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"></ListView>-->
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_follow_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#000000"
+        android:divider="#19000000"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="true"
+        android:smoothScrollbar="true"
+        ptr:ptrAnimationStyle="rotate"></com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </LinearLayout>

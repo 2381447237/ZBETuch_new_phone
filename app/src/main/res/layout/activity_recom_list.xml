@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    xmlns:ptr="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/detail_title_bg">
+
+        <ImageView
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wz"/>
+
+        <Button
+            android:id="@+id/btn_recom_list_meet_tongji"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/yellow_btn"
+            android:text="招聘会统计" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:background="#50AAFF"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="编号"/>
+
+        <TextView
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="岗位编号"/>
+        <TextView
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="招聘会编号"/>
+        <TextView
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1.1"
+            android:layout_height="wrap_content"
+            android:text="身份证"/>
+        <TextView
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="创建时间"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#0B1EF0"/>
+
+<!--<ListView-->
+    <!--android:id="@+id/lv_recom_list"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"></ListView>-->
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/lv_recom_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#000000"
+        android:divider="#19000000"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="true"
+        android:smoothScrollbar="true"
+        ptr:ptrAnimationStyle="rotate"></com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+</LinearLayout>
