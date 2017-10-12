@@ -84,6 +84,10 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
 
                     markData.addAll(( List<StaffMarkInfo>)msg.obj);
 
+                    if(getActivity()==null){
+                        return;
+                    }
+
                     for(StaffMarkInfo info : markData){
 
                         TextView tv=new TextView(getActivity());

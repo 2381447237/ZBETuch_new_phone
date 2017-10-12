@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:gravity="center"
+        android:padding="5dp"
+        android:background="@drawable/policygroupitem"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_item_shiye_tongji_big_sign"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:src="@drawable/isdengji"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_shiye_tongji_big_name"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_shiye_tongji_big_nan"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+         />
+
+    <TextView
+        android:id="@+id/tv_item_shiye_tongji_big_nv"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_shiye_tongji_big_all"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+
+        />
+    </LinearLayout>
+
+    <com.youli.zbetuch.jingan.view.MyListView
+        android:id="@+id/lv_item_shiye_tongji_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.youli.zbetuch.jingan.view.MyListView>
+
+</LinearLayout>

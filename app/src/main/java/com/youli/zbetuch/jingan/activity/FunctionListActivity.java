@@ -91,6 +91,10 @@ public class FunctionListActivity extends BaseActivity{
                                 case 5:
                                     intent=new Intent(mContext,InterviewActivity.class);
                                     startActivity(intent);
+                                     break;
+                                case 6:
+                                    intent=new Intent(mContext,ShiyeTongjiActivity.class);
+                                    startActivity(intent);
                                     break;
                                 case 7:
                                     intent=new Intent(mContext,WorkRecordActivity.class);

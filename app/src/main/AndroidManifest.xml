@@ -115,6 +115,9 @@
         <activity android:name=".activity.GradConQueryActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity><!--应届毕业生里面的条件查询界面-->
+        <activity android:name=".activity.ShiyeTongjiActivity"
+            android:screenOrientation="portrait"
+            ></activity><!--失业统计-->
     </application>
 
 </manifest>
