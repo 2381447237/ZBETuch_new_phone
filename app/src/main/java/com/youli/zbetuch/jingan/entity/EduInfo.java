@@ -22,6 +22,9 @@ public class EduInfo {
     private int RecordCount;
     private int Type;
 
+    public EduInfo() {
+    }
+
     public int getUPDATE_STAFF() {
         return UPDATE_STAFF;
     }

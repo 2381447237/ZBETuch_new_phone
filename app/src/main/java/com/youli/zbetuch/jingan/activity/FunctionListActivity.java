@@ -100,6 +100,10 @@ public class FunctionListActivity extends BaseActivity{
                                     intent=new Intent(mContext,WorkRecordActivity.class);
                                     startActivity(intent);
                                     break;
+                                case 8:
+                                    intent=new Intent(mContext,PersonDataCenterActivity.class);
+                                    startActivity(intent);
+                                    break;
 //                                default:
 //                                    Toast.makeText(FunctionListActivity.this, "当前点击第" + finalI
 //                                            + "页第" + position + "个", Toast.LENGTH_SHORT).show();

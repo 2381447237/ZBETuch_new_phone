@@ -21,12 +21,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.entity.ChildJobPostInfo;
+import com.youli.zbetuch.jingan.entity.EduInfo;
 import com.youli.zbetuch.jingan.entity.JobInfoListInfo;
 import com.youli.zbetuch.jingan.entity.JobPostInfo;
 import com.youli.zbetuch.jingan.entity.PersonReInfo;
 import com.youli.zbetuch.jingan.entity.RecruitEduInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -165,6 +167,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
                     if(TextUtils.equals("True",(String)msg.obj)){
                         Toast.makeText(mContext,"上传成功",Toast.LENGTH_SHORT).show();
+                        EventBus.getDefault().post(new PersonReInfo());//注意这里post()里面一定要传一个对象，否则就会报错
                     }
 
                     break;
@@ -521,9 +524,6 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                           startSalaryStr=wantSalaryStr.replace("以上","");
                         endSalaryStr="0";
 
-                        Log.e("2017/9/12","startSalaryStr=="+startSalaryStr);
-                        Log.e("2017/9/12","endSalaryStr=="+endSalaryStr);
-
                     }else{
 
                         if(wantSalaryStr.indexOf("-")!=-1){
@@ -679,6 +679,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                            try {
                                msg.obj=response.body().string();
                                msg.what=SUCCESS_UPLOAD;
+
                            } catch (IOException e) {
                                e.printStackTrace();
                            }

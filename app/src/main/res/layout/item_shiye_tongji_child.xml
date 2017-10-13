@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:src="@drawable/isdengji"
+
         />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_width="0dp"
         android:layout_weight="4"
         android:gravity="center"
-        android:text="名称" />
+       />
 
     <TextView
         android:id="@+id/tv_item_shiye_tongji_child_nan"
@@ -28,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="男" />
+         />
 
     <TextView
         android:id="@+id/tv_item_shiye_tongji_child_nv"
@@ -36,7 +36,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="女" />
+        />
 
     <TextView
         android:id="@+id/tv_item_shiye_tongji_child_all"
@@ -44,7 +44,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="总"
+
         />
 
 

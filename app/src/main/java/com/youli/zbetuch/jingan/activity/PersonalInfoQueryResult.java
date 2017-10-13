@@ -128,6 +128,8 @@ public class PersonalInfoQueryResult extends BaseActivity {
                 if(url_suffix!=null) {
                     refreshUrl = MyOkHttpUtils.BaseUrl + "/Json/Get_BASIC_INFORMATION" +
                             ".aspx?page=0&rows=15" + url_suffix;
+
+
                 }else if(jobId!=0){
                     refreshUrl=MyOkHttpUtils.BaseUrl+"/Json/GetSeekersInfo.aspx?JobId="+jobId+"&PageRecCnts=15";
                 }
@@ -212,6 +214,9 @@ public class PersonalInfoQueryResult extends BaseActivity {
             url= MyOkHttpUtils.BaseUrl + "/Json/Get_BASIC_INFORMATION.aspx?" +
                     "page=0&rows=" +
                     index + url_suffix;
+
+            Log.e("2017/10/13","url=="+url);
+
         }else if(jobId!=0){
             url= MyOkHttpUtils.BaseUrl+"/Json/GetSeekersInfo.aspx?JobId="+jobId+"&PageRecCnts=15";
         }

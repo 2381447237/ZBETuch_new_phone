@@ -29,6 +29,10 @@ import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.EduInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +59,7 @@ public class EduInfoFragment extends Fragment{
 
     private  View contentView;
     private ListView lv;
+    private EduInfo info=null;
     private List<EduInfo> data=new ArrayList<>();
     private CommonAdapter adapter;
 
@@ -69,6 +74,7 @@ public class EduInfoFragment extends Fragment{
 
                 case SUCCESS:
 
+                    data.clear();
                     data.addAll((List<EduInfo>)msg.obj);
 
                     setLvAdapter(data);
@@ -85,27 +91,33 @@ public class EduInfoFragment extends Fragment{
         }
     };
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         contentView=LayoutInflater.from(getContext()).inflate(R.layout.framgment_education_info,container,false);
         if(getSfzStr()!=null) {
             initView(contentView);
         }
+
+        EventBus.getDefault().register(this);
+
         return contentView;
     }
+
 
     private void initView(View view){
 
         lv= (ListView) view.findViewById(R.id.lv_fmt_education_info);
 
-
-
-        initDatas();
+        initDatas(info);
 
    }
 
-    private void initDatas(){
+    //这里我们的ThreadMode设置为MAIN，事件的处理会在UI线程中执行
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void initDatas(EduInfo info){//注意方法里面一定要传一个对象，否则就eventBus就会报错
         //http://web.youli.pw:89/Json/Get_Educational_Information.aspx?sfz=310108198004026642
         new Thread(
 
@@ -178,6 +190,16 @@ public class EduInfoFragment extends Fragment{
 
 
     }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //取消注册事件
+        EventBus.getDefault().unregister(this);
+    }
+
+
 
 
 }

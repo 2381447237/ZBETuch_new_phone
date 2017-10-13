@@ -116,8 +116,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity><!--应届毕业生里面的条件查询界面-->
         <activity android:name=".activity.ShiyeTongjiActivity"
+            android:screenOrientation="portrait"></activity><!--失业统计-->
+        <activity android:name=".activity.PersonDataCenterActivity"
+            android:screenOrientation="portrait"></activity><!--个人数据中心-->
+        <activity android:name=".activity.GraPerDetailActivity"
             android:screenOrientation="portrait"
-            ></activity><!--失业统计-->
+            android:windowSoftInputMode="stateHidden"></activity><!--应届毕业生个人详情-->
     </application>
 
 </manifest>

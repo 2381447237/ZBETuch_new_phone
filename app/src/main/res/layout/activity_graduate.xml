@@ -24,7 +24,7 @@
             android:layout_marginRight="10dip"
             android:textColor="@android:color/white"
             android:textSize="15sp"
-            android:text="共有50人"/>
+            />
 
     </RelativeLayout>
 
@@ -73,7 +73,6 @@
             android:background="@drawable/shape_ziyuan_detail_et"
             />
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -81,17 +80,25 @@
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
-        <EditText
-            android:layout_marginRight="5dp"
-            android:singleLine="true"
+        <Spinner
+            android:background="@drawable/spinner_bg"
+            android:spinnerMode="dialog"
+            android:id="@+id/sp_graduate_year"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="15sp"
-            android:padding="2dp"
-            android:background="@drawable/shape_ziyuan_detail_et"
-            />
+            android:layout_height="33dp"
+            android:layout_weight="1"/>
+
+        <!--<EditText-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:singleLine="true"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:textSize="15sp"-->
+            <!--android:padding="2dp"-->
+            <!--android:background="@drawable/shape_ziyuan_detail_et"-->
+            <!--/>-->
     </LinearLayout>
 
     <LinearLayout

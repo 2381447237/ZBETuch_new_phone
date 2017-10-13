@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,10 @@ import com.youli.zbetuch.jingan.activity.JobInfoListActivity;
 import com.youli.zbetuch.jingan.entity.JobInfoListInfo;
 import com.youli.zbetuch.jingan.entity.PersonReInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -54,7 +57,7 @@ public class PersonReFragment extends Fragment{
             languageTwoTv,languageProfTwoTv,languageCertTv,otherCertsTv,selfEvaluationTv;
 
     private List<PersonReInfo> data=new ArrayList<>();
-
+    private PersonReInfo pri;
     private List<JobInfoListInfo> jobInfoList=new ArrayList<>();
 
     private Button findWorkBtn;
@@ -71,7 +74,7 @@ public class PersonReFragment extends Fragment{
             switch (msg.what){
 
                 case SUCCESS:
-
+                    data.clear();
                     data.addAll((List<PersonReInfo> )msg.obj);
                     if(data.size()!=0) {
                         workNatureTv.setText(data.get(0).getGZXZNAME());
@@ -115,8 +118,6 @@ public class PersonReFragment extends Fragment{
                     jobInfoList.clear();
                     jobInfoList.addAll((List<JobInfoListInfo>)msg.obj);
 
-                    Log.e("2017/9/5","岗位信息=="+jobInfoList);
-
                     Intent intent=new Intent(getActivity(), JobInfoListActivity.class);
                     intent.putExtra("JobInfoList",(Serializable) jobInfoList);
                     intent.putExtra("queryUrl",queryUrl);
@@ -140,7 +141,7 @@ public class PersonReFragment extends Fragment{
         contentView=LayoutInflater.from(getContext()).inflate(R.layout.framgment_personal_resume,container,false);
 
         initView(contentView);
-
+        EventBus.getDefault().register(this);
 
         return contentView;
     }
@@ -178,10 +179,11 @@ public class PersonReFragment extends Fragment{
             }
         });
 
-        initDatas();
+        initDatas(pri);
     }
 
-    private void getJobList(final String sfz){
+
+    public void getJobList(final String sfz){
 
         new Thread(
 
@@ -232,8 +234,11 @@ public class PersonReFragment extends Fragment{
         ).start();
 
     }
+    //这里我们的ThreadMode设置为MAIN，事件的处理会在UI线程中执行
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void initDatas(PersonReInfo pri){//注意方法里面一定要传一个对象，否则就eventBus就会报错
 
-    private void initDatas(){
+    //    Log.e("2017/10/13","赋值=================================");
 
 //        workNatureTv.setText("全日制劳动合同");
 //        workClassTv.setText("常日班");
@@ -306,6 +311,13 @@ public class PersonReFragment extends Fragment{
 
         ).start();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //取消注册事件
+        EventBus.getDefault().unregister(this);
     }
 
 }

@@ -36,6 +36,8 @@ import com.youli.zbetuch.jingan.fragment.ServiceReFramgent;
 import com.youli.zbetuch.jingan.utils.IOUtil;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -102,7 +104,7 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_info);
 
@@ -418,5 +420,7 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
         });
         builder.show();
     }
+
+
 
 }

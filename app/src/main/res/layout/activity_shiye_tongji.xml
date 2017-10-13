@@ -62,16 +62,12 @@
 
     </LinearLayout>
     <ExpandableListView
+        android:divider="@null"
         android:id="@+id/elv_shiye_tongji_big"
         android:groupIndicator="@null"
         android:layout_width="match_parent"
         android:layout_height="fill_parent" >
     </ExpandableListView>
-    <!--<ListView-->
-        <!--android:dividerHeight="0.5dp"-->
-        <!--android:divider="#000000"-->
-        <!--android:id="@+id/lv_shiye_tongji_big"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"></ListView>-->
+
 
 </LinearLayout>

@@ -34,6 +34,7 @@ import com.youli.zbetuch.jingan.entity.EduInfo;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -69,6 +70,8 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
         @Override
         public void handleMessage(Message msg) {
+
+            EventBus.getDefault().post(new EduInfo());//注意这里post()里面一定要传一个对象，否则就会报错
 
             switch (msg.what){
 

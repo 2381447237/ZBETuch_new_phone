@@ -6,17 +6,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
-import com.youli.zbetuch.jingan.adapter.ShiyeTongjiBigAdapter;
+import com.youli.zbetuch.jingan.adapter.ShiyeExpandAdapter;
 import com.youli.zbetuch.jingan.entity.ShiyeTongjiInfo;
-import com.youli.zbetuch.jingan.entity.TongjiInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
+import com.youli.zbetuch.jingan.utils.ProgressDialogUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,38 +36,41 @@ import okhttp3.Response;
  * 失业统计
  */
 
-public class ShiyeTongjiActivity extends BaseActivity{
+public class ShiyeTongjiActivity extends BaseActivity implements ExpandableListView.OnChildClickListener{
 
     private final int SUCCESS_BIG_LIST=10001;
     private final int FAIL=10002;
 
     private Context mContext=ShiyeTongjiActivity.this;
-   // private ListView bigLv;
-    private List<TongjiInfo> tongjiData=new ArrayList<>();//后台返回的数据
-    private List<ShiyeTongjiInfo> bigData=new ArrayList<>();//父集合
-    private List<ShiyeTongjiInfo.ShiyeTongjiChildInfo> chlidData=new ArrayList<>();//子集合
-
+    private ExpandableListView elv;
+    // 源数据
+    private List<ShiyeTongjiInfo> items=new ArrayList<>();
+    // 组数据
+    private List<ShiyeTongjiInfo> groupItems=new ArrayList<>();
+    // 子数据
+    private List<List<ShiyeTongjiInfo>> subItems=new ArrayList<>();
     // 组数据和子数据的对应表
-    Map<String, Integer> itemMap= new HashMap<String, Integer>();
+   private Map<String, Integer> itemMap= new HashMap<String, Integer>();
 
-    private ShiyeTongjiBigAdapter adapter;
+    private ShiyeExpandAdapter adapter;
 
     private Handler mHandler=new Handler(){
 
         @Override
         public void handleMessage(Message msg) {
-
+            ProgressDialogUtils.dismissMyProgressDialog(mContext);
             switch (msg.what){
 
                 case SUCCESS_BIG_LIST:
 
-                    tongjiData.clear();
-                    tongjiData.addAll((List<TongjiInfo>)msg.obj);
+                    items.clear();
+                    items.addAll((List<ShiyeTongjiInfo>)msg.obj);
 
-                    fretchGroupItems(tongjiData);
-                    fretchSubItems(tongjiData);
-                    lvSetAdapter(bigData);
+                    fretchGroupItems(items);
+                    fretchSubItems(items);
 
+                    adapter = new ShiyeExpandAdapter(groupItems,mContext,subItems);
+                    elv.setAdapter(adapter);
                     break;
 
                 case FAIL:
@@ -77,6 +80,8 @@ public class ShiyeTongjiActivity extends BaseActivity{
 
         }
     };
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,7 +94,8 @@ public class ShiyeTongjiActivity extends BaseActivity{
 
     private void initViews(){
 
-      //  bigLv= (ListView) findViewById(R.id.lv_shiye_tongji_big);
+        elv= (ExpandableListView) findViewById(R.id.elv_shiye_tongji_big);
+        elv.setOnChildClickListener(this);
         getDates();
 
 
@@ -98,7 +104,7 @@ public class ShiyeTongjiActivity extends BaseActivity{
     //获取网络数据
     //http://web.youli.pw:89/Json/Get_Resources_Query.aspx
     private void getDates(){
-
+        ProgressDialogUtils.showMyProgressDialog(this);
         new Thread(
 
                 new Runnable() {
@@ -118,7 +124,7 @@ public class ShiyeTongjiActivity extends BaseActivity{
 
                                 Gson gson=new Gson();
 
-                                msg.obj=gson.fromJson(resStr,new TypeToken<List<TongjiInfo>>(){}.getType());
+                                msg.obj=gson.fromJson(resStr,new TypeToken<List<ShiyeTongjiInfo>>(){}.getType());
 
                                 msg.what=SUCCESS_BIG_LIST;
 
@@ -141,57 +147,54 @@ public class ShiyeTongjiActivity extends BaseActivity{
 
     }
 
-    private void lvSetAdapter(List<ShiyeTongjiInfo> data){
-
-        if(adapter==null) {
-
-            adapter = new ShiyeTongjiBigAdapter(data, mContext, bigLv);
-            bigLv.setAdapter(adapter);
-        }else{
-
-            adapter.notifyDataSetChanged();
-        }
-    }
-
-    //填充父集合
-    private void fretchGroupItems(List<TongjiInfo> data){
 
 
-        if(data!=null &&data.size()>0){
+    // 填充组数据
+    private void fretchGroupItems(List<ShiyeTongjiInfo> items) {
 
-            int index=0;
-
-            for(int i=0;i<data.size();i++){
-
-                if(!data.get(i).getOrder_id().substring(0,1).equals("4")){
-
-                    bigData.add(new ShiyeTongjiInfo(data.get(i),false));
-
-                    itemMap.put(data.get(i).getCommittee_id()+data.get(i).getType(),index);
-
+        if (items != null && items.size() > 0) {
+            int index = 0;
+            for (ShiyeTongjiInfo item : items) {
+                String orderidStr = "" + item.getOrder_id();
+                if (!orderidStr.trim().substring(0, 1).equals("4")) {
+                    groupItems.add(item);
+                    itemMap.put(item.getCommittee_id() + item.getType().trim(), index);
                     index++;
                 }
-
             }
-
-        }
-
-
-    }
-
-    //填充子集合
-    private void fretchSubItems(List<TongjiInfo> data){
-
-        if(data!=null &&data.size()>0){
-
-            for(int i=0;i<itemMap.size();i++){
-
-
-
-            }
-
         }
 
     }
+    // 填充子数据
+    private void fretchSubItems(List<ShiyeTongjiInfo> items) {
+        if (items != null && items.size() > 0) {
+            for (int i = 0; i < itemMap.size(); i++) {
+                subItems.add(new ArrayList<ShiyeTongjiInfo>());
+            }
 
+            for (ShiyeTongjiInfo item : items) {
+                String orderidStr = "" + item.getOrder_id();
+                if (orderidStr.trim().substring(0, 1).equals("4")) {
+                    subItems.get(
+                            itemMap.get(orderidStr.trim().substring(1)
+                                    + item.getType().trim())).add(item);
+                }
+            }
+        }
+    }
+
+
+    @Override
+    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+      // Toast.makeText(mContext,"子条目="+subItems.get(groupPosition).get(childPosition),Toast.LENGTH_SHORT).show();
+        String url_suffix="&order_id="+ subItems.get(groupPosition).get(childPosition).getOrder_id()
+                +"&COMMITTEE_ID=" + subItems.get(groupPosition).get(childPosition).getCommittee_id()
+                         + "&TYPE=" + subItems.get(groupPosition).get(childPosition).getType()+"&Resources=true";
+        Intent intent=new Intent(mContext,PersonalInfoQueryResult.class);
+        intent.putExtra("queryUrl", url_suffix);
+        startActivity(intent);
+
+        return false;
+    }
 }

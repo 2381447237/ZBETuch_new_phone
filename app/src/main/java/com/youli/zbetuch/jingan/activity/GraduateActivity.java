@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +18,9 @@ import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.GraduateInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +33,7 @@ import java.util.List;
  * 应届毕业生
  */
 
-public class GraduateActivity extends BaseActivity implements View.OnClickListener{
+public class GraduateActivity extends BaseActivity implements View.OnClickListener,AdapterView.OnItemClickListener{
 
     private Context mContext=GraduateActivity.this;
 
@@ -36,6 +41,11 @@ public class GraduateActivity extends BaseActivity implements View.OnClickListen
     private List<GraduateInfo> data=new ArrayList<>();
     private CommonAdapter adapter;
     private Button btnFind,btnConFind;
+    private TextView tvPnum;//人数
+    private Spinner spYear;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+    private List<String> commonSpData=new ArrayList<>();//常见工种
+    private String commonSpArray [];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,17 @@ public class GraduateActivity extends BaseActivity implements View.OnClickListen
     private void initViews(){
 
        lv= (ListView) findViewById(R.id.lv_graduate);
+        lv.setOnItemClickListener(this);
+        tvPnum= (TextView) findViewById(R.id.tv_graduate_num);
+        tvPnum.setText("共有500人");
+        spYear= (Spinner) findViewById(R.id.sp_graduate_year);
+
+       // initSpValue();
+        commonSpArray=getResources().getStringArray(R.array.cboWorkType);
+        for(String commonStr:commonSpArray){
+            commonSpData.add(commonStr);
+        }
+        spYear.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,commonSpData));
        btnFind= (Button) findViewById(R.id.btn_graduate_find);
         btnFind.setOnClickListener(this);
         btnConFind= (Button) findViewById(R.id.btn_graduate_condition_find);
@@ -109,4 +130,26 @@ public class GraduateActivity extends BaseActivity implements View.OnClickListen
         }
 
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Intent intent=new Intent(mContext,GraPerDetailActivity.class);
+        startActivity(intent);
+
+    }
+
+//    private void initSpValue() {
+//        String year = sdf.format(new Date());
+//        List<Integer> list = new ArrayList<Integer>();
+//        for (int i = 5; i >= 0; i--) {
+//            list.add((Integer.parseInt(year) - i));
+//        }
+//        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(mContext,
+//                android.R.layout.simple_list_item_1, list);
+//       // adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spYear.setAdapter(adapter);
+//        spYear.setSelection(list.size() - 1);
+//    }
+
 }
