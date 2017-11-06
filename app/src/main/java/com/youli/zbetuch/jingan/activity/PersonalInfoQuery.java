@@ -1,5 +1,6 @@
 package com.youli.zbetuch.jingan.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +19,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.baidu.ocr.sdk.OCR;
+import com.baidu.ocr.sdk.OnResultListener;
+import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.AccessToken;
+import com.baidu.ocr.sdk.model.IDCardParams;
+import com.baidu.ocr.sdk.model.IDCardResult;
+import com.baidu.ocr.ui.camera.CameraActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,8 +34,10 @@ import com.youli.zbetuch.jingan.bean.addressBean.CommitteeInfo;
 import com.youli.zbetuch.jingan.bean.addressBean.RegionInfo;
 import com.youli.zbetuch.jingan.bean.addressBean.StreetInfo;
 import com.youli.zbetuch.jingan.entity.PersonInfo;
+import com.youli.zbetuch.jingan.utils.FileUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,6 +46,9 @@ import java.util.List;
 import okhttp3.Response;
 
 public class PersonalInfoQuery extends BaseActivity implements View.OnClickListener {
+
+
+    private static final int REQUEST_CODE_CAMERA = 9999;
 
     private final int SUCCEED=10000;
     private final int  PROBLEM=10001;
@@ -100,13 +114,34 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_info_query_layout);
 
+        // 初始化扫描身份证的功能
+        initAccessTokenWithAkSk();
+
         initView();
     }
 
 
+    private void initAccessTokenWithAkSk(){
+
+        OCR.getInstance().initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
+            @Override
+            public void onResult(AccessToken result) {
+                Log.e("2017-11-2", "onResult: " + result.toString());
+            }
+
+            @Override
+            public void onError(OCRError error) {
+                error.printStackTrace();
+                Log.e("2017-11-2", "onError: " + error.getMessage());
+            }
+        },getApplicationContext(),"d8GYLDKFKfEv58opiaB2yLSk","W2FpYRkd49pMimAQDWR1eC3v0Ng82oUv");
+
+    }
+
     private void initView() {
         et_id_num = (EditText) findViewById(R.id.et_id_num);
         btn_scanning = (Button) findViewById(R.id.btn_scanning);
+        btn_scanning.setOnClickListener(this);
         btn_query_id_num = (Button) findViewById(R.id.btn_query_id_num);
         et_personName = (EditText) findViewById(R.id.et_personal_name);
         spinner_sex = (Spinner) findViewById(R.id.spinner_sex);
@@ -246,8 +281,16 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                 @Override
                 public void run() {
                     try {
-                        String committeeBody = MyOkHttpUtils.okHttpGet(committeeUrl).body()
-                                .string();
+
+                        if(MyOkHttpUtils.okHttpGet(committeeUrl)==null){
+                            return;
+                        }
+                        if(MyOkHttpUtils.okHttpGet(committeeUrl).body()==null){
+                            return;
+                        }
+                        Log.e("2017/10/15","body=="+MyOkHttpUtils.okHttpGet(committeeUrl).body());
+                         String committeeBody = MyOkHttpUtils.okHttpGet(committeeUrl).body().string();
+                        Log.e("2017/10/15","cb=="+committeeBody);
                         if (!committeeBody.equals("[]")) {
                             committeeInfoList = new ArrayList<CommitteeInfo>();
                             committeeInfoList = new Gson().fromJson(committeeBody, new
@@ -320,7 +363,7 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_query_id_num:
+            case R.id.btn_query_id_num://查询
                 final String id_card_num = et_id_num.getText().toString().trim();
                 if (id_card_num.isEmpty()) {
                     Toast.makeText(this, "身份证号码不能为空", Toast.LENGTH_SHORT).show();
@@ -396,10 +439,16 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
 
                 str.add(String.valueOf(streetId));
 
-                String committeeName = spinner_neighborhood_committee.getSelectedItem().toString
-                        ().trim();
+                if(spinner_neighborhood_committee.getSelectedItem()==null){
+                    return;
+                }
+
+                String committeeName = spinner_neighborhood_committee.getSelectedItem().toString().trim();
                 Log.e("committeeName", "committeeName: " + committeeName);
                 int committeeId = 0;
+                if(committeeInfoList==null){
+                    return;
+                }
                 for (CommitteeInfo committeeInfo : committeeInfoList) {
                     if (committeeInfo.getCommitteeName().equals(committeeName)) {
                         committeeId = committeeInfo.getId();
@@ -407,7 +456,6 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                 }
                 str.add(String.valueOf(committeeId));
 
-//                Log.e("CommitteeId", "onClick: " + committeeId);
                 String sex = "";
                 if (!spinner_sex.getSelectedItem().toString().trim().equals("全部")) {
                     sex = spinner_sex.getSelectedItem().toString().trim();
@@ -450,7 +498,12 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                 intent.putExtra("queryUrl", url_suffix);
                 startActivity(intent);
                 break;
-            case R.id.btn_scanning:
+            case R.id.btn_scanning://扫描
+                Intent i= new Intent(mContext, CameraActivity.class);
+                i.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                        FileUtils.getSaveFile(getApplication()).getAbsolutePath());
+                i.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
+                startActivityForResult(i, REQUEST_CODE_CAMERA);
                 break;
         }
     }
@@ -488,5 +541,98 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==REQUEST_CODE_CAMERA&&resultCode== Activity.RESULT_OK){
+            if(data!=null){
+                String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
+                String filePath = FileUtils.getSaveFile(getApplicationContext()).getAbsolutePath();
+              if(!TextUtils.isEmpty(contentType)){
+                  if(CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)){
+                      recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
+                  }
+              }
+            }
+        }
+    }
+
+    /**
+     * 解析身份证图片
+     *
+     * @param idCardSide 身份证正反面
+     * @param filePath   图片路径
+     */
+    private void recIDCard(String idCardSide, String filePath) {
+
+        IDCardParams param=new IDCardParams();
+        param.setImageFile(new File(filePath));
+        // 设置身份证正反面
+        param.setIdCardSide(idCardSide);
+        // 设置方向检测
+        param.setDetectDirection(true);
+        // 设置图像参数压缩质量0-100, 越大图像质量越好但是请求时间越长。 不设置则默认值为20
+        param.setImageQuality(40);
+
+        OCR.getInstance().recognizeIDCard(param, new OnResultListener<IDCardResult>() {
+            @Override
+            public void onResult(IDCardResult result) {
+                if(result!=null){
+
+                  String num = "";
+                    if (result.getIdNumber() != null) {
+                        num = result.getIdNumber().toString();
+
+                    }
+
+                    final String finalNum = num;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String url = MyOkHttpUtils.BaseUrl + "/Json/Get_BASIC_INFORMATION" +
+                                    ".aspx?sfz=" + finalNum;
+                            Response response = MyOkHttpUtils.okHttpGet(url);
+
+                            try {
+                                String result = response.body().string().trim();
+                                Log.e("2017/11/2","result=="+result);
+                                if (result.equals("[null]")||result.equals("")) {
+                                    Looper.prepare();
+                                    Toast.makeText(mContext, "对不起，查无此人", Toast.LENGTH_SHORT).show();
+                                    Looper.loop();
+                                } else {
+                                    // TODO 解析数据并传递给下一个Activity
+                                    Gson gson=new Gson();
+                                    Message msg=Message.obtain();
+
+                                    msg.obj=gson.fromJson(result,new TypeToken<List<PersonInfo>>(){}.getType());
+                                    msg.what=SUCCEED;
+                                    mHandler.sendMessage(msg);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                }
+            }
+
+            @Override
+            public void onError(OCRError error) {
+                Toast.makeText(mContext, "识别出错,请重新扫描", Toast.LENGTH_SHORT).show();
+                Log.e("2017-11-2", "onError: " + error.getMessage());
+            }
+        });
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 释放内存资源
+        OCR.getInstance().release();
     }
 }

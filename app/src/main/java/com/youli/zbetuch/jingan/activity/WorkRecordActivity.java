@@ -14,6 +14,7 @@ import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.WorkNoticeInfo;
 import com.youli.zbetuch.jingan.entity.WorkRecordInfo;
+import com.youli.zbetuch.jingan.utils.MyDateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,7 @@ public class WorkRecordActivity extends BaseActivity implements View.OnClickList
 
         for(int i=1;i<100;i++){
 
-            data.add(new WorkRecordInfo("2017-10-9",""+i,"标题"+i));
+            data.add(new WorkRecordInfo("标题"+i,"2017-10-16 08:00:01"));
 
         }
 
@@ -70,11 +71,11 @@ public class WorkRecordActivity extends BaseActivity implements View.OnClickList
             public void convert(CommonViewHolder holder, WorkRecordInfo item, int position) {
 
                 TextView tvNo=holder.getView(R.id.item_work_record_no_tv);
-                tvNo.setText(item.getNoStr());
+                tvNo.setText((position+1)+"");
                 TextView tvTitle=holder.getView(R.id.item_work_record_title_tv);
-                tvTitle.setText(item.getTitleStr());
+                tvTitle.setText(item.getTITLE());
                 TextView tvDate=holder.getView(R.id.item_work_record_date_tv);
-                tvDate.setText(item.getDateStr());
+                tvDate.setText(MyDateUtils.stringToYMD(item.getCREATE_DATE()));
 
                 LinearLayout ll = holder.getView(R.id.item_work_record_ll);
                 if (position % 2 == 0) {

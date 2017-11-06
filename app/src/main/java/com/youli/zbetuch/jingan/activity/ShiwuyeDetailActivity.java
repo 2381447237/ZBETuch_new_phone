@@ -25,9 +25,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.entity.PersonInfo;
+import com.youli.zbetuch.jingan.entity.PersonReInfo;
 import com.youli.zbetuch.jingan.entity.ResourcesDetailInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.utils.SharedPreferencesUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -58,6 +63,10 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
             streetEt,jwEt,detailAddressEt,presentStatusEt,masterDateEt,presentIntentionEt,
             shidengDateEt,shidengVidEt,phoneEt,diaocharenEt,remarksEt;
 
+    private EditText lastPresentStatusEt;//最后一次的目前状况
+    private EditText lastPresentIntentionEt;//最后一次的当前意向
+    private EditText lastRemarksEt;//最后一次的备注
+
     private Spinner currStaSp,currIntSp;
     private String currIntStr,currStaStr;
     private String [] currStaData,currIntData;
@@ -69,6 +78,7 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
     private final int  NOPERSONINFO=10002;
     private final int  PROBLEM=10003;
     private List<PersonInfo> personInfos=new ArrayList<>();
+
 
     private Handler mHandler=new Handler(){
 
@@ -101,6 +111,7 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
                 case PERSONINFO:
 
                     personInfos=(List<PersonInfo>)msg.obj;
+
                     Intent intent=new Intent(mContext,PersonInfoActivity.class);
                     intent.putExtra("personInfos", (Serializable) personInfos.get(0));
                     startActivity(intent);
@@ -164,6 +175,13 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
         currStaSp= (Spinner) findViewById(R.id.sp_shiwuye_detail_curr_sta);
         currIntSp= (Spinner) findViewById(R.id.sp_shiwuye_detail_curr_int);
 
+
+        lastPresentStatusEt= (EditText) findViewById(R.id.shiwuye_detail_present_status_et_last);//最后一次的目前状况
+        lastPresentStatusEt.setText("111");
+        lastPresentIntentionEt= (EditText) findViewById(R.id.shiwuye_detail_present_intention_et_last);//最后一次的当前意向
+        lastPresentIntentionEt.setText("222");
+        lastRemarksEt= (EditText) findViewById(R.id.shiwuye_detail_remarks_et_last);//最后一次的备注
+        lastRemarksEt.setText("333");
         initData();
 
     }
@@ -301,6 +319,8 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.shiwuye_detail_info_btn://详细信息
+
+                PersonReInfo pInfo = null;
 
                 getPersonInfo();
                 break;
@@ -456,7 +476,6 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
             }
 
         }
-
 
     private void getPersonInfo(){
        // http://web.youli.pw:89/Json/Get_BASIC_INFORMATION.aspx?sfz=310101198711030515

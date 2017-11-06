@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:background="#afb6ef"
+            android:id="@+id/tv_titlename"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="备     注"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"></LinearLayout>
+        <RadioGroup 
+            android:id="@+id/rgp_chuguo"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_marginLeft="0dp"
+            >
+            <RadioButton 
+                android:id="@+id/btn_chuguo"
+                android:background="@drawable/blue"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textSize="21sp"
+                android:textColor="@color/black"
+               android:paddingLeft="40dp"
+                android:text="出国出境"/>
+            <RadioButton 
+                android:id="@+id/btn_renhufenli"
+                android:background="@drawable/white"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textSize="21sp"
+                android:textColor="@color/black"
+                android:paddingLeft="40dp"
+                android:text="人户分离,电话错误或\n无人接听等"/>
+            <RadioButton 
+                android:id="@+id/btn_dianhuacuowu"
+                android:background="@drawable/blue"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textSize="21sp"
+                android:textColor="@color/black"
+                android:paddingLeft="40dp"
+                android:text="拒绝调查"/>
+            
+            <RadioButton 
+                android:id="@+id/btn_qita"
+                android:background="@drawable/white"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:textSize="21sp"
+                android:textColor="@color/black"
+               android:paddingLeft="40dp"
+                android:text="其他(请注明):"/>
+        </RadioGroup>
+    </LinearLayout>
+ <TextView 
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dp"
+	    android:background="@drawable/blue"
+	    />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="150dip"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:background="@drawable/mark_bg"
+            android:id="@+id/et_mark"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:gravity="top"
+            android:layout_marginBottom="5dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="5dip"
+            android:layout_marginLeft="10dip"
+            android:layout_weight="1"
+            android:singleLine="false"
+            android:paddingLeft="10dip"
+            android:textSize="21sp"
+            android:hint="请输入无法调查原因"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=" " />
+
+        <Button
+            android:id="@+id/btn_true"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/blue_btn"
+            android:layout_gravity="center"
+            android:text="确定"
+        />
+
+        <Button
+            android:id="@+id/btn_false"
+            android:layout_width="0dip"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dip"
+            android:background="@drawable/blue_btn"
+            android:layout_gravity="center"
+            android:text="取消"
+             />
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=" " />
+
+    </LinearLayout>
+
+</LinearLayout>

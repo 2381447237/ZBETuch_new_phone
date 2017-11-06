@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,9 +20,63 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="毕业生个人详细"/>
+    <LinearLayout
+        android:background="@drawable/bjt"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:gravity="center"
+                android:padding="10dp"
+                android:onClick="onChange"
+                android:id="@+id/rb_graper_detail_one"
+                android:checked="true"
+                android:background="@drawable/tab"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="个人基本信息"/>
+
+            <RadioButton
+                android:id="@+id/rb_graper_detail_two"
+                android:padding="10dp"
+                android:onClick="onChange"
+                android:gravity="center"
+                android:background="@drawable/tab"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="个人求职意愿"/>
+            <RadioButton
+                android:id="@+id/rb_graper_detail_three"
+                android:gravity="center"
+                android:padding="10dp"
+                android:onClick="onChange"
+                android:background="@drawable/tab"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="就业工作轨迹"/>
+        </RadioGroup>
+
+        <FrameLayout
+            android:id="@+id/fl_graper_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></FrameLayout>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

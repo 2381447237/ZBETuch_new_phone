@@ -177,6 +177,7 @@
 
 
         <Spinner
+            android:prompt="@string/spinner_title"
             android:id="@+id/sp_person_baseinfo_sex"
             android:background="@drawable/spinner_bg_baseinfo"
         android:layout_marginLeft="3dp"
@@ -266,6 +267,7 @@
                 <!--android:layout_height="wrap_content"-->
                 <!--/>-->
             <Spinner
+                android:prompt="@string/spinner_title"
                 android:id="@+id/sp_person_baseinfo_nation"
                 android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"
@@ -328,6 +330,7 @@
                 android:text="状        态:"/>
 
             <Spinner
+                android:prompt="@string/spinner_title"
                 android:id="@+id/sp_person_baseinfo_state"
                 android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"
@@ -401,6 +404,7 @@
                 android:text="当前意向:"/>
 
             <Spinner
+                android:prompt="@string/spinner_title"
                 android:id="@+id/sp_person_baseinfo_intention"
                 android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"
@@ -448,6 +452,7 @@
                 android:text="文化程度:"/>
 
             <Spinner
+                android:prompt="@string/spinner_title"
                 android:id="@+id/sp_person_baseinfo_edu"
                 android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"
@@ -487,6 +492,7 @@
                 android:text="摸底情况:"/>
 
             <Spinner
+                android:prompt="@string/spinner_title"
                 android:id="@+id/sp_person_baseinfo_md"
                 android:background="@drawable/spinner_bg_baseinfo"
                 android:layout_marginLeft="3dp"

@@ -1,6 +1,7 @@
 package com.youli.zbetuch.jingan.entity;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by liutao on 2017/8/17.
@@ -91,6 +92,16 @@ public class PersonInfo implements Serializable{
     private Object LevelMsg;
     private Object GPS;
     private String Md;
+
+    private byte[] photoImg;
+
+    public byte[] getPhotoImg() {
+        return photoImg;
+    }
+
+    public void setPhotoImg(byte[] photoImg) {
+        this.photoImg = photoImg;
+    }
 
     public int getID() {
         return ID;
@@ -651,5 +662,20 @@ public class PersonInfo implements Serializable{
     // "GetPhotoUrl":"../../../image/ooopic_1367546805.png","GetPhoto":"无","LevelMsg":null,"GPS":null,"Md":"入学"}]
 
 
+//    @Override
+//    public String toString() {
+//        return "PersonInfo{" +
+//                "photoImg=" + Arrays.toString(photoImg) +
+//                ", SFZ='" + SFZ + '\'' +
+//                '}';
+//    }
 
+
+//    @Override
+//    public String toString() {
+//        return "PersonInfo{" +
+//                "SFZ='" + SFZ + '\'' +
+//                ", photoImg=" + Arrays.toString(photoImg) +
+//                '}';
+//    }
 }

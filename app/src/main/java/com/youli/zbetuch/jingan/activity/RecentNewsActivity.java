@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,8 @@ import okhttp3.Response;
 public class RecentNewsActivity extends BaseActivity implements AdapterView.OnItemClickListener{
 
     private final int SUCCEED=10000;
-    private final int  PROBLEM=10001;
+    private final int SUCCEED_NODATA=10001;
+    private final int  PROBLEM=10002;
     private Context mContext=this;
 
     private List<NewsInfo> newsList=new ArrayList<>();
@@ -65,6 +67,8 @@ public class RecentNewsActivity extends BaseActivity implements AdapterView.OnIt
 
                     break;
 
+                case SUCCEED_NODATA:
+                    break;
             }
 
         }
@@ -109,12 +113,17 @@ public class RecentNewsActivity extends BaseActivity implements AdapterView.OnIt
                                try {
                                    String resStr=response.body().string();
 
-                                   Gson gson=new Gson();
+                                   if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
 
-                                   msg.obj=gson.fromJson(resStr,new TypeToken<List<NewsInfo>>(){}.getType());
-                                   msg.what=SUCCEED;
+                                       Gson gson = new Gson();
 
+                                       msg.obj = gson.fromJson(resStr, new TypeToken<List<NewsInfo>>() {
+                                       }.getType());
+                                       msg.what = SUCCEED;
 
+                                   }else{
+                                       msg.what = SUCCEED_NODATA;
+                                   }
                                } catch (IOException e) {
                                    e.printStackTrace();
                                }

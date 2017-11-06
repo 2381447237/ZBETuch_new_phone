@@ -23,6 +23,11 @@ public class FollowListInfo {
     private int RecordCount;
     private boolean Delete1;
 
+    public FollowListInfo(String NAME, String SFZ) {
+        this.NAME = NAME;
+        this.SFZ = SFZ;
+    }
+
     public String getCREATE_TIME() {
         return CREATE_TIME;
     }

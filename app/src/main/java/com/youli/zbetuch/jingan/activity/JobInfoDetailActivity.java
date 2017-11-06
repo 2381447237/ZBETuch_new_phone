@@ -33,7 +33,8 @@ public class JobInfoDetailActivity extends BaseActivity implements View.OnClickL
 
     private final int SUCCEED=10000;
     private final int SUCCEED_Counselor=10001;
-    private final int  PROBLEM=10002;
+    private final int SUCCEED_NODATA=10002;
+    private final int  PROBLEM=10003;
 
     private List<JobDetailInfo> detailList=new ArrayList<>();
     private List<CounselorInfo> counselorList=new ArrayList<>();
@@ -171,6 +172,9 @@ public class JobInfoDetailActivity extends BaseActivity implements View.OnClickL
                 case PROBLEM:
                     Toast.makeText(mContext,"网络不给力",Toast.LENGTH_SHORT).show();
                     break;
+
+                case SUCCEED_NODATA:
+                    break;
             }
 
         }
@@ -259,14 +263,21 @@ public class JobInfoDetailActivity extends BaseActivity implements View.OnClickL
                             try {
                                 String detailStr=response.body().string();
                                 Gson gson=new Gson();
-                                if(TextUtils.equals("Detail",sign)){
-                                    msg.what=SUCCEED;
-                                    msg.obj=gson.fromJson(detailStr,new TypeToken<List<JobDetailInfo>>(){}.getType());
-                                }else if(TextUtils.equals("Counselor",sign)){
-                                    msg.what=SUCCEED_Counselor;
-                                    msg.obj=gson.fromJson(detailStr,new TypeToken<List<CounselorInfo>>(){}.getType());
-                                }
 
+                                if(!TextUtils.equals(detailStr,"")&&!TextUtils.equals(detailStr,"[]")) {
+
+                                    if (TextUtils.equals("Detail", sign)) {
+                                        msg.what = SUCCEED;
+                                        msg.obj = gson.fromJson(detailStr, new TypeToken<List<JobDetailInfo>>() {
+                                        }.getType());
+                                    } else if (TextUtils.equals("Counselor", sign)) {
+                                        msg.what = SUCCEED_Counselor;
+                                        msg.obj = gson.fromJson(detailStr, new TypeToken<List<CounselorInfo>>() {
+                                        }.getType());
+                                    }
+                                }else{
+                                    msg.what=SUCCEED_NODATA;
+                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

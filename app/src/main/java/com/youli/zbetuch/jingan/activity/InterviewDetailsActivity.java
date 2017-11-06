@@ -51,7 +51,8 @@ public class InterviewDetailsActivity extends BaseActivity implements View.OnCli
     private final int SUCCESS_LIST=10001;
     private final int SUCCESS_GET_STATE=10002;
     private final int SUCCESS_SET_STATE=10003;
-    private final int FAIL=10004;
+    private final int SUCCESS_NODATA=10004;
+    private final int FAIL=10005;
 
     private Context mContext=InterviewDetailsActivity.this;
     private TextView tvName,tvDate,tvCnum,tvPnum,tvAddress;
@@ -120,6 +121,14 @@ public class InterviewDetailsActivity extends BaseActivity implements View.OnCli
                     if(lv.isRefreshing()){
                         lv.onRefreshComplete();
                     }
+                    break;
+
+                case SUCCESS_NODATA:
+
+                    if(lv.isRefreshing()){
+                        lv.onRefreshComplete();
+                    }
+
                     break;
             }
 
@@ -264,14 +273,14 @@ public class InterviewDetailsActivity extends BaseActivity implements View.OnCli
 
                             Message msg=Message.obtain();
 
-                            if(!TextUtils.equals(resStr,"")){
+                            if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")){
 
                                 msg.what=SUCCESS_LIST;
                                 msg.obj=gson.fromJson(resStr,new TypeToken<List<InterviewDetailsInfo>>(){}.getType());
 
                             }else{
 
-                                msg.what=FAIL;
+                                msg.what=SUCCESS_NODATA;
 
                             }
 

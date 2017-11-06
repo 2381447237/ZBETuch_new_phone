@@ -44,22 +44,21 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="街        道："/>
 
-                <EditText
+                <Spinner
+                    android:id="@+id/sp_gradcon_query_street"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -70,22 +69,21 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="居        委："/>
 
-                <EditText
+                <Spinner
+                    android:id="@+id/sp_gradcon_query_jw"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -96,22 +94,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="性        别："/>
 
-                <EditText
+                <Spinner
+                    android:paddingLeft="12dp"
+                    android:entries="@array/gradeate_sex"
+                    android:id="@+id/sp_gradcon_query_sex"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -122,6 +121,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -134,10 +134,12 @@
                     android:layout_weight="2"
                     android:orientation="horizontal">
                     <EditText
+                        android:id="@+id/et_gradcon_query_age_start"
+                        android:inputType="number"
                         android:singleLine="true"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:gravity="center_vertical"
                         android:textSize="15sp"
                         android:padding="2dp"
@@ -145,6 +147,7 @@
                         />
 
                     <TextView
+                        android:layout_gravity="center_vertical"
                         android:textSize="13sp"
                         android:paddingRight="5dp"
                         android:paddingLeft="5dp"
@@ -153,11 +156,12 @@
                         android:text="至"/>
 
                     <EditText
-
+                        android:id="@+id/et_gradcon_query_age_end"
+                        android:inputType="number"
                         android:singleLine="true"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:gravity="center_vertical"
                         android:textSize="15sp"
                         android:padding="2dp"
@@ -177,22 +181,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="文化程度："/>
 
-                <EditText
+                <Spinner
+                    android:paddingLeft="12dp"
+                    android:entries="@array/gradeate_educationLevel"
+                    android:id="@+id/sp_gradcon_query_edu"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -203,22 +208,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="特殊情况："/>
 
-                <EditText
+                <Spinner
+                    android:paddingLeft="12dp"
+                    android:entries="@array/gradeate_ParamQuery_qingkuangStyle"
+                    android:id="@+id/sp_gradcon_query_case"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -229,22 +235,21 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="企业类型："/>
 
-                <EditText
+                <Spinner
+                    android:id="@+id/sp_gradcon_query_type"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -255,22 +260,21 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="行业类别："/>
 
-                <EditText
+                <Spinner
+                    android:id="@+id/sp_gradcon_query_industry"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -281,22 +285,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="岗位类别："/>
 
-                <EditText
+                <Spinner
+                    android:paddingLeft="12dp"
+                    android:entries="@array/gradeate_ParamQuery_jobStyle"
+                    android:id="@+id/sp_gradcon_query_job"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -307,22 +312,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="税后薪资："/>
 
-                <EditText
+                <Spinner
+                    android:paddingLeft="12dp"
+                    android:entries="@array/gradeate_ParamQuery_salaryStyle"
+                    android:id="@+id/sp_gradcon_query_salary"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -333,22 +339,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="人员基本情况："/>
 
-                <EditText
+                <Spinner
+                    android:paddingLeft="12dp"
+                    android:entries="@array/gradeate_baseSituation"
+                    android:id="@+id/sp_gradcon_query_pcase_one"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -359,22 +366,22 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="人员基本情况："/>
+                    android:text="人员具体情况："/>
 
-                <EditText
+                <Spinner
+                    android:entries="@array/gradeate_empty"
+                    android:id="@+id/sp_gradcon_query_pcase_two"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -385,22 +392,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="是否职业指导："/>
 
-                <EditText
+                <Spinner
+                    android:paddingLeft="12dp"
+                    android:entries="@array/gradeate_idChecked"
+                    android:id="@+id/sp_gradcon_query_job_guide"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
 
             </LinearLayout>
 
@@ -411,23 +419,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_gravity="center_vertical"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="是否推荐就业岗位："/>
 
-                <EditText
+                <Spinner
+                    android:paddingLeft="12dp"
+                    android:entries="@array/gradeate_idChecked"
+                    android:id="@+id/sp_gradcon_query_work_guide"
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:singleLine="true"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:padding="2dp"
-                    android:background="@drawable/shape_ziyuan_detail_et"
-                    />
-
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
             </LinearLayout>
 
         </LinearLayout>

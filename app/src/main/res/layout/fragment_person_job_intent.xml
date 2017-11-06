@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="#000000"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:text="期望入职企业类型：(多选，最多选三项)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+               <com.youli.zbetuch.jingan.view.MyGridView
+                   android:numColumns="1"
+                   android:id="@+id/gv_comproperty"
+                   android:background="@drawable/gridebg"
+                   android:layout_width="fill_parent"
+                   android:layout_height="0dp"
+                   android:layout_weight="1"></com.youli.zbetuch.jingan.view.MyGridView>
+
+            <TextView
+                android:textColor="#000000"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:text="期望入职行业类别：(多选，最多选三项)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.youli.zbetuch.jingan.view.MyGridView
+                android:numColumns="1"
+                android:id="@+id/gv_IndustryCategory"
+                android:background="@drawable/gridebg"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"></com.youli.zbetuch.jingan.view.MyGridView>
+
+            <TextView
+                android:textColor="#000000"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:text="期望入职岗位类型：(多选，最多选三项)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.youli.zbetuch.jingan.view.MyGridView
+                android:numColumns="1"
+                android:id="@+id/gv_jobCategory"
+                android:background="@drawable/gridebg"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"></com.youli.zbetuch.jingan.view.MyGridView>
+
+            <TextView
+                android:textColor="#000000"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:text="期望月度税后薪资："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.youli.zbetuch.jingan.view.MyGridView
+                android:numColumns="1"
+                android:id="@+id/gv_salary"
+                android:background="@drawable/gridebg"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"></com.youli.zbetuch.jingan.view.MyGridView>
+            <RelativeLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/btn_fmt_person_base_info_save"
+                    android:layout_width="70dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_selector"
+                    android:text="保存"
+                    android:textSize="15sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

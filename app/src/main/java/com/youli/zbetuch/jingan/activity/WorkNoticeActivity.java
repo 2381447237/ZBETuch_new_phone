@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -38,7 +39,8 @@ public class WorkNoticeActivity extends BaseActivity implements AdapterView.OnIt
 
     private final int SUCCEED_LIST=10000;
     private final int SUCCEED_READ=10001;
-    private final int  PROBLEM=10002;
+    private final int SUCCEED_NODATA=10002;
+    private final int  PROBLEM=10003;
 
 
     private Context mContext=WorkNoticeActivity.this;
@@ -105,6 +107,13 @@ public class WorkNoticeActivity extends BaseActivity implements AdapterView.OnIt
                         ptrLv.onRefreshComplete();
                     }
                     break;
+
+                case SUCCEED_NODATA:
+
+                    if(ptrLv.isRefreshing()){
+                        ptrLv.onRefreshComplete();
+                    }
+                    break;
             }
 
         }
@@ -167,11 +176,16 @@ public class WorkNoticeActivity extends BaseActivity implements AdapterView.OnIt
                             try {
                                 String dataStr=response.body().string();
 
-                                Gson gson=new Gson();
+                                if(!TextUtils.equals(dataStr,"")&&!TextUtils.equals(dataStr,"[]")) {
 
-                                msg.obj=gson.fromJson(dataStr,new TypeToken<List<WorkNoticeInfo>>(){}.getType());
-                                msg.what=SUCCEED_LIST;
+                                    Gson gson = new Gson();
 
+                                    msg.obj = gson.fromJson(dataStr, new TypeToken<List<WorkNoticeInfo>>() {
+                                    }.getType());
+                                    msg.what = SUCCEED_LIST;
+                                }else{
+                                    msg.what = SUCCEED_NODATA;
+                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -244,15 +258,17 @@ public class WorkNoticeActivity extends BaseActivity implements AdapterView.OnIt
                         Message msg=Message.obtain();
 
                         if(response!=null){
-
                             try {
                                 String dataStr=response.body().string();
+                                if(!TextUtils.equals(dataStr,"")&&!TextUtils.equals(dataStr,"[]")) {
+                                    Gson gson = new Gson();
 
-                                Gson gson=new Gson();
-
-                                msg.obj=gson.fromJson(dataStr,new TypeToken<List<WorkNoticeReadInfo>>(){}.getType());
-                                msg.what=SUCCEED_READ;
-
+                                    msg.obj = gson.fromJson(dataStr, new TypeToken<List<WorkNoticeReadInfo>>() {
+                                    }.getType());
+                                    msg.what = SUCCEED_READ;
+                                }else {
+                                    msg.what = SUCCEED_NODATA;
+                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

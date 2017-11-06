@@ -50,7 +50,8 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
     private final int SUCCESS=10000;
     private final int SUCCESS_UPLOAD=10001;//上传个人简历
-    private final int  PROBLEM=10002;
+    private final int SUCCESS_NODATA=10002;
+    private final int  PROBLEM=10003;
 
     private List<PersonReInfo> data=new ArrayList<>();
 
@@ -174,6 +175,11 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                 case PROBLEM:
 
                     Toast.makeText(mContext,"网络不给力",Toast.LENGTH_SHORT).show();
+
+                    break;
+
+                case SUCCESS_NODATA:
+
 
                     break;
             }
@@ -304,7 +310,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                             try {
                                 String resStr=response.body().string();
 
-                                if(resStr!=null){
+                                if(!TextUtils.equals("",resStr)&&!TextUtils.equals("[]",resStr)){
 
                                     Gson gson=new Gson();
 
@@ -314,7 +320,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
                                     mHandler.sendMessage(msg);
 
                                 }else{
-                                    msg.what= PROBLEM;
+                                    msg.what= SUCCESS_NODATA;
                                     mHandler.sendMessage(msg);
 
                                 }
@@ -653,7 +659,8 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
             jsonObj.put("LANGUAGECERT",languageCertStr);//外语类证书
             jsonObj.put("COMPUTERCERT",computerCertStr);//计算机证书
             jsonObj.put("OTHERZYFL",wantWorkThreeStr);//欲从事岗位3
-            jsonObj.put("GPS","0.0,0.0");
+            jsonObj.put("GPS",MainLayoutActivity.jingDu+","+MainLayoutActivity.weiDu);
+            //jsonObj.put("GPS","0.0,0.0");
             jsonObj.put("ZYFLCHILDID_1",wantWorkOneDetailStr);//欲从事岗位1详细
             jsonObj.put("ZYFLID_1",wantWorkOneStr);//欲从事岗位1
             jsonObj.put("ZYFLCHILDID_2",wantWorkTwoDetailStr);//欲从事岗位2详细

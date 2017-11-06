@@ -1,7 +1,9 @@
 package com.youli.zbetuch.jingan.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -10,9 +12,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -30,6 +35,7 @@ import com.youli.zbetuch.jingan.utils.FileUtils;
 import com.youli.zbetuch.jingan.utils.IOUtil;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
+import com.youli.zbetuch.jingan.utils.ToastUtils;
 import com.youli.zbetuch.jingan.view.MyListView;
 
 import java.io.File;
@@ -63,7 +69,7 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
     private CommonAdapter adapter;
     private WorkNoticeInfo info;
     private String currentFile;
-
+    private int pSign;
 
     private Handler mHandler=new Handler(){
 
@@ -207,11 +213,15 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
                                    msg.obj = resStr;
                                }else if(TextUtils.equals(sign,"fujian")){
 
-                                   Gson gson=new Gson();
+                                   if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
 
-                                   msg.obj=gson.fromJson(resStr,new TypeToken<List<AppendixInfo>>(){}.getType());
+                                       Gson gson = new Gson();
 
-                                   msg.what = SUCCEED_APPENDIX;
+                                       msg.obj = gson.fromJson(resStr, new TypeToken<List<AppendixInfo>>() {
+                                       }.getType());
+
+                                       msg.what = SUCCEED_APPENDIX;
+                                   }
                                }
 
                             } catch (IOException e) {
@@ -279,10 +289,33 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         //下载图片
-        downLoadPic(lvData.get(position).getFILE_PATH(),position);
+        getPermission(position);
+       // downLoadPic(lvData.get(position).getFILE_PATH(),position);
+        pSign=position;
+
 
     }
+    private void getPermission(int position) {
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                ) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                ToastUtils.showShort(this, "您已经拒绝过一次");
+            }
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},10000);
+        } else {
+            downLoadPic(lvData.get(position).getFILE_PATH(),position);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        downLoadPic(lvData.get(pSign).getFILE_PATH(),pSign);
+    }
     private void downLoadPic(final String path, final int position){
 
           new Thread(
@@ -386,6 +419,9 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
 //
 //    }
 
+
+
+
     private void SavaFile(final InputStream is, final String path, final int position) {
 
         new Thread(
@@ -409,18 +445,14 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
 
                         File saveFile = new File(file, fileName);
 
-//                        if (saveFile.exists()) {
-//                            Log.e("2017/9/4","你存在");
-//                            msg.what=SUCCEED_SEE;
-//                        } else {
                         try {
 
                             fileOutputStream = new FileOutputStream(saveFile);
-                            //Log.e("2017/9/4","数据流=="+is);
-                            fileOutputStream.write(IOUtil.getBytesByStream(is));
-                            fileOutputStream.close();
-                            Log.e("2017/9/4","创建");
-                            msg.what=SUCCEED_SEE;
+                            if(is!=null) {
+                                fileOutputStream.write(IOUtil.getBytesByStream(is));
+                                fileOutputStream.close();
+                                msg.what = SUCCEED_SEE;
+                            }
                         } catch (IOException e) {
                             if(saveFile.exists()){
                                 saveFile.delete();
@@ -428,7 +460,7 @@ public class WorkNoticeDetailActivity extends BaseActivity implements View.OnCli
                             e.printStackTrace();
                             msg.what=PROBLEM;
                         }
-                        //    }
+
                         mHandler.sendMessage(msg);
                     }
                 }

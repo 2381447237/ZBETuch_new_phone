@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.adapter.FunctionPageAdapter;
 import com.youli.zbetuch.jingan.adapter.GridViewAdapter;
+import com.youli.zbetuch.jingan.naire.ShowWenJuanActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,12 +97,24 @@ public class FunctionListActivity extends BaseActivity{
                                     intent=new Intent(mContext,ShiyeTongjiActivity.class);
                                     startActivity(intent);
                                     break;
+//                                case 7:
+//                                    intent=new Intent(mContext,WorkRecordActivity.class);
+//                                    startActivity(intent);
+//                                    break;
                                 case 7:
-                                    intent=new Intent(mContext,WorkRecordActivity.class);
+                                    intent=new Intent(mContext,PersonDataCenterActivity.class);
                                     startActivity(intent);
                                     break;
                                 case 8:
-                                    intent=new Intent(mContext,PersonDataCenterActivity.class);
+                                    intent=new Intent(mContext,FollowListActivity.class);
+                                    startActivity(intent);
+                                    break;
+                                case 9:
+                                    intent=new Intent(mContext,ChangePwdActivity.class);
+                                    startActivity(intent);
+                                    break;
+                                case 10:
+                                    intent=new Intent(mContext,ShowWenJuanActivity.class);
                                     startActivity(intent);
                                     break;
 //                                default:
@@ -170,17 +183,23 @@ public class FunctionListActivity extends BaseActivity{
 
     private void initData(){
 
-        myIcons = new int[]{
+//        myIcons = new int[]{
+//                R.drawable.gerenxinxi, R.drawable.zpxx, R.drawable.tjbb,
+//                R.drawable.yjbys, R.drawable.zzdc, R.drawable.xcms,
+//                R.drawable.sstj, R.drawable.ggrz, R.drawable.grsjzx,
+//                R.drawable.jyzc, R.drawable.cczcfw, R.drawable.zzwd,
+//                R.drawable.dbsy, R.drawable.hytz, R.drawable.gztz,
+//                R.drawable.lyb, R.drawable.gggs, R.drawable.jjrd, R
+//                .drawable.ggjl, R.drawable.wwxz, R.drawable.ggxx, R
+//                .drawable.gglb, R.drawable.qqxx, R.drawable.yydbsy, R
+//                .drawable.mmxg, R.drawable.ccsm, R.drawable.ssgf, R
+//                .drawable.wjdc, R.drawable.ggwj};
+
+                myIcons = new int[]{
                 R.drawable.gerenxinxi, R.drawable.zpxx, R.drawable.tjbb,
                 R.drawable.yjbys, R.drawable.zzdc, R.drawable.xcms,
-                R.drawable.sstj, R.drawable.ggrz, R.drawable.grsjzx,
-                R.drawable.jyzc, R.drawable.cczcfw, R.drawable.zzwd,
-                R.drawable.dbsy, R.drawable.hytz, R.drawable.gztz,
-                R.drawable.lyb, R.drawable.gggs, R.drawable.jjrd, R
-                .drawable.ggjl, R.drawable.wwxz, R.drawable.ggxx, R
-                .drawable.gglb, R.drawable.qqxx, R.drawable.yydbsy, R
-                .drawable.mmxg, R.drawable.ccsm, R.drawable.ssgf, R
-                .drawable.wjdc, R.drawable.ggwj};
+                R.drawable.sstj,  R.drawable.grsjzx, R.drawable.gglb,
+                        R.drawable.mmxg,  R.drawable.wjdc};
 
         viewList=new ArrayList<>();
         initGridView();

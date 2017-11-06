@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="身  份  证："/>
+
+                <EditText
+                    android:focusable="false"
+                    android:id="@+id/et_fmt_pbase_info_sfz"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="姓        名："/>
+
+                <EditText
+                    android:focusable="false"
+                    android:id="@+id/et_fmt_pbase_info_name"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="性        别："/>
+
+                <Spinner
+                    android:id="@+id/sp_fmt_pbase_info_sex"
+                    android:paddingLeft="12dp"
+                    android:gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
+                    android:layout_width="0dp"
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="民        族："/>
+
+                <Spinner
+                    android:id="@+id/sp_fmt_pbase_info_nation"
+                    android:paddingLeft="12dp"
+                    android:gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
+                    android:layout_width="0dp"
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="政治面貌："/>
+
+                <Spinner
+                    android:id="@+id/sp_fmt_pbase_info_polit"
+                    android:paddingLeft="12dp"
+                    android:gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
+                    android:layout_width="0dp"
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="文化程度："/>
+
+                <Spinner
+                    android:paddingLeft="12dp"
+                    android:id="@+id/sp_fmt_pbase_info_edu"
+                    android:gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
+                    android:layout_width="0dp"
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="就读学校："/>
+
+                <EditText
+                    android:id="@+id/et_fmt_pbase_info_school"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="所学专业："/>
+
+                <EditText
+                    android:id="@+id/et_fmt_pbase_info_major"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="户籍地址："/>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="街        道："/>
+
+                <Spinner
+                    android:clickable="false"
+                    android:id="@+id/sp_fmt_pbase_info_street"
+                    android:paddingLeft="12dp"
+                    android:gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
+                    android:layout_width="0dp"
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="居        委："/>
+
+                <Spinner
+                    android:clickable="false"
+                    android:id="@+id/sp_fmt_pbase_info_jw"
+                    android:paddingLeft="12dp"
+                    android:gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/spinner_bg"
+                    android:spinnerMode="dialog"
+                    android:layout_width="0dp"
+                    android:layout_height="33dp"
+                    android:layout_weight="2"/>
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="详细地址："/>
+
+                <EditText
+                    android:id="@+id/et_fmt_pbase_info_detail_address"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="居住地址："/>
+
+                <EditText
+                    android:id="@+id/et_fmt_pbase_info_live_address"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="联系电话1："/>
+
+                <EditText
+                    android:inputType="phone"
+                    android:id="@+id/et_fmt_pbase_info_phone_one"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="联系电话2："/>
+
+                <EditText
+                    android:inputType="phone"
+                    android:id="@+id/et_fmt_pbase_info_phone_two"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:background="@drawable/shape_ziyuan_detail_et"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:text="特殊情况："/>
+
+                <LinearLayout
+                    android:id="@+id/llEspecial"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6">
+
+                <CheckBox
+                    android:id="@+id/cb_fmt_pbase_info_one"
+                    android:textSize="12sp"
+                    android:text="低保家庭成员"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+                <CheckBox
+                    android:id="@+id/cb_fmt_pbase_info_two"
+                    android:textSize="12sp"
+                    android:text="零就业家庭成员"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+                <CheckBox
+                    android:id="@+id/cb_fmt_pbase_info_three"
+                    android:textSize="12sp"
+                    android:text="残疾"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <RelativeLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_fmt_pbase_info_save"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="70dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_selector"
+                    android:text="保存"
+                    android:textSize="15sp"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

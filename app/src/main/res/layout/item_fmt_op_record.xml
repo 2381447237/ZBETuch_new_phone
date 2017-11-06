@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp"
+    android:gravity="center"
+    android:id="@+id/ll_item_fmt_op_record">
+
+    <TextView
+        android:id="@+id/tv_item_fmt_op_record_no"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="wrap_content"
+        android:text="编号"/>
+
+    <TextView
+        android:id="@+id/tv_item_fmt_op_record_info"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_height="wrap_content"
+        android:text="详细信息"/>
+
+    <TextView
+        android:id="@+id/tv_item_fmt_op_record_sfz"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_height="wrap_content"
+        android:text="身份证号"/>
+
+    <TextView
+        android:id="@+id/tv_item_fmt_op_record_time"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:text="时间"/>
+
+    <TextView
+        android:id="@+id/tv_item_fmt_op_record_gps"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        />
+</LinearLayout>

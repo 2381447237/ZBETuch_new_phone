@@ -4,12 +4,26 @@ package com.youli.zbetuch.jingan.utils;
 import android.util.Base64;
 import android.util.Log;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -24,8 +38,8 @@ public class MyOkHttpUtils {
     private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");//mdiatype 这个需要和服务端保持一致
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");
-    public static final String BaseUrl="http://web.youli.pw:89";
-  //  public static final String BaseUrl="http://192.168.4.11:89";
+     public static final String BaseUrl="http://web.youli.pw:89";
+   // public static final String BaseUrl = "http://192.168.4.11:89"; // 3G
     private static final String TAG = "asdasdasd";
     static OkHttpClient okHttpClient = null;
 
@@ -409,4 +423,5 @@ return response;
         }
 
     }
+
 }

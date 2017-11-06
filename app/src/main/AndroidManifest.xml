@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.youli.zbetuch.jingan"
           android:versionName="版本日期：2017-07-03 \n新增高校专项调查">
-
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -10,6 +12,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- 向SD卡中创建或者删除的权限。 -->
     <uses-permission android:name="andorid.permission.MONUN_UNMOUNT_FILESYSTEMS"/>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/><!--获取精确位置-->
 
     <application
         android:name=".utils.MyApplication"
@@ -67,7 +73,7 @@
 
         <activity android:name=".activity.RecruitInfoActivity"
             android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"></activity><!--招聘信息-->
 
         <activity android:name=".activity.JobInfoListActivity"
             android:screenOrientation="portrait"></activity>
@@ -88,7 +94,7 @@
         <activity android:name=".activity.WorkNoticeDetailActivity"
             android:screenOrientation="portrait" ></activity>
         <activity android:name=".activity.MeetNoticeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"></activity><!--会议通知-->
         <activity android:name=".activity.MeetDetailActivity"
             android:screenOrientation="portrait"></activity>
 <activity android:name=".activity.ChangePwdActivity"
@@ -122,6 +128,82 @@
         <activity android:name=".activity.GraPerDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"></activity><!--应届毕业生个人详情-->
+        <activity android:name=".activity.WorkRecordDetailActivity"
+            android:screenOrientation="portrait"></activity><!--工作日志详情-->
+        <activity android:name=".activity.ReportDetailActivity"
+            android:screenOrientation="portrait"></activity><!--统计报表详情-->
+        <activity android:name=".activity.QuestionNaireActivity"
+            android:screenOrientation="portrait"></activity><!--问卷调查-->
+        <activity android:name=".activity.NairePersonActivity"
+            android:screenOrientation="portrait"></activity><!--问卷被调查人-->
+
+        <activity android:name=".naire.ShowWenJuanActivity"
+            android:screenOrientation="portrait"></activity><!--问卷调查-->
+
+        <activity android:name=".naire.WenJuanPersonActivity"
+            android:screenOrientation="portrait"></activity><!--问卷被调查人-->
+        <activity
+            android:name=".naire.ShowPersionDetailInfo"
+            android:theme="@style/Theme.ActivityDialogStyle"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+        <activity
+            android:name=".naire.WenJuanDetailActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name=".naire.WenJuanRegisterInfo"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            ></activity>
+
+        <activity
+            android:theme="@style/Theme.ActivityDialogStyle"
+            android:name=".naire.ShowWenJuanMarkActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+        <activity
+
+            android:name=".naire.ShowPersionHistoryActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+        <activity
+            android:theme="@style/Theme.ActivityDialogStyle"
+            android:name=".naire.ShowPersionHistoryList"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+
+        <service android:name=".naire.PersonService" >
+            <intent-filter>
+                <action android:name="com.fc.person.newservice.PersonService" />
+            </intent-filter>
+        </service>
+        <service android:name=".naire.MainService" >
+        <intent-filter>
+            <action android:name="com.fc.main.newservice.MainService" />
+        </intent-filter>
+    </service>
+
+        <service android:name=".service.PostMsgService" >
+            <intent-filter>
+                <action android:name="com.youli.zbetuch.jingan.service.PostMsgService" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

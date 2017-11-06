@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,12 +43,14 @@ public class PersonReFragment extends Fragment{
     private String sfzStr;
 
 
-    public String getSfzStr() {
-        return sfzStr;
-    }
+    public static final PersonReFragment newInstance(String sfz){
 
-    public PersonReFragment(String sfzStr) {
-        this.sfzStr = sfzStr;
+        PersonReFragment fragment = new PersonReFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("sfz", sfz);
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 
     private View contentView;
@@ -64,7 +69,8 @@ public class PersonReFragment extends Fragment{
     private String queryUrl;
     private final int SUCCESS=10000;
     private final int SUCCESS_JOB=10001;
-    private final int  PROBLEM=10002;
+    private final int  SUCCESS_NODATA=10002;
+    private final int  PROBLEM=10003;
 
     private Handler mHandler=new Handler(){
 
@@ -117,16 +123,20 @@ public class PersonReFragment extends Fragment{
 
                     jobInfoList.clear();
                     jobInfoList.addAll((List<JobInfoListInfo>)msg.obj);
-
-                    Intent intent=new Intent(getActivity(), JobInfoListActivity.class);
-                    intent.putExtra("JobInfoList",(Serializable) jobInfoList);
-                    intent.putExtra("queryUrl",queryUrl);
-                    startActivity(intent);
+                    if(getActivity()!=null) {
+                        Intent intent = new Intent(getActivity(), JobInfoListActivity.class);
+                        intent.putExtra("JobInfoList", (Serializable) jobInfoList);
+                        intent.putExtra("queryUrl", queryUrl);
+                        startActivity(intent);
+                    }
                     break;
 
                 case PROBLEM:
-
-                    Toast.makeText(getActivity(),"网络不给力",Toast.LENGTH_SHORT).show();
+                    if(getActivity()!=null) {
+                        Toast.makeText(getActivity(), "网络不给力", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case SUCCESS_NODATA:
 
                     break;
             }
@@ -134,14 +144,21 @@ public class PersonReFragment extends Fragment{
         }
     };
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        sfzStr=getArguments().getString("sfz");
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-
+        EventBus.getDefault().register(this);
         contentView=LayoutInflater.from(getContext()).inflate(R.layout.framgment_personal_resume,container,false);
 
         initView(contentView);
-        EventBus.getDefault().register(this);
+
 
         return contentView;
     }
@@ -194,9 +211,11 @@ public class PersonReFragment extends Fragment{
 //                        根据身份证查询岗位信息
 //                        http://web.youli.pw:89/Json/Get_JobsInfo.aspx?sfz=422201197209204223&PageIndex=0&PageRecCnts=15
 
-                        queryUrl=MyOkHttpUtils.BaseUrl+"/Json/Get_JobsInfo.aspx?sfz="+getSfzStr()+"&PageRecCnts=15&PageIndex=";
+                        queryUrl=MyOkHttpUtils.BaseUrl+"/Json/Get_JobsInfo.aspx?sfz="+sfz+"&PageRecCnts=15&PageIndex=";
 
                         String urlJobList=queryUrl+"0";
+
+                        Log.e("2017/10/26","urlJobList=="+urlJobList);
 
                         Response response=MyOkHttpUtils.okHttpGet(urlJobList);
 
@@ -207,13 +226,13 @@ public class PersonReFragment extends Fragment{
                             try {
                                 String jobStr=response.body().string();
 
-                                if(jobStr!=null){
+                                if(!TextUtils.equals(jobStr,"")){
                                     Gson gson=new Gson();
                                     msg.what=SUCCESS_JOB;
                                     msg.obj=gson.fromJson(jobStr,new TypeToken<List<JobInfoListInfo>>(){}.getType());
                                 }else{
 
-                                    msg.what=PROBLEM;
+                                    msg.what=SUCCESS_NODATA;
                                 }
 
                             } catch (IOException e) {
@@ -269,7 +288,7 @@ public class PersonReFragment extends Fragment{
                     @Override
                     public void run() {
 
-                        String resUrl= MyOkHttpUtils.BaseUrl+"/Json/Get_Resumes_Info.aspx?sfz="+getSfzStr();
+                        String resUrl= MyOkHttpUtils.BaseUrl+"/Json/Get_Resumes_Info.aspx?sfz="+sfzStr;
 
                         Response response=MyOkHttpUtils.okHttpGet(resUrl);
 
@@ -280,7 +299,7 @@ public class PersonReFragment extends Fragment{
                              try {
                                  String resStr=response.body().string();
 
-                                 if(resStr!=null){
+                                 if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")){
 
                                      Gson gson=new Gson();
 
@@ -290,7 +309,7 @@ public class PersonReFragment extends Fragment{
                                      mHandler.sendMessage(msg);
 
                                  }else{
-                                     msg.what= PROBLEM;
+                                     msg.what= SUCCESS_NODATA;
                                      mHandler.sendMessage(msg);
 
                                  }

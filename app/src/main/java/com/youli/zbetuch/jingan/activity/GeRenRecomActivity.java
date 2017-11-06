@@ -1,6 +1,8 @@
 package com.youli.zbetuch.jingan.activity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,14 +15,22 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.ocr.sdk.OCR;
+import com.baidu.ocr.sdk.OnResultListener;
+import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.AccessToken;
+import com.baidu.ocr.sdk.model.IDCardParams;
+import com.baidu.ocr.sdk.model.IDCardResult;
+import com.baidu.ocr.ui.camera.CameraActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
-import com.youli.zbetuch.jingan.entity.InterviewInfo;
 import com.youli.zbetuch.jingan.entity.PersonInfo;
+import com.youli.zbetuch.jingan.utils.FileUtils;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +49,12 @@ import okhttp3.Response;
 
 public class GeRenRecomActivity extends BaseActivity implements View.OnClickListener{
 
+    private static final int REQUEST_CODE_CAMERA = 9999;
 
     private final int SUCCESS_INFO=10001;
     private final int SUCCESS_RECOM=10002;
-    private final int FAIL=10003;
+    private final int SUCCESS_NODATA=10003;
+    private final int FAIL=10004;
 
     private Context mContext=GeRenRecomActivity.this;
     private Button btnScan;//扫描
@@ -118,6 +130,9 @@ public class GeRenRecomActivity extends BaseActivity implements View.OnClickList
                     Toast.makeText(mContext,"网络不给力",Toast.LENGTH_SHORT).show();
 
                     break;
+
+                case SUCCESS_NODATA:
+                    break;
             }
 
 
@@ -134,11 +149,29 @@ public class GeRenRecomActivity extends BaseActivity implements View.OnClickList
         masterId=getIntent().getStringExtra("master_id");
         code=getIntent().getStringExtra("JOBNO");
 
-
+         // 初始化
+        initAccessTokenWithAkSk();
         initViews();
 
     }
 
+
+    private void initAccessTokenWithAkSk(){
+
+        OCR.getInstance().initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
+            @Override
+            public void onResult(AccessToken result) {
+                Log.e("2017-11-2", "onResult: " + result.toString());
+            }
+
+            @Override
+            public void onError(OCRError error) {
+                error.printStackTrace();
+                Log.e("2017-11-2", "onError: " + error.getMessage());
+            }
+        },getApplicationContext(),"d8GYLDKFKfEv58opiaB2yLSk","W2FpYRkd49pMimAQDWR1eC3v0Ng82oUv");
+
+    }
 
     private void initViews(){
 
@@ -179,6 +212,13 @@ public class GeRenRecomActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()){
 
             case R.id.btn_geren_recom_scanning://扫描
+
+                Intent intent=new Intent(mContext, CameraActivity.class);
+                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                        FileUtils.getSaveFile(getApplication()).getAbsolutePath());
+                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
+                startActivityForResult(intent,REQUEST_CODE_CAMERA);
+
                 break;
             case R.id.btn_geren_recom_query://查询
 
@@ -236,7 +276,7 @@ public class GeRenRecomActivity extends BaseActivity implements View.OnClickList
 
                              Message msg=Message.obtain();
 
-                             if(!TextUtils.equals("",resStr)){
+                             if(!TextUtils.equals("",resStr)&&!TextUtils.equals("[]",resStr)){
 
                                  Gson gson=new Gson();
 
@@ -246,7 +286,7 @@ public class GeRenRecomActivity extends BaseActivity implements View.OnClickList
 
                              }else{
 
-                                 msg.what=FAIL;
+                                 msg.what=SUCCESS_NODATA;
 
                              }
 
@@ -300,26 +340,34 @@ public class GeRenRecomActivity extends BaseActivity implements View.OnClickList
                         String url=MyOkHttpUtils.BaseUrl+"/Json/Set_JobFairRecommend.aspx?sfz="+sfz+"&rows=15&page=0&master_id="+masterId+"&code="+code;
 
                         Response response=MyOkHttpUtils.okHttpGet(url);
-
+                        Message msg = Message.obtain();
 
                         try {
-                            String resStr=response.body().string();
 
-                            Message msg=Message.obtain();
+                            if(response.body()!=null) {
 
-                            if(!TextUtils.equals("",resStr)){
+                                String resStr = response.body().string();
 
-                                msg.obj=resStr;
 
-                                msg.what=SUCCESS_RECOM;
+                                if (!TextUtils.equals("", resStr) && !TextUtils.equals("[]", resStr)) {
+
+                                    msg.obj = resStr;
+
+                                    msg.what = SUCCESS_RECOM;
+
+                                } else {
+
+                                    msg.what = SUCCESS_NODATA;
+
+                                }
+
+                                mHandler.sendMessage(msg);
 
                             }else{
-
-                                msg.what=FAIL;
-
+                                msg.what = FAIL;
+                                mHandler.sendMessage(msg);
                             }
 
-                            mHandler.sendMessage(msg);
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -332,6 +380,73 @@ public class GeRenRecomActivity extends BaseActivity implements View.OnClickList
         ).start();
 
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_CODE_CAMERA&&resultCode== Activity.RESULT_OK){
+
+            if(data!=null){
+
+                String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
+                String filePath=FileUtils.getSaveFile(getApplicationContext()).getAbsolutePath();
+                if(!TextUtils.isEmpty(contentType)){
+                    if(CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)){
+                        recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
+                    }
+                }
+            }
+
+        }
+    }
+
+    /**
+     * 解析身份证图片
+     *
+     * @param idCardSide 身份证正反面
+     * @param filePath   图片路径
+     */
+    private void recIDCard(String idCardSide, String filePath) {
+
+        IDCardParams param=new IDCardParams();
+        param.setImageFile(new File(filePath));
+        // 设置身份证正反面
+        param.setIdCardSide(idCardSide);
+        // 设置方向检测
+        param.setDetectDirection(true);
+       // 设置图像参数压缩质量0-100, 越大图像质量越好但是请求时间越长。 不设置则默认值为20
+        param.setImageQuality(40);
+
+        OCR.getInstance().recognizeIDCard(param, new OnResultListener<IDCardResult>() {
+            @Override
+            public void onResult(IDCardResult result) {
+                if(result!=null){
+                    String num = "";
+                    if (result.getIdNumber() != null) {
+                        num = result.getIdNumber().toString();
+                    }
+
+                    Log.e("2017/11/2","身份证号=="+num);
+                    gerenRecom(num,masterId,code);
+                }
+            }
+
+            @Override
+            public void onError(OCRError error) {
+                Toast.makeText(mContext, "识别出错,请重新扫描身份证", Toast.LENGTH_SHORT).show();
+                Log.e("2017/11/2", "onError: " + error.getMessage());
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // 释放内存资源
+        OCR.getInstance().release();
     }
 
 }

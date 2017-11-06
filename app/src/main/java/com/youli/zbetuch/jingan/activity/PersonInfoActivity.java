@@ -37,6 +37,8 @@ import com.youli.zbetuch.jingan.utils.IOUtil;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -107,26 +109,45 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_info);
-
+//注册事件
+        EventBus.getDefault().register(this);
         personInfo=(PersonInfo)getIntent().getSerializableExtra("personInfos");//从ShiwuyeDetailActivity传过来的//从PersonalInfoQueryResult传过来的//从RecomListActivity传过来的//从FollowListActivity传过来的
-        if(mFragments==null) {
+        if(mFragments==null) {                                                //从ShowPersionDetailInfo传过来的
 
-            initData();
-            initView();
+            RefreshUi();
+
         }
 
     }
+
+
+    public void RefreshUi(){
+        initData();
+        initView();
+    }
+
 
     private void initData(){
 
         mFragments=new ArrayList<Fragment>();
 
+
+
         if(personInfo!=null){
-            mFragments.add(new PersonInfoFragment(personInfo));
-            mFragments.add(new FamilyInfoFragment(personInfo.getSFZ()));
-            mFragments.add(new PersonReFragment(personInfo.getSFZ()));
-            mFragments.add(new ServiceReFramgent(personInfo.getSFZ()));
-            mFragments.add(new EduInfoFragment(personInfo.getSFZ()));
+            PersonInfoFragment piFmt=PersonInfoFragment.newInstance(personInfo);
+            mFragments.add(piFmt);
+
+            FamilyInfoFragment fiFmt=FamilyInfoFragment.newInstance(personInfo.getSFZ());
+            mFragments.add(fiFmt);
+
+            PersonReFragment prFmt=PersonReFragment.newInstance(personInfo.getSFZ());
+            mFragments.add(prFmt);
+
+            ServiceReFramgent srFmt=ServiceReFramgent.newInstance(personInfo.getSFZ());
+            mFragments.add(srFmt);
+
+            EduInfoFragment eiFmt=EduInfoFragment.newInstance(personInfo.getSFZ());
+            mFragments.add(eiFmt);
         }
 
     }
@@ -229,12 +250,14 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
 
 
         if(personInfo!=null) {
-            getHeadPhoto();
+            getHeadPhoto(personInfo);
         }
     }
 
     //获得头像图片
-    private void getHeadPhoto(){
+    //这里我们的ThreadMode设置为MAIN，事件的处理会在UI线程中执行，用iv来展示收到的事件消息
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getHeadPhoto(final PersonInfo info){
 
         new Thread(
 
@@ -421,6 +444,11 @@ public class PersonInfoActivity extends FragmentActivity implements View.OnClick
         builder.show();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //取消注册事件
+        EventBus.getDefault().unregister(this);
+    }
 
 }

@@ -6,4 +6,7 @@
     <color name="org">#FFA500</color>
     <color name="skyBlue">#C9E2FA</color>
     <color name="white">#FFFFFF</color>
+    <color name="tabLay">#e29b70</color>
+    <color name="tabLayBg">#5ba4e6</color>
+    <color name="black">#000000</color>
 </resources>

@@ -59,7 +59,8 @@ public class RecruitInfoActivity extends BaseActivity implements View.OnClickLis
     private final int SUCCEED_INDUSTRY_SMALL=10007;
     private final int SUCCEED_OCC_BIG=10008;
     private final int SUCCEED_OCC_SMALL=10009;
-    private final int  PROBLEM=10010;
+    private final int SUCCEED_NODATA=10010;
+    private final int  PROBLEM=10011;
 
     private int PageIndex=0;
     private String queryUrl,ModifyStartDateStr,ModifyEndDateStr,industryCode,occPid;
@@ -168,6 +169,8 @@ public class RecruitInfoActivity extends BaseActivity implements View.OnClickLis
 
                      break;
 
+                             case SUCCEED_NODATA:
+                                 break;
              }
 
         }
@@ -348,47 +351,50 @@ public class RecruitInfoActivity extends BaseActivity implements View.OnClickLis
 
                             try {
                                 String resStr=response.body().string();
-                                Gson gson=new Gson();
-                                if(TextUtils.equals(content,"单位性质")) {
-                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<CompanyPropertyInfo>>() {
-                                    }.getType());
-                                    msg.what=SUCCEED_COMPANYPROPERTY;
-                                }else if(TextUtils.equals(content,"文化程度")){
-                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<RecruitEduInfo>>() {
-                                    }.getType());
-                                    msg.what=SUCCEED_EDU;
-                                }else if(TextUtils.equals(content,"工作性质")){
-                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<GzxzInfo>>() {
-                                    }.getType());
-                                    msg.what=SUCCEED_GZXZ;
-                                }else if(TextUtils.equals(content,"工作班时")){
-                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<GzbsInfo>>() {
-                                    }.getType());
-                                    msg.what=SUCCEED_GZBS;
-                                }else if(TextUtils.equals(content,"工作地区")){
-                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<AreaInfo>>() {
-                                    }.getType());
-                                    msg.what=SUCCEED_AREA;
-                                }else if(TextUtils.equals(content,"行业大类")){
-                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<IndustryInfo>>() {
-                                    }.getType());
-                                    msg.what=SUCCEED_INDUSTRY_BIG;
-                                }else if(TextUtils.equals(content,"职业大类")){
-                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<OccInfo>>() {
-                                    }.getType());
-                                    msg.what=SUCCEED_OCC_BIG;
-                                }else if(TextUtils.equals(content,"行业小类")){
-                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<IndustryInfo>>() {
-                                    }.getType());
 
-                                    msg.what=SUCCEED_INDUSTRY_SMALL;
-                                }else if(TextUtils.equals(content,"职业小类")){
-                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<OccInfo>>() {
-                                    }.getType());
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
 
-                                    msg.what=SUCCEED_OCC_SMALL;
+                                    Gson gson = new Gson();
+                                    if (TextUtils.equals(content, "单位性质")) {
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<CompanyPropertyInfo>>() {
+                                        }.getType());
+                                        msg.what = SUCCEED_COMPANYPROPERTY;
+                                    } else if (TextUtils.equals(content, "文化程度")) {
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<RecruitEduInfo>>() {
+                                        }.getType());
+                                        msg.what = SUCCEED_EDU;
+                                    } else if (TextUtils.equals(content, "工作性质")) {
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<GzxzInfo>>() {
+                                        }.getType());
+                                        msg.what = SUCCEED_GZXZ;
+                                    } else if (TextUtils.equals(content, "工作班时")) {
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<GzbsInfo>>() {
+                                        }.getType());
+                                        msg.what = SUCCEED_GZBS;
+                                    } else if (TextUtils.equals(content, "工作地区")) {
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<AreaInfo>>() {
+                                        }.getType());
+                                        msg.what = SUCCEED_AREA;
+                                    } else if (TextUtils.equals(content, "行业大类")) {
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<IndustryInfo>>() {
+                                        }.getType());
+                                        msg.what = SUCCEED_INDUSTRY_BIG;
+                                    } else if (TextUtils.equals(content, "职业大类")) {
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<OccInfo>>() {
+                                        }.getType());
+                                        msg.what = SUCCEED_OCC_BIG;
+                                    } else if (TextUtils.equals(content, "行业小类")) {
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<IndustryInfo>>() {
+                                        }.getType());
+
+                                        msg.what = SUCCEED_INDUSTRY_SMALL;
+                                    } else if (TextUtils.equals(content, "职业小类")) {
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<OccInfo>>() {
+                                        }.getType());
+
+                                        msg.what = SUCCEED_OCC_SMALL;
+                                    }
                                 }
-
                                 mHandler.sendMessage(msg);
 
                             } catch (IOException e) {
@@ -499,6 +505,7 @@ public class RecruitInfoActivity extends BaseActivity implements View.OnClickLis
 
 
                  break;
+
          }
 
     }
@@ -527,10 +534,16 @@ public class RecruitInfoActivity extends BaseActivity implements View.OnClickLis
                             try {
                                 String resStr=response.body().string();
 
-                                Gson gson=new Gson();
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
 
-                                msg.obj=gson.fromJson(resStr,new TypeToken<List<JobInfoListInfo>>(){}.getType());
-                                msg.what=SUCCEED;
+                                    Gson gson = new Gson();
+
+                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<JobInfoListInfo>>() {
+                                    }.getType());
+                                    msg.what = SUCCEED;
+                                }else{
+                                    msg.what = SUCCEED_NODATA;
+                                }
                                 mHandler.sendMessage(msg);
 
 

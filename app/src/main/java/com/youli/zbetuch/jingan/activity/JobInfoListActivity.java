@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,8 @@ public class JobInfoListActivity extends BaseActivity implements AdapterView.OnI
 
     private Context mContext=this;
     private final int SUCCEED_REFRESH=10001;
-    private final int  PROBLEM=10002;
+    private final int SUCCEED_NODATA=10002;
+    private final int  PROBLEM=10003;
 
     private MyListView lv;
     private View headerLv;
@@ -76,6 +78,8 @@ public class JobInfoListActivity extends BaseActivity implements AdapterView.OnI
 
                      break;
 
+                 case SUCCEED_NODATA:
+                     break;
              }
 
         }
@@ -212,13 +216,18 @@ if(commonAdapter==null){
                             try {
                                 String resStr=response.body().string();
 
-                                Gson gson=new Gson();
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
 
-                                msg.obj=gson.fromJson(resStr,new TypeToken<List<JobInfoListInfo>>(){}.getType());
-                                msg.what=SUCCEED_REFRESH;
+                                    Gson gson = new Gson();
+
+                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<JobInfoListInfo>>() {
+                                    }.getType());
+                                    msg.what = SUCCEED_REFRESH;
+
+                                }else{
+                                    msg.what = SUCCEED_NODATA;
+                                }
                                 mHandler.sendMessage(msg);
-
-
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

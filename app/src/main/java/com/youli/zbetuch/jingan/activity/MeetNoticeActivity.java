@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,8 @@ public class MeetNoticeActivity extends FragmentActivity{
 
     private Context mContext=MeetNoticeActivity.this;
     private final int SUCCEED_READNUM=10000;
-    private final int  PROBLEM=10001;
+    private final int SUCCEED_NODATA=10001;
+    private final int  PROBLEM=10002;
 
 
     private TextView readNum;
@@ -76,6 +78,8 @@ public class MeetNoticeActivity extends FragmentActivity{
                     Toast.makeText(mContext,"网络不给力",Toast.LENGTH_SHORT).show();
                     break;
 
+                case SUCCEED_NODATA:
+                    break;
             }
 
         }
@@ -122,11 +126,15 @@ public class MeetNoticeActivity extends FragmentActivity{
                             try {
                                 String dataStr=response.body().string();
 
-                                Gson gson=new Gson();
+                                if(!TextUtils.equals(dataStr,"")&&!TextUtils.equals(dataStr,"[]")) {
+                                    Gson gson = new Gson();
 
-                                msg.obj=gson.fromJson(dataStr,new TypeToken<List<WorkNoticeReadInfo>>(){}.getType());
-                                msg.what=SUCCEED_READNUM;
-
+                                    msg.obj = gson.fromJson(dataStr, new TypeToken<List<WorkNoticeReadInfo>>() {
+                                    }.getType());
+                                    msg.what = SUCCEED_READNUM;
+                                }else{
+                                    msg.what = SUCCEED_NODATA;
+                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp"
+    android:gravity="center"
+    android:id="@+id/ll_item_fmt_work_log">
+
+    <TextView
+        android:id="@+id/tv_item_fmt_work_log_no"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="编号"/>
+
+    <TextView
+        android:id="@+id/tv_item_fmt_work_log_name"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="姓名"/>
+
+    <TextView
+        android:id="@+id/tv_item_fmt_work_log_time"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="时间"/>
+
+
+</LinearLayout>

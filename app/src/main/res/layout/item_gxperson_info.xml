@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/tv_item_naire_person_name"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="姓名" />
+
+    <TextView
+        android:id="@+id/tv_item_naire_person_sex"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:text="性别" />
+
+    <TextView
+        android:id="@+id/tv_item_naire_person_street"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:text="街道" />
+    <TextView
+        android:id="@+id/tv_item_naire_person_jw"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="居委" />
+    <TextView
+        android:id="@+id/tv_item_naire_person_huji"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="户籍地址" />
+    <TextView
+        android:id="@+id/tv_item_naire_person_family_num"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:text="家庭成员数量" />
+     <!--<LinearLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:orientation="horizontal"-->
+             <!--&gt; -->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_name"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:text="姓　名"-->
+                <!--android:textSize="22sp"-->
+                <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_sex"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="50dp"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:gravity="center"-->
+                <!--android:text="性　别"-->
+                <!--android:textSize="22sp"-->
+                <!--android:textStyle="bold" -->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_jd"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+               <!--android:layout_weight="1"-->
+               <!--android:layout_gravity="center"-->
+                 <!--android:gravity="center"-->
+                <!--android:text="街道"-->
+                <!--android:textSize="22sp"-->
+                <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_jw"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                 <!--android:gravity="center"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:text="居委"-->
+                <!--android:textSize="22sp"-->
+                <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_lxdz"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="2"-->
+                 <!--android:gravity="center"-->
+                <!--android:text="联系地址"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:textSize="22sp"-->
+                <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+                <!--android:visibility="gone"-->
+                <!--android:id="@+id/tv_jtcys"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                 <!--android:gravity="center"-->
+                <!--android:text="10"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:textSize="22sp"-->
+                <!--android:textStyle="bold" />-->
+            <!---->
+        <!--</LinearLayout>-->
+    
+
+</LinearLayout>

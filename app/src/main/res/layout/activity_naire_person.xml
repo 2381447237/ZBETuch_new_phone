@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/grxxlb"
+        >
+
+        <RadioGroup
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rb_naire_person_no_check"
+                android:onClick="onRadio"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_ziyuan_detaillist"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="未查" />
+
+            <RadioButton
+                android:id="@+id/rb_naire_person_checked"
+                android:onClick="onRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_ziyuan_detaillist"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_marginLeft="12dp"
+                android:text="已查" />
+        </RadioGroup>
+
+        <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+         />
+
+        <TextView
+            android:id="@+id/tv_naire_person_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:textColor="#fff"
+            android:textSize="17sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/title2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:visibility="gone"
+            style="@style/gradeate_list_titletext"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="编号"
+            />
+
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="姓名" />
+
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="性别" />
+
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="街道" />
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="居委" />
+        <TextView
+            style="@style/gradeate_list_titletext"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="户籍地址" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_naire_person_family_num"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="家庭成员数量" />
+
+
+    </LinearLayout>
+
+
+    <!--<ListView-->
+        <!--android:id="@+id/lv_naire_person"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"></ListView>-->
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/lv_naire_person"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#000000"
+        android:divider="#19000000"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="true"
+        android:smoothScrollbar="true"
+        ptr:ptrAnimationStyle="rotate"></com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+</LinearLayout>

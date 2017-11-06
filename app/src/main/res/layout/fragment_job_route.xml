@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <RadioGroup
+        android:id="@+id/rg_job_route"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/pendsecondback"
+        >
+
+        <RadioButton
+            android:background="@drawable/lefttab"
+            android:gravity="center"
+            android:id="@+id/rb_job_route_one"
+            android:checked="true"
+             android:padding="10dp"
+            android:button="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="调\n查\n走\n访\n情\n况"/>
+
+        <RadioButton
+            android:id="@+id/rb_job_route_two"
+            android:background="@drawable/lefttab"
+            android:padding="10dp"
+            android:gravity="center"
+            android:button="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="职\n业\n指\n导\n情\n况"/>
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/fl_job_route"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></FrameLayout>
+
+</LinearLayout>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:ptr="http://schemas.android.com/tools">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,31 +32,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingTop="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:orientation="horizontal"
+            >
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
             android:text="身份证："
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
         <EditText
             android:singleLine="true"
-            android:id="@+id/ziyuan_detail_et"
+            android:id="@+id/et_graduate_sfz"
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center_vertical"
             android:textSize="15sp"
             android:padding="2dp"
             android:background="@drawable/shape_ziyuan_detail_et"
             />
+</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="姓名："
@@ -63,42 +75,36 @@
             android:textSize="15sp" />
 
         <EditText
+            android:id="@+id/et_graduate_name"
             android:singleLine="true"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center_vertical"
             android:textSize="15sp"
             android:padding="2dp"
             android:background="@drawable/shape_ziyuan_detail_et"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="20dp"
             android:text="年度："
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
         <Spinner
+            android:gravity="center"
             android:background="@drawable/spinner_bg"
             android:spinnerMode="dialog"
             android:id="@+id/sp_graduate_year"
             android:layout_width="0dp"
-            android:layout_height="33dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            />
+        </LinearLayout>
 
-        <!--<EditText-->
-            <!--android:layout_marginRight="5dp"-->
-            <!--android:singleLine="true"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:textSize="15sp"-->
-            <!--android:padding="2dp"-->
-            <!--android:background="@drawable/shape_ziyuan_detail_et"-->
-            <!--/>-->
     </LinearLayout>
 
     <LinearLayout
@@ -175,9 +181,21 @@
 
     </LinearLayout>
 
-    <ListView
+    <!--<ListView-->
+        <!--android:id="@+id/lv_graduate"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"></ListView>-->
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_graduate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:cacheColorHint="#000000"
+        android:divider="#19000000"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="true"
+        android:smoothScrollbar="true"
+        ptr:ptrAnimationStyle="rotate"></com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </LinearLayout>

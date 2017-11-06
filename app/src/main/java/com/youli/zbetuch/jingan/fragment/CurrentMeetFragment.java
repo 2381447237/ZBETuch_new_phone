@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,8 @@ public class CurrentMeetFragment extends Fragment implements AdapterView.OnItemC
     private List<MeetNoticeInfo> data=new ArrayList<>();
 
     private final int SUCCEED=10001;
-    private final int  PROBLEM=10002;
+    private final int SUCCEED_NODATA=10002;
+    private final int  PROBLEM=10003;
 
     private int PageIndex=0;
 
@@ -68,8 +70,15 @@ public class CurrentMeetFragment extends Fragment implements AdapterView.OnItemC
                     break;
                 case PROBLEM:
                     Toast.makeText(getActivity(),"网络不给力",Toast.LENGTH_SHORT).show();
+                    if(lv.isRefreshing()){
+                        lv.onRefreshComplete();
+                    }
                     break;
-
+                case SUCCEED_NODATA:
+                    if(lv.isRefreshing()){
+                        lv.onRefreshComplete();
+                    }
+                    break;
             }
 
         }
@@ -135,11 +144,13 @@ public class CurrentMeetFragment extends Fragment implements AdapterView.OnItemC
                             try {
                                 String meetStr=response.body().string();
 
-                                if(meetStr!=null){
+                                if(!TextUtils.equals(meetStr,"")&&!TextUtils.equals(meetStr,"[]")){
 
                                     Gson gson=new Gson();
                                     msg.obj=gson.fromJson(meetStr,new TypeToken<List<MeetNoticeInfo>>(){}.getType());
                                     msg.what=SUCCEED;
+                                }else{
+                                    msg.what=SUCCEED_NODATA;
                                 }
 
                             } catch (IOException e) {

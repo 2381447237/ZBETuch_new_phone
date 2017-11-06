@@ -4,6 +4,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -40,17 +41,19 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
 
     private final int SUCCEED_MARK=10000;
     private final int SUCCEED_MARKIMG=10001;
-
+    private final int SUCCEED_NODATA=10002;
     private final int  PROBLEM=10003;
 
     private PersonInfo pInfo;
 
-    public PersonInfoFragment(PersonInfo pInfo) {
-        this.pInfo = pInfo;
-    }
+    public static final PersonInfoFragment newInstance(PersonInfo pInfo){
 
-    public PersonInfo getpInfo() {
-        return pInfo;
+        PersonInfoFragment fragment = new PersonInfoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("pInfo",pInfo);
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 
     private LinearLayout markLl;
@@ -140,13 +143,24 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
 
 
                 case PROBLEM:
+                    if(getActivity()!=null) {
+                        Toast.makeText(getActivity(), "网络不给力", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                case SUCCEED_NODATA:
 
-                    Toast.makeText(getActivity(),"网络不给力",Toast.LENGTH_SHORT).show();
                     break;
             }
 
         }
     };
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        pInfo=(PersonInfo)getArguments().getSerializable("pInfo");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
@@ -159,6 +173,7 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
         }
         return contentView;
     }
+
 
 
     private void initViews(View view){
@@ -254,7 +269,7 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void run() {
 //http://web.youli.pw:89/Json/Get_Tb_Mark.aspx?sfz=310108198004026642
-                        String urlMarkImg=MyOkHttpUtils.BaseUrl+"/Json/Get_Tb_Mark.aspx?sfz="+getpInfo().getSFZ();
+                        String urlMarkImg=MyOkHttpUtils.BaseUrl+"/Json/Get_Tb_Mark.aspx?sfz="+pInfo.getSFZ();
 
                         Response response=MyOkHttpUtils.okHttpGet(urlMarkImg);
 
@@ -265,10 +280,16 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
                             try {
                                 String resStr=response.body().string();
 
-                                Gson gson=new Gson();
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
 
-                                msg.obj=gson.fromJson(resStr,new TypeToken<List<MarkImgInfo>>(){}.getType());
-                                msg.what=SUCCEED_MARKIMG;
+                                    Gson gson = new Gson();
+
+                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<MarkImgInfo>>() {
+                                    }.getType());
+                                    msg.what = SUCCEED_MARKIMG;
+                                }else{
+                                    msg.what = SUCCEED_NODATA;
+                                }
                                 mHandler.sendMessage(msg);
 
                             } catch (IOException e) {
@@ -300,7 +321,7 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void run() {
 
-                        String markUrl= MyOkHttpUtils.BaseUrl+"/Json/Get_TB_Staff_Marks.aspx?sfz="+getpInfo().getSFZ();
+                        String markUrl= MyOkHttpUtils.BaseUrl+"/Json/Get_TB_Staff_Marks.aspx?sfz="+pInfo.getSFZ();
 
                         Response response=MyOkHttpUtils.okHttpGet(markUrl);
 
@@ -310,11 +331,15 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
 
                             try {
                                 String resStr=response.body().string();
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
+                                    Gson gson = new Gson();
 
-                                Gson gson=new Gson();
-
-                                msg.what=SUCCEED_MARK;
-                                msg.obj=gson.fromJson(resStr,new TypeToken<List<StaffMarkInfo>>(){}.getType());
+                                    msg.what = SUCCEED_MARK;
+                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<StaffMarkInfo>>() {
+                                    }.getType());
+                                }else{
+                                    msg.what = SUCCEED_NODATA;
+                                }
                                 mHandler.sendMessage(msg);
 
                             } catch (IOException e) {
@@ -364,7 +389,9 @@ switch (v.getId()){
     }
 
     private void showPopupWindow(View parent,String markStr){
-
+      if(getActivity()==null){
+          return;
+      }
        if(popupWin==null){
            markView=LayoutInflater.from(getActivity()).inflate(R.layout.popup_person_mark,null);
 

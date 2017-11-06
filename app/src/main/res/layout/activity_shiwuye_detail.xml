@@ -288,7 +288,7 @@
 
         </LinearLayout>
 
-        <!--居委，详细地址-->
+        <!--户籍地址-->
         <LinearLayout
             android:padding="9dp"
             android:layout_width="match_parent"
@@ -544,6 +544,130 @@
                     />
 
             </LinearLayout>
+
+        </LinearLayout>
+
+
+        <!--最后一次调查情况-->
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最后一次调查情况"
+                    android:textColor="#ffffff"/>
+
+
+        </LinearLayout>
+
+
+        <!--目前状况，当前意向-->
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="目前状况"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_present_status_et_last"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:paddingLeft="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前意向"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_present_intention_et_last"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--备注-->
+
+        <LinearLayout
+            android:padding="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="16sp"
+                    android:paddingRight="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备  注"
+                    android:textColor="#ffffff"/>
+
+                <EditText
+                    android:id="@+id/shiwuye_detail_remarks_et_last"
+                    android:textColor="#c0c0c0"
+                    android:paddingLeft="3dp"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    android:background="@drawable/shape_shiwuye_detail_et"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+
+
+
 
         </LinearLayout>
 

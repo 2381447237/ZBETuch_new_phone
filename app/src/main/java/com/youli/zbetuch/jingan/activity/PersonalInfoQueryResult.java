@@ -274,6 +274,11 @@ public class PersonalInfoQueryResult extends BaseActivity {
             public void run() {
                 Response response = MyOkHttpUtils.okHttpGet(url);
                 try {
+
+                    if(response==null){
+                        return;
+                    }
+
                     final String responseBody = response.body().string().trim();
                     Log.e("TAG", responseBody);
                     if (!responseBody.equals("[]")) {

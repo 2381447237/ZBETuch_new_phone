@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -47,22 +48,24 @@ public class ServiceReFramgent extends Fragment {
 
     private String sfz;
 
+    public static final ServiceReFramgent newInstance(String sfz){
 
+        ServiceReFramgent fragment = new ServiceReFramgent();
+        Bundle bundle = new Bundle();
+        bundle.putString("sfz", sfz);
+        fragment.setArguments(bundle);
 
-    public ServiceReFramgent(String sfz) {
-        this.sfz = sfz;
+        return fragment;
     }
 
-    public String getSfz() {
-        return sfz;
-    }
 
     private final int SUCCESS_TYPE=10000;
     private final int SUCCESS_LIST=10001;
     private final int  SUCCESS_NEW=10002;
     private final int  SUCCESS_DEL=10003;
     private final int  SUCCESS_MODIFY=10004;
-    private final int  PROBLEM=10005;
+    private final int SUCCESS_NODATA=10005;
+    private final int  PROBLEM=10006;
 
     private View contentview;
     private ListView lv;
@@ -90,8 +93,10 @@ public class ServiceReFramgent extends Fragment {
                     spList.addAll((List<ServiceTypeInfo>)msg.obj);
 
                     if(spAdapter==null) {
-                        spAdapter = new ArrayAdapter<ServiceTypeInfo>(getActivity(), android.R.layout.simple_spinner_item, spList);
-                        sp.setAdapter(spAdapter);
+                        if(getActivity()!=null) {
+                            spAdapter = new ArrayAdapter<ServiceTypeInfo>(getActivity(), android.R.layout.simple_spinner_item, spList);
+                            sp.setAdapter(spAdapter);
+                        }
                     }
 
                     if(msg.arg1==222){
@@ -113,19 +118,22 @@ public class ServiceReFramgent extends Fragment {
                 case SUCCESS_LIST:
                     data.clear();
                     data.addAll((List<ServiceReInfo>)msg.obj);
-                    lvSetAdapter(data);
-
+                    if(getActivity()!=null) {
+                        lvSetAdapter(data);
+                    }
                     break;
 
                 case SUCCESS_NEW:
 
                     if(TextUtils.equals("True",(String)msg.obj)){
 
-                        Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
-
+                        if(getActivity()!=null) {
+                            Toast.makeText(getActivity(), "添加成功", Toast.LENGTH_SHORT).show();
+                        }
                     }else{
-
-                        Toast.makeText(getActivity(),"添加失败",Toast.LENGTH_SHORT).show();
+                        if(getActivity()!=null) {
+                            Toast.makeText(getActivity(), "添加失败", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     getServiceInfo();
@@ -137,32 +145,38 @@ public class ServiceReFramgent extends Fragment {
                     if(TextUtils.equals("True",(String)msg.obj)){
                         data.remove(delPosition);
                         adapter.notifyDataSetChanged();
-                        Toast.makeText(getActivity(),"删除成功",Toast.LENGTH_SHORT).show();
-
-                    }else{
-
-                        Toast.makeText(getActivity(),"删除失败",Toast.LENGTH_SHORT).show();
+                        if(getActivity()!=null) {
+                            Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        if (getActivity() != null) {
+                            Toast.makeText(getActivity(), "删除失败", Toast.LENGTH_SHORT).show();
+                        }
                     }
-
                     break;
 
                 case SUCCESS_MODIFY:
 
                     if(TextUtils.equals("True",(String)msg.obj)){
                         getServiceInfo();
-                        Toast.makeText(getActivity(),"修改成功",Toast.LENGTH_SHORT).show();
-
-                    }else{
-
-                        Toast.makeText(getActivity(),"修改失败",Toast.LENGTH_SHORT).show();
+                        if(getActivity()!=null) {
+                            Toast.makeText(getActivity(), "修改成功", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        if (getActivity() != null) {
+                            Toast.makeText(getActivity(), "修改失败", Toast.LENGTH_SHORT).show();
+                        }
                     }
-
                     break;
 
 
                 case PROBLEM:
+                    if(getActivity()!=null) {
+                        Toast.makeText(getActivity(), "网络不给力", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
 
-                    Toast.makeText(getActivity(),"网络不给力",Toast.LENGTH_SHORT).show();
+                case SUCCESS_NODATA:
 
                     break;
             }
@@ -171,11 +185,18 @@ public class ServiceReFramgent extends Fragment {
     };
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        sfz=getArguments().getString("sfz");
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         contentview = LayoutInflater.from(getContext()).inflate(R.layout.framgment_service_record, container, false);
 
-        if(getSfz()!=null) {
+        if(sfz!=null) {
             initView(contentview);
         }
         return contentview;
@@ -208,7 +229,7 @@ public class ServiceReFramgent extends Fragment {
                     @Override
                     public void run() {
 
-                        String url=MyOkHttpUtils.BaseUrl+"/Json/Get_Sfz_Service.aspx?sfz="+getSfz();
+                        String url=MyOkHttpUtils.BaseUrl+"/Json/Get_Sfz_Service.aspx?sfz="+sfz;
 
                         Response response=MyOkHttpUtils.okHttpGet(url);
 
@@ -219,13 +240,13 @@ public class ServiceReFramgent extends Fragment {
                             try {
                                 String resStr=response.body().string();
 
-                                if(resStr!=null){
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")){
 
                                     Gson gson=new Gson();
                                     msg.what=SUCCESS_LIST;
                                     msg.obj=gson.fromJson(resStr,new TypeToken<List<ServiceReInfo>>(){}.getType());
                                 }else{
-                                    msg.what=PROBLEM;
+                                    msg.what=SUCCESS_NODATA;
                                 }
                                 mHandler.sendMessage(msg);
                             } catch (IOException e) {
@@ -293,7 +314,9 @@ public class ServiceReFramgent extends Fragment {
 
 
     private void showDeleteDialog(final int id, final int staffId, String title, String message, final String sign, final AlertDialog alertDialog) {
-
+         if(getActivity()==null){
+             return;
+         }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title);
         builder.setMessage(message);
@@ -339,6 +362,9 @@ public class ServiceReFramgent extends Fragment {
     private void showNewDialog(final int sign, String date, int type, String mark, final int itemId){
     //注意这里哈sign等于111,表示新增；sign等于222,表示修改
    //======================================================
+        if(getActivity()==null){
+            return;
+        }
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         View view=LayoutInflater.from(getActivity()).inflate(R.layout.dialog_fmt_service_record_new,null,false);
         builder.setView(view);
@@ -388,6 +414,11 @@ public class ServiceReFramgent extends Fragment {
                         dateTv.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
 
                         if(year>c.get(Calendar.YEAR)||monthOfYear>c.get(Calendar.MONTH)||dayOfMonth>c.get(Calendar.DAY_OF_MONTH)){
+
+                           if(getActivity()==null){
+                               return;
+                           }
+
                             Toast.makeText(getActivity(),"时间必须是当年且小于当前时间!",Toast.LENGTH_SHORT).show();
                             dateTv.setText(c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH)+1) + "-" + c.get(Calendar.DAY_OF_MONTH));
                         }
@@ -400,7 +431,9 @@ public class ServiceReFramgent extends Fragment {
             if(spList.size()==0) {
                 getServiceType(sign,type);
             }else{
-
+                if(getActivity()==null){
+                    return;
+                }
                 spAdapter = new ArrayAdapter<ServiceTypeInfo>(getActivity(), android.R.layout.simple_spinner_item, spList);
                 sp.setAdapter(spAdapter);
                 if(sign==222){
@@ -424,7 +457,9 @@ public class ServiceReFramgent extends Fragment {
             public void onClick(View v) {
 
                 if(sp.getSelectedItemPosition()==0){
-                    Toast.makeText(getActivity(), "请选择服务内容", Toast.LENGTH_SHORT).show();
+                    if(getActivity()!=null) {
+                        Toast.makeText(getActivity(), "请选择服务内容", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     if(sign==111){
                         showDeleteDialog(0,MainLayoutActivity.adminId,"保存信息提示","您确定保存此服务选项吗？","new",dialog);
@@ -475,7 +510,7 @@ public class ServiceReFramgent extends Fragment {
                          String urlNew=MyOkHttpUtils.BaseUrl+"/Json/Set_Sfz_Service.aspx";
 
                         Response response=MyOkHttpUtils.okHttpPost(urlNew,
-                                itemID+"",getSfz(),MainLayoutActivity.adminId+"",dateStr,typeId+"",markStr);
+                                itemID+"",sfz,MainLayoutActivity.adminId+"",dateStr,typeId+"",markStr);
                          Message msg=Message.obtain();
 
                          if(response!=null){
@@ -577,12 +612,18 @@ public class ServiceReFramgent extends Fragment {
 
                             try {
                                 String responseStr=response.body().string();
-                                Gson gson=new Gson();
 
-                                msg.what=SUCCESS_TYPE;
-                                msg.obj=gson.fromJson(responseStr,new TypeToken<List<ServiceTypeInfo>>(){}.getType());
-                                msg.arg1=sign;
-                                msg.arg2=typeId;
+                                if(!TextUtils.equals(responseStr,"")&&!TextUtils.equals(responseStr,"[]")) {
+                                    Gson gson = new Gson();
+
+                                    msg.what = SUCCESS_TYPE;
+                                    msg.obj = gson.fromJson(responseStr, new TypeToken<List<ServiceTypeInfo>>() {
+                                    }.getType());
+                                    msg.arg1 = sign;
+                                    msg.arg2 = typeId;
+                                }else{
+                                    msg.what = SUCCESS_NODATA;
+                                }
                                 mHandler.sendMessage(msg);
 
                             } catch (IOException e) {

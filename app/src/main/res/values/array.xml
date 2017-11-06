@@ -481,6 +481,105 @@
         <item>就业条件一般</item>
     </string-array>
 
+    <string-array name="gradeate_sex">
+        <item>请选择</item>
+        <item>男</item>
+        <item>女</item>
+    </string-array>
 
+    <string-array name="gradeate_educationLevel">
+        <item>请选择</item>
+        <item>硕士研究生及以上学历</item>
+        <item>大学本科</item>
+        <item>大学专科/高职</item>
+        <item>高中/中专/技校</item>
+        <item>初中或以下</item>
+    </string-array>
+
+    <string-array name="gradeate_ParamQuery_qingkuangStyle">
+        <item>请选择</item>
+        <item>低保家庭成员</item>
+        <item>零就业家庭成员</item>
+        <item>残疾</item>
+    </string-array>
+
+    <string-array name="gradeate_ParamQuery_jobStyle">
+        <item>请选择</item>
+        <item>管理类</item>
+        <item>技术类</item>
+        <item>服务类</item>
+    </string-array>
+
+    <string-array name="gradeate_ParamQuery_salaryStyle">
+        <item>请选择</item>
+        <item>3,000元(含)以下</item>
+        <item>3,000元至5,000元(含)</item>
+        <item>5,000元至10,000元(含)</item>
+        <item>10,000元以上</item>
+    </string-array>
+
+    <string-array name="gradeate_baseSituation">
+        <item>请选择</item>
+        <item>已就业</item>
+        <item>未就业</item>
+        <item>暂不要求就业</item>
+        <item>其他</item>
+    </string-array>
+
+    <string-array name="gradeate_empty">
+    <item>请选择</item>
+    </string-array>
+
+    <string-array name="gradeate_detailSituation_yjy">
+        <item>请选择</item>
+        <item>企业就业已办录用</item>
+        <item>企业就业未办录用</item>
+        <item>自主创业已领证照</item>
+        <item>青年职业创业见习</item>
+        <item>已办用工现已退工</item>
+    </string-array>
+
+    <string-array name="gradeate_detailSituation_wjy">
+        <item>请选择</item>
+        <item>有就业意愿</item>
+        <item>有见习意愿</item>
+        <item>有培训意愿或正在培训</item>
+        <item>有创业意愿或正在创业</item>
+        <item>主观原因</item>
+    </string-array>
+
+    <string-array name="gradeate_detailSituation_zbjy">
+        <item>请选择</item>
+        <item>继续入学</item>
+        <item>身体原因</item>
+        <item>出国出境</item>
+        <item>应征入伍</item>
+    </string-array>
+
+    <string-array name="gradeate_detailSituation_qt">
+        <item>请选择</item>
+        <item>拒绝调查</item>
+        <item>无法联系</item>
+    </string-array>
+
+    <string-array name="gradeate_idChecked">
+        <item>请选择</item>
+        <item>是</item>
+        <item>否</item>
+    </string-array>
+
+    <string-array name="gradeate_nation">
+        <item>请选择</item>
+        <item>汉族</item>
+        <item>少数民族</item>
+    </string-array>
+
+    <string-array name="gradeate_polityStyle">
+        <item>请选择</item>
+        <item>群众</item>
+        <item>共青团员</item>
+        <item>共产党员</item>
+        <item>民主党派</item>
+    </string-array>
 
 </resources>

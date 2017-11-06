@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:gravity="center"
+    android:id="@+id/ll_item_naire_person">
+
+    <TextView
+        android:id="@+id/tv_item_naire_person_name"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="姓名" />
+
+    <TextView
+        android:id="@+id/tv_item_naire_person_sex"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:text="性别" />
+
+    <TextView
+        android:id="@+id/tv_item_naire_person_street"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:text="街道" />
+    <TextView
+        android:id="@+id/tv_item_naire_person_jw"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="居委" />
+    <TextView
+        android:id="@+id/tv_item_naire_person_huji"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="户籍地址" />
+    <TextView
+        android:id="@+id/tv_item_naire_person_family_num"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:text="家庭成员数量" />
+
+
+</LinearLayout>

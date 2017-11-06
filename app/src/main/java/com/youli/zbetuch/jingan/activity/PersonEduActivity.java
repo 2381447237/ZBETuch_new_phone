@@ -63,7 +63,8 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
     private final int SUCCESS_DELETE=10001;//删除
     private final int SUCCESS_NEW=10002;//新建
     private final int SUCCESS_MODIFY=10003;//修改
-    private final int  PROBLEM=10004;
+    private final int SUCCESS_NODATA=10004;
+    private final int  PROBLEM=10005;
     private String sfzStr;
     private Button btnNew;
     private Handler mHandler=new Handler(){
@@ -121,6 +122,9 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
                     Toast.makeText(mContext,"网络不给力",Toast.LENGTH_SHORT).show();
 
                     break;
+
+                case SUCCESS_NODATA:
+                    break;
             }
 
         }
@@ -167,8 +171,6 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
                         String url= MyOkHttpUtils.BaseUrl+"/Json/Get_Educational_Information.aspx?sfz="+sfzStr;
 
-                        Log.e("2017/8/29","url=="+url);
-
                         Response response=MyOkHttpUtils.okHttpGet(url);
 
                         Message msg=Message.obtain();
@@ -177,11 +179,15 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
 
                             try {
                                 String resStr=response.body().string();
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
+                                    Gson gson = new Gson();
 
-                                Gson gson=new Gson();
-
-                                msg.what=SUCCESS;
-                                msg.obj=gson.fromJson(resStr, new TypeToken<List<EduInfo>>(){}.getType());
+                                    msg.what = SUCCESS;
+                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<EduInfo>>() {
+                                    }.getType());
+                                }else{
+                                    msg.what = SUCCESS_NODATA;
+                                }
                                 mHandler.sendMessage(msg);
 
                             } catch (IOException e) {

@@ -188,15 +188,25 @@ public class ZiyuandiaochaActivity extends BaseActivity implements View.OnClickL
                             Message msg = Message.obtain();
                             if (response != null) {
 
-                                String infoStr = response.body().string();
-                                Gson gson = new Gson();
+                                if(response.body()!=null){
+                                    String infoStr = response.body().string();
 
-                                RInfoList = gson.fromJson(infoStr, new TypeToken<List<ResourcesInfo>>() {
-                                }.getType());
-                                Log.e("2017/8/9", "数据==" + RInfoList);
-                                msg.what = SUCCESS;
-                                msg.obj = RInfoList;
-                                mHandler.sendMessage(msg);
+                                    if(!TextUtils.equals(infoStr,"")) {
+
+                                        Gson gson = new Gson();
+
+                                        RInfoList = gson.fromJson(infoStr, new TypeToken<List<ResourcesInfo>>() {
+                                        }.getType());
+
+                                        msg.what = SUCCESS;
+                                        msg.obj = RInfoList;
+                                        mHandler.sendMessage(msg);
+                                    }
+                                }else{
+                                    sendProblemMessage(msg);
+                                }
+
+
                             } else {
                                 sendProblemMessage(msg);
                             }

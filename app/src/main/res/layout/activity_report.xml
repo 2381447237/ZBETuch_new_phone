@@ -25,12 +25,12 @@
 
 
         <TextView
+            android:id="@+id/tv_report_date"
             android:layout_marginTop="10dp"
             android:textSize="14sp"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="报表日期：2017/4/6"
             android:textColor="#ffffff"/>
 
         <LinearLayout

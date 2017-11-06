@@ -8,7 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.youli.zbetuch.jingan.utils.GetManifestInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.utils.ProgressDialogUtils;
 import com.youli.zbetuch.jingan.utils.SharedPreferencesUtils;
+import com.youli.zbetuch.jingan.utils.UpdateManager;
 
 import java.io.IOException;
 
@@ -66,7 +66,9 @@ switch (msg.what){
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+// 更新apk
+        UpdateManager manager = new UpdateManager(LoginActivity.this);
+        manager.checkUpdate();
         initUI();
 
     }

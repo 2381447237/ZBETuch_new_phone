@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/invitedetailback">
+    
+
+    <ScrollView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+    
+     <LinearLayout         
+                    android:id="@+id/ll_userInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal" >
+
+                    <TextView 
+                        android:paddingLeft="12dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="7dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="应在本户登记的人：调查时点居住在本户的人；本户人口中，外出不满半年的人。"
+                        />
+         
+                     <LinearLayout
+                         android:visibility="gone"
+                            android:paddingLeft="12dp"
+                            android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:layout_width="160dp"
+                                android:layout_height="wrap_content"
+                                android:text="户主姓名:"
+                                android:textSize="18sp" />
+
+                                    <EditText
+                                        android:id="@+id/awri_et_name"
+                                        android:layout_width="150dp"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true" />
+                                   </LinearLayout>
+                    
+                        <LinearLayout
+                            android:paddingLeft="12dp"
+                            android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/awri_tv_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="访问地址:"
+                                android:textSize="18sp" />
+
+                                    <EditText
+                                        android:background="@color/white"
+                                        android:id="@+id/awri_et_area"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true" />
+
+                                    <TextView
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="区"
+                                        android:textSize="18sp"  />
+
+                                    <EditText
+                                        android:background="@color/white"
+                                        android:id="@+id/awri_et_street"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true" />
+
+                                    <TextView
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="街道(乡镇)"
+                                        android:textSize="18sp"  />
+
+                        </LinearLayout>
+
+                            <LinearLayout
+                                android:paddingLeft="12dp"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal" >
+
+
+
+                                    <EditText
+                                        android:background="@color/white"
+                                        android:id="@+id/awri_et_village"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true" />
+
+                                    <TextView
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="居(村)委会" 
+                                        android:textSize="18sp" />
+
+                                    <EditText
+                                        android:background="@color/white"
+                                        android:id="@+id/awri_et_address"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1.5"
+                                        android:layout_height="wrap_content"
+                                        android:singleLine="true" />
+                                
+                          
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:paddingLeft="12dp"
+                          android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="实际居住人数:" 
+                                android:textSize="18sp" />
+
+                            <EditText
+                                android:background="@color/white"
+                                android:inputType="number"
+                                android:id="@+id/awri_et_person"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true" />
+
+                            <TextView
+                                android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="人"
+                                android:textSize="18sp"  />
+                            
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="男:" 
+                                android:textSize="18sp" />
+
+                            <EditText
+                                android:background="@color/white"
+                                android:inputType="number"
+                                android:id="@+id/awri_et_man"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true" />
+
+                            <TextView
+                                android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="人"
+                                android:textSize="18sp"  />
+                            
+                             <TextView
+                                 android:layout_marginLeft="10dp"
+                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="女:" 
+                                android:textSize="18sp" />
+
+                            <EditText
+                                android:background="@color/white"
+                                android:inputType="number"
+                                android:id="@+id/awri_et_woman"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true" />
+
+                            <TextView
+                                android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="人"
+                                android:textSize="18sp"  />
+                            
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/awri_ll_sixteen"
+                            android:paddingLeft="12dp"
+                           android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                 android:layout_width="160dp"
+                                android:layout_height="wrap_content"
+                                android:text="16周岁以上的人数:"
+                                android:textSize="18sp"  />
+
+                            <EditText
+                                android:background="@color/white"
+                                android:inputType="number"
+                                android:id="@+id/awri_et_16"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true" />
+
+                            <TextView
+                                android:layout_marginLeft="5dp"
+                                        android:layout_marginRight="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="人"
+                                android:textSize="18sp"  />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:paddingLeft="12dp"
+                            android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/awri_tv_contacts"
+                                 android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:text="联系人:"
+                                android:textSize="18sp"  />
+
+                            <EditText
+                                android:background="@color/white"
+                                android:id="@+id/awri_et_contacts"
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true" />
+                        </LinearLayout>
+
+                         <LinearLayout
+                            android:paddingLeft="12dp"
+                           android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/awri_tv_interviewer"
+                                 android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:text="访员:"
+                                android:textSize="18sp"  />
+
+                            <EditText
+                                android:background="@color/white"
+                                android:id="@+id/awri_et_interviewer"
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true" />
+                        </LinearLayout>
+                        
+                        <LinearLayout
+                            android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="12dp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/awri_tv_phone"
+                                 android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:text="联系电话:"
+                                android:textSize="18sp" 
+                                 />
+
+                            <EditText
+                                android:background="@color/white"
+                                android:inputType="number"
+                                android:id="@+id/awri_et_phone"
+                                android:layout_width="150dp"
+                                android:layout_height="wrap_content"
+                                android:singleLine="true" />
+                        </LinearLayout>
+                    
+    
+     
+      <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" 
+        android:layout_marginTop="20dp"
+        >
+     
+        <Button
+            android:id="@+id/awri_btn_back"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button_selector"
+            android:text="保存" />
+
+        <Button
+            android:id="@+id/awri_btn_next"
+            android:layout_width="65dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="30dip"
+            android:background="@drawable/button_selector"
+            android:text="取消" />
+    </LinearLayout>
+    
+     </LinearLayout>
+     
+     </ScrollView>
+</LinearLayout>

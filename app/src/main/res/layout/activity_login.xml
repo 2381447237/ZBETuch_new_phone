@@ -43,18 +43,19 @@
             android:padding="10dp">
 
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="用户名"
                 android:textSize="18dp" />
 
             <EditText
+                android:singleLine="true"
                 android:id="@+id/et_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_d"
                 android:gravity="center"
-                android:maxLines="1"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -72,13 +73,13 @@
                 android:textSize="18dp" />
 
             <EditText
+                android:singleLine="true"
                 android:id="@+id/et_user_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_d"
                 android:gravity="center"
                 android:inputType="textPassword"
-                android:maxLines="1"
                 android:textSize="16dp" />
         </LinearLayout>
 

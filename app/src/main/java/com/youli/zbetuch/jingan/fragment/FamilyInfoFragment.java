@@ -8,7 +8,10 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,12 +52,22 @@ public class FamilyInfoFragment extends Fragment {
 
     private String sfz;
 
-    public String getSfz() {
-        return sfz;
-    }
+//    public String getSfz() {
+//        return sfz;
+//    }
 
-    public FamilyInfoFragment(String sfz) {
-        this.sfz = sfz;
+//    public FamilyInfoFragment(String sfz) {
+//        this.sfz = sfz;
+//    }
+
+    public static final FamilyInfoFragment newInstance(String sfz){
+
+        FamilyInfoFragment fragment = new FamilyInfoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("sfz", sfz);
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 
     private View contentView;
@@ -70,7 +83,8 @@ public class FamilyInfoFragment extends Fragment {
     private final int SUCCESS_HUJI=10000;
     private final int SUCCESS_JUZHU=10001;
     private final int SUCCESS_PINFO=10002;
-    private final int  PROBLEM=10003;
+    private  final int SUCCESS_NODATA=10003;
+    private final int  PROBLEM=10004;
 
     private Handler mHandler=new Handler(){
 
@@ -93,36 +107,47 @@ public class FamilyInfoFragment extends Fragment {
                     juzhuData.addAll((List<FamilyAddressInfo.FamilyAddressInfoList>)msg.obj);
 
                      data.add(new FamilyAddressInfo(false, "居住地址:", juzhuData));
-
-                    setLvAdapter(data);
-
+                    if(getActivity()!=null) {
+                        setLvAdapter(data);
+                    }
                     break;
 
                 case SUCCESS_PINFO:
-
-                    Intent intent=new Intent(getActivity(),PersonInfoActivity.class);
-                    intent.putExtra("personInfos",(Serializable)((List<PersonInfo>)msg.obj).get(0));
-                    startActivity(intent);
-                    getActivity().finish();
-
+                    if(getActivity()!=null) {
+                        Intent intent = new Intent(getActivity(), PersonInfoActivity.class);
+                        intent.putExtra("personInfos", (Serializable) ((List<PersonInfo>) msg.obj).get(0));
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
                     break;
 
                 case PROBLEM:
 
-                    Toast.makeText(getActivity(),"网络不给力",Toast.LENGTH_SHORT).show();
-
+                    if(getActivity()!=null) {
+                        Toast.makeText(getActivity(), "网络不给力", Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
+                case SUCCESS_NODATA:
+                    break;
             }
 
         }
     };
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        sfz=getArguments().getString("sfz");
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
         contentView = LayoutInflater.from(getContext()).inflate(R.layout.framgment_family_info, container, false);
 
-          if(getSfz()!=null) {
+          if(sfz!=null) {
               initView(contentView);
           }
         return contentView;
@@ -144,7 +169,8 @@ public class FamilyInfoFragment extends Fragment {
 //                        居住地址
 //                        http://web.youli.pw:89/Json/Get_family_Info_Now.aspx?sfz=310108198004026642
 
-                      String url= MyOkHttpUtils.BaseUrl+"/Json/Get_family_Info.aspx?sfz="+getSfz();
+                      String url= MyOkHttpUtils.BaseUrl+"/Json/Get_family_Info.aspx?sfz="+sfz;
+
 
                         Response response=MyOkHttpUtils.okHttpGet(url);
 
@@ -155,12 +181,12 @@ public class FamilyInfoFragment extends Fragment {
                             try {
                                 String resStr=response.body().string();
 
-                                if(resStr!=null){
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")){
                                     Gson gson=new Gson();
                                     msg.obj=gson.fromJson(resStr,new TypeToken<List<FamilyAddressInfo.FamilyAddressInfoList>>(){}.getType());
                                     msg.what=SUCCESS_HUJI;
                                 }else{
-                                    msg.what=PROBLEM;
+                                    msg.what=SUCCESS_NODATA;
                                 }
                                 mHandler.sendMessage(msg);
                             } catch (IOException e) {
@@ -192,7 +218,7 @@ public class FamilyInfoFragment extends Fragment {
                     @Override
                     public void run() {
 
-                        String url= MyOkHttpUtils.BaseUrl+"/Json/Get_family_Info_Now.aspx?sfz="+getSfz();
+                        String url= MyOkHttpUtils.BaseUrl+"/Json/Get_family_Info_Now.aspx?sfz="+sfz;
 
                         Response response=MyOkHttpUtils.okHttpGet(url);
 
@@ -203,12 +229,12 @@ public class FamilyInfoFragment extends Fragment {
                             try {
                                 String resStr=response.body().string();
 
-                                if(resStr!=null){
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")){
                                     Gson gson=new Gson();
                                     msg.obj=gson.fromJson(resStr,new TypeToken<List<FamilyAddressInfo.FamilyAddressInfoList>>(){}.getType());
                                     msg.what=SUCCESS_JUZHU;
                                 }else{
-                                    msg.what=PROBLEM;
+                                    msg.what=SUCCESS_NODATA;
                                 }
                                 mHandler.sendMessage(msg);
                             } catch (IOException e) {
@@ -372,7 +398,9 @@ public class FamilyInfoFragment extends Fragment {
     }
 
     private void showFamilyDialog(final int p){
-
+        if(getActivity()==null){
+            return;
+        }
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         builder.setTitle("查看详细信息");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -407,10 +435,15 @@ public class FamilyInfoFragment extends Fragment {
                                 String resStr=response.body().string();
                                // Log.e("2017/8/31","数据==="+resStr);
 
-                                Gson gson=new Gson();
-                                msg.obj=gson.fromJson(resStr,new TypeToken<List<PersonInfo>>(){}.getType());
+                                if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
+                                    Gson gson = new Gson();
+                                    msg.obj = gson.fromJson(resStr, new TypeToken<List<PersonInfo>>() {
+                                    }.getType());
 
-                                msg.what=SUCCESS_PINFO;
+                                    msg.what = SUCCESS_PINFO;
+                                }else{
+                                    msg.what = SUCCESS_NODATA;
+                                }
 
                             } catch (IOException e) {
                                 e.printStackTrace();

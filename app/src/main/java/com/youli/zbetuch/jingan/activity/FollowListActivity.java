@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -53,7 +52,8 @@ public class FollowListActivity extends BaseActivity{
     private final int  PERSONINFO=10002;
     private final int  NOPERSONINFO=10003;
     private final int CANCEL_FOLLOW=10004;
-    private final int FAIL=10005;
+    private final int SUCCESS_NODATA=10005;
+    private final int FAIL=10006;
 
     private Context mContext=FollowListActivity.this;
 
@@ -117,7 +117,12 @@ public class FollowListActivity extends BaseActivity{
                         Toast.makeText(mContext, "删除失败！", Toast.LENGTH_SHORT).show();
                     }
 
+                  break;
+                case SUCCESS_NODATA:
 
+                    if (lv.isRefreshing()) {
+                        lv.onRefreshComplete();
+                    }
                     break;
             }
 
@@ -178,7 +183,7 @@ public class FollowListActivity extends BaseActivity{
 
                             Message msg=Message.obtain();
 
-                            if(!TextUtils.equals("",resStr)){
+                            if(!TextUtils.equals("",resStr)&&!TextUtils.equals("[]",resStr)){
 
                                 Gson gson=new Gson();
 
@@ -188,7 +193,7 @@ public class FollowListActivity extends BaseActivity{
 
                             }else{
 
-                                msg.what=FAIL;
+                                msg.what=SUCCESS_NODATA;
 
                             }
 

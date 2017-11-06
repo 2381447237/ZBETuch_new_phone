@@ -219,7 +219,6 @@
         <RadioGroup
             android:background="#5ba4e6"
             android:id="@+id/rg_person_info"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">

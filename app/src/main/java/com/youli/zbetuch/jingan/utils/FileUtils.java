@@ -1,12 +1,27 @@
 package com.youli.zbetuch.jingan.utils;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 
+import com.youli.zbetuch.jingan.naire.HttpUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by liutao on 2017/9/1.
@@ -220,6 +235,123 @@ public class FileUtils {
         Uri uri = Uri.fromFile(new File(param));
         intent.setDataAndType(uri, "application/pdf");
         return intent;
+    }
+
+
+    /**
+     * 查询设备上所有非系统apk
+     *
+     * @param mContext
+     * @return
+     */
+    public static String showAllApks(Context mContext) {
+        String value = "";
+        try {
+            PackageManager packageManager = mContext.getPackageManager();
+            List<PackageInfo> packageInfoList = packageManager
+                    .getInstalledPackages(0);
+            for (PackageInfo info : packageInfoList) {
+                // 判断如果不是系统apk
+                if ((info.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) <= 0) {
+                    // System.out.println(info.applicationInfo.packageName
+                    // + "===>"
+                    // + packageManager
+                    // .getApplicationLabel(info.applicationInfo));
+                    value += packageManager
+                            .getApplicationLabel(info.applicationInfo) + ",";
+                }
+
+                // 获得应用的图标
+                // packageManager.getApplicationIcon(applicationInfo)
+            }
+            if (value.trim().length() > 1) {
+                value = value.substring(0, value.length() - 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
+
+    public static String getMovies(Context mContext) {
+        String value = "";
+        try {
+            ContentResolver contentResolver = mContext.getContentResolver();
+            String[] projection = new String[] { MediaStore.Video.Media.TITLE,
+                    MediaStore.Video.Media.DISPLAY_NAME,
+                    MediaStore.Video.Media.DATA };
+            Cursor cursor = contentResolver.query(
+                    MediaStore.Video.Media.EXTERNAL_CONTENT_URI, projection,
+                    null, null, MediaStore.Video.Media.DEFAULT_SORT_ORDER);
+            cursor.moveToFirst();
+            int fileNum = cursor.getCount();
+
+            for (int counter = 0; counter < fileNum; counter++) {
+                // Log.e("=============", "-------------file is: " +
+                // cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.TITLE))
+                // );
+                // Log.e("=============", "-------------path is: " +
+                // cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA)));
+                // Log.e("=============", "-------------display is: " +
+                // cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME)));
+                if (!cursor.getString(
+                        cursor.getColumnIndex(MediaStore.Video.Media.DATA))
+                        .contains(Const.USB_PATH)) {
+                    value += cursor
+                            .getString(cursor
+                                    .getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME))
+                            + ",";
+                }
+                cursor.moveToNext();
+            }
+            cursor.close();
+            if (value.trim().length() > 1) {
+                value = value.substring(0, value.length() - 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
+    public static String sendApps(Map<String, String> data) {
+        String jsonString = parseToJson(data.get("apps"), data.get("films"));
+        String url = "/Json/Set_TB_Staff_Pad_File.aspx";
+        String valueString = HttpUtil.postJson(url, jsonString);
+        return valueString;
+    }
+
+    public static String parseToJson(String apps, String films) {
+        String[] appStrings = apps.split(",");
+        System.out.println(appStrings.length);
+        String[] filmsStrings = films.split(",");
+        System.out.println(filmsStrings.length);
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject;
+        try {
+            for (int i = 0; i < appStrings.length; i++) {
+                jsonObject = new JSONObject();
+                jsonObject.put("NAME", appStrings[i]);
+                jsonObject.put("TYPE", "程序");
+                jsonArray.put(jsonObject);
+            }
+            for (int i = 0; i < filmsStrings.length; i++) {
+                jsonObject = new JSONObject();
+                jsonObject.put("NAME", filmsStrings[i]);
+                jsonObject.put("TYPE", "视频");
+                jsonArray.put(jsonObject);
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return jsonArray.toString();
+    }
+
+    public static File getSaveFile(Context context) {
+        return new File(context.getFilesDir(), "pic.jpg");
     }
 
 }

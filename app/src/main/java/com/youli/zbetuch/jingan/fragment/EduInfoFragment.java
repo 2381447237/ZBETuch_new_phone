@@ -1,5 +1,6 @@
 package com.youli.zbetuch.jingan.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.session.MediaSession;
@@ -8,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,12 +50,14 @@ public class EduInfoFragment extends Fragment{
     private String sfzStr;
 
 
-    public EduInfoFragment(String sfzStr) {
-        this.sfzStr = sfzStr;
-    }
+    public static final EduInfoFragment newInstance(String sfz){
 
-    public String getSfzStr() {
-        return sfzStr;
+        EduInfoFragment fragment = new EduInfoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("sfz", sfz);
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 
 
@@ -76,15 +80,16 @@ public class EduInfoFragment extends Fragment{
 
                     data.clear();
                     data.addAll((List<EduInfo>)msg.obj);
-
-                    setLvAdapter(data);
-
+                    if(getActivity()!=null) {
+                        setLvAdapter(data);
+                    }
                     break;
 
                 case PROBLEM:
 
-                    Toast.makeText(getActivity(),"网络不给力",Toast.LENGTH_SHORT).show();
-
+                    if(getActivity()!=null) {
+                        Toast.makeText(getActivity(), "网络不给力", Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
 
@@ -92,12 +97,24 @@ public class EduInfoFragment extends Fragment{
     };
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        sfzStr=getArguments().getString("sfz");
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         contentView=LayoutInflater.from(getContext()).inflate(R.layout.framgment_education_info,container,false);
-        if(getSfzStr()!=null) {
+
+//        if(getSfzStr()!=null) {
+//            initView(contentView);
+//        }
+
+        if(sfzStr!=null) {
             initView(contentView);
         }
 
@@ -125,7 +142,7 @@ public class EduInfoFragment extends Fragment{
                     @Override
                     public void run() {
 
-                        String url= MyOkHttpUtils.BaseUrl+"/Json/Get_Educational_Information.aspx?sfz="+getSfzStr();
+                        String url= MyOkHttpUtils.BaseUrl+"/Json/Get_Educational_Information.aspx?sfz="+sfzStr;
 
                         Response response=MyOkHttpUtils.okHttpGet(url);
 
@@ -135,13 +152,14 @@ public class EduInfoFragment extends Fragment{
 
                             try {
                                 String resStr=response.body().string();
+                             if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
+                                 Gson gson = new Gson();
 
-                                Gson gson=new Gson();
-
-                                msg.what=SUCCESS;
-                                msg.obj=gson.fromJson(resStr, new TypeToken<List<EduInfo>>(){}.getType());
-                                mHandler.sendMessage(msg);
-
+                                 msg.what = SUCCESS;
+                                 msg.obj = gson.fromJson(resStr, new TypeToken<List<EduInfo>>() {
+                                 }.getType());
+                                 mHandler.sendMessage(msg);
+                             }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

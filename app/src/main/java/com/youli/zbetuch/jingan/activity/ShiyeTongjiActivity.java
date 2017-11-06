@@ -39,7 +39,8 @@ import okhttp3.Response;
 public class ShiyeTongjiActivity extends BaseActivity implements ExpandableListView.OnChildClickListener{
 
     private final int SUCCESS_BIG_LIST=10001;
-    private final int FAIL=10002;
+    private final int SUCCESS_NODATA=10002;
+    private final int FAIL=10003;
 
     private Context mContext=ShiyeTongjiActivity.this;
     private ExpandableListView elv;
@@ -75,6 +76,9 @@ public class ShiyeTongjiActivity extends BaseActivity implements ExpandableListV
 
                 case FAIL:
                     Toast.makeText(mContext,"网络不给力",Toast.LENGTH_SHORT).show();
+                    break;
+
+                case SUCCESS_NODATA:
                     break;
             }
 
@@ -120,7 +124,7 @@ public class ShiyeTongjiActivity extends BaseActivity implements ExpandableListV
 
                             Message msg=Message.obtain();
 
-                            if(!TextUtils.equals("",resStr)){
+                            if(!TextUtils.equals("",resStr)&&!TextUtils.equals("[]",resStr)){
 
                                 Gson gson=new Gson();
 
@@ -130,7 +134,7 @@ public class ShiyeTongjiActivity extends BaseActivity implements ExpandableListV
 
                             }else{
 
-                                msg.what=FAIL;
+                                msg.what=SUCCESS_NODATA;
 
                             }
 

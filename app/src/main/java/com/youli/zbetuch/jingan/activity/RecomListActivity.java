@@ -55,7 +55,8 @@ public class RecomListActivity extends BaseActivity{
     private final int SUCCESS_LIST=10001;
     private final int  PERSONINFO=10002;
     private final int  NOPERSONINFO=10003;
-    private final int FAIL=10004;
+    private final int SUCCESS_NODATA=10004;
+    private final int FAIL=10005;
     private Context mContext=RecomListActivity.this;
     private PullToRefreshListView lv;
     private List<RecomListInfo> data=new ArrayList<>();
@@ -109,6 +110,11 @@ public class RecomListActivity extends BaseActivity{
                         Toast.makeText(mContext,"对不起,查无此人",Toast.LENGTH_SHORT).show();
                     }
 
+                    break;
+                case SUCCESS_NODATA:
+                    if (lv.isRefreshing()) {
+                        lv.onRefreshComplete();
+                    }
                     break;
             }
 
@@ -190,7 +196,7 @@ public class RecomListActivity extends BaseActivity{
 
                            Message msg=Message.obtain();
 
-                           if(!TextUtils.equals("",resStr)){
+                           if(!TextUtils.equals("",resStr)&&!TextUtils.equals("[]",resStr)){
 
                                Gson gson=new Gson();
 
@@ -200,7 +206,7 @@ public class RecomListActivity extends BaseActivity{
 
                            }else{
 
-                               msg.what=FAIL;
+                               msg.what=SUCCESS_NODATA;
 
                            }
 

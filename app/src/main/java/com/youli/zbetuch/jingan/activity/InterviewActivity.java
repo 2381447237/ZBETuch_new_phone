@@ -46,7 +46,8 @@ import okhttp3.Response;
 public class InterviewActivity extends BaseActivity{
 
     private final int SUCCESS_INFO=10001;
-    private final int FAIL=10002;
+    private final int SUCCESS_NODATA=10002;
+    private final int FAIL=10003;
 
     private Context mContext=InterviewActivity.this;
     private List<InterviewInfo> data=new ArrayList<InterviewInfo>();
@@ -79,6 +80,14 @@ public class InterviewActivity extends BaseActivity{
                     if(lv.isRefreshing()){
                         lv.onRefreshComplete();
                     }
+                    break;
+
+                case SUCCESS_NODATA:
+
+                    if(lv.isRefreshing()){
+                        lv.onRefreshComplete();
+                    }
+
                     break;
             }
 
@@ -150,24 +159,28 @@ public class InterviewActivity extends BaseActivity{
                         String url= MyOkHttpUtils.BaseUrl+"/Json/GetJobFairMaster.aspx";
 
                         Response response=MyOkHttpUtils.okHttpPostFormBody(url,mapData);
-
+                        Message msg = Message.obtain();
                         try {
-                            String resStr=response.body().string();
+                            if(response!=null) {
+                                if (response.body() != null) {
 
-                            Message msg=Message.obtain();
+                                    String resStr = response.body().string();
 
-                            if(!TextUtils.equals(resStr,"")){
 
-                                Gson gson=new Gson();
-                                msg.obj=gson.fromJson(resStr,new TypeToken<List<InterviewInfo>>(){}.getType());
-                                msg.what=SUCCESS_INFO;
+                                    if (!TextUtils.equals(resStr, "") && !TextUtils.equals(resStr, "[]")) {
 
-                            }else{
+                                        Gson gson = new Gson();
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<InterviewInfo>>() {
+                                        }.getType());
+                                        msg.what = SUCCESS_INFO;
 
-                                msg.what=FAIL;
+                                    } else {
 
+                                        msg.what = SUCCESS_NODATA;
+
+                                    }
+                                }
                             }
-
                             mHandler.sendMessage(msg);
 
                         } catch (IOException e) {

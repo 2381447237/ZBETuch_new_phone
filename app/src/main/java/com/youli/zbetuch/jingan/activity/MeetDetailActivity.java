@@ -1,11 +1,16 @@
 package com.youli.zbetuch.jingan.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +30,7 @@ import com.youli.zbetuch.jingan.utils.FileUtils;
 import com.youli.zbetuch.jingan.utils.IOUtil;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
+import com.youli.zbetuch.jingan.utils.ToastUtils;
 import com.youli.zbetuch.jingan.view.MyListView;
 
 import java.io.File;
@@ -50,7 +56,8 @@ public class MeetDetailActivity extends BaseActivity implements View.OnClickList
     private final int SUCCEED_APPENDIX=10003;
     private final int SUCCEED_FILE=10004;
     private final int SUCCEED_SEE=10005;
-    private final int  PROBLEM=10006;
+    private final int SUCCEED_NODATA=10006;
+    private final int  PROBLEM=10007;
 
     private TextView tvTitle;//会议名称
     private TextView tvTime;//会议名称
@@ -66,6 +73,7 @@ public class MeetDetailActivity extends BaseActivity implements View.OnClickList
     private List<AppendixInfo> lvData=new ArrayList<>();//附件的集合
     private CommonAdapter adapter;
     private String currentFile;
+    private int pSign;
     private Handler mHandler=new Handler(){
 
         @Override
@@ -124,6 +132,9 @@ public class MeetDetailActivity extends BaseActivity implements View.OnClickList
                     startActivity(intent);
                     currentFile = "";
 
+                    break;
+
+                case SUCCEED_NODATA:
                     break;
             }
 
@@ -205,7 +216,7 @@ private void getorSetData(final String sign){
                         try {
                             String resStr=response.body().string();
 
-                            if(resStr!=null){
+                            if(!TextUtils.equals("",resStr)){
                                 if(TextUtils.equals("get",sign)){
                                     msg.what=SUCCEED_GET_STATUS;
                                     msg.obj=resStr;
@@ -213,13 +224,18 @@ private void getorSetData(final String sign){
                                     msg.what=SUCCEED_SET_STATUS;
                                     msg.obj=resStr;
                                 }else if(TextUtils.equals("fujian",sign)){
-                                    msg.what=SUCCEED_APPENDIX;
-                                    Gson gson=new Gson();
-                                    msg.obj=gson.fromJson(resStr,new TypeToken<List<AppendixInfo>>(){}.getType());
+                                    if(!TextUtils.equals("[]",resStr)) {
+                                        msg.what = SUCCEED_APPENDIX;
+                                        Gson gson = new Gson();
+                                        msg.obj = gson.fromJson(resStr, new TypeToken<List<AppendixInfo>>() {
+                                        }.getType());
+                                    }else{
+                                        msg.what=SUCCEED_NODATA;
+                                    }
                                 }
 
                             }else{
-                                msg.what=PROBLEM;
+                                msg.what=SUCCEED_NODATA;
                             }
 
                         } catch (IOException e) {
@@ -286,10 +302,32 @@ private void getorSetData(final String sign){
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //下载图片
+        getPermission(position);
+        pSign=position;
         downLoadPic(lvData.get(position).getFILE_PATH(),position);
     }
 
+    private void getPermission(int position) {
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                ) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                ToastUtils.showShort(this, "您已经拒绝过一次");
+            }
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},10000);
+        } else {
+            downLoadPic(lvData.get(position).getFILE_PATH(),position);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        downLoadPic(lvData.get(pSign).getFILE_PATH(),pSign);
+    }
     private void downLoadPic(final String path, final int position){
 
         new Thread(
