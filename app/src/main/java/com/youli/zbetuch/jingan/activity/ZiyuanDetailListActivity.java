@@ -7,11 +7,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,14 +23,11 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
-import com.youli.zbetuch.jingan.bean.personalInfoBean.PersonalInfoBean;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.ResourcesDetailInfo;
 import com.youli.zbetuch.jingan.entity.ResourcesInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.utils.ProgressDialogUtils;
-import com.youli.zbetuch.jingan.utils.SharedPreferencesUtils;
-import com.youli.zbetuch.jingan.view.XListView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -244,7 +238,7 @@ public class ZiyuanDetailListActivity extends BaseActivity implements RadioGroup
                                 sendProblemMessage(msg);
                             }
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

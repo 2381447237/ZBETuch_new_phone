@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -24,7 +23,6 @@ import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.entity.AreaInfo;
 import com.youli.zbetuch.jingan.entity.CompanyPropertyInfo;
-import com.youli.zbetuch.jingan.entity.EduInfo;
 import com.youli.zbetuch.jingan.entity.GzbsInfo;
 import com.youli.zbetuch.jingan.entity.GzxzInfo;
 import com.youli.zbetuch.jingan.entity.IndustryInfo;
@@ -397,7 +395,7 @@ public class RecruitInfoActivity extends BaseActivity implements View.OnClickLis
                                 }
                                 mHandler.sendMessage(msg);
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -547,7 +545,7 @@ public class RecruitInfoActivity extends BaseActivity implements View.OnClickLis
                                 mHandler.sendMessage(msg);
 
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

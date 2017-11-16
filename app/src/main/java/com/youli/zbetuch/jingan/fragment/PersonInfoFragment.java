@@ -292,7 +292,7 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
                                 }
                                 mHandler.sendMessage(msg);
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -342,7 +342,7 @@ public class PersonInfoFragment extends Fragment implements View.OnClickListener
                                 }
                                 mHandler.sendMessage(msg);
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

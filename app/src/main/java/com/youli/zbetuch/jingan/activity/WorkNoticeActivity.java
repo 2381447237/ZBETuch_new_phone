@@ -24,8 +24,6 @@ import com.youli.zbetuch.jingan.entity.WorkNoticeInfo;
 import com.youli.zbetuch.jingan.entity.WorkNoticeReadInfo;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -186,7 +184,7 @@ public class WorkNoticeActivity extends BaseActivity implements AdapterView.OnIt
                                 }else{
                                     msg.what = SUCCEED_NODATA;
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -269,7 +267,7 @@ public class WorkNoticeActivity extends BaseActivity implements AdapterView.OnIt
                                 }else {
                                     msg.what = SUCCEED_NODATA;
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

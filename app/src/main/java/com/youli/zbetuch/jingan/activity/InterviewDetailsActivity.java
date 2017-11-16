@@ -286,7 +286,7 @@ public class InterviewDetailsActivity extends BaseActivity implements View.OnCli
 
                             mHandler.sendMessage(msg);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

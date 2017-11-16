@@ -184,7 +184,7 @@ public class PersonalInfoQueryResult extends BaseActivity {
                                 msg.obj=gson.fromJson(resStr,new TypeToken<List<PersonInfo>>(){}.getType());
                                 msg.what=SUCCEED;
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -307,7 +307,7 @@ public class PersonalInfoQueryResult extends BaseActivity {
                         Looper.loop();
                     }
 
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     if (lv_personalInfo.isRefreshing()) {

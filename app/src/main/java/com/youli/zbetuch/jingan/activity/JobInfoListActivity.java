@@ -79,6 +79,9 @@ public class JobInfoListActivity extends BaseActivity implements AdapterView.OnI
                      break;
 
                  case SUCCEED_NODATA:
+                     if(hsv.isRefreshing()) {
+                         hsv.onRefreshComplete();
+                     }
                      break;
              }
 
@@ -228,7 +231,7 @@ if(commonAdapter==null){
                                     msg.what = SUCCEED_NODATA;
                                 }
                                 mHandler.sendMessage(msg);
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

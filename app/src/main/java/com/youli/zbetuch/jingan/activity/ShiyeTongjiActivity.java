@@ -17,8 +17,6 @@ import com.youli.zbetuch.jingan.adapter.ShiyeExpandAdapter;
 import com.youli.zbetuch.jingan.entity.ShiyeTongjiInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.utils.ProgressDialogUtils;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -140,7 +138,7 @@ public class ShiyeTongjiActivity extends BaseActivity implements ExpandableListV
 
                             mHandler.sendMessage(msg);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

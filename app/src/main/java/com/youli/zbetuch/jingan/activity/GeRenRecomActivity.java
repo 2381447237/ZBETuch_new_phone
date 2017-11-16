@@ -292,7 +292,7 @@ public class GeRenRecomActivity extends BaseActivity implements View.OnClickList
 
                              mHandler.sendMessage(msg);
 
-                         } catch (IOException e) {
+                         } catch (Exception e) {
                              e.printStackTrace();
                          }
 

@@ -23,14 +23,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.youli.zbetuch.jingan.R;
-import com.youli.zbetuch.jingan.adapter.MainAdapter;
 import com.youli.zbetuch.jingan.adapter.MyFpAdapter;
 import com.youli.zbetuch.jingan.entity.GetStaffInfo;
-import com.youli.zbetuch.jingan.entity.JobsInfo;
-import com.youli.zbetuch.jingan.entity.MainContent;
-import com.youli.zbetuch.jingan.entity.MeetNoticeInfo;
-import com.youli.zbetuch.jingan.entity.NewsInfo;
-import com.youli.zbetuch.jingan.entity.WorkNoticeInfo;
 import com.youli.zbetuch.jingan.fragment.FollowListFragment;
 import com.youli.zbetuch.jingan.fragment.LoginInfoFragment;
 import com.youli.zbetuch.jingan.fragment.OpRecordFragment;
@@ -39,7 +33,6 @@ import com.youli.zbetuch.jingan.fragment.WorkLogFragment;
 import com.youli.zbetuch.jingan.utils.IOUtil;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -281,7 +274,7 @@ public class PersonDataCenterActivity extends FragmentActivity implements View.O
                                 sendProblemMessage(msg);
                             }
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

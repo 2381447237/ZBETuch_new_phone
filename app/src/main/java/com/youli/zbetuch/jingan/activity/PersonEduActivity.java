@@ -124,6 +124,11 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
                     break;
 
                 case SUCCESS_NODATA:
+
+                    if(lv.isRefreshing()){
+                        lv.onRefreshComplete();
+                    }
+
                     break;
             }
 
@@ -190,7 +195,7 @@ public class PersonEduActivity extends BaseActivity implements View.OnClickListe
                                 }
                                 mHandler.sendMessage(msg);
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

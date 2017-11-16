@@ -15,8 +15,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
-import com.youli.zbetuch.jingan.entity.MeetNoticeInfo;
-import com.youli.zbetuch.jingan.entity.WorkNoticeInfo;
 import com.youli.zbetuch.jingan.entity.WorkNoticeReadInfo;
 import com.youli.zbetuch.jingan.fragment.CurrentMeetFragment;
 import com.youli.zbetuch.jingan.fragment.HistoryMeetFragment;
@@ -135,7 +133,7 @@ public class MeetNoticeActivity extends FragmentActivity{
                                 }else{
                                     msg.what = SUCCEED_NODATA;
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

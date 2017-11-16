@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,26 +25,16 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.entity.LastInvest;
 import com.youli.zbetuch.jingan.entity.PersonInfo;
 import com.youli.zbetuch.jingan.entity.PersonReInfo;
 import com.youli.zbetuch.jingan.entity.ResourcesDetailInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
-import com.youli.zbetuch.jingan.utils.SharedPreferencesUtils;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -76,9 +67,11 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
     private final int SUCCESS=10000;
     private final int  PERSONINFO=10001;
     private final int  NOPERSONINFO=10002;
-    private final int  PROBLEM=10003;
+    private final int SUCCESS_LAST=10003;
+    private final int  PROBLEM=10004;
     private List<PersonInfo> personInfos=new ArrayList<>();
 
+    private List<LastInvest> lastInfo=new ArrayList<>();
 
     private Handler mHandler=new Handler(){
 
@@ -93,6 +86,19 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
                     isSave=true;
                     setResult(ZiyuanDetailListActivity.ResultCode,null);
 
+                    break;
+
+                case SUCCESS_LAST://最后一次调查情况
+
+                    lastInfo.clear();
+
+                    lastInfo.addAll((List<LastInvest>)msg.obj);
+
+                    if(lastInfo.size()>0&&lastInfo.get(0)!=null) {
+                        lastPresentStatusEt.setText(lastInfo.get(0).getMqzk());
+                        lastPresentIntentionEt.setText(lastInfo.get(0).getDqyx());
+                        lastRemarksEt.setText(lastInfo.get(0).getMark());
+                    }
                     break;
 
                 case PROBLEM:
@@ -126,8 +132,13 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shiwuye_detail);
 
+
+
+
         initViews();
     }
+
+
 
 
     private void initViews(){
@@ -177,12 +188,60 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
 
 
         lastPresentStatusEt= (EditText) findViewById(R.id.shiwuye_detail_present_status_et_last);//最后一次的目前状况
-        lastPresentStatusEt.setText("111");
         lastPresentIntentionEt= (EditText) findViewById(R.id.shiwuye_detail_present_intention_et_last);//最后一次的当前意向
-        lastPresentIntentionEt.setText("222");
         lastRemarksEt= (EditText) findViewById(R.id.shiwuye_detail_remarks_et_last);//最后一次的备注
-        lastRemarksEt.setText("333");
+
+        getLastCase();//最后一次调查情况
+
         initData();
+
+    }
+
+    private void getLastCase(){
+
+       new Thread(new Runnable() {
+           @Override
+           public void run() {
+
+               // http://web.youli.pw:89/Json/Get_Resource_Survey_Last.aspx?SFZ=310108198004026642
+
+               String url=MyOkHttpUtils.BaseUrl+"/Json/Get_Resource_Survey_Last.aspx?SFZ="+RDInfo.getSFZ();
+
+               Response response=MyOkHttpUtils.okHttpGet(url);
+
+               Message msg=Message.obtain();
+
+               if(response!=null){
+
+                   if(response.body()!=null){
+
+                       try {
+                           String resStr=response.body().string();
+                           Gson gson=new Gson();
+                           msg.obj = gson.fromJson(resStr, new TypeToken<List<LastInvest>>() {
+                           }.getType());
+                           msg.what=SUCCESS_LAST;
+
+                       } catch (Exception e) {
+                           e.printStackTrace();
+                       }
+
+                   }else {
+                       msg.what=PROBLEM;
+
+                   }
+
+               }else{
+                   msg.what=PROBLEM;
+
+               }
+               mHandler.sendMessage(msg);
+
+           }
+       }).start();
+
+
+
 
     }
 
@@ -353,11 +412,22 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
 
     private void spinnerSetSelection(String type){
 
+
+        if(TextUtils.equals("old",type)){
+            remarksEt.setText(lastRemarksEt.getText().toString().trim());
+        }
+
         for(int i=0; i<currStaData.length;i++){
 
             if(TextUtils.equals("old",type)){
 
-                if(TextUtils.equals(RDInfo.getMQZK(),currStaData[i])){
+//                if(TextUtils.equals(RDInfo.getMQZK(),currStaData[i])){
+//
+//                    currStaSp.setSelection(i);
+//
+//                }
+
+                                if(TextUtils.equals(lastPresentStatusEt.getText().toString().trim(),currStaData[i])){
 
                     currStaSp.setSelection(i);
 
@@ -381,7 +451,13 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
 
             if(TextUtils.equals("old",type)){
 
-                if(TextUtils.equals(RDInfo.getDQYX(),currIntData[i])){
+//                if(TextUtils.equals(RDInfo.getDQYX(),currIntData[i])){
+//
+//                    currIntSp.setSelection(i);
+//
+//                }
+
+                if(TextUtils.equals(lastPresentIntentionEt.getText().toString().trim(),currIntData[i])){
 
                     currIntSp.setSelection(i);
 
@@ -509,7 +585,7 @@ public class ShiwuyeDetailActivity extends BaseActivity implements View.OnClickL
                                     mHandler.sendMessage(msg);
 
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

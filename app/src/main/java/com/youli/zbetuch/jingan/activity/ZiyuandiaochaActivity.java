@@ -25,9 +25,6 @@ import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.ResourcesInfo;
 import com.youli.zbetuch.jingan.entity.StreetInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
-import com.youli.zbetuch.jingan.utils.SharedPreferencesUtils;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,7 +207,7 @@ public class ZiyuandiaochaActivity extends BaseActivity implements View.OnClickL
                             } else {
                                 sendProblemMessage(msg);
                             }
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

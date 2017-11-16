@@ -30,7 +30,6 @@ import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.GraduateInfo;
-import com.youli.zbetuch.jingan.entity.InvestInfo;
 import com.youli.zbetuch.jingan.entity.OccupGuideInfo;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
@@ -262,7 +261,7 @@ public class JobRouteTwoFragment extends BaseFragment implements View.OnClickLis
 
                                     }
                                     mHandler.sendMessage(msg);
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 

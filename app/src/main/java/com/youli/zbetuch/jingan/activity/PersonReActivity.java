@@ -21,11 +21,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.entity.ChildJobPostInfo;
-import com.youli.zbetuch.jingan.entity.EduInfo;
-import com.youli.zbetuch.jingan.entity.JobInfoListInfo;
 import com.youli.zbetuch.jingan.entity.JobPostInfo;
 import com.youli.zbetuch.jingan.entity.PersonReInfo;
-import com.youli.zbetuch.jingan.entity.RecruitEduInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,7 +31,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -325,7 +321,7 @@ public class PersonReActivity extends BaseActivity implements View.OnClickListen
 
                                 }
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

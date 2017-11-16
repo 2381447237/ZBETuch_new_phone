@@ -28,16 +28,11 @@ import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.PersonInfo;
 import com.youli.zbetuch.jingan.entity.RecomListInfo;
-import com.youli.zbetuch.jingan.entity.WorkRecordInfo;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -212,7 +207,7 @@ public class RecomListActivity extends BaseActivity{
 
                            mHandler.sendMessage(msg);
 
-                       } catch (IOException e) {
+                       } catch (Exception e) {
                            e.printStackTrace();
                        }
 
@@ -294,7 +289,7 @@ public class RecomListActivity extends BaseActivity{
                                     mHandler.sendMessage(msg);
 
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

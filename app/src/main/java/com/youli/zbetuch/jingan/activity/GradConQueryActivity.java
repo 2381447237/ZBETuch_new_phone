@@ -205,6 +205,8 @@ public class GradConQueryActivity extends BaseActivity implements View.OnClickLi
                                     if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
 
                                         Gson gson = new Gson();
+
+
                                         if (TextUtils.equals(content, "街道")) {
                                             msg.obj = gson.fromJson(resStr, new TypeToken<List<JinAnStreetInfo>>() {
                                             }.getType());
@@ -222,10 +224,11 @@ public class GradConQueryActivity extends BaseActivity implements View.OnClickLi
                                             }.getType());
                                             msg.what = SUCCESS_JW;
                                         }
+
                                     }
                                     mHandler.sendMessage(msg);
 
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 

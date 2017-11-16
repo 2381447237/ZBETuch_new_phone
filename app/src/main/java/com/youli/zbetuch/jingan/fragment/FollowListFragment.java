@@ -26,7 +26,6 @@ import com.youli.zbetuch.jingan.activity.PersonInfoActivity;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.FollowListInfo;
-import com.youli.zbetuch.jingan.entity.LoginInfo;
 import com.youli.zbetuch.jingan.entity.PersonInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
@@ -133,6 +132,11 @@ public class FollowListFragment extends BaseFragment{
                     break;
 
                 case SUCCESS_NODATA:
+
+                    if (lv.isRefreshing()) {
+                        lv.onRefreshComplete();
+                    }
+
                     break;
             }
 
@@ -220,7 +224,7 @@ public class FollowListFragment extends BaseFragment{
 
                             mHandler.sendMessage(msg);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -323,7 +327,7 @@ public class FollowListFragment extends BaseFragment{
                                     mHandler.sendMessage(msg);
 
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

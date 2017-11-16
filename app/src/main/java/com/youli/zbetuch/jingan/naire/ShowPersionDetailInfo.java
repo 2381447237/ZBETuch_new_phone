@@ -162,8 +162,12 @@ public class ShowPersionDetailInfo extends Activity implements OnClickListener {
 						
 						Gson gson=new Gson();
 						Type listType=new TypeToken<LinkedList<FamilyInfo>>(){}.getType();
-						
-						LinkedList<FamilyInfo> fi=gson.fromJson(infoStr,listType);
+
+						try{
+							LinkedList<FamilyInfo> fi=gson.fromJson(infoStr,listType);
+
+
+
 						
 						listInfo.clear();
 						
@@ -176,7 +180,9 @@ public class ShowPersionDetailInfo extends Activity implements OnClickListener {
 							listInfo.add(content);
 							
 						}
+						}catch (Exception e){
 
+						}
 						if(adapter==null){
 							adapter=new WenJuanPersonListAdapter(listInfo, ShowPersionDetailInfo.this);
 							lv.setAdapter(adapter);					
@@ -630,7 +636,7 @@ case R.id.family://家庭成员调查
 									mHandler.sendMessage(msg);
 
 								}
-							} catch (IOException e) {
+							} catch (Exception e) {
 								e.printStackTrace();
 							}
 

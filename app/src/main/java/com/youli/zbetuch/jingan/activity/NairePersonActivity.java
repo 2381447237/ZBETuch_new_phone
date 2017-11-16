@@ -182,7 +182,7 @@ public class NairePersonActivity extends BaseActivity{
                                         msg.what=SUCCESS_NODATA;
                                     }
 
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 

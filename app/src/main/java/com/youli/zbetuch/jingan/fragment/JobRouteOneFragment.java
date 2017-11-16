@@ -30,12 +30,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
-import com.youli.zbetuch.jingan.entity.CompanyPropertyInfo;
 import com.youli.zbetuch.jingan.entity.GraduateInfo;
-import com.youli.zbetuch.jingan.entity.IndustryInfo;
 import com.youli.zbetuch.jingan.entity.InquirerInfo;
 import com.youli.zbetuch.jingan.entity.InvestInfo;
-import com.youli.zbetuch.jingan.entity.JinAnStreetInfo;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.utils.SpinnerUtils;
@@ -274,7 +271,7 @@ public class JobRouteOneFragment extends BaseFragment implements View.OnClickLis
 
                                     }
                                     mHandler.sendMessage(msg);
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 
@@ -627,7 +624,7 @@ public class JobRouteOneFragment extends BaseFragment implements View.OnClickLis
 
                                     }
                                     mHandler.sendMessage(msg);
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 

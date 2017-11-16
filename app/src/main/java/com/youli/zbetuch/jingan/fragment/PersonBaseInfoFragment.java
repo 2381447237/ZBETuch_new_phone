@@ -23,9 +23,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
-import com.youli.zbetuch.jingan.entity.CompanyPropertyInfo;
 import com.youli.zbetuch.jingan.entity.GraduateInfo;
-import com.youli.zbetuch.jingan.entity.IndustryInfo;
 import com.youli.zbetuch.jingan.entity.JinAnStreetInfo;
 import com.youli.zbetuch.jingan.entity.JwInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
@@ -324,7 +322,7 @@ public class PersonBaseInfoFragment extends BaseFragment {
                                     }
                                     mHandler.sendMessage(msg);
 
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 

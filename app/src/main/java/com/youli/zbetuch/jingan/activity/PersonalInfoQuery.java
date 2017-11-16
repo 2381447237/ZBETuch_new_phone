@@ -224,7 +224,7 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                             }
                         });
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -263,7 +263,7 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                         streetNameList.add("未找到信息");
                         showSpinner(streetNameList, spinner_street);
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -306,7 +306,7 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                             Toast.makeText(mContext, "居委会列表为空", Toast.LENGTH_SHORT).show();
                             Looper.loop();
                         }
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -395,7 +395,7 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                                     msg.what=SUCCEED;
                                     mHandler.sendMessage(msg);
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -612,7 +612,7 @@ public class PersonalInfoQuery extends BaseActivity implements View.OnClickListe
                                     msg.what=SUCCEED;
                                     mHandler.sendMessage(msg);
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }

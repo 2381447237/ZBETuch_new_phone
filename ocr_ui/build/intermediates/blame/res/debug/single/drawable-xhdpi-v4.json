@@ -268,11 +268,11 @@
         "source": "D:\\android\\e\\asworkspace\\github\\ZBETuch_new_phone\\ocr_ui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.1\\res\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "D:\\android\\e\\asworkspace\\github\\ZBETuch_new_phone\\ocr_ui\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
-        "source": "D:\\android\\e\\asworkspace\\github\\ZBETuch_new_phone\\ocr_ui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.1\\res\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
-    },
-    {
         "merged": "D:\\android\\e\\asworkspace\\github\\ZBETuch_new_phone\\ocr_ui\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\bd_ocr_confirm.png",
         "source": "D:\\android\\e\\asworkspace\\github\\ZBETuch_new_phone\\ocr_ui\\src\\main\\res\\drawable-xhdpi\\bd_ocr_confirm.png"
+    },
+    {
+        "merged": "D:\\android\\e\\asworkspace\\github\\ZBETuch_new_phone\\ocr_ui\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
+        "source": "D:\\android\\e\\asworkspace\\github\\ZBETuch_new_phone\\ocr_ui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.1.1\\res\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
     }
 ]

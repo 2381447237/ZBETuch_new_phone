@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,17 +33,12 @@ import com.youli.zbetuch.jingan.entity.MainContent;
 import com.youli.zbetuch.jingan.entity.MeetNoticeInfo;
 import com.youli.zbetuch.jingan.entity.NewsInfo;
 import com.youli.zbetuch.jingan.entity.WorkNoticeInfo;
-import com.youli.zbetuch.jingan.utils.MyApplication;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.view.MyListView;
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 import okhttp3.Response;
 
 /**
@@ -316,7 +310,7 @@ public class MainAdapter extends BaseAdapter{
                                 msg.what=SUCCEED_JOBINFO;
                                 msg.obj=gson.fromJson(dataStr,new TypeToken<List<JobInfoListInfo>>(){}.getType());
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

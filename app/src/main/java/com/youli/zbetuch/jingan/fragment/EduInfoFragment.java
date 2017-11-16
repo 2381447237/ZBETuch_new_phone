@@ -22,10 +22,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.youli.zbetuch.jingan.R;
-import com.youli.zbetuch.jingan.activity.PersonInfoActivity;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.entity.EduInfo;
@@ -34,8 +31,6 @@ import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,7 +155,7 @@ public class EduInfoFragment extends Fragment{
                                  }.getType());
                                  mHandler.sendMessage(msg);
                              }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

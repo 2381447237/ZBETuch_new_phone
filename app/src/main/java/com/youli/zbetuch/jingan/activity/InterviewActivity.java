@@ -170,6 +170,7 @@ public class InterviewActivity extends BaseActivity{
                                     if (!TextUtils.equals(resStr, "") && !TextUtils.equals(resStr, "[]")) {
 
                                         Gson gson = new Gson();
+
                                         msg.obj = gson.fromJson(resStr, new TypeToken<List<InterviewInfo>>() {
                                         }.getType());
                                         msg.what = SUCCESS_INFO;
@@ -183,7 +184,7 @@ public class InterviewActivity extends BaseActivity{
                             }
                             mHandler.sendMessage(msg);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

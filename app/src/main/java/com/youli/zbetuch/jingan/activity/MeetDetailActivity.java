@@ -225,10 +225,12 @@ private void getorSetData(final String sign){
                                     msg.obj=resStr;
                                 }else if(TextUtils.equals("fujian",sign)){
                                     if(!TextUtils.equals("[]",resStr)) {
+
                                         msg.what = SUCCEED_APPENDIX;
                                         Gson gson = new Gson();
                                         msg.obj = gson.fromJson(resStr, new TypeToken<List<AppendixInfo>>() {
                                         }.getType());
+
                                     }else{
                                         msg.what=SUCCEED_NODATA;
                                     }
@@ -238,7 +240,7 @@ private void getorSetData(final String sign){
                                 msg.what=SUCCEED_NODATA;
                             }
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
@@ -304,7 +306,7 @@ private void getorSetData(final String sign){
         //下载图片
         getPermission(position);
         pSign=position;
-        downLoadPic(lvData.get(position).getFILE_PATH(),position);
+
     }
 
     private void getPermission(int position) {

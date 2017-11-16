@@ -25,8 +25,6 @@ import com.youli.zbetuch.jingan.adapter.RadioButtonAdapter;
 import com.youli.zbetuch.jingan.entity.CompanyPropertyInfo;
 import com.youli.zbetuch.jingan.entity.GraduateInfo;
 import com.youli.zbetuch.jingan.entity.IndustryInfo;
-import com.youli.zbetuch.jingan.entity.JinAnStreetInfo;
-import com.youli.zbetuch.jingan.entity.JobInfoListInfo;
 import com.youli.zbetuch.jingan.entity.JobIntentInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
@@ -279,7 +277,7 @@ public class PersonJobIntFragment extends BaseFragment{
                                     }
 
 
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 
@@ -395,7 +393,7 @@ public class PersonJobIntFragment extends BaseFragment{
                                      mHandler.sendMessage(msg);
                                  }
 
-                             } catch (IOException e) {
+                             } catch (Exception e) {
                                  e.printStackTrace();
                              }
 

@@ -15,6 +15,7 @@ import com.baidu.ocr.ui.crop.FrameOverlayView;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -114,6 +115,17 @@ public class CameraActivity extends Activity {
     protected void onStart() {
         super.onStart();
         cameraView.start();
+    }
+
+    @Override
+    protected void onResume() {
+        /**
+         * 设置为竖屏
+         */
+        if(getRequestedOrientation()!= ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        super.onResume();
     }
 
     @Override

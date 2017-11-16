@@ -1,9 +1,12 @@
 package com.youli.zbetuch.jingan.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -32,6 +35,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private Button btn_login;
     private final int SUCCEED=10000;
     private final int  PROBLEM=10001;
+    private int info_num;
+    private LocationManager locationManager;
     private Handler mHandler=new Handler(){
 
         @Override
@@ -69,6 +74,10 @@ switch (msg.what){
 // 更新apk
         UpdateManager manager = new UpdateManager(LoginActivity.this);
         manager.checkUpdate();
+
+        locationManager = (LocationManager) this
+                .getSystemService(Context.LOCATION_SERVICE);
+
         initUI();
 
     }
@@ -122,10 +131,19 @@ switch (msg.what){
                 if(TextUtils.equals("",userNameStr)||TextUtils.equals("",passwordStr)){
                     Toast.makeText(this,"用户名或密码不能为空",Toast.LENGTH_SHORT).show();
                 }else{
+                    if (info_num<5&&
+                            (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) != true)) {
+                        Toast.makeText(LoginActivity.this, "请打开GPS定位！",
+                                Toast.LENGTH_SHORT).show();
+                       Intent callGPSSettingIntent = new Intent(
+                               android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 
-                    //登录
-                    login(userNameStr,passwordStr);
-
+                        startActivity(callGPSSettingIntent);
+                        info_num++;
+                    } else {
+                        //登录
+                        login(userNameStr, passwordStr);
+                    }
                 }
 
 

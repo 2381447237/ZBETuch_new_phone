@@ -153,7 +153,7 @@ public class CurrentMeetFragment extends Fragment implements AdapterView.OnItemC
                                     msg.what=SUCCEED_NODATA;
                                 }
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

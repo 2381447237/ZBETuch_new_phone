@@ -28,20 +28,16 @@ import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.activity.PersonInfoActivity;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
-import com.youli.zbetuch.jingan.entity.EduInfo;
 import com.youli.zbetuch.jingan.entity.FamilyAddressInfo;
 import com.youli.zbetuch.jingan.entity.PersonInfo;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.view.MyListView;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.Response;
 
 /**
@@ -189,7 +185,7 @@ public class FamilyInfoFragment extends Fragment {
                                     msg.what=SUCCESS_NODATA;
                                 }
                                 mHandler.sendMessage(msg);
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -237,7 +233,7 @@ public class FamilyInfoFragment extends Fragment {
                                     msg.what=SUCCESS_NODATA;
                                 }
                                 mHandler.sendMessage(msg);
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -445,7 +441,7 @@ public class FamilyInfoFragment extends Fragment {
                                     msg.what = SUCCESS_NODATA;
                                 }
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

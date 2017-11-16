@@ -199,7 +199,7 @@ public class FollowListActivity extends BaseActivity{
 
                             mHandler.sendMessage(msg);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -291,12 +291,13 @@ public class FollowListActivity extends BaseActivity{
                                 }else{
 
                                     Gson gson=new Gson();
+
                                     msg.obj=gson.fromJson(strRes,new TypeToken<List<PersonInfo>>(){}.getType());
                                     msg.what=PERSONINFO;
                                     mHandler.sendMessage(msg);
 
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

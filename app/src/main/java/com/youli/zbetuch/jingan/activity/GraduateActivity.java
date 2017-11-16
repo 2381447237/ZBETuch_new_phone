@@ -266,9 +266,11 @@ public class GraduateActivity extends BaseActivity implements View.OnClickListen
                                     if(!TextUtils.equals(resStr,"")&&!TextUtils.equals(resStr,"[]")) {
 
                                         Gson gson = new Gson();
+
                                         msg.obj = gson.fromJson(resStr, new TypeToken<List<GraduateInfo>>() {
                                         }.getType());
                                         msg.what = SUCCESS_LIST;
+
                                         mHandler.sendMessage(msg);
                                     }else{
 
@@ -276,7 +278,7 @@ public class GraduateActivity extends BaseActivity implements View.OnClickListen
                                         mHandler.sendMessage(msg);
 
                                     }
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 

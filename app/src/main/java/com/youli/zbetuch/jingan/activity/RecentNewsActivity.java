@@ -9,11 +9,9 @@ import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +24,6 @@ import com.youli.zbetuch.jingan.entity.NewsInfo;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +121,7 @@ public class RecentNewsActivity extends BaseActivity implements AdapterView.OnIt
                                    }else{
                                        msg.what = SUCCEED_NODATA;
                                    }
-                               } catch (IOException e) {
+                               } catch (Exception e) {
                                    e.printStackTrace();
                                }
 

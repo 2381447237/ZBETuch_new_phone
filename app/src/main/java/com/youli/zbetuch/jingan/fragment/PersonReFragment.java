@@ -235,7 +235,7 @@ public class PersonReFragment extends Fragment{
                                     msg.what=SUCCESS_NODATA;
                                 }
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -314,7 +314,7 @@ public class PersonReFragment extends Fragment{
 
                                  }
 
-                             } catch (IOException e) {
+                             } catch (Exception e) {
                                  e.printStackTrace();
                              }
 

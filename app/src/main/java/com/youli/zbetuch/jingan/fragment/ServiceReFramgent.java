@@ -249,7 +249,7 @@ public class ServiceReFramgent extends Fragment {
                                     msg.what=SUCCESS_NODATA;
                                 }
                                 mHandler.sendMessage(msg);
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
@@ -626,7 +626,7 @@ public class ServiceReFramgent extends Fragment {
                                 }
                                 mHandler.sendMessage(msg);
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

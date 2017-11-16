@@ -1843,8 +1843,7 @@ OkHttpUtils.post().url(MyOkHttpUtils.BaseUrl+ShowPersionDetailInfo.familyListUrl
 			
 			@Override
 			public void onResponse(final String infoStr) {
-				
-				Log.i("2017/3/15","666成功999"+infoStr);
+
 				
 				runOnUiThread(new Runnable() {
 					public void run() {

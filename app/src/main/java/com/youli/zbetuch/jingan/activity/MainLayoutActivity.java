@@ -1,21 +1,14 @@
 package com.youli.zbetuch.jingan.activity;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +16,11 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
@@ -39,10 +37,10 @@ import com.youli.zbetuch.jingan.utils.FileUtils;
 import com.youli.zbetuch.jingan.utils.IOUtil;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.view.CircleImageView;
-
-import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,12 +48,7 @@ import java.util.Map;
 
 import okhttp3.Response;
 
-public class MainLayoutActivity extends BaseActivity implements View.OnClickListener {
-
-    private LocationManager locationManager;
-    private String provider;
-
-    private static final int Location = 9999;
+public class MainLayoutActivity extends CheckPermissionsActivity implements View.OnClickListener {
 
     private Context mContext = MainLayoutActivity.this;
     private GridView gv;
@@ -86,6 +79,11 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
     public static String adminName;
 
     public static int adminId;
+
+    //声明AMapLocationClient类对象
+    private AMapLocationClient mLocationClient;
+    //声明AMapLocationClientOption对象
+    private AMapLocationClientOption mLocationOption;
 
     private Handler mHandler = new Handler() {
 
@@ -216,21 +214,12 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
         workBtn = (Button) findViewById(R.id.main_layout_work_btn);
         workBtn.setOnClickListener(this);
 
-        //获取LocationManager服务
-        locationManager = (LocationManager) this
-                .getSystemService(Context.LOCATION_SERVICE);
 
         initData();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){//判断是否大于等于安卓6.0版本
-            requestPermission(Manifest.permission.ACCESS_FINE_LOCATION, Location);
-        }else{
-            getAddress();
-        }
-
         //发送本机app和film
         sendPhoneInfo();
-
+        getGpsInfo();//定位
     }
 
     private void sendPhoneInfo(){
@@ -257,129 +246,93 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
 
     };
 
-    //shouldShowRequestPermissionRationale主要用于给用户一个申请权限的解释，该方法只有在用户在上一次已经拒绝过你的这个权限申请。也就是说，用户已经拒绝一次了，你又弹个授权框，你需要给用户一个解释，为什么要授权，则使用该方法。
-    private void requestPermission(String permission, int requestCode) {
 
-        if (!isGranted(permission)) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
+    private void getGpsInfo(){
 
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+
+                if(aMapLocation!=null){
+
+                    if(aMapLocation.getErrorCode()==0){
+                        //可在其中解析amapLocation获取相应内容。
+
+                        aMapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+                        aMapLocation.getLatitude();//获取纬度
+                        aMapLocation.getLongitude();//获取经度
+                        aMapLocation.getAccuracy();//获取精度信息
+                        aMapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
+                        aMapLocation.getCountry();//国家信息
+                        aMapLocation.getProvince();//省信息
+                        aMapLocation.getCity();//城市信息
+                        aMapLocation.getDistrict();//城区信息
+                        aMapLocation.getStreet();//街道信息
+                        aMapLocation.getStreetNum();//街道门牌号信息
+                        aMapLocation.getCityCode();//城市编码
+                        aMapLocation.getAdCode();//地区编码
+                        aMapLocation.getAoiName();//获取当前定位点的AOI信息
+                        aMapLocation.getBuildingId();//获取当前室内定位的建筑物Id
+                        aMapLocation.getFloor();//获取当前室内定位的楼层
+                        aMapLocation.getGpsAccuracyStatus();//获取GPS的当前状态
+                        //获取定位时间
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        Date date = new Date(aMapLocation.getTime());
+                        df.format(date);
+                        jDuTv.setText("经度:"+aMapLocation.getLongitude());
+                        wDuTv.setText("纬度:"+aMapLocation.getLatitude());
+                        gDuTv.setText("高度:"+aMapLocation.getAltitude()+"米");
+                           jingDu=String.valueOf(aMapLocation.getLongitude());
+                         weiDu=String.valueOf(aMapLocation.getLatitude());
+                    }else{
+                        //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                        Log.e("AmapError","location Error, ErrCode:"
+                                + aMapLocation.getErrorCode() + ", errInfo:"
+                                + aMapLocation.getErrorInfo());
+                    }
+                }
+
             }
-        } else {
-            //直接执行相应操作了
-            getAddress();
-        }
+        });
 
-    }
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+        //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
 
-    public boolean isGranted(String permission) {
-        return !isMarshmallow() || isGranted_(permission);
-    }
+//        //设置定位模式为AMapLocationMode.Battery_Saving，低功耗模式。
+//        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
 
-    private boolean isGranted_(String permission) {
-        int checkSelfPermission = ActivityCompat.checkSelfPermission(this, permission);
-        return checkSelfPermission == PackageManager.PERMISSION_GRANTED;
-    }
+        //设置定位间隔,单位毫秒,默认为2000ms，最低1000ms。
+        mLocationOption.setInterval(1000);
 
-    private boolean isMarshmallow() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+        //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.setNeedAddress(true);
+
+        //设置是否允许模拟位置,默认为true，允许模拟位置
+        mLocationOption.setMockEnable(true);
+
+        //单位是毫秒，默认30000毫秒，建议超时时间不要低于8000毫秒。
+        mLocationOption.setHttpTimeOut(20000);
+
+        //关闭缓存机制
+        mLocationOption.setLocationCacheEnable(false);
+
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
+
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == Location) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getAddress();
-            } else {
-                // Permission Denied
-                Toast.makeText(mContext, "您没有授权该权限，请在设置中打开授权", Toast.LENGTH_SHORT).show();
-            }
-            return;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-
-
-
-    private void getAddress() {
-
-        List<String> providerList = locationManager.getProviders(true);
-        if (providerList.contains(LocationManager.GPS_PROVIDER)) {
-            provider = LocationManager.GPS_PROVIDER;
-        } else if (providerList.contains(LocationManager.NETWORK_PROVIDER)) {
-            provider = LocationManager.NETWORK_PROVIDER;
-        } else {
-//            Toast.makeText(MainActivity.this, "no Location provider to use",
-//                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-        Location location = locationManager.getLastKnownLocation(provider);
-
-        if (location != null) {
-            //显示位置
-            showLocations(location);
-
-        }
-        locationManager.requestLocationUpdates(provider, 500, 0, locationListener);
-
-    }
-
-    @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-        if (locationManager != null) {
-            //关闭程序时将监听器移除
-
-            locationManager.removeUpdates(locationListener);
-        }
-    }
-
-    LocationListener locationListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            //更新当前位置
-            showLocations(location);
-
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
-
-    private void showLocations(Location location) {
-//        String currentposition = "纬度 is" + location.getLatitude();
-//        String currentposition2 = "经度 is" + location.getLongitude();
-   //     String heightStr="高度 is"+location.getAltitude()+"米";
-        jDuTv.setText("经度:"+location.getLongitude());
-        wDuTv.setText("纬度:"+location.getLatitude());
-        gDuTv.setText("高度:"+location.getAltitude()+"米");
-            jingDu=String.valueOf(location.getLongitude());
-    weiDu=String.valueOf(location.getLatitude());
+        mLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
+        mLocationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
     }
 
 
@@ -449,6 +402,7 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                                 if(!TextUtils.equals(infoStr,"")&&!TextUtils.equals(infoStr,"{}")) {
 
                                     Gson gson = new Gson();
+
                                     GetStaffInfo staffInfo = gson.fromJson(infoStr, GetStaffInfo.class);
                                     msg.obj = staffInfo;
                                     msg.what = SUCCEED_NAME;
@@ -461,7 +415,7 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                                 sendProblemMessage(msg);
                             }
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -488,10 +442,12 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                                 String miStr=response.body().string();
                                 if(!TextUtils.equals(miStr,"")) {
                                     Gson gson = new Gson();
+
                                     childData1 = gson.fromJson(miStr, new TypeToken<List<MeetNoticeInfo>>() {
                                     }.getType());
                                     msg.obj = childData1;
                                     msg.what = SUCCEED_MI;
+
                                 }else{
                                     msg.what = SUCCEED_NODATA;
                                 }
@@ -499,7 +455,7 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                             }else{
                                 sendProblemMessage(msg);
                             }
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -526,10 +482,12 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                                 String wnStr=response.body().string();
                                 if(!TextUtils.equals(wnStr,"")) {
                                     Gson gson = new Gson();
+
                                     childData2 = gson.fromJson(wnStr, new TypeToken<List<WorkNoticeInfo>>() {
                                     }.getType());
                                     msg.obj = childData2;
                                     msg.what = SUCCEED_WN;
+
                                 }else{
                                     msg.what = SUCCEED_NODATA;
                                 }
@@ -537,7 +495,7 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                             }else{
                                 sendProblemMessage(msg);
                             }
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -565,10 +523,12 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                                 String jiStr=response.body().string();
                                 if(!TextUtils.equals(jiStr,"")) {
                                     Gson gson = new Gson();
+
                                     childData3 = gson.fromJson(jiStr, new TypeToken<List<JobsInfo>>() {
                                     }.getType());
                                     msg.obj = childData3;
                                     msg.what = SUCCEED_JOB;
+
                                 }else{
                                     msg.what = SUCCEED_NODATA;
                                 }
@@ -576,7 +536,7 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                             }else{
                                 sendProblemMessage(msg);
                             }
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -603,10 +563,12 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                                 String niStr=response.body().string();
                                 if(!TextUtils.equals(niStr,"")) {
                                     Gson gson = new Gson();
+
                                     childData4 = gson.fromJson(niStr, new TypeToken<List<NewsInfo>>() {
                                     }.getType());
                                     msg.obj = childData4;
                                     msg.what = SUCCEED_NI;
+
                                 }else{
                                     msg.what = SUCCEED_NODATA;
                                 }
@@ -614,7 +576,7 @@ public class MainLayoutActivity extends BaseActivity implements View.OnClickList
                             }else{
                                 sendProblemMessage(msg);
                             }
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

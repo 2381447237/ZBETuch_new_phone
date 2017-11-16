@@ -20,12 +20,9 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
-import com.youli.zbetuch.jingan.entity.LoginInfo;
 import com.youli.zbetuch.jingan.entity.OpRecordInfo;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -177,7 +174,7 @@ public class OpRecordFragment extends BaseFragment{
                                     msg.what=SUCCESS_NODATA;
                                 }
                                 mHandler.sendMessage(msg);
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

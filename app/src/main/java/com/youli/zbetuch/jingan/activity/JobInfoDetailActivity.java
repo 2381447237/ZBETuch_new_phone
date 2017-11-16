@@ -275,10 +275,11 @@ public class JobInfoDetailActivity extends BaseActivity implements View.OnClickL
                                         msg.obj = gson.fromJson(detailStr, new TypeToken<List<CounselorInfo>>() {
                                         }.getType());
                                     }
+
                                 }else{
                                     msg.what=SUCCEED_NODATA;
                                 }
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

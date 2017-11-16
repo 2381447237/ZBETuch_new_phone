@@ -545,7 +545,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                                      }else{
                                          msg.what = SUCCEED_NODATA;
                                      }
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 
@@ -561,7 +561,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                                     }else{
                                         msg.what = SUCCEED_NODATA;
                                     }
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 
@@ -579,7 +579,7 @@ public class PersonBaseInfoActivity extends BaseActivity implements View.OnClick
                                     }else{
                                         msg.what = SUCCEED_NODATA;
                                     }
-                                } catch (IOException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
 
