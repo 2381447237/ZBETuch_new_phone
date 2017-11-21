@@ -117,6 +117,10 @@ public class FunctionListActivity extends BaseActivity{
                                     intent=new Intent(mContext,ShowWenJuanActivity.class);
                                     startActivity(intent);
                                     break;
+                                case 11:
+                                    intent=new Intent(mContext,ComNaireActivity.class);
+                                    startActivity(intent);
+                                    break;
 //                                default:
 //                                    Toast.makeText(FunctionListActivity.this, "当前点击第" + finalI
 //                                            + "页第" + position + "个", Toast.LENGTH_SHORT).show();
@@ -199,7 +203,7 @@ public class FunctionListActivity extends BaseActivity{
                 R.drawable.gerenxinxi, R.drawable.zpxx, R.drawable.tjbb,
                 R.drawable.yjbys, R.drawable.zzdc, R.drawable.xcms,
                 R.drawable.sstj,  R.drawable.grsjzx, R.drawable.gglb,
-                        R.drawable.mmxg,  R.drawable.wjdc};
+                        R.drawable.mmxg,  R.drawable.wjdc,  R.drawable.qydc};
 
         viewList=new ArrayList<>();
         initGridView();

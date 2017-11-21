@@ -201,6 +201,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden" >
         </activity>
 
+        <activity android:name=".activity.ComNaireActivity"
+            android:screenOrientation="portrait"></activity><!--企业调查-->
+
         <service android:name=".naire.PersonService" >
             <intent-filter>
                 <action android:name="com.fc.person.newservice.PersonService" />
