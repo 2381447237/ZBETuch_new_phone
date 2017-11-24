@@ -11,6 +11,7 @@ import okhttp3.Call;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.activity.BaseActivity;
 import com.youli.zbetuch.jingan.activity.MainLayoutActivity;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.utils.SharedPreferencesUtils;
@@ -32,7 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class WenJuanRegisterInfo extends Activity implements OnClickListener{
+public class WenJuanRegisterInfo extends BaseActivity implements OnClickListener{
 
 	private Button backBtn,nextBtn;
 	
@@ -49,7 +50,7 @@ public class WenJuanRegisterInfo extends Activity implements OnClickListener{
 	private List<FamilyInfo> listInfo=new ArrayList<FamilyInfo>();
 	private FamilyInfo fInfo;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);

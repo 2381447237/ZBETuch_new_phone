@@ -34,12 +34,6 @@ public class ComNaireInfo implements Serializable {
     private int RecordCount;
     private List<DetilsBean> Detils;
 
-    public ComNaireInfo(String CREATE_TIME, String NO, String TITLE) {
-        this.CREATE_TIME = CREATE_TIME;
-        this.NO = NO;
-        this.TITLE = TITLE;
-    }
-
     public int getID() {
         return ID;
     }
@@ -104,7 +98,7 @@ public class ComNaireInfo implements Serializable {
         this.Detils = Detils;
     }
 
-    public static class DetilsBean {
+    public static class DetilsBean implements Serializable{
         /**
          * ID : 1
          * TITLE_L : 您的性别

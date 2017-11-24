@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:id="@+id/ll_item_com_person_list">
+
+    <TextView
+        android:id="@+id/tv_item_com_person_list_no"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_com_person_list_name"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_com_person_list_sfz"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_com_person_list_mark"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        />
+
+</LinearLayout>

@@ -204,6 +204,16 @@
         <activity android:name=".activity.ComNaireActivity"
             android:screenOrientation="portrait"></activity><!--企业调查-->
 
+        <activity android:name=".activity.ComListActivity"
+            android:screenOrientation="portrait"></activity><!--企业列表-->
+
+        <activity android:name=".activity.ComPersonListActivity"
+            android:screenOrientation="portrait"></activity><!--企业人员列表-->
+
+        <activity android:name=".activity.ComNaireDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity><!--企业调查里面的问卷-->
+
         <service android:name=".naire.PersonService" >
             <intent-filter>
                 <action android:name="com.fc.person.newservice.PersonService" />

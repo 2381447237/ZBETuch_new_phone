@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.activity.BaseActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +33,7 @@ import java.util.Map;
  * github:2381447237
  */
 
-public class ShowWenJuanActivity extends Activity implements IActivity{
+public class ShowWenJuanActivity extends BaseActivity implements IActivity{
 
     private Context mContext=this;
     private PullToRefreshListView lv;
@@ -47,7 +48,7 @@ public class ShowWenJuanActivity extends Activity implements IActivity{
    // private ProgressDialog dialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
 

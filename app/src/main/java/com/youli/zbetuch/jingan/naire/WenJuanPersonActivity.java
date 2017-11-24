@@ -29,9 +29,10 @@ import android.widget.Toast;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.activity.BaseActivity;
 
 
-public class WenJuanPersonActivity extends Activity implements IActivity{
+public class WenJuanPersonActivity extends BaseActivity implements IActivity{
 	private PullToRefreshListView personquery_listview;
 	//private PullDownView mPullDownView;
 	private List<WenJuanPersonInfo> wenJuanPersonInfos = new ArrayList<WenJuanPersonInfo>();
@@ -58,7 +59,7 @@ public class WenJuanPersonActivity extends Activity implements IActivity{
 	public boolean myISJYSTATUS;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 

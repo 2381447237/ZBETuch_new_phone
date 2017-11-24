@@ -216,6 +216,8 @@ public class HttpUtil {
 			}
 		}
 
+		Log.e("2017/11/24","问卷调查提交 URL"+strhttp);
+
 		HttpPost post = new HttpPost(strhttp);
 		try {
 			//if (!HttpUrls_.staffName.trim().equals("")) {

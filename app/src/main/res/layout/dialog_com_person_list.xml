@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b7daf4">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="0.8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="姓名 :"/>
+
+            <EditText
+                android:gravity="center"
+                android:id="@+id/et_dialog_com_person_list_name"
+                android:layout_marginLeft="15dp"
+                android:padding="5dp"
+                android:background="@drawable/shape_ziyuan_detail_et"
+                android:layout_weight="2.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_weight="0.4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="#8dbadb"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="0.8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="身份证 :"/>
+
+            <EditText
+                android:singleLine="true"
+                android:gravity="center"
+                android:id="@+id/et_dialog_com_person_list_sfz"
+                android:layout_marginLeft="15dp"
+                android:padding="5dp"
+                android:background="@drawable/shape_ziyuan_detail_et"
+                android:layout_weight="2.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_weight="0.4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="0.8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="备注 :"/>
+
+            <EditText
+                android:gravity="center"
+                android:id="@+id/et_dialog_com_person_list_mark"
+                android:layout_marginLeft="15dp"
+                android:padding="5dp"
+                android:background="@drawable/shape_ziyuan_detail_et"
+                android:layout_weight="2.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_weight="0.4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:background="#8dbadb"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"/>
+
+            <Button
+                android:id="@+id/btn_dialog_com_person_list_sure"
+                android:background="@drawable/button_selector"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:text="开始答题"
+                android:textSize="12sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"/>
+            <Button
+                android:id="@+id/btn_dialog_com_person_list_cancel"
+                android:textSize="12sp"
+                android:background="@drawable/button_selector"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:text="取消"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

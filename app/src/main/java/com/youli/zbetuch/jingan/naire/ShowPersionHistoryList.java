@@ -12,6 +12,7 @@ import okhttp3.OkHttpClient;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.activity.BaseActivity;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -31,7 +32,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ShowPersionHistoryList extends Activity{
+public class ShowPersionHistoryList extends BaseActivity {
 
 	private TextView qx_tv, pid_tv, number_tv, name_tv, sex_tv, sfz_tv, edu_tv,
 zt_tv, jd_tv, jw_tv, lxdz_tv, phone, dzszqx_tv,sphl_tv_name;
@@ -42,7 +43,7 @@ zt_tv, jd_tv, jw_tv, lxdz_tv, phone, dzszqx_tv,sphl_tv_name;
 	private List<FamilyInfo> listInfo=new ArrayList<FamilyInfo>();
 	private ProgressDialog dialog;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_showpersionhistorylist);

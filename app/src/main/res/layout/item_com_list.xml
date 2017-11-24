@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:id="@+id/ll_item_com_list">
+
+    <TextView
+        android:id="@+id/tv_item_com_list_no"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
+       android:text="编号"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_com_list_name"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:text="企业名称"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_com_list_industry"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="所属行业"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_com_list_yg_num"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="员工总数"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_com_list_gg_num"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="高管人数"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_com_list_zc_num"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="中层人数"
+        />
+
+    <TextView
+        android:id="@+id/tv_item_com_list_naire_num"
+        style="@style/gradeate_list_titletext"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="问卷数"
+        />
+
+
+</LinearLayout>

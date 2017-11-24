@@ -14,6 +14,7 @@ import okhttp3.Response;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.activity.BaseActivity;
 import com.youli.zbetuch.jingan.activity.PersonInfoActivity;
 import com.youli.zbetuch.jingan.activity.ZiyuanDetailListActivity;
 import com.youli.zbetuch.jingan.entity.PersonInfo;
@@ -43,7 +44,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ShowPersionDetailInfo extends Activity implements OnClickListener {
+public class ShowPersionDetailInfo extends BaseActivity implements OnClickListener {
 
 	private Context mContext=this;
 	private final int  PERSONINFO=10001;
@@ -102,7 +103,7 @@ public class ShowPersionDetailInfo extends Activity implements OnClickListener {
 	public static String answerUrl="/Json/Get_Tb_Home_Answer_Info.aspx";
 	private ProgressDialog dialog;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 

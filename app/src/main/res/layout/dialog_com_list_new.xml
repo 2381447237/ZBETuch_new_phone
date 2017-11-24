@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b7daf4">
+
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1.1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="单位名称 :"/>
+
+        <EditText
+            android:gravity="center"
+            android:id="@+id/et_dialog_com_list_name"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp"
+            android:background="@drawable/shape_ziyuan_detail_et"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_weight="0.4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+
+      <LinearLayout
+          android:gravity="center"
+          android:background="#8dbadb"
+          android:padding="10dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <TextView
+              android:gravity="center"
+              android:layout_weight="1.1"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:text="所属行业 :"/>
+
+          <RadioGroup
+              android:gravity="center"
+              android:layout_width="0dp"
+              android:layout_weight="2"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+              <RadioButton
+                  android:checked="true"
+                  android:id="@+id/rb_dialog_com_list_one"
+                  android:layout_weight="1"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="商贸"/>
+              <RadioButton
+                  android:id="@+id/rb_dialog_com_list_two"
+                  android:layout_weight="1"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:text="文创"/>
+          </RadioGroup>
+          <TextView
+              android:layout_weight="0.4"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              />
+
+
+      </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1.1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="组织机构代码/社会统一信用代码 :"/>
+
+        <EditText
+            android:gravity="center"
+            android:id="@+id/et_dialog_com_list_code"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp"
+            android:background="@drawable/shape_ziyuan_detail_et"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_weight="0.4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:background="#8dbadb"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1.1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="企业员工总数 :"/>
+
+        <EditText
+            android:inputType="number"
+            android:gravity="center"
+            android:id="@+id/et_dialog_com_list_yg_num"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp"
+            android:background="@drawable/shape_ziyuan_detail_et"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_weight="0.4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1.1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="企业高管人数 :"/>
+
+        <EditText
+            android:inputType="number"
+            android:gravity="center"
+            android:id="@+id/et_dialog_com_list_gg_num"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp"
+            android:background="@drawable/shape_ziyuan_detail_et"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_weight="0.4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:background="#8dbadb"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="center"
+            android:layout_weight="1.1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="企业中层人数 :"/>
+
+        <EditText
+            android:inputType="number"
+            android:gravity="center"
+            android:id="@+id/et_dialog_com_list_zc_num"
+            android:layout_marginLeft="15dp"
+            android:padding="5dp"
+            android:background="@drawable/shape_ziyuan_detail_et"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_weight="0.4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"/>
+
+        <Button
+            android:id="@+id/btn_dialog_com_list_sure"
+            android:background="@drawable/button_selector"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="确定"
+            android:textSize="12sp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"/>
+        <Button
+            android:id="@+id/btn_dialog_com_list_cancel"
+            android:textSize="12sp"
+            android:background="@drawable/button_selector"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="取消"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"/>
+    </LinearLayout>
+  </LinearLayout>
+</ScrollView>

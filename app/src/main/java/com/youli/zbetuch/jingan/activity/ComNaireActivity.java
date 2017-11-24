@@ -1,6 +1,7 @@
 package com.youli.zbetuch.jingan.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,8 +23,6 @@ import com.youli.zbetuch.jingan.entity.ComNaireInfo;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,7 +131,13 @@ public class ComNaireActivity extends BaseActivity{
        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               Toast.makeText(mContext,"...",Toast.LENGTH_SHORT).show();
+
+               if(data.get(position-1).getDetils().size()>0) {
+                   Intent i = new Intent(mContext, ComListActivity.class);
+                   i.putExtra("NaireInfo", data.get(position-1));
+                   startActivity(i);
+               }
+
            }
        });
 
@@ -164,14 +169,13 @@ public class ComNaireActivity extends BaseActivity{
                             if(!TextUtils.equals(resStr,"[]")){
 
                                 Gson gson=new Gson();
-                                msg.obj = gson.fromJson(resStr, new TypeToken<List<ComNaireInfo>>() {
-                                }.getType());
+                                msg.obj = gson.fromJson(resStr, new TypeToken<List<ComNaireInfo>>() {}.getType());
                                 msg.what=SUCCESS;
                             }else{
                                msg.what=SUCCESS_NODATA;
                             }
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 

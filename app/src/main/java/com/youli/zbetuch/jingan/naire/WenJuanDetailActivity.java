@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.activity.BaseActivity;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import com.youli.zbetuch.jingan.utils.SharedPreferencesUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -64,7 +65,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class WenJuanDetailActivity extends Activity implements IActivity {
+public class WenJuanDetailActivity extends BaseActivity implements IActivity {
 
 	private Button btn_star;//开始答题
 	private Button btn_upload;//提交
@@ -124,7 +125,7 @@ public class WenJuanDetailActivity extends Activity implements IActivity {
    private WenJuanPersonInfo wjPInfo;
    private ProgressDialog dialog;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
@@ -336,6 +337,9 @@ public class WenJuanDetailActivity extends Activity implements IActivity {
 											data.put("data", answerString);
 											params.put("data", data);
 											//提交答案
+
+											Log.e("2017/11/24","问卷调查提交的信息=="+data);
+
 											PersonTask task = new PersonTask(
 													PersonTask.UPLOADWENJUAN_SET_WENJUAN,
 													params);
@@ -1350,7 +1354,9 @@ public class WenJuanDetailActivity extends Activity implements IActivity {
 		WebView webView = (WebView) view.findViewById(R.id.my_webview);
 		tv_no.setText(Html.fromHtml("<u>" + getIntent().getStringExtra("NO")
 				+ "</u>"));
-		tv_title.setText(typeMap.getTITLE());
+		if(typeMap!=null&&typeMap.getTITLE()!=null) {
+			tv_title.setText(typeMap.getTITLE());
+		}
 		if(getIntent().getSerializableExtra("sname")!=null){
 			
 			

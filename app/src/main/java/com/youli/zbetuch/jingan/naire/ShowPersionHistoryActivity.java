@@ -21,9 +21,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.activity.BaseActivity;
 
 
-public class ShowPersionHistoryActivity extends Activity implements IActivity {
+public class ShowPersionHistoryActivity extends BaseActivity implements IActivity {
 
 	private ListView history_listview;
 	private List<HistoryInfo> historyInfos = new ArrayList<HistoryInfo>();
@@ -35,7 +36,7 @@ public class ShowPersionHistoryActivity extends Activity implements IActivity {
 	public static final int REFRESH_INFO = 0;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history_list);

@@ -15,8 +15,9 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
 
 import com.youli.zbetuch.jingan.R;
+import com.youli.zbetuch.jingan.activity.BaseActivity;
 
-public class ShowWenJuanMarkActivity extends Activity implements IActivity,
+public class ShowWenJuanMarkActivity extends BaseActivity implements IActivity,
 		OnClickListener, OnCheckedChangeListener {
 	private EditText mark_text;
 	private Button button_true;
@@ -28,7 +29,7 @@ public class ShowWenJuanMarkActivity extends Activity implements IActivity,
 	private String reason;
 	private String reason_edit;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
