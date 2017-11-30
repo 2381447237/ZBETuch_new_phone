@@ -46,7 +46,7 @@
                 android:textSize="21sp"
                 android:textColor="@color/black"
                 android:paddingLeft="40dp"
-                android:text="人户分离,电话错误或\n无人接听等"/>
+                android:text="人户分离,电话错误或无人接听等"/>
             <RadioButton 
                 android:id="@+id/btn_dianhuacuowu"
                 android:background="@drawable/blue"

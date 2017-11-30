@@ -27,6 +27,7 @@ import com.youli.zbetuch.jingan.entity.ComNaireInfo;
 import com.youli.zbetuch.jingan.entity.ComPersonInfo;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
+import com.youli.zbetuch.jingan.utils.SfzUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -55,7 +56,6 @@ public class ComPersonListActivity extends BaseActivity implements View.OnClickL
 
     private final int SUCCESS_LIST=10000;
     private final int SUCCESS_NODATA=10001;
-    //private final int SUCCESS_NEW=10002;
     private final int SUCCESS_EDIT=10003;
     private final int SUCCESS_PNAIRE=10004;
     private final int FAIL=10005;
@@ -69,6 +69,8 @@ public class ComPersonListActivity extends BaseActivity implements View.OnClickL
     private CommonAdapter adapter;
 
     private ComPersonInfo eBus;//eventBus专用参数
+
+    private String birthDay;
 
     private TextView tvNum;
     private Button naireBtn;
@@ -111,21 +113,6 @@ public class ComPersonListActivity extends BaseActivity implements View.OnClickL
 
                     Toast.makeText(mContext, "修改成功!", Toast.LENGTH_SHORT).show();
                     break;
-
-//                case SUCCESS_NEW://企业人员信息的创建
-//
-//                    if(dialog!=null) {
-//                        dialog.dismiss();
-//                    }
-//                    getDates();
-//                    EventBus.getDefault().post(new ComListInfo());//通知企业列表界面刷新
-//                    //查看答题情况
-//                    Intent i=new Intent(mContext,ComNaireDetailActivity.class);
-//                    i.putExtra("pName",msg.obj+"");//个人姓名
-//                    i.putExtra("wenjuan",naireInfo);
-//                    startActivity(i);
-//
-//                    break;
 
                 case SUCCESS_PNAIRE://获取人员问卷信息:
 
@@ -294,7 +281,7 @@ public class ComPersonListActivity extends BaseActivity implements View.OnClickL
                       return;
                   };
 
-                  if(etSfz.getText().toString().length()!=18){
+                  if(!SfzUtils.maybeIsIdentityCard(etSfz)){
                       Toast.makeText(mContext, "身份证格式不对!", Toast.LENGTH_SHORT).show();
                       etSfz.requestFocus();
                       return;
@@ -303,7 +290,10 @@ public class ComPersonListActivity extends BaseActivity implements View.OnClickL
                   String nameStr=etName.getText().toString();
                   String sfzStr=etSfz.getText().toString();
                   String markStr=etMark.getText().toString();
-
+                  if(sfzStr.length()==18) {
+                      birthDay = sfzStr.substring(6, 10) + "年" + sfzStr.substring(10, 12) + "月" + sfzStr.substring(12, 14) + "日";
+                      Log.e("2017/11/28","birthDay="+birthDay);
+                  }
                   if(TextUtils.equals(mark,"new")){//新建人员
 
                       newPersonInfo(nameStr,sfzStr,markStr);
@@ -336,7 +326,7 @@ public class ComPersonListActivity extends BaseActivity implements View.OnClickL
                         dialog.dismiss();
                     }
         ComPersonInfo pInfo=new ComPersonInfo();
-        pInfo.setID(-1);
+        pInfo.setID(-1);//设置人员的默认ID为-1,这个不能随便改的哦
         pInfo.setNAME(nameStr);
         pInfo.setSFZ(sfzStr);
         pInfo.setMARK(markStr);
@@ -346,6 +336,7 @@ public class ComPersonListActivity extends BaseActivity implements View.OnClickL
                     i.putExtra("pInfo",pInfo);//个人信息
                     i.putExtra("wenjuan",naireInfo);//问卷信息
                     i.putExtra("comInfo",comInfo);//企业信息
+                    i.putExtra("birthDay",birthDay);//生日
                     startActivity(i);
 
 
@@ -367,8 +358,6 @@ public class ComPersonListActivity extends BaseActivity implements View.OnClickL
                 String url = null;
                 if(TextUtils.equals(mark,"modify")) {
                     url = MyOkHttpUtils.BaseUrl + "/Json/Set_Qa_Company_Personnel.aspx?COMPANY_ID=" + cId + "&ID=" + pId + "&MARK=" + markStr + "&NAME=" + nameStr + "&SFZ=" + sfzStr;
-//                }else if(TextUtils.equals(mark,"new")){
-//                    url = MyOkHttpUtils.BaseUrl + "/Json/Set_Qa_Company_Personnel.aspx?COMPANY_ID=" + cId  + "&MARK=" + markStr + "&NAME=" + nameStr + "&SFZ=" + sfzStr;
                 }
 
                 Response response=MyOkHttpUtils.okHttpGet(url);

@@ -110,6 +110,7 @@ public class ComNaireDetailActivity extends BaseActivity implements View.OnClick
 
     private ComPersonInfo pInfo;//个人信息
     private ComListInfo comInfo;//企业信息
+    private String birthDay;
 
     private byte [] shujuliu;//答案数据流
     private List<ComNaireAnswerInfo> aInfo=new ArrayList<>();//上个界面传递过来的答案信息
@@ -152,6 +153,10 @@ public class ComNaireDetailActivity extends BaseActivity implements View.OnClick
         aInfo=(List<ComNaireAnswerInfo>)getIntent().getSerializableExtra("aInfo");//上个界面传递过来的答案信息
 
         pInfo=(ComPersonInfo) getIntent().getSerializableExtra("pInfo");//个人信息
+
+        birthDay=getIntent().getStringExtra("birthDay");
+
+        Log.e("2017/11/28","生日"+birthDay);
 
         Log.e("2017/11/24","个人信息的个人ID="+pInfo.getID());
 
@@ -899,7 +904,14 @@ public class ComNaireDetailActivity extends BaseActivity implements View.OnClick
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                 tv.setCompoundDrawables(null,null,drawable,null);
 
-                tv.setText("请点击选择");
+
+
+                if(birthDay!=null&&!TextUtils.equals(birthDay,"")){
+                    tv.setText(birthDay);
+                }else{
+                    tv.setText("请点击选择");
+                }
+
                 tv.setId(info.getID());
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override

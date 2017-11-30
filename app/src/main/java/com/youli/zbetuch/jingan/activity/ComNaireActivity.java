@@ -1,6 +1,8 @@
 package com.youli.zbetuch.jingan.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +23,7 @@ import com.youli.zbetuch.jingan.R;
 import com.youli.zbetuch.jingan.adapter.CommonAdapter;
 import com.youli.zbetuch.jingan.entity.ComNaireInfo;
 import com.youli.zbetuch.jingan.entity.CommonViewHolder;
+import com.youli.zbetuch.jingan.service.PostMsgService;
 import com.youli.zbetuch.jingan.utils.MyDateUtils;
 import com.youli.zbetuch.jingan.utils.MyOkHttpUtils;
 import java.util.ArrayList;
@@ -232,5 +235,26 @@ public class ComNaireActivity extends BaseActivity{
             lv.onRefreshComplete();
         }
     }
+//
+//    @Override
+//    public void onBackPressed() {
+//
+//        final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+//        builder.setMessage("您确定退出吗?");
+//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//                ActivityController.finishAll();
+//            }
+//        });
+//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+//        builder.show();
+//    }
 
 }
